@@ -30,9 +30,10 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.accountBox1 = new System.Windows.Forms.TextBox();
             this.routingBox1 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -42,6 +43,7 @@
             this.lastNameLabel = new System.Windows.Forms.Label();
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.ammountBox = new System.Windows.Forms.TextBox();
             this.accountBox2 = new System.Windows.Forms.TextBox();
             this.routingBox2 = new System.Windows.Forms.TextBox();
@@ -49,10 +51,10 @@
             this.accountLabel2 = new System.Windows.Forms.Label();
             this.routingLabel2 = new System.Windows.Forms.Label();
             this.addCheckLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.SuspendLayout();
@@ -81,8 +83,29 @@
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(106, 118);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(334, 31);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "This will be the home page";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(10, 7);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(180, 20);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Welcome To Check Plus";
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -108,22 +131,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Add Account";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.ammountBox);
-            this.tabPage4.Controls.Add(this.accountBox2);
-            this.tabPage4.Controls.Add(this.routingBox2);
-            this.tabPage4.Controls.Add(this.label2);
-            this.tabPage4.Controls.Add(this.accountLabel2);
-            this.tabPage4.Controls.Add(this.routingLabel2);
-            this.tabPage4.Controls.Add(this.addCheckLabel);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(554, 255);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Add Check";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // accountBox1
             // 
@@ -199,6 +206,22 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "Add Account";
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.ammountBox);
+            this.tabPage4.Controls.Add(this.accountBox2);
+            this.tabPage4.Controls.Add(this.routingBox2);
+            this.tabPage4.Controls.Add(this.label2);
+            this.tabPage4.Controls.Add(this.accountLabel2);
+            this.tabPage4.Controls.Add(this.routingLabel2);
+            this.tabPage4.Controls.Add(this.addCheckLabel);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(554, 255);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Add Check";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // ammountBox
             // 
             this.ammountBox.Location = new System.Drawing.Point(101, 76);
@@ -257,25 +280,15 @@
             this.addCheckLabel.TabIndex = 49;
             this.addCheckLabel.Text = "Add Check";
             // 
-            // label3
+            // label5
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(180, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Welcome To Check Plus";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(106, 118);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(334, 31);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "This will be the home page";
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(127, 108);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(324, 31);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "This will be the login page";
             // 
             // ammountLabel
             // 
@@ -288,6 +301,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
@@ -321,6 +336,7 @@
         private System.Windows.Forms.Label accountLabel2;
         private System.Windows.Forms.Label routingLabel2;
         private System.Windows.Forms.Label addCheckLabel;
+        private System.Windows.Forms.Label label5;
     }
 }
 
