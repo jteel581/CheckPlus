@@ -33,10 +33,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.accountBox1 = new System.Windows.Forms.TextBox();
             this.routingBox1 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lastNameBox = new System.Windows.Forms.TextBox();
             this.firstNameBox = new System.Windows.Forms.TextBox();
             this.accountLabel1 = new System.Windows.Forms.Label();
             this.routingLabel1 = new System.Windows.Forms.Label();
@@ -51,7 +52,8 @@
             this.accountLabel2 = new System.Windows.Forms.Label();
             this.routingLabel2 = new System.Windows.Forms.Label();
             this.addCheckLabel = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.addActButton = new System.Windows.Forms.Button();
+            this.addChkButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -114,11 +116,22 @@
             this.tabPage2.Text = "Login";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(127, 108);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(324, 31);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "This will be the login page";
+            // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.addActButton);
             this.tabPage3.Controls.Add(this.accountBox1);
             this.tabPage3.Controls.Add(this.routingBox1);
-            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Controls.Add(this.lastNameBox);
             this.tabPage3.Controls.Add(this.firstNameBox);
             this.tabPage3.Controls.Add(this.accountLabel1);
             this.tabPage3.Controls.Add(this.routingLabel1);
@@ -134,24 +147,24 @@
             // 
             // accountBox1
             // 
-            this.accountBox1.Location = new System.Drawing.Point(101, 102);
+            this.accountBox1.Location = new System.Drawing.Point(100, 102);
             this.accountBox1.Name = "accountBox1";
             this.accountBox1.Size = new System.Drawing.Size(100, 20);
             this.accountBox1.TabIndex = 45;
             // 
             // routingBox1
             // 
-            this.routingBox1.Location = new System.Drawing.Point(101, 73);
+            this.routingBox1.Location = new System.Drawing.Point(100, 73);
             this.routingBox1.Name = "routingBox1";
             this.routingBox1.Size = new System.Drawing.Size(100, 20);
             this.routingBox1.TabIndex = 44;
             // 
-            // textBox1
+            // lastNameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(100, 49);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 43;
+            this.lastNameBox.Location = new System.Drawing.Point(100, 49);
+            this.lastNameBox.Name = "lastNameBox";
+            this.lastNameBox.Size = new System.Drawing.Size(100, 20);
+            this.lastNameBox.TabIndex = 43;
             // 
             // firstNameBox
             // 
@@ -208,6 +221,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.addChkButton);
             this.tabPage4.Controls.Add(this.ammountBox);
             this.tabPage4.Controls.Add(this.accountBox2);
             this.tabPage4.Controls.Add(this.routingBox2);
@@ -224,21 +238,21 @@
             // 
             // ammountBox
             // 
-            this.ammountBox.Location = new System.Drawing.Point(101, 76);
+            this.ammountBox.Location = new System.Drawing.Point(100, 73);
             this.ammountBox.Name = "ammountBox";
             this.ammountBox.Size = new System.Drawing.Size(100, 20);
             this.ammountBox.TabIndex = 55;
             // 
             // accountBox2
             // 
-            this.accountBox2.Location = new System.Drawing.Point(101, 52);
+            this.accountBox2.Location = new System.Drawing.Point(100, 49);
             this.accountBox2.Name = "accountBox2";
             this.accountBox2.Size = new System.Drawing.Size(100, 20);
             this.accountBox2.TabIndex = 54;
             // 
             // routingBox2
             // 
-            this.routingBox2.Location = new System.Drawing.Point(101, 26);
+            this.routingBox2.Location = new System.Drawing.Point(100, 26);
             this.routingBox2.Name = "routingBox2";
             this.routingBox2.Size = new System.Drawing.Size(100, 20);
             this.routingBox2.TabIndex = 53;
@@ -280,15 +294,27 @@
             this.addCheckLabel.TabIndex = 49;
             this.addCheckLabel.Text = "Add Check";
             // 
-            // label5
+            // addActButton
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(127, 108);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(324, 31);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "This will be the login page";
+            this.addActButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addActButton.Location = new System.Drawing.Point(7, 137);
+            this.addActButton.Name = "addActButton";
+            this.addActButton.Size = new System.Drawing.Size(96, 29);
+            this.addActButton.TabIndex = 46;
+            this.addActButton.Text = "Add Account";
+            this.addActButton.UseVisualStyleBackColor = true;
+            this.addActButton.Click += new System.EventHandler(this.addActButton_Click);
+            // 
+            // addChkButton
+            // 
+            this.addChkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addChkButton.Location = new System.Drawing.Point(9, 109);
+            this.addChkButton.Name = "addChkButton";
+            this.addChkButton.Size = new System.Drawing.Size(93, 25);
+            this.addChkButton.TabIndex = 56;
+            this.addChkButton.Text = "Add Check";
+            this.addChkButton.UseVisualStyleBackColor = true;
+            this.addChkButton.Click += new System.EventHandler(this.addChkButton_Click);
             // 
             // ammountLabel
             // 
@@ -321,7 +347,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox accountBox1;
         private System.Windows.Forms.TextBox routingBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox lastNameBox;
         private System.Windows.Forms.TextBox firstNameBox;
         private System.Windows.Forms.Label accountLabel1;
         private System.Windows.Forms.Label routingLabel1;
@@ -337,6 +363,8 @@
         private System.Windows.Forms.Label routingLabel2;
         private System.Windows.Forms.Label addCheckLabel;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button addActButton;
+        private System.Windows.Forms.Button addChkButton;
     }
 }
 
