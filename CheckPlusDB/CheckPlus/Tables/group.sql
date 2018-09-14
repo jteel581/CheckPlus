@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[group]
+(
+	[Id] INT NOT NULL PRIMARY KEY
+)
