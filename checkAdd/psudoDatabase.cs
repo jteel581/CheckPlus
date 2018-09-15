@@ -17,5 +17,17 @@ namespace checkAdd
         {
             psudoAccounts.Add(act);
         }
+        public psudoAccount getAccountByNum(int acctNum)
+        {
+            foreach (psudoAccount acct in psudoAccounts)
+            {
+                if (acct.getAccountNum() == acctNum)
+                {
+                    return acct;
+                }
+            }
+            return null;
+                 
+        }
     }
 }
