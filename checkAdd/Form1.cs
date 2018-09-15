@@ -31,6 +31,10 @@ namespace checkAdd
             database.addAccount(act);
             ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum().ToString("0000"), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
             accountsListView.Items.Add(lvi);
+            firstNameBox.Clear();
+            lastNameBox.Clear();
+            routingBox1.Clear();
+            accountBox1.Clear();
 
         }
 
@@ -42,6 +46,9 @@ namespace checkAdd
             psudoCheck check = new psudoCheck(acctNum, routNum, ammount);
             database.getAccountByNum(acctNum).addCheck(check);
             updateListView();
+            accountBox2.Clear();
+            routingBox2.Clear();
+            ammountBox.Clear();
             
         }
         public void updateListView()
