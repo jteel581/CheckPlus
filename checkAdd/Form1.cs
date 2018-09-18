@@ -12,22 +12,12 @@ namespace checkAdd
 {
     public partial class ammountLabel : Form
     {
-        //linq testing
-        CheckPlusDB cpdb;
-        PersonSQLer perSQL;
-        AccountSQLer accSQL;
-        //linq testing
 
         psudoDatabase database = new psudoDatabase();
         public ammountLabel()
         {
             InitializeComponent();
-
-            //linq testing
-            cpdb = new CheckPlusDB();
-            perSQL = new PersonSQLer(cpdb);
-            accSQL = new AccountSQLer(cpdb);
-            //linq testing
+            accountsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         /*  FUNCTION
@@ -84,11 +74,37 @@ namespace checkAdd
             //end linq testing code chunk
             */
             database.addAccount(act);
+            ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum().ToString("0000"), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
+            accountsListView.Items.Add(lvi);
+            firstNameBox.Clear();
+            lastNameBox.Clear();
+            routingBox1.Clear();
+            accountBox1.Clear();
+
         }
 
         private void addChkButton_Click(object sender, EventArgs e)
         {
-
+            int acctNum = Convert.ToInt32(accountBox2.Text);
+            int routNum = Convert.ToInt32(routingBox2.Text);
+            double ammount = Convert.ToDouble(ammountBox.Text);
+            psudoCheck check = new psudoCheck(acctNum, routNum, ammount);
+            database.getAccountByNum(acctNum).addCheck(check);
+            updateListView();
+            accountBox2.Clear();
+            routingBox2.Clear();
+            ammountBox.Clear();
+            
+        }
+        public void updateListView()
+        {
+            int i = 0;
+            foreach (ListViewItem lvi in accountsListView.Items)
+            {
+                psudoAccount act = database.getAccountByNum(Convert.ToInt32(lvi.SubItems[0].Text));
+                lvi.SubItems[3].Text = act.getNumOfChecks().ToString();
+                lvi.SubItems[4].Text = act.getCurBal().ToString();
+            }
         }
     }
 }

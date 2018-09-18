@@ -35,6 +35,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.addActButton = new System.Windows.Forms.Button();
             this.accountBox1 = new System.Windows.Forms.TextBox();
             this.routingBox1 = new System.Windows.Forms.TextBox();
             this.lastNameBox = new System.Windows.Forms.TextBox();
@@ -45,6 +46,7 @@
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.addChkButton = new System.Windows.Forms.Button();
             this.ammountBox = new System.Windows.Forms.TextBox();
             this.accountBox2 = new System.Windows.Forms.TextBox();
             this.routingBox2 = new System.Windows.Forms.TextBox();
@@ -52,13 +54,19 @@
             this.accountLabel2 = new System.Windows.Forms.Label();
             this.routingLabel2 = new System.Windows.Forms.Label();
             this.addCheckLabel = new System.Windows.Forms.Label();
-            this.addActButton = new System.Windows.Forms.Button();
-            this.addChkButton = new System.Windows.Forms.Button();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.accountsListView = new System.Windows.Forms.ListView();
+            this.accNumCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.firstCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lastCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.numChecksCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.curBalanceCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -67,6 +75,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(-1, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -144,6 +153,17 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Add Account";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // addActButton
+            // 
+            this.addActButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addActButton.Location = new System.Drawing.Point(7, 137);
+            this.addActButton.Name = "addActButton";
+            this.addActButton.Size = new System.Drawing.Size(96, 29);
+            this.addActButton.TabIndex = 46;
+            this.addActButton.Text = "Add Account";
+            this.addActButton.UseVisualStyleBackColor = true;
+            this.addActButton.Click += new System.EventHandler(this.addActButton_Click);
             // 
             // accountBox1
             // 
@@ -236,6 +256,17 @@
             this.tabPage4.Text = "Add Check";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // addChkButton
+            // 
+            this.addChkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addChkButton.Location = new System.Drawing.Point(9, 109);
+            this.addChkButton.Name = "addChkButton";
+            this.addChkButton.Size = new System.Drawing.Size(93, 25);
+            this.addChkButton.TabIndex = 56;
+            this.addChkButton.Text = "Add Check";
+            this.addChkButton.UseVisualStyleBackColor = true;
+            this.addChkButton.Click += new System.EventHandler(this.addChkButton_Click);
+            // 
             // ammountBox
             // 
             this.ammountBox.Location = new System.Drawing.Point(100, 73);
@@ -294,27 +325,51 @@
             this.addCheckLabel.TabIndex = 49;
             this.addCheckLabel.Text = "Add Check";
             // 
-            // addActButton
+            // tabPage5
             // 
-            this.addActButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addActButton.Location = new System.Drawing.Point(7, 137);
-            this.addActButton.Name = "addActButton";
-            this.addActButton.Size = new System.Drawing.Size(96, 29);
-            this.addActButton.TabIndex = 46;
-            this.addActButton.Text = "Add Account";
-            this.addActButton.UseVisualStyleBackColor = true;
-            this.addActButton.Click += new System.EventHandler(this.addActButton_Click);
+            this.tabPage5.Controls.Add(this.accountsListView);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(554, 255);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "View Accounts";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // addChkButton
+            // accountsListView
             // 
-            this.addChkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addChkButton.Location = new System.Drawing.Point(9, 109);
-            this.addChkButton.Name = "addChkButton";
-            this.addChkButton.Size = new System.Drawing.Size(93, 25);
-            this.addChkButton.TabIndex = 56;
-            this.addChkButton.Text = "Add Check";
-            this.addChkButton.UseVisualStyleBackColor = true;
-            this.addChkButton.Click += new System.EventHandler(this.addChkButton_Click);
+            this.accountsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.accNumCH,
+            this.firstCH,
+            this.lastCH,
+            this.numChecksCH,
+            this.curBalanceCH});
+            this.accountsListView.Location = new System.Drawing.Point(3, 6);
+            this.accountsListView.Name = "accountsListView";
+            this.accountsListView.Size = new System.Drawing.Size(428, 240);
+            this.accountsListView.TabIndex = 0;
+            this.accountsListView.UseCompatibleStateImageBehavior = false;
+            this.accountsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // accNumCH
+            // 
+            this.accNumCH.Text = "Account Number";
+            // 
+            // firstCH
+            // 
+            this.firstCH.Text = "First Name";
+            // 
+            // lastCH
+            // 
+            this.lastCH.Text = "Last Name";
+            // 
+            // numChecksCH
+            // 
+            this.numChecksCH.Text = "Number of Checks";
+            // 
+            // curBalanceCH
+            // 
+            this.curBalanceCH.Text = "Current Balance";
             // 
             // ammountLabel
             // 
@@ -333,6 +388,7 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -365,6 +421,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button addActButton;
         private System.Windows.Forms.Button addChkButton;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.ListView accountsListView;
+        private System.Windows.Forms.ColumnHeader accNumCH;
+        private System.Windows.Forms.ColumnHeader firstCH;
+        private System.Windows.Forms.ColumnHeader lastCH;
+        private System.Windows.Forms.ColumnHeader numChecksCH;
+        private System.Windows.Forms.ColumnHeader curBalanceCH;
     }
 }
 
