@@ -10,10 +10,10 @@ namespace checkAdd
     {
         string firstName;
         string lastName;
-        int routingNumber;
-        int accountNumber;
+        string routingNumber;
+        string accountNumber;
         List<psudoCheck> checks;
-        public psudoAccount(string first, string last, int rout, int account)
+        public psudoAccount(string first, string last, string rout, string account)
         {
             firstName = first;
             lastName = last;
