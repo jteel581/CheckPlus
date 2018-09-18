@@ -33,8 +33,8 @@ namespace checkAdd
         {
             string firstName = firstNameBox.Text;
             string lastName = lastNameBox.Text;
-            string routingNumber = routingBox1.Text;
-            string accountNumber = accountBox1.Text;
+            int routingNumber = Convert.ToInt32(routingBox1.Text);
+            int accountNumber = Convert.ToInt32(accountBox1.Text);
             psudoAccount act = new psudoAccount(firstName, lastName, routingNumber, accountNumber);
 
             /*
