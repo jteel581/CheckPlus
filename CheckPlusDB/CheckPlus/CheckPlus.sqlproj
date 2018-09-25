@@ -23,6 +23,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <PermissionSet>SAFE</PermissionSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -58,6 +59,7 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\account.sql" />
@@ -73,6 +75,7 @@
     <Build Include="Tables\organization.sql" />
     <Build Include="Tables\person.sql" />
     <Build Include="Tables\user_role.sql" />
+    <None Include="Scripts\Initial Population.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CheckPlus.publish.xml" />

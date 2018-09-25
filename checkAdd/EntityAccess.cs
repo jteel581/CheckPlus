@@ -92,8 +92,8 @@ namespace checkAdd
 
             if (tstAccount == null)
             {
-                cpdb.Accounts.Add(acctToInsert);
-                cpdb.SaveChanges();
+                //cpdb.Accounts.Add(acctToInsert);
+                //cpdb.SaveChanges();
             }
 
             return tstAccount;
@@ -141,7 +141,7 @@ namespace checkAdd
                 .Where(
                     x =>
                     x.First_name == person.First_name
-                        && x.Last_name == person.Last_name).First();
+                        && x.Last_name == person.Last_name).FirstOrDefault();
             return tstPerson;
         }
         public void UpdatePerson(Person person)

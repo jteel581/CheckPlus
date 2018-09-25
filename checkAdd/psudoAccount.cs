@@ -10,13 +10,13 @@ namespace checkAdd
     {
         string firstName;
         string lastName;
-        int routingNumber;
-        int accountNumber;
+        string routingNumber;
+        string accountNumber;
         double curBal;
         List<psudoCheck> checks;
         int numOfChecks;
 
-        public psudoAccount(string first, string last, int rout, int account)
+        public psudoAccount(string first, string last, string rout, string account)
         {
             firstName = first;
             lastName = last;
@@ -27,13 +27,13 @@ namespace checkAdd
             checks = new List<psudoCheck>();
         }
         
-        public int getAccountNum()
+        public string getAccountNum()
         {
             return accountNumber;
         }
         public string getFirstName() { return firstName; }
         public string getLastName() { return lastName; }
-        public int getRoutingNum() { return routingNumber; }
+        public string getRoutingNum() { return routingNumber; }
         public double getCurBal() { return curBal; }
         public void addCheck(psudoCheck check)
         {

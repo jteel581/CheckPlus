@@ -8,11 +8,11 @@ namespace checkAdd
 {
     class psudoCheck
     {
-        int accountNum;
-        int routingNum;
+        string accountNum;
+        string routingNum;
         double ammount;
 
-        public psudoCheck(int acct, int rout, double ammnt)
+        public psudoCheck(string acct, string rout, double ammnt)
         {
             accountNum = acct;
             routingNum = rout;

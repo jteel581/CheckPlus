@@ -7,7 +7,6 @@ create table dbo.account
 	account_id			int			not null,	--pk the meaningless id assigned to the account
 	entity_id_1			int			not null,	--fk to the id of the accountholder (typically a person)
 	entity_id_2			int			not null,	--fk to the id of the bank
-	account_type_id		int			not null,	--fk to what type of account it is
 	account_number		char(9)		not null,
 	routing_number		char(13)	not null,
 	date_start			date		not null,	--date that the account was entered into our system

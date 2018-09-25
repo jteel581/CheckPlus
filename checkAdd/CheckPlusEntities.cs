@@ -16,13 +16,13 @@ using System.Text.RegularExpressions;
 
 namespace checkAdd
 {   //in alphabetical order by table name (at least, that's the goal)
+
     [Table("account")]
     class Account
     {
         [Key]
         public int Account_id { get; set; }
         public int Entity_id_1 { get; set; }
-        public Entity Entity_1 { get; set; }
         public int Entity_id_2 { get; set; }
         public string Account_number { get; set; }
         public string Routing_number { get; set; }
@@ -37,6 +37,7 @@ namespace checkAdd
         public int Account_check_id { get; set; }
         public int Account_id { get; set; }
         public double Amount { get; set; }
+        public string Check_number { get; set; }
         public DateTime Date_received { get; set; }
     }
 
@@ -137,7 +138,7 @@ namespace checkAdd
         public string Middle_name { get; set; }
         public string Suffix { get; set; }
         public string Title { get; set; }
-        public int User_role_id { get; set; }
+        public int? User_role_id { get; set; }
     }
 
     [Table("user_role")]

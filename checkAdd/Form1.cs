@@ -7,37 +7,53 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
+using System.Data.Common;
+using System.Text.RegularExpressions;
 
 namespace checkAdd
 {
     public partial class ammountLabel : Form
     {
+        CheckPlusDB cpdb;
+        PersonSQLer perSQL;
+        AccountSQLer accSQL;
+        Account_checkSQLer acc_chkSQL;
 
         psudoDatabase database = new psudoDatabase();
         public ammountLabel()
         {
             InitializeComponent();
             accountsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            cpdb = new CheckPlusDB();
+            cpdb.Database.Connection.ConnectionString = "Data Source=localhost;Initial Catalog=CheckPlus;Integrated Security=True";
+
+            perSQL = new PersonSQLer(cpdb);
+            accSQL = new AccountSQLer(cpdb);
+            acc_chkSQL = new Account_checkSQLer(cpdb);
         }
 
         /*  FUNCTION
          *  helpful for displaying success/error messages
          *      throughout the application
          */
-        public void DisplayMessageNoResponse(string inMessage, string inCaption)
+        public void DisplayMessageNoResponse(string inHeading, string inMessage)
         {
-            MessageBox.Show(inMessage, inCaption, MessageBoxButtons.OK);
+            MessageBox.Show(inHeading, inMessage, MessageBoxButtons.OK);
         }
 
         private void addActButton_Click(object sender, EventArgs e)
         {
             string firstName = firstNameBox.Text;
             string lastName = lastNameBox.Text;
-            int routingNumber = Convert.ToInt32(routingBox1.Text);
-            int accountNumber = Convert.ToInt32(accountBox1.Text);
+            string routingNumber = routingBox1.Text;
+            string accountNumber = accountBox1.Text;
             psudoAccount act = new psudoAccount(firstName, lastName, routingNumber, accountNumber);
 
-            /*
             //start linq testing code chunk
             Person selPer = perSQL.SelectPerson(new Person()
             {   //all we really care about are First_name and Last_name for now
@@ -72,9 +88,9 @@ namespace checkAdd
             }
             else { DisplayMessageNoResponse("Error", "Person does not exist."); }
             //end linq testing code chunk
-            */
+
             database.addAccount(act);
-            ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum().ToString("0000"), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
+            ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
             accountsListView.Items.Add(lvi);
             firstNameBox.Clear();
             lastNameBox.Clear();
@@ -85,8 +101,8 @@ namespace checkAdd
 
         private void addChkButton_Click(object sender, EventArgs e)
         {
-            int acctNum = Convert.ToInt32(accountBox2.Text);
-            int routNum = Convert.ToInt32(routingBox2.Text);
+            string acctNum = accountBox2.Text;
+            string routNum = routingBox2.Text;
             double ammount = Convert.ToDouble(ammountBox.Text);
             psudoCheck check = new psudoCheck(acctNum, routNum, ammount);
             database.getAccountByNum(acctNum).addCheck(check);
@@ -101,7 +117,7 @@ namespace checkAdd
             int i = 0;
             foreach (ListViewItem lvi in accountsListView.Items)
             {
-                psudoAccount act = database.getAccountByNum(Convert.ToInt32(lvi.SubItems[0].Text));
+                psudoAccount act = database.getAccountByNum(lvi.SubItems[0].Text);
                 lvi.SubItems[3].Text = act.getNumOfChecks().ToString();
                 lvi.SubItems[4].Text = act.getCurBal().ToString();
             }

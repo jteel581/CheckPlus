@@ -17,7 +17,7 @@ namespace checkAdd
         {
             psudoAccounts.Add(act);
         }
-        public psudoAccount getAccountByNum(int acctNum)
+        public psudoAccount getAccountByNum(string acctNum)
         {
             foreach (psudoAccount acct in psudoAccounts)
             {

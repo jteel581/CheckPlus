@@ -22,15 +22,5 @@ namespace checkAdd.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=CheckPlus;Integrated Security=True")]
-        public string CheckPlusConn {
-            get {
-                return ((string)(this["CheckPlusConn"]));
-            }
-        }
     }
 }
