@@ -13,8 +13,8 @@ namespace checkPlus
         string firstName = "";
         string lastName = "";
         string userName = "";
-        bool adminPrivaleges = false;
-        bool supervisorPrivaleges = false;
+        public bool adminPrivaleges = false;
+        public bool supervisorPrivaleges = false;
         string password = "0000";
 
         public User(string first, string last, string usName, string pswd)

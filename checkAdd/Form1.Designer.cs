@@ -28,11 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ammountLabel));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.logoutButton = new System.Windows.Forms.Button();
+            this.logoutLabel = new System.Windows.Forms.Label();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.passwordBox = new System.Windows.Forms.TextBox();
+            this.usernameBox = new System.Windows.Forms.TextBox();
+            this.passwordLabel = new System.Windows.Forms.Label();
+            this.usernameLabel = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.zipLabel = new System.Windows.Forms.Label();
             this.zipBox = new System.Windows.Forms.TextBox();
@@ -77,20 +84,10 @@
             this.lastCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.numChecksCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.curBalanceCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.usernameLabel = new System.Windows.Forms.Label();
-            this.passwordLabel = new System.Windows.Forms.Label();
-            this.usernameBox = new System.Windows.Forms.TextBox();
-            this.passwordBox = new System.Windows.Forms.TextBox();
-            this.loginButton = new System.Windows.Forms.Button();
-            this.logoutLabel = new System.Windows.Forms.Label();
-            this.logoutButton = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.fNameSearchLabel = new System.Windows.Forms.Label();
-            this.lNameSearchLabel = new System.Windows.Forms.Label();
-            this.acctNumSearchLabel = new System.Windows.Forms.Label();
-            this.fNameSearchBox = new System.Windows.Forms.TextBox();
-            this.lNameSearchBox = new System.Windows.Forms.TextBox();
-            this.acctNumSearchBox = new System.Windows.Forms.TextBox();
+            this.updateAcctSearchButton = new System.Windows.Forms.Button();
+            this.deleteAccountButton = new System.Windows.Forms.Button();
+            this.saveChangesButton = new System.Windows.Forms.Button();
             this.zipLabel2 = new System.Windows.Forms.Label();
             this.zipNumBox = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -109,9 +106,13 @@
             this.rNumLabel = new System.Windows.Forms.Label();
             this.lNameLabel = new System.Windows.Forms.Label();
             this.fNameLabel = new System.Windows.Forms.Label();
-            this.saveChangesButton = new System.Windows.Forms.Button();
-            this.deleteAccountButton = new System.Windows.Forms.Button();
-            this.updateAcctSearchButton = new System.Windows.Forms.Button();
+            this.acctNumSearchBox = new System.Windows.Forms.TextBox();
+            this.lNameSearchBox = new System.Windows.Forms.TextBox();
+            this.fNameSearchBox = new System.Windows.Forms.TextBox();
+            this.acctNumSearchLabel = new System.Windows.Forms.Label();
+            this.lNameSearchLabel = new System.Windows.Forms.Label();
+            this.fNameSearchLabel = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -137,7 +138,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -146,16 +147,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(106, 118);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(334, 31);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "This will be the home page";
             // 
             // label3
             // 
@@ -184,6 +175,67 @@
             this.tabPage2.Text = "Login/Logout";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // logoutButton
+            // 
+            this.logoutButton.Location = new System.Drawing.Point(118, 91);
+            this.logoutButton.Name = "logoutButton";
+            this.logoutButton.Size = new System.Drawing.Size(75, 23);
+            this.logoutButton.TabIndex = 6;
+            this.logoutButton.Text = "Logout";
+            this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
+            // 
+            // logoutLabel
+            // 
+            this.logoutLabel.AutoSize = true;
+            this.logoutLabel.Location = new System.Drawing.Point(12, 96);
+            this.logoutLabel.Name = "logoutLabel";
+            this.logoutLabel.Size = new System.Drawing.Size(100, 13);
+            this.logoutLabel.TabIndex = 5;
+            this.logoutLabel.Text = "Currently logged in?";
+            // 
+            // loginButton
+            // 
+            this.loginButton.Location = new System.Drawing.Point(12, 66);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(75, 23);
+            this.loginButton.TabIndex = 4;
+            this.loginButton.Text = "Login";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            // 
+            // passwordBox
+            // 
+            this.passwordBox.Location = new System.Drawing.Point(71, 36);
+            this.passwordBox.Name = "passwordBox";
+            this.passwordBox.Size = new System.Drawing.Size(100, 20);
+            this.passwordBox.TabIndex = 3;
+            // 
+            // usernameBox
+            // 
+            this.usernameBox.Location = new System.Drawing.Point(71, 9);
+            this.usernameBox.Name = "usernameBox";
+            this.usernameBox.Size = new System.Drawing.Size(100, 20);
+            this.usernameBox.TabIndex = 2;
+            // 
+            // passwordLabel
+            // 
+            this.passwordLabel.AutoSize = true;
+            this.passwordLabel.Location = new System.Drawing.Point(9, 39);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(56, 13);
+            this.passwordLabel.TabIndex = 1;
+            this.passwordLabel.Text = "Password:";
+            // 
+            // usernameLabel
+            // 
+            this.usernameLabel.AutoSize = true;
+            this.usernameLabel.Location = new System.Drawing.Point(7, 12);
+            this.usernameLabel.Name = "usernameLabel";
+            this.usernameLabel.Size = new System.Drawing.Size(58, 13);
+            this.usernameLabel.TabIndex = 0;
+            this.usernameLabel.Text = "Username:";
             // 
             // tabPage3
             // 
@@ -575,67 +627,6 @@
             // 
             this.curBalanceCH.Text = "Current Balance";
             // 
-            // usernameLabel
-            // 
-            this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(7, 12);
-            this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(58, 13);
-            this.usernameLabel.TabIndex = 0;
-            this.usernameLabel.Text = "Username:";
-            // 
-            // passwordLabel
-            // 
-            this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(9, 39);
-            this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(56, 13);
-            this.passwordLabel.TabIndex = 1;
-            this.passwordLabel.Text = "Password:";
-            // 
-            // usernameBox
-            // 
-            this.usernameBox.Location = new System.Drawing.Point(71, 9);
-            this.usernameBox.Name = "usernameBox";
-            this.usernameBox.Size = new System.Drawing.Size(100, 20);
-            this.usernameBox.TabIndex = 2;
-            // 
-            // passwordBox
-            // 
-            this.passwordBox.Location = new System.Drawing.Point(71, 36);
-            this.passwordBox.Name = "passwordBox";
-            this.passwordBox.Size = new System.Drawing.Size(100, 20);
-            this.passwordBox.TabIndex = 3;
-            // 
-            // loginButton
-            // 
-            this.loginButton.Location = new System.Drawing.Point(12, 66);
-            this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(75, 23);
-            this.loginButton.TabIndex = 4;
-            this.loginButton.Text = "Login";
-            this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
-            // 
-            // logoutLabel
-            // 
-            this.logoutLabel.AutoSize = true;
-            this.logoutLabel.Location = new System.Drawing.Point(12, 96);
-            this.logoutLabel.Name = "logoutLabel";
-            this.logoutLabel.Size = new System.Drawing.Size(100, 13);
-            this.logoutLabel.TabIndex = 5;
-            this.logoutLabel.Text = "Currently logged in?";
-            // 
-            // logoutButton
-            // 
-            this.logoutButton.Location = new System.Drawing.Point(118, 91);
-            this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(75, 23);
-            this.logoutButton.TabIndex = 6;
-            this.logoutButton.Text = "Logout";
-            this.logoutButton.UseVisualStyleBackColor = true;
-            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
-            // 
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.updateAcctSearchButton);
@@ -673,53 +664,32 @@
             this.tabPage6.Text = "Update Accounts";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // fNameSearchLabel
+            // updateAcctSearchButton
             // 
-            this.fNameSearchLabel.AutoSize = true;
-            this.fNameSearchLabel.Location = new System.Drawing.Point(33, 6);
-            this.fNameSearchLabel.Name = "fNameSearchLabel";
-            this.fNameSearchLabel.Size = new System.Drawing.Size(60, 13);
-            this.fNameSearchLabel.TabIndex = 0;
-            this.fNameSearchLabel.Text = "First Name:";
+            this.updateAcctSearchButton.Location = new System.Drawing.Point(6, 84);
+            this.updateAcctSearchButton.Name = "updateAcctSearchButton";
+            this.updateAcctSearchButton.Size = new System.Drawing.Size(75, 23);
+            this.updateAcctSearchButton.TabIndex = 77;
+            this.updateAcctSearchButton.Text = "Search";
+            this.updateAcctSearchButton.UseVisualStyleBackColor = true;
             // 
-            // lNameSearchLabel
+            // deleteAccountButton
             // 
-            this.lNameSearchLabel.AutoSize = true;
-            this.lNameSearchLabel.Location = new System.Drawing.Point(32, 30);
-            this.lNameSearchLabel.Name = "lNameSearchLabel";
-            this.lNameSearchLabel.Size = new System.Drawing.Size(61, 13);
-            this.lNameSearchLabel.TabIndex = 1;
-            this.lNameSearchLabel.Text = "Last Name:";
+            this.deleteAccountButton.Location = new System.Drawing.Point(458, 250);
+            this.deleteAccountButton.Name = "deleteAccountButton";
+            this.deleteAccountButton.Size = new System.Drawing.Size(100, 23);
+            this.deleteAccountButton.TabIndex = 76;
+            this.deleteAccountButton.Text = "Delete Account";
+            this.deleteAccountButton.UseVisualStyleBackColor = true;
             // 
-            // acctNumSearchLabel
+            // saveChangesButton
             // 
-            this.acctNumSearchLabel.AutoSize = true;
-            this.acctNumSearchLabel.Location = new System.Drawing.Point(3, 54);
-            this.acctNumSearchLabel.Name = "acctNumSearchLabel";
-            this.acctNumSearchLabel.Size = new System.Drawing.Size(90, 13);
-            this.acctNumSearchLabel.TabIndex = 2;
-            this.acctNumSearchLabel.Text = "Account Number:";
-            // 
-            // fNameSearchBox
-            // 
-            this.fNameSearchBox.Location = new System.Drawing.Point(99, 3);
-            this.fNameSearchBox.Name = "fNameSearchBox";
-            this.fNameSearchBox.Size = new System.Drawing.Size(100, 20);
-            this.fNameSearchBox.TabIndex = 3;
-            // 
-            // lNameSearchBox
-            // 
-            this.lNameSearchBox.Location = new System.Drawing.Point(99, 27);
-            this.lNameSearchBox.Name = "lNameSearchBox";
-            this.lNameSearchBox.Size = new System.Drawing.Size(100, 20);
-            this.lNameSearchBox.TabIndex = 4;
-            // 
-            // acctNumSearchBox
-            // 
-            this.acctNumSearchBox.Location = new System.Drawing.Point(99, 51);
-            this.acctNumSearchBox.Name = "acctNumSearchBox";
-            this.acctNumSearchBox.Size = new System.Drawing.Size(100, 20);
-            this.acctNumSearchBox.TabIndex = 5;
+            this.saveChangesButton.Location = new System.Drawing.Point(252, 250);
+            this.saveChangesButton.Name = "saveChangesButton";
+            this.saveChangesButton.Size = new System.Drawing.Size(100, 23);
+            this.saveChangesButton.TabIndex = 75;
+            this.saveChangesButton.Text = "Save Changes";
+            this.saveChangesButton.UseVisualStyleBackColor = true;
             // 
             // zipLabel2
             // 
@@ -865,32 +835,63 @@
             this.fNameLabel.TabIndex = 57;
             this.fNameLabel.Text = "First Name:";
             // 
-            // saveChangesButton
+            // acctNumSearchBox
             // 
-            this.saveChangesButton.Location = new System.Drawing.Point(252, 250);
-            this.saveChangesButton.Name = "saveChangesButton";
-            this.saveChangesButton.Size = new System.Drawing.Size(100, 23);
-            this.saveChangesButton.TabIndex = 75;
-            this.saveChangesButton.Text = "Save Changes";
-            this.saveChangesButton.UseVisualStyleBackColor = true;
+            this.acctNumSearchBox.Location = new System.Drawing.Point(99, 51);
+            this.acctNumSearchBox.Name = "acctNumSearchBox";
+            this.acctNumSearchBox.Size = new System.Drawing.Size(100, 20);
+            this.acctNumSearchBox.TabIndex = 5;
             // 
-            // deleteAccountButton
+            // lNameSearchBox
             // 
-            this.deleteAccountButton.Location = new System.Drawing.Point(458, 250);
-            this.deleteAccountButton.Name = "deleteAccountButton";
-            this.deleteAccountButton.Size = new System.Drawing.Size(100, 23);
-            this.deleteAccountButton.TabIndex = 76;
-            this.deleteAccountButton.Text = "Delete Account";
-            this.deleteAccountButton.UseVisualStyleBackColor = true;
+            this.lNameSearchBox.Location = new System.Drawing.Point(99, 27);
+            this.lNameSearchBox.Name = "lNameSearchBox";
+            this.lNameSearchBox.Size = new System.Drawing.Size(100, 20);
+            this.lNameSearchBox.TabIndex = 4;
             // 
-            // updateAcctSearchButton
+            // fNameSearchBox
             // 
-            this.updateAcctSearchButton.Location = new System.Drawing.Point(6, 84);
-            this.updateAcctSearchButton.Name = "updateAcctSearchButton";
-            this.updateAcctSearchButton.Size = new System.Drawing.Size(75, 23);
-            this.updateAcctSearchButton.TabIndex = 77;
-            this.updateAcctSearchButton.Text = "Search";
-            this.updateAcctSearchButton.UseVisualStyleBackColor = true;
+            this.fNameSearchBox.Location = new System.Drawing.Point(99, 3);
+            this.fNameSearchBox.Name = "fNameSearchBox";
+            this.fNameSearchBox.Size = new System.Drawing.Size(100, 20);
+            this.fNameSearchBox.TabIndex = 3;
+            // 
+            // acctNumSearchLabel
+            // 
+            this.acctNumSearchLabel.AutoSize = true;
+            this.acctNumSearchLabel.Location = new System.Drawing.Point(3, 54);
+            this.acctNumSearchLabel.Name = "acctNumSearchLabel";
+            this.acctNumSearchLabel.Size = new System.Drawing.Size(90, 13);
+            this.acctNumSearchLabel.TabIndex = 2;
+            this.acctNumSearchLabel.Text = "Account Number:";
+            // 
+            // lNameSearchLabel
+            // 
+            this.lNameSearchLabel.AutoSize = true;
+            this.lNameSearchLabel.Location = new System.Drawing.Point(32, 30);
+            this.lNameSearchLabel.Name = "lNameSearchLabel";
+            this.lNameSearchLabel.Size = new System.Drawing.Size(61, 13);
+            this.lNameSearchLabel.TabIndex = 1;
+            this.lNameSearchLabel.Text = "Last Name:";
+            // 
+            // fNameSearchLabel
+            // 
+            this.fNameSearchLabel.AutoSize = true;
+            this.fNameSearchLabel.Location = new System.Drawing.Point(33, 6);
+            this.fNameSearchLabel.Name = "fNameSearchLabel";
+            this.fNameSearchLabel.Size = new System.Drawing.Size(60, 13);
+            this.fNameSearchLabel.TabIndex = 0;
+            this.fNameSearchLabel.Text = "First Name:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(14, 31);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(211, 248);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // ammountLabel
             // 
@@ -921,7 +922,6 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
@@ -1003,6 +1003,7 @@
         private System.Windows.Forms.Label acctNumSearchLabel;
         private System.Windows.Forms.Label lNameSearchLabel;
         private System.Windows.Forms.Label fNameSearchLabel;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

@@ -117,4 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>There are 3 user accounts currently set up for you to use
+to sign in and test the program with.
+
+Administrator Accoount
+-Username: admin
+-Password: administrator
+
+Supervisor Account
+-Username: sup
+-Password: supervisor
+
+Regular User Account
+-Username: jshmo
+-Password: jshmoiscool
+
+</value>
+  </data>
 </root>

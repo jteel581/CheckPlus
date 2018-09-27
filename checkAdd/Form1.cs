@@ -30,6 +30,8 @@ namespace checkPlus
         {
             InitializeComponent();
             accountsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            tabControl1.Selected += new TabControlEventHandler(TabControl1_Selected);
+
 
             cpdb = new CheckPlusDB();
             cpdb.Database.Connection.ConnectionString = "Data Source=localhost;Initial Catalog=CheckPlus;Integrated Security=True";
@@ -48,14 +50,47 @@ namespace checkPlus
             MessageBox.Show(inHeading, inMessage, MessageBoxButtons.OK);
         }
 
+        private void TabControl1_Selected(Object sender, TabControlEventArgs e)
+        {
+            if (tabControl1.SelectedIndex != 1 && tabControl1.SelectedIndex != 0)
+            {
+                if (activeUser == null)
+                {
+                    string message = "You must be logged in to access this page! Log in now?";
+                    string caption = "User not logged in";
+                    switch (MessageBox.Show(message, caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+                    {
+                        case DialogResult.Yes:
+                            tabControl1.SelectedIndex = 1;
+                            break;
+
+                        case DialogResult.No:
+                            tabControl1.SelectedIndex = 0;
+                            break;
+
+                        case DialogResult.Cancel:
+                            tabControl1.SelectedIndex = 0;
+                            break;
+
+                    }
+                }
+            }
+            
+            
+
+        }
+
         private void addActButton_Click(object sender, EventArgs e)
         {
+            
             string firstName = firstNameBox.Text;
             string lastName = lastNameBox.Text;
             string routingNumber = routingBox1.Text;
             string accountNumber = accountBox1.Text;
             pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber);
-
+            // Jonathan Teel commented this out to test without using database, if I forget to remove the comments and 
+            // you pull and notice it not working remove my comment marks
+            /*
             //start linq testing code chunk
             Person selPer = perSQL.SelectPerson(new Person()
             {   //all we really care about are First_name and Last_name for now
@@ -90,7 +125,7 @@ namespace checkPlus
             }
             else { DisplayMessageNoResponse("Error", "Person does not exist."); }
             //end linq testing code chunk
-
+            */
             database.addAccount(act);
             ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
             accountsListView.Items.Add(lvi);
