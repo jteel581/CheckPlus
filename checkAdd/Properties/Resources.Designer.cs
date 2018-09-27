@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace checkAdd.Properties {
+namespace checkPlus.Properties {
     using System;
     
     

@@ -14,7 +14,7 @@ using System.Configuration;
 using System.Data.Common;
 using System.Text.RegularExpressions;
 
-namespace checkAdd
+namespace checkPlus
 {   //in alphabetical order by table name (at least, that's the goal)
 
     [Table("account")]

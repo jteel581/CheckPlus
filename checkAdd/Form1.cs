@@ -14,7 +14,7 @@ using System.Configuration;
 using System.Data.Common;
 using System.Text.RegularExpressions;
 
-namespace checkAdd
+namespace checkPlus
 {
     public partial class ammountLabel : Form
     {
@@ -23,7 +23,9 @@ namespace checkAdd
         AccountSQLer accSQL;
         Account_checkSQLer acc_chkSQL;
 
-        psudoDatabase database = new psudoDatabase();
+        pseudoDatabase database = new pseudoDatabase();
+        UsersCollection uc = new UsersCollection();
+        User activeUser = null;
         public ammountLabel()
         {
             InitializeComponent();
@@ -52,7 +54,7 @@ namespace checkAdd
             string lastName = lastNameBox.Text;
             string routingNumber = routingBox1.Text;
             string accountNumber = accountBox1.Text;
-            psudoAccount act = new psudoAccount(firstName, lastName, routingNumber, accountNumber);
+            pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber);
 
             //start linq testing code chunk
             Person selPer = perSQL.SelectPerson(new Person()
@@ -104,7 +106,7 @@ namespace checkAdd
             string acctNum = accountBox2.Text;
             string routNum = routingBox2.Text;
             double ammount = Convert.ToDouble(ammountBox.Text);
-            psudoCheck check = new psudoCheck(acctNum, routNum, ammount);
+            pseudoCheck check = new pseudoCheck(acctNum, routNum, ammount);
             database.getAccountByNum(acctNum).addCheck(check);
             updateListView();
             accountBox2.Clear();
@@ -117,10 +119,36 @@ namespace checkAdd
             int i = 0;
             foreach (ListViewItem lvi in accountsListView.Items)
             {
-                psudoAccount act = database.getAccountByNum(lvi.SubItems[0].Text);
+                pseudoAccount act = database.getAccountByNum(lvi.SubItems[0].Text);
                 lvi.SubItems[3].Text = act.getNumOfChecks().ToString();
                 lvi.SubItems[4].Text = act.getCurBal().ToString();
             }
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            string uName = usernameBox.Text;
+            string pWord = passwordBox.Text;
+
+            foreach(User usr in uc.getUsers())
+            {
+                if (usr.getUserName() == uName && usr.getPassword() == pWord)
+                {
+                    activeUser = usr;
+                    return;
+                }
+            }
+            // complain that username or password is incorrect
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            activeUser = null;
         }
     }
 }
