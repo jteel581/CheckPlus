@@ -3,26 +3,9 @@
 	notes:		must copy-paste into ssms and run manually
 */
 
-insert into dbo.entity_type (
-	entity_type_id,
-	entity_type_nm
-)
-select 1000, 'Account Holder' union
-select 1001, 'Bank'
-;
-
-insert into dbo.entity (
-	entity_id,
-	entity_type_id
-)
-select 111000, 1000 union
-select 111001, 1000 union
-select 111002, 1000 union
-select 111500, 1001 union
-select 111501, 1001
-;
-
-insert into dbo.person (
+--not up to date right now; do not use
+insert into dbo.person 
+(
 	person_id,
 	first_name,
 	last_name,
@@ -31,25 +14,37 @@ insert into dbo.person (
 )
 select 111000, 'John', 'Smith', 'Xavier', 'Mr.' union
 select 111001, 'Madelynn', 'Geraldino', 'Patricia', 'Mrs.' union
-select 111002, 'Jamie', 'Jackson', 'Alex', 'Miss'
+select 111002, 'Jamie', 'Jackson', 'Alex', 'Miss' union
+select 112000, 'Maggie', 'Gordon', '', ''
 ;
 
-insert into dbo.organization (
-	organization_id,
-	organization_nm
+insert into dbo.bank 
+(
+	bank_id,
+	bank_nm
 )
-select 111500, 'First Union Together Bank'
+select 111500, 'First Union Together Bank' union
+select 111501, 'Union Credit Union'
+;
+
+insert into dbo.bank 
+(
+	bank_id,
+	contact_id,
+	contact_email,
+	routing_number
+)
+select 111500, 112000, 'mgordon@futb.com', '864-555-2134'
 ;
 
 insert into dbo.account (
 	account_id,
-	entity_id_1,
-	entity_id_2,
+	person_id,
+	bank_id,
 	account_number,
-	routing_number,
 	date_start
 )
-select 111100, 111000, 111500, '999867890', '9991234321234', '2018-09-18'
+select 111100, 111000, 111500, '9991234321234', GETDATE()
 ;
 
 insert into dbo.account_check (

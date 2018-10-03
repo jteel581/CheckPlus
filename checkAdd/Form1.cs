@@ -19,9 +19,8 @@ namespace checkAdd
     public partial class ammountLabel : Form
     {
         CheckPlusDB cpdb;
-        PersonSQLer perSQL;
         AccountSQLer accSQL;
-        Account_checkSQLer acc_chkSQL;
+        Acct_checkSQLer acct_chkSQL;
 
         psudoDatabase database = new psudoDatabase();
         public ammountLabel()
@@ -31,10 +30,9 @@ namespace checkAdd
 
             cpdb = new CheckPlusDB();
             cpdb.Database.Connection.ConnectionString = "Data Source=localhost;Initial Catalog=CheckPlus;Integrated Security=True";
-
-            perSQL = new PersonSQLer(cpdb);
+            
             accSQL = new AccountSQLer(cpdb);
-            acc_chkSQL = new Account_checkSQLer(cpdb);
+            acct_chkSQL = new Acct_checkSQLer(cpdb);
         }
 
         /*  FUNCTION
@@ -52,42 +50,7 @@ namespace checkAdd
             string lastName = lastNameBox.Text;
             string routingNumber = routingBox1.Text;
             string accountNumber = accountBox1.Text;
-            psudoAccount act = new psudoAccount(firstName, lastName, routingNumber, accountNumber);
-
-            //start linq testing code chunk
-            Person selPer = perSQL.SelectPerson(new Person()
-            {   //all we really care about are First_name and Last_name for now
-                Person_id = 1000,
-                First_name = firstName,
-                Middle_name = "",
-                Last_name = lastName,
-                Suffix = "",
-                Title = ""
-            });
-
-            if(selPer != null)
-            {
-                Account insAcc = accSQL.InsertAccount(new Account()
-                {
-                    Account_id = (
-                            from a in cpdb.Accounts
-                            select a.Account_id).Max() + 1,
-                    Entity_id_1 = selPer.Person_id,
-                    Entity_id_2 = 1000000, //doesn't matter for now.....
-                    Account_number = accountNumber,
-                    Routing_number = routingNumber,
-                    Date_start = DateTime.Now
-                    }
-                );
-
-                //if attempt to insert account results in finding 
-                //  an exitsting account
-                //  display an error message
-                if (insAcc != null) { DisplayMessageNoResponse("Error", "Account already exists."); }
-                else { DisplayMessageNoResponse("Success!", "New account added."); }
-            }
-            else { DisplayMessageNoResponse("Error", "Person does not exist."); }
-            //end linq testing code chunk
+            psudoAccount act = new psudoAccount(firstName, lastName, routingNumber, accountNumber);      
 
             database.addAccount(act);
             ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });

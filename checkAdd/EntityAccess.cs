@@ -46,18 +46,26 @@ namespace checkAdd
             *      and things of that nature
             */
         public List<Account> GetAllAccounts() { return cpdb.Accounts.ToList(); }
+        public int GetNewAccountID()
+        {
+            return (from a in cpdb.Accounts
+                    select a.Account_id).Max() + 1;
+        }
 
         /*  FUNCTION
             *  updates the desired record
             */
         public void UpdateAccount(Account acctToUpdate)
         {
-            int updEntity_id_1 = acctToUpdate.Entity_id_1;
-            int updEntity_id_2 = acctToUpdate.Entity_id_2;
+                /*
+            int updAcct_holder_id = acctToUpdate.Acct_holder_id;
+            int? updAcct_holder_id_2 = acctToUpdate.Acct_holder_id_2;
+            int updBank_id = acctToUpdate.Bank_id;
+            int updAddress_id = acctToUpdate.Address_id;
             string updAccount_number = acctToUpdate.Account_number;
-            string updRouting_number = acctToUpdate.Routing_number;
             DateTime updDate_start = acctToUpdate.Date_start;
             DateTime? updDate_end = acctToUpdate.Date_end;
+            string updPhone_number = acctToUpdate.Phone_number;
 
             var upAccount = cpdb.Accounts
                 .Where(
@@ -69,8 +77,8 @@ namespace checkAdd
             //the actual update
             foreach (var a in upAccount)
             {
-                a.Entity_id_1 = updEntity_id_1;
-                a.Entity_id_2 = updEntity_id_2;
+                a.Entity_id_1 = updAcct_holder_id;
+                a.Entity_id_2 = updAcct_holder_id_2;
                 a.Account_number = updAccount_number;
                 a.Routing_number = updRouting_number;
                 a.Date_start = updDate_start;
@@ -78,27 +86,28 @@ namespace checkAdd
             }
 
             cpdb.SaveChanges();
+            */
         }
 
 
         public Account InsertAccount(Account acctToInsert)
         {
-            var tstAccount = cpdb.Accounts
-                .Where(
-                    x =>
-                    x.Routing_number == acctToInsert.Routing_number
-                        && x.Account_number == acctToInsert.Account_number
+            var tstAccount = (
+                from a in cpdb.Accounts
+                join ah in cpdb.Acct_holders on a.Acct_holder_id equals ah.Acct_holder_id
+                select a
                 ).FirstOrDefault();
 
             if (tstAccount == null)
             {
-                //cpdb.Accounts.Add(acctToInsert);
-                //cpdb.SaveChanges();
+                cpdb.Accounts.Add(acctToInsert);
+                cpdb.SaveChanges();
             }
 
             return tstAccount;
         }
 
+            /*
         public void DeleteAccount(Account acctToDel)
         {
             GetAllAccounts()
@@ -108,67 +117,62 @@ namespace checkAdd
                         && x.Account_number == acctToDel.Account_number
                 );
         }
+        */
     }
 
-    class Account_checkSQLer
+    class Acct_checkSQLer
     {
         private CheckPlusDB cpdb;
-        public Account_checkSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
-
-        public List<Account_check> GetAllAccount_checks() { return cpdb.Account_Checks.ToList(); }
-        public void UpdateAccount_check(Account_check acctChkToUpdate)
+        public Acct_checkSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
+        public int GetNewAcct_check_id()
         {
-
+            return (from ac in cpdb.Acct_checks
+                    select ac.Acct_check_id).Max() + 1;
         }
-        public void InsertAccount_check(Account_check acctChkToInsert)
+        public List<Acct_check> GetAllAcct_checks() { return cpdb.Acct_checks.ToList(); }
+        public Acct_check GetAcct_check(string param_rout_num, string param_acct_num, string param_check_num)
         {
-
-        }
-        public void DeleteAccount_check(Account_check acctChkToDelete)
-        {
-
-        }
-    }
-
-    class PersonSQLer
-    {
-        private CheckPlusDB cpdb;
-        public PersonSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
-        public List<Person> SelectAllPeople() { return cpdb.People.ToList(); }
-        public Person SelectPerson(Person person)
-        {
-            var tstPerson = cpdb.People
-                .Where(
-                    x =>
-                    x.First_name == person.First_name
-                        && x.Last_name == person.Last_name).FirstOrDefault();
-            return tstPerson;
-        }
-        public void UpdatePerson(Person person)
-        {
-
-        }
-        public Person InsertPerson(Person perToInsert)
-        {
-            var tstPerson = cpdb.People
-                .Where(
-                    x =>
-                    x.First_name == perToInsert.First_name
-                        && x.Last_name == perToInsert.Last_name
+            return (from ac in cpdb.Acct_checks
+                    join a in cpdb.Accounts on ac.Account_id equals a.Account_id
+                    join b in cpdb.Banks on a.Bank_id equals b.Bank_id
+                    where b.Routing_number == param_rout_num
+                        && a.Account_number == param_acct_num
+                        && ac.Check_number == param_check_num
+                    select ac
                 ).FirstOrDefault();
-
-            if (tstPerson == null)
-            {
-                cpdb.People.Add(perToInsert);
-                cpdb.SaveChanges();
-            }
-
-            return perToInsert;
         }
-        public void DeletePerson(Person person)
+        public void UpdateAcct_check(Acct_check acctChkToUpdate)
+        {
+
+        }
+        public void InsertAcct_check(Acct_check acctChkToInsert)
+        {
+
+        }
+        public void DeleteAcct_check(Acct_check acctChkToDelete)
         {
 
         }
     }
     
+
+    class Acct_holderSQLer
+    {
+        private CheckPlusDB cpdb;
+        public Acct_holderSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
+        public int GetNewAcct_holder_id()
+        {
+            return (from ah in cpdb.Acct_holders
+                    select ah.Acct_holder_id).Max() + 1;
+        }
+        public List<Acct_holder> GetAllAcct_holders() { return cpdb.Acct_holders.ToList(); }
+        public Acct_holder GetAcct_holder(string param_first_nm, string param_last_nm)
+        {
+            return (from ah in cpdb.Acct_holders
+                    where ah.First_name == param_first_nm
+                        && ah.Last_name == param_last_nm
+                    select ah
+                ).FirstOrDefault();
+        }
+    }
 }
