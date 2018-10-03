@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace checkAdd
+namespace checkPlus
 {
-    class psudoAccount
+    class pseudoAccount
     {
         string firstName;
         string lastName;
         string routingNumber;
         string accountNumber;
         double curBal;
-        List<psudoCheck> checks;
+        List<pseudoCheck> checks;
         int numOfChecks;
 
-        public psudoAccount(string first, string last, string rout, string account)
+        public pseudoAccount(string first, string last, string rout, string account)
         {
             firstName = first;
             lastName = last;
@@ -24,7 +24,7 @@ namespace checkAdd
             accountNumber = account;
             curBal = 0;
             numOfChecks = 0;
-            checks = new List<psudoCheck>();
+            checks = new List<pseudoCheck>();
         }
         
         public string getAccountNum()
@@ -35,7 +35,7 @@ namespace checkAdd
         public string getLastName() { return lastName; }
         public string getRoutingNum() { return routingNumber; }
         public double getCurBal() { return curBal; }
-        public void addCheck(psudoCheck check)
+        public void addCheck(pseudoCheck check)
         {
             checks.Add(check);
             numOfChecks++;

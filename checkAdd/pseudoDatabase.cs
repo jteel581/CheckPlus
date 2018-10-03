@@ -4,22 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace checkAdd
+namespace checkPlus
 {
-    class psudoDatabase
+    class pseudoDatabase
     {
-        List<psudoAccount> psudoAccounts;
-        public psudoDatabase()
+        List<pseudoAccount> psudoAccounts;
+        public pseudoDatabase()
         {
-            psudoAccounts = new List<psudoAccount>();
+            psudoAccounts = new List<pseudoAccount>();
         }
-        public void addAccount(psudoAccount act)
+        public void addAccount(pseudoAccount act)
         {
             psudoAccounts.Add(act);
         }
-        public psudoAccount getAccountByNum(string acctNum)
+        public pseudoAccount getAccountByNum(string acctNum)
         {
-            foreach (psudoAccount acct in psudoAccounts)
+            foreach (pseudoAccount acct in psudoAccounts)
             {
                 if (acct.getAccountNum() == acctNum)
                 {

@@ -4,20 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace checkAdd
+namespace checkPlus
 {
-    class psudoCheck
+    class pseudoCheck
     {
         string accountNum;
         string routingNum;
         double ammount;
+        int checkNum;
 
-        public psudoCheck(string acct, string rout, double ammnt)
+        public pseudoCheck(string acct, string rout, double ammnt)
         {
             accountNum = acct;
             routingNum = rout;
             ammount = ammnt;
 
+        }
+        public pseudoCheck(string acct, string rout, double ammnt, int num)
+        {
+            accountNum = acct;
+            routingNum = rout;
+            ammount = ammnt;
+            checkNum = num;
         }
         public double getAmmount() { return ammount; }
 
