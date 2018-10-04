@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ammountLabel));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.logoutButton = new System.Windows.Forms.Button();
@@ -112,7 +113,10 @@
             this.acctNumSearchLabel = new System.Windows.Forms.Label();
             this.lNameSearchLabel = new System.Windows.Forms.Label();
             this.fNameSearchLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.dateWrittenBox = new System.Windows.Forms.Label();
+            this.phnNumBox = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -147,6 +151,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(14, 31);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(211, 248);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // label3
             // 
@@ -239,6 +253,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.phnNumBox);
+            this.tabPage3.Controls.Add(this.textBox5);
             this.tabPage3.Controls.Add(this.zipLabel);
             this.tabPage3.Controls.Add(this.zipBox);
             this.tabPage3.Controls.Add(this.stateBox);
@@ -349,7 +365,7 @@
             // addActButton
             // 
             this.addActButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addActButton.Location = new System.Drawing.Point(225, 229);
+            this.addActButton.Location = new System.Drawing.Point(216, 241);
             this.addActButton.Name = "addActButton";
             this.addActButton.Size = new System.Drawing.Size(96, 29);
             this.addActButton.TabIndex = 46;
@@ -433,6 +449,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.textBox4);
+            this.tabPage4.Controls.Add(this.dateWrittenBox);
             this.tabPage4.Controls.Add(this.checkNumBox);
             this.tabPage4.Controls.Add(this.checkNumLabel);
             this.tabPage4.Controls.Add(this.addChkButton);
@@ -469,7 +487,7 @@
             // addChkButton
             // 
             this.addChkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addChkButton.Location = new System.Drawing.Point(10, 136);
+            this.addChkButton.Location = new System.Drawing.Point(10, 158);
             this.addChkButton.Name = "addChkButton";
             this.addChkButton.Size = new System.Drawing.Size(93, 25);
             this.addChkButton.TabIndex = 56;
@@ -883,15 +901,39 @@
             this.fNameSearchLabel.TabIndex = 0;
             this.fNameSearchLabel.Text = "First Name:";
             // 
-            // textBox1
+            // textBox4
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(14, 31);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(211, 248);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = resources.GetString("textBox1.Text");
+            this.textBox4.Location = new System.Drawing.Point(100, 125);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 60;
+            // 
+            // dateWrittenBox
+            // 
+            this.dateWrittenBox.AutoSize = true;
+            this.dateWrittenBox.Location = new System.Drawing.Point(13, 128);
+            this.dateWrittenBox.Name = "dateWrittenBox";
+            this.dateWrittenBox.Size = new System.Drawing.Size(70, 13);
+            this.dateWrittenBox.TabIndex = 59;
+            this.dateWrittenBox.Text = "Date Written:";
+            // 
+            // phnNumBox
+            // 
+            this.phnNumBox.AutoSize = true;
+            this.phnNumBox.Location = new System.Drawing.Point(13, 266);
+            this.phnNumBox.Name = "phnNumBox";
+            this.phnNumBox.Size = new System.Drawing.Size(81, 13);
+            this.phnNumBox.TabIndex = 58;
+            this.phnNumBox.Text = "Phone Number:";
+            this.phnNumBox.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(100, 262);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.TabIndex = 57;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // ammountLabel
             // 
@@ -1004,6 +1046,10 @@
         private System.Windows.Forms.Label lNameSearchLabel;
         private System.Windows.Forms.Label fNameSearchLabel;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label dateWrittenBox;
+        private System.Windows.Forms.Label phnNumBox;
+        private System.Windows.Forms.TextBox textBox5;
     }
 }
 

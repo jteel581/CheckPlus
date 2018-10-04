@@ -18,10 +18,11 @@ namespace checkPlus
 {
     public partial class ammountLabel : Form
     {
+        //db variables
         CheckPlusDB cpdb;
-        PersonSQLer perSQL;
+        Acct_holderSQLer acct_holdSQL;
         AccountSQLer accSQL;
-        Account_checkSQLer acc_chkSQL;
+        Acct_checkSQLer acct_chkSQL;
 
         pseudoDatabase database = new pseudoDatabase();
         UsersCollection uc = new UsersCollection();
@@ -32,13 +33,13 @@ namespace checkPlus
             accountsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             tabControl1.Selected += new TabControlEventHandler(TabControl1_Selected);
 
-
+            //configuring db variables
             cpdb = new CheckPlusDB();
             cpdb.Database.Connection.ConnectionString = "Data Source=localhost;Initial Catalog=CheckPlus;Integrated Security=True";
 
-            perSQL = new PersonSQLer(cpdb);
+            acct_holdSQL = new Acct_holderSQLer(cpdb);
             accSQL = new AccountSQLer(cpdb);
-            acc_chkSQL = new Account_checkSQLer(cpdb);
+            acct_chkSQL = new Acct_checkSQLer(cpdb);
         }
 
         /*  FUNCTION
@@ -87,45 +88,36 @@ namespace checkPlus
             string lastName = lastNameBox.Text;
             string routingNumber = routingBox1.Text;
             string accountNumber = accountBox1.Text;
-            pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber);
-            // Jonathan Teel commented this out to test without using database, if I forget to remove the comments and 
-            // you pull and notice it not working remove my comment marks
-            /*
+            //Izaac added these address strings for his data access function testing
+            //Jonathan already had created the boxes
+            string address = stNumBox.Text + " " + stNameBox.Text;
+            string city = cityBox.Text;
+            string state = stateBox.Text;
+            string zip = zipBox.Text;
+            //Izaac added this box and string
+            string phnNum = phnNumBox.Text;
+
+            //--------------------------------------------------------
             //start linq testing code chunk
-            Person selPer = perSQL.SelectPerson(new Person()
-            {   //all we really care about are First_name and Last_name for now
-                Person_id = 1000,
-                First_name = firstName,
-                Middle_name = "",
-                Last_name = lastName,
-                Suffix = "",
-                Title = ""
-            });
+            //--------------------------------------------------------
+            Account tstAccount = accSQL.InsertAccount(
+                accSQL.BuildAccount(firstName, lastName, routingNumber, accountNumber, address, city, state, zip, phnNum)
+            );
 
-            if(selPer != null)
-            {
-                Account insAcc = accSQL.InsertAccount(new Account()
-                {
-                    Account_id = (
-                            from a in cpdb.Accounts
-                            select a.Account_id).Max() + 1,
-                    Entity_id_1 = selPer.Person_id,
-                    Entity_id_2 = 1000000, //doesn't matter for now.....
-                    Account_number = accountNumber,
-                    Routing_number = routingNumber,
-                    Date_start = DateTime.Now
-                    }
-                );
-
-                //if attempt to insert account results in finding 
-                //  an exitsting account
-                //  display an error message
-                if (insAcc != null) { DisplayMessageNoResponse("Error", "Account already exists."); }
-                else { DisplayMessageNoResponse("Success!", "New account added."); }
+            //if attempt to insert account results in finding an exitsting account
+            if (tstAccount != null)
+            {   //display an error message
+                DisplayMessageNoResponse("Error", "Account already exists.");
             }
-            else { DisplayMessageNoResponse("Error", "Person does not exist."); }
+            else
+            {   //otherwise, it was a successful account addition
+                DisplayMessageNoResponse("Success!", "New account added.");
+            }
+            //--------------------------------------------------------
             //end linq testing code chunk
-            */
+            //--------------------------------------------------------
+
+            pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber);
             database.addAccount(act);
             ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
             accountsListView.Items.Add(lvi);
@@ -133,22 +125,46 @@ namespace checkPlus
             lastNameBox.Clear();
             routingBox1.Clear();
             accountBox1.Clear();
-
         }
 
         private void addChkButton_Click(object sender, EventArgs e)
         {
             string acctNum = accountBox2.Text;
             string routNum = routingBox2.Text;
+            //Izaac added this string; box already existed
+            string chkNum = checkNumBox.Text;
             double ammount = Convert.ToDouble(ammountBox.Text);
+            //Izaac added this box and string
+            DateTime dateWritten = Convert.ToDateTime(dateWrittenBox.Text);
+
+            //--------------------------------------------------------
+            //start linq testing code chunk
+            //--------------------------------------------------------
+            Acct_check tstAcct_check = acct_chkSQL.InsertAcct_check(
+                acct_chkSQL.BuildAcct_check(acctNum, routNum, chkNum, ammount, dateWritten)
+            );
+
+            //if check record already existed
+            if (tstAcct_check != null)
+            {   //display an error message
+                DisplayMessageNoResponse("Error", "Check already exists.");
+            }
+            else
+            {   //otherwise, it was a successful account addition
+                DisplayMessageNoResponse("Success!", "New check added.");
+            }
+            //--------------------------------------------------------
+            //end linq testing code chunk
+            //--------------------------------------------------------
+
             pseudoCheck check = new pseudoCheck(acctNum, routNum, ammount);
             database.getAccountByNum(acctNum).addCheck(check);
             updateListView();
             accountBox2.Clear();
             routingBox2.Clear();
             ammountBox.Clear();
-            
         }
+
         public void updateListView()
         {
             int i = 0;
@@ -184,6 +200,16 @@ namespace checkPlus
         private void logoutButton_Click(object sender, EventArgs e)
         {
             activeUser = null;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

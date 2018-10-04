@@ -16,35 +16,73 @@ using System.Text.RegularExpressions;
 
 namespace checkPlus
 {
-    /*  SELECT * functions
-        */
-
-    /*  UDPATE functions
-        */
-
-    /*  INSERT functions
-        *  checks to see if the account to insert already exists
-        *   if it does, return the account and add nothing to the db
-        *   if not, add the account and return null
-        *  
-        *  be sure to check the return value
-        *   to determine if INSERT was successful
-        *      
-        */
-
-    /*  DELETE functions
-        */
-
     class AccountSQLer
     {
         private CheckPlusDB cpdb;
         public AccountSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
 
         /*  FUNCTION
-            *  retrieves a list of all the accounts present in dbo.account
-            *  probably most commonly used for displaying lists of accounts in dropdowns
-            *      and things of that nature
-            */
+         *  build an account out of the unique characteristics of an account record
+         *      Account holder's first name and last name
+         *      Bank's routing number
+         *      Account's account number
+         *  if a record does not exist with the provided information,
+         *      we return null
+         *      
+         *  use it to build an Account instance 
+         *      any time you need to call one of the "SQL-esque" Account functions below
+         */
+        public Account BuildAccount
+        (
+            string prmFirstNm, string prmLastNm, //account holder info
+            string prmRoutNum, //bank info
+            string prmAddress, string prmCity, string prmState, string prmZip, //address info
+            string prmAcctNum, string prmPhnNum //account info
+        )
+        {
+            Account tst_Acct = (
+                from a in cpdb.Accounts
+                join b in cpdb.Banks on a.Bank_id equals b.Bank_id
+                where b.Routing_number == prmRoutNum
+                    && a.Account_number == prmAcctNum
+                select a
+            ).FirstOrDefault();
+
+            //there already was an account with that information
+            if (tst_Acct != null) { return tst_Acct; }
+            else
+            {   //build a new account record because one does not already exist
+                return new Account()
+                {   
+                    Account_id = GetNewAccountID(),
+                    Acct_holder_id = (
+                        from ah in cpdb.Acct_holders
+                        where ah.First_name == prmFirstNm
+                            && ah.Last_name == prmLastNm
+                        select ah.Acct_holder_id
+                    ).FirstOrDefault(),
+                    Acct_holder_id_2 = null, //implement this later
+                    Bank_id = (
+                        from b in cpdb.Banks
+                        where b.Routing_number == prmRoutNum
+                        select b.Bank_id
+                    ).FirstOrDefault(),
+                    Address_id = (
+                        from a in cpdb.Addresses
+                        where a.Address_nm == prmAddress
+                            && a.City == prmCity
+                            && a.State == prmState
+                            && a.Zip_code == prmZip
+                        select a.Address_id
+                    ).FirstOrDefault(),
+                    Account_number = prmAcctNum,
+                    Date_start = DateTime.Now,
+                    Phone_number = null
+                };
+            }
+        }
+
+
         public List<Account> GetAllAccounts() { return cpdb.Accounts.ToList(); }
         public int GetNewAccountID()
         {
@@ -52,49 +90,16 @@ namespace checkPlus
                     select a.Account_id).Max() + 1;
         }
 
-        /*  FUNCTION
-            *  updates the desired record
-            */
         public void UpdateAccount(Account acctToUpdate)
         {
-                /*
-            int updAcct_holder_id = acctToUpdate.Acct_holder_id;
-            int? updAcct_holder_id_2 = acctToUpdate.Acct_holder_id_2;
-            int updBank_id = acctToUpdate.Bank_id;
-            int updAddress_id = acctToUpdate.Address_id;
-            string updAccount_number = acctToUpdate.Account_number;
-            DateTime updDate_start = acctToUpdate.Date_start;
-            DateTime? updDate_end = acctToUpdate.Date_end;
-            string updPhone_number = acctToUpdate.Phone_number;
 
-            var upAccount = cpdb.Accounts
-                .Where(
-                    x =>
-                    x.Account_number == acctToUpdate.Account_number
-                        && x.Routing_number == acctToUpdate.Routing_number)
-                .ToList();
-
-            //the actual update
-            foreach (var a in upAccount)
-            {
-                a.Entity_id_1 = updAcct_holder_id;
-                a.Entity_id_2 = updAcct_holder_id_2;
-                a.Account_number = updAccount_number;
-                a.Routing_number = updRouting_number;
-                a.Date_start = updDate_start;
-                a.Date_end = updDate_end;
-            }
-
-            cpdb.SaveChanges();
-            */
         }
-
 
         public Account InsertAccount(Account acctToInsert)
         {
             var tstAccount = (
                 from a in cpdb.Accounts
-                join ah in cpdb.Acct_holders on a.Acct_holder_id equals ah.Acct_holder_id
+                where a.Account_id == acctToInsert.Account_id
                 select a
                 ).FirstOrDefault();
 
@@ -107,7 +112,7 @@ namespace checkPlus
             return tstAccount;
         }
 
-            /*
+        /*
         public void DeleteAccount(Account acctToDel)
         {
             GetAllAccounts()
@@ -124,30 +129,69 @@ namespace checkPlus
     {
         private CheckPlusDB cpdb;
         public Acct_checkSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
+        public Acct_check BuildAcct_check
+        (
+            string prmAcctNum, //account info
+            string prmRoutNum, //bank info
+            string prmCheckNum, double prmAmt, DateTime prmDateWrit //check info
+        )
+        {
+            Acct_check tstAcct_check = (
+                from ac in cpdb.Acct_checks
+                join a in cpdb.Accounts on ac.Account_id equals a.Account_id
+                join b in cpdb.Banks on a.Bank_id equals b.Bank_id
+                where a.Account_number == prmAcctNum
+                    && b.Routing_number == prmRoutNum
+                    && ac.Check_number == prmCheckNum
+                select ac
+            ).FirstOrDefault();
+
+            if(tstAcct_check != null) { return tstAcct_check; }
+            else
+            {
+                return new Acct_check()
+                {
+                    Acct_check_id = GetNewAcct_check_id(),
+                    Account_id = (
+                        from a in cpdb.Accounts
+                        join b in cpdb.Banks on a.Bank_id equals b.Bank_id
+                        where a.Account_number == prmAcctNum
+                            && b.Routing_number == prmRoutNum
+                        select a.Account_id
+                    ).FirstOrDefault(),
+                    Amount = prmAmt,
+                    Date_written = prmDateWrit,
+                    Date_received = DateTime.Now
+                };
+            }
+        }
         public int GetNewAcct_check_id()
         {
-            return (from ac in cpdb.Acct_checks
-                    select ac.Acct_check_id).Max() + 1;
+            return (
+                from ac in cpdb.Acct_checks
+                select ac.Acct_check_id
+            ).Max() + 1;
         }
         public List<Acct_check> GetAllAcct_checks() { return cpdb.Acct_checks.ToList(); }
-        public Acct_check GetAcct_check(string param_rout_num, string param_acct_num, string param_check_num)
+        public Acct_check GetAcct_check(string prmrout_num, string prmacct_num, string prmcheck_num)
         {
-            return (from ac in cpdb.Acct_checks
-                    join a in cpdb.Accounts on ac.Account_id equals a.Account_id
-                    join b in cpdb.Banks on a.Bank_id equals b.Bank_id
-                    where b.Routing_number == param_rout_num
-                        && a.Account_number == param_acct_num
-                        && ac.Check_number == param_check_num
-                    select ac
-                ).FirstOrDefault();
+            return (
+                from ac in cpdb.Acct_checks
+                join a in cpdb.Accounts on ac.Account_id equals a.Account_id
+                join b in cpdb.Banks on a.Bank_id equals b.Bank_id
+                where b.Routing_number == prmrout_num
+                    && a.Account_number == prmacct_num
+                    && ac.Check_number == prmcheck_num
+                select ac
+            ).FirstOrDefault();
         }
         public void UpdateAcct_check(Acct_check acctChkToUpdate)
         {
 
         }
-        public void InsertAcct_check(Acct_check acctChkToInsert)
+        public Acct_check InsertAcct_check(Acct_check acctChkToInsert)
         {
-
+            return null;
         }
         public void DeleteAcct_check(Acct_check acctChkToDelete)
         {
@@ -162,17 +206,36 @@ namespace checkPlus
         public Acct_holderSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
         public int GetNewAcct_holder_id()
         {
-            return (from ah in cpdb.Acct_holders
-                    select ah.Acct_holder_id).Max() + 1;
+            return (
+                from ah in cpdb.Acct_holders
+                select ah.Acct_holder_id
+            ).Max() + 1;
         }
         public List<Acct_holder> GetAllAcct_holders() { return cpdb.Acct_holders.ToList(); }
-        public Acct_holder GetAcct_holder(string param_first_nm, string param_last_nm)
+        public Acct_holder GetAcct_holder(string prmFirstNm, string prmLastNm)
         {
-            return (from ah in cpdb.Acct_holders
-                    where ah.First_name == param_first_nm
-                        && ah.Last_name == param_last_nm
-                    select ah
-                ).FirstOrDefault();
+            return (
+                from ah in cpdb.Acct_holders
+                where ah.First_name == prmFirstNm
+                    && ah.Last_name == prmLastNm
+                select ah
+            ).FirstOrDefault();
+        }
+    }
+
+
+    class BankSQLer
+    {
+        private CheckPlusDB cpdb;
+        public BankSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
+        public List<Bank> GetAllBanks() { return cpdb.Banks.ToList(); }
+        public Bank GetBank(string prmRoutNum)
+        {
+            return (
+                from b in cpdb.Banks
+                where b.Routing_number == prmRoutNum
+                select b
+            ).FirstOrDefault();
         }
     }
 }
