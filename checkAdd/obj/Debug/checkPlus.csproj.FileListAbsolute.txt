@@ -15,3 +15,6 @@ C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\obj\Debug\checkPlus.csprojRes
 C:\Users\jondt_000\Downloads\CheckPlus\checkAdd\bin\Debug\checkAdd.exe.config
 C:\Users\jondt_000\Downloads\CheckPlus\checkAdd\obj\Debug\checkAdd.exe
 C:\Users\jondt_000\Downloads\CheckPlus\checkAdd\obj\Debug\checkAdd.pdb
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\checkAdd.exe.config
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\obj\Debug\checkAdd.exe
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\obj\Debug\checkAdd.pdb
