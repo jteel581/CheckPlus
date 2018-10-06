@@ -417,7 +417,7 @@
             // addActButton
             // 
             this.addActButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addActButton.Location = new System.Drawing.Point(225, 229);
+            this.addActButton.Location = new System.Drawing.Point(216, 241);
             this.addActButton.Name = "addActButton";
             this.addActButton.Size = new System.Drawing.Size(96, 29);
             this.addActButton.TabIndex = 46;

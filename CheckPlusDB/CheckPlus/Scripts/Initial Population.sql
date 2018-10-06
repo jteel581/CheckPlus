@@ -3,61 +3,126 @@
 	notes:		must copy-paste into ssms and run manually
 */
 
-insert into dbo.entity_type (
-	entity_type_id,
-	entity_type_nm
-)
-select 1000, 'Account Holder' union
-select 1001, 'Bank'
+--not up to date right now; do not use
+insert into dbo.acct_holder
+(		first_name,		last_name,			middle_name,		title			)
+select	'John',			'Smith',			'Xavier',			'Mr.'		union
+select	'Madelynn',		'Geraldino',		'Patricia',			'Mrs.'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
+select	'Maggie',		'Gordon',			'',					''
 ;
 
-insert into dbo.entity (
-	entity_id,
-	entity_type_id
-)
-select 111000, 1000 union
-select 111001, 1000 union
-select 111002, 1000 union
-select 111500, 1001 union
-select 111501, 1001
+insert into dbo.bank 
+(		bank_nm,							routing_number,					contact_nm,						contact_email,					contact_phone				)
+select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbilling@fun.com',			'675-555-8976'			union
+select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbilling@fun.com',			'675-555-8976'			union
+select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbilling@fun.com',			'675-555-8976'			union
+select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbilling@fun.com',			'675-555-8976'			union
+select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbilling@fun.com',			'675-555-8976'			union
+select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbilling@fun.com',			'675-555-8976'			union
+select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbilling@fun.com',			'675-555-8976'			union
+select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbilling@fun.com',			'675-555-8976'			union
+select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbilling@fun.com',			'675-555-8976'			union
+select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbilling@fun.com',			'675-555-8976'			union
+select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbilling@fun.com',			'675-555-8976'			union
+select	'Union Credit Union',				'000432178',					'Sherida Smith',				'sksmith@ucu.org',				'864-555-1234'				
 ;
 
-insert into dbo.person (
-	person_id,
-	first_name,
-	last_name,
-	middle_name,
-	title
-)
-select 111000, 'John', 'Smith', 'Xavier', 'Mr.' union
-select 111001, 'Madelynn', 'Geraldino', 'Patricia', 'Mrs.' union
-select 111002, 'Jamie', 'Jackson', 'Alex', 'Miss'
+insert into dbo.address
+(		address_nm,							city,					state,			country,				zip_code			)
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
+select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'
 ;
 
-insert into dbo.organization (
-	organization_id,
-	organization_nm
-)
-select 111500, 'First Union Together Bank'
+insert into dbo.account 
+(		acct_holder_id,			bank_id,			address_id,			account_number,				phone_number			)
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'		union
+select	100000,					100001,				100000,				'9991234321234',			'864-555-8765'
 ;
 
-insert into dbo.account (
-	account_id,
-	entity_id_1,
-	entity_id_2,
-	account_number,
-	routing_number,
-	date_start
-)
-select 111100, 111000, 111500, '999867890', '9991234321234', '2018-09-18'
+insert into dbo.client
+(		client_nm,				default_fee,		days_bw_letters			)
+select	'Chick-fil-A',			100.05,				15					union
+select	'Chick-fil-A',			100.05,				15					union
+select	'Chick-fil-A',			100.05,				15					union
+select	'Chick-fil-A',			100.05,				15					union
+select	'Chick-fil-A',			100.05,				15					union
+select	'Chick-fil-A',			100.05,				15					union
+select	'Chick-fil-A',			100.05,				15					union
+select	'Chick-fil-A',			100.05,				15					union
+select	'Chick-fil-A',			100.05,				15
 ;
 
-insert into dbo.account_check (
-	account_check_id,
-	account_id,
-	check_number,
-	amount,
-	date_received
-)
-select 111110, 111100, '000001', 235.67, '2018-07-24'
+insert into dbo.acct_check 
+(		account_id,			check_number,		amount,			date_written,			client_id			)
+select	100000,				'000001',			235.67,			'2018-07-24',			100000
 ;
