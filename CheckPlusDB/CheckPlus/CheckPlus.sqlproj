@@ -63,19 +63,15 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\account.sql" />
-    <Build Include="Tables\account_check.sql" />
-    <Build Include="Tables\addr_type.sql" />
+    <Build Include="Tables\acct_check.sql" />
     <Build Include="Tables\address.sql" />
-    <Build Include="Tables\citystate.sql" />
-    <Build Include="Tables\ent_addr_rel.sql" />
-    <Build Include="Tables\entity.sql" />
-    <Build Include="Tables\entity_type.sql" />
     <Build Include="Tables\letter.sql" />
     <Build Include="Tables\letter_stage.sql" />
-    <Build Include="Tables\organization.sql" />
-    <Build Include="Tables\person.sql" />
-    <Build Include="Tables\user_role.sql" />
+    <Build Include="Tables\client.sql" />
+    <Build Include="Tables\acct_holder.sql" />
     <None Include="Scripts\Initial Population.sql" />
+    <Build Include="Tables\bank.sql" />
+    <Build Include="Tables\cp_user.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CheckPlus.publish.xml" />
