@@ -17,6 +17,11 @@ namespace checkPlus
         {
             psudoAccounts.Add(act);
         }
+        public void deleteAccount(pseudoAccount act)
+        {
+            psudoAccounts.Remove(act);
+            
+        }
         public pseudoAccount getAccountByNum(string acctNum)
         {
             foreach (pseudoAccount acct in psudoAccounts)

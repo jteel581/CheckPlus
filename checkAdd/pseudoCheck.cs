@@ -23,11 +23,15 @@ namespace checkPlus
         public pseudoCheck(string acct, string rout, double ammnt, int num)
         {
             accountNum = acct;
+            
             routingNum = rout;
             ammount = ammnt;
             checkNum = num;
         }
         public double getAmmount() { return ammount; }
+        public string getAccountNum() { return accountNum; }
+        public string getRoutingNum() { return routingNum; }
+        public int getCheckNum() { return checkNum; }
 
     }
 }

@@ -30,6 +30,8 @@ namespace checkPlus
         {
             InitializeComponent();
             accountsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            checkListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            accountsListView.FullRowSelect = true;
             tabControl1.Selected += new TabControlEventHandler(TabControl1_Selected);
 
 
@@ -87,7 +89,13 @@ namespace checkPlus
             string lastName = lastNameBox.Text;
             string routingNumber = routingBox1.Text;
             string accountNumber = accountBox1.Text;
-            pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber);
+            string stNum = stNumBox.Text;
+            string stName = stNameBox.Text;
+            string city = cityBox.Text;
+            string state = stateBox.Text;
+            string zip = zipBox.Text;
+
+            pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber, stNum, city, state, zip);
             // Jonathan Teel commented this out to test without using database, if I forget to remove the comments and 
             // you pull and notice it not working remove my comment marks
             /*
@@ -133,6 +141,10 @@ namespace checkPlus
             lastNameBox.Clear();
             routingBox1.Clear();
             accountBox1.Clear();
+            streetNumBox.Clear();
+            streetNameBox.Clear();
+            cityBox.Clear();
+            zipBox.Clear();
 
         }
 
@@ -141,22 +153,44 @@ namespace checkPlus
             string acctNum = accountBox2.Text;
             string routNum = routingBox2.Text;
             double ammount = Convert.ToDouble(ammountBox.Text);
-            pseudoCheck check = new pseudoCheck(acctNum, routNum, ammount);
+            string fName = fNameBox2.Text;
+            string lName = lNameBox2.Text;
+
+            int num = Convert.ToInt32(checkNumBox.Text);
+            pseudoCheck check = new pseudoCheck(acctNum, routNum, ammount, num);
+            var act = database.getAccountByNum(acctNum);
+                ListViewItem lvi = new ListViewItem(new string[] { acctNum,  act.getFirstName(), act.getLastName(), num.ToString(), ammount.ToString()  });
+            checkListView.Items.Add(lvi);
             database.getAccountByNum(acctNum).addCheck(check);
-            updateListView();
+            updateAccountListView();
+            updateCheckListView();
             accountBox2.Clear();
             routingBox2.Clear();
             ammountBox.Clear();
             
         }
-        public void updateListView()
+
+        public void updateCheckListView()
+        {
+            
+            checkListView.Sort();
+        }
+
+        public void updateAccountListView()
         {
             int i = 0;
             foreach (ListViewItem lvi in accountsListView.Items)
             {
                 pseudoAccount act = database.getAccountByNum(lvi.SubItems[0].Text);
-                lvi.SubItems[3].Text = act.getNumOfChecks().ToString();
-                lvi.SubItems[4].Text = act.getCurBal().ToString();
+                if (act != null)
+                {
+                    lvi.SubItems[3].Text = act.getNumOfChecks().ToString();
+                    lvi.SubItems[4].Text = act.getCurBal().ToString();
+                }
+                else
+                {
+                    lvi.Remove();
+                }
             }
         }
 
@@ -184,6 +218,146 @@ namespace checkPlus
         private void logoutButton_Click(object sender, EventArgs e)
         {
             activeUser = null;
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            if (accountNumSearchBox.Text != null && accountNameSearchBox.Text != null)
+            {
+                // message box choose one
+                // then change rest to else if
+            }
+            if (accountNumSearchBox != null)
+            {
+                string sNum = accountNumSearchBox.Text;
+                int i = 0;
+                foreach (ListViewItem lvi in accountsListView.Items)
+                {
+                    string actNum = lvi.SubItems[0].Text;
+                    if (actNum == sNum)
+                    {
+                        accountsListView.Items[i].Selected = true;
+                        accountsListView.TopItem = accountsListView.Items[i];
+                        accountsListView.Select();
+                        return;
+                    }
+                    i++;
+                }
+            }
+            else if (accountNameSearchBox.Text != null)
+            {
+                string sName = accountNameSearchBox.Text;
+                int i = 0;
+                foreach(ListViewItem lvi in accountsListView.Items)
+                {
+                    string fName = lvi.SubItems[1].ToString();
+                    string lName = lvi.SubItems[2].ToString();
+                    if (fName == sName || lName == sName )
+                    {
+                        accountsListView.Items[i].Selected = true;
+                        accountsListView.TopItem = accountsListView.Items[i];
+                        accountsListView.Select();
+
+                        return;
+                    }
+                    i++;
+                }
+            }
+        }
+
+        private void updateChecksPage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void updateAcctSearchButton_Click(object sender, EventArgs e)
+        {
+            if (accountNumSearchBox.Text != null)
+            {
+                string actNum = accountNumSearchBox.Text;
+                var act = database.getAccountByNum(actNum);
+                fNameBox.Text = act.getFirstName();
+                lNameBox.Text = act.getLastName();
+                rNumBox.Text = act.getRoutingNum();
+                acctNumBox.Text = act.getAccountNum();
+                streetNumBox.Text = act.getStNum();
+                streetNameBox.Text = act.getStName();
+                updateActCityBox.Text = act.getCity();
+                updateActStateBox.Text = act.getState();
+                zipNumBox.Text = act.getZip();
+            }
+        }
+
+        private void saveChangesButton_Click(object sender, EventArgs e)
+        {
+            var act = database.getAccountByNum(accountNumSearchBox.Text);
+            act.setFirstName(fNameBox.Text);
+            act.setLastName(lNameBox.Text);
+            act.setRoutingNum(rNumBox.Text);
+            act.setAccountNum(acctNumBox.Text);
+            act.setStNum(streetNumBox.Text);
+            act.setStName(streetNameBox.Text);
+            act.setCity(updateActCityBox.Text);
+            act.setState(updateActStateBox.Text);
+            act.setZip(zipNumBox.Text);
+
+
+        }
+
+        private void deleteAccountButton_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void viewChecksSearchButton_Click(object sender, EventArgs e)
+        {
+            if (viewCheckActNumBox.Text != null && viewCheckNameBox.Text != null)
+            {
+                // message box choose one
+                // then change rest to else if
+            }
+            if (viewCheckActNumBox != null)
+            {
+                string sNum = viewCheckActNumBox.Text;
+                string sCNum = viewCheckNumBox.Text;
+                int i = 0;
+                foreach (ListViewItem lvi in checkListView.Items)
+                {
+                    string actNum = lvi.SubItems[0].Text;
+                    string cNum = lvi.SubItems[3].Text;
+                    if (actNum == sNum && cNum == sCNum)
+                    {
+                        checkListView.Items[i].Selected = true;
+                        checkListView.TopItem = accountsListView.Items[i];
+                        checkListView.Select();
+                        return;
+                    }
+                    i++;
+                }
+            }
+            else if (viewCheckNameBox.Text != null)
+            {
+                string sName = viewCheckActNumBox.Text;
+                string sCNum = viewCheckNumBox.Text;
+
+                int i = 0;
+                foreach (ListViewItem lvi in accountsListView.Items)
+                {
+                    string fName = lvi.SubItems[1].ToString();
+                    string lName = lvi.SubItems[2].ToString();
+                    string cNum = lvi.SubItems[3].Text;
+
+                    if ((fName == sName || lName == sName) && cNum == sCNum)
+                    {
+                        checkListView.Items[i].Selected = true;
+                        checkListView.TopItem = accountsListView.Items[i];
+                        checkListView.Select();
+
+                        return;
+                    }
+                    i++;
+                }
+            }
         }
     }
 }
