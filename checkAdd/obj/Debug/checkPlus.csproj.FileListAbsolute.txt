@@ -1,0 +1,17 @@
+C:\Users\jondt_000\Documents\College\CS\Software Development\practice\checkAdd\checkAdd\bin\Debug\checkAdd.exe.config
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\bin\Debug\checkAdd.exe.config
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\bin\Debug\checkAdd.exe
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\bin\Debug\checkAdd.pdb
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\bin\Debug\EntityFramework.dll
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\bin\Debug\EntityFramework.xml
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\obj\Debug\checkPlus.ammountLabel.resources
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\obj\Debug\checkAdd.Properties.Resources.resources
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.GenerateResource.Cache
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\obj\Debug\checkAdd.exe
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\obj\Debug\checkAdd.pdb
+C:\Users\jondt_000\Source\Repos\CheckPlus\checkAdd\obj\Debug\checkPlus.csprojResolveAssemblyReference.cache
+C:\Users\jondt_000\Downloads\CheckPlus\checkAdd\bin\Debug\checkAdd.exe.config
+C:\Users\jondt_000\Downloads\CheckPlus\checkAdd\obj\Debug\checkAdd.exe
+C:\Users\jondt_000\Downloads\CheckPlus\checkAdd\obj\Debug\checkAdd.pdb
