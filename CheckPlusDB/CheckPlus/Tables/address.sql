@@ -4,7 +4,7 @@
 */
 create table dbo.address
 (
-	address_id		int				not null,
+	address_id		int				identity(100000, 1)		not null,
 	address_nm		varchar(100)	not null,
 	city			varchar(50)		not null,
 	state			varchar(50)		null,

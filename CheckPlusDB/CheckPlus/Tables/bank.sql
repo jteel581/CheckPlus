@@ -4,7 +4,7 @@
 */
 create table dbo.bank
 (
-	bank_id			integer			not null,
+	bank_id			integer			identity(100000, 1)		not null,
 	bank_nm			varchar(100)	not null,
 	routing_number	varchar(20)		not null,
 	contact_nm		varchar(35)		not null,

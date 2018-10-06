@@ -100,9 +100,13 @@ namespace checkPlus
             //--------------------------------------------------------
             //start linq testing code chunk
             //--------------------------------------------------------
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder on");
             Account tstAccount = accSQL.InsertAccount(
                 accSQL.BuildAccount(firstName, lastName, routingNumber, accountNumber, address, city, state, zip, phnNum)
             );
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder off");
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account off");
 
             //if attempt to insert account results in finding an exitsting account
             if (tstAccount != null)
@@ -140,9 +144,12 @@ namespace checkPlus
             //--------------------------------------------------------
             //start linq testing code chunk
             //--------------------------------------------------------
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_check on");
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
             Acct_check tstAcct_check = acct_chkSQL.InsertAcct_check(
                 acct_chkSQL.BuildAcct_check(acctNum, routNum, chkNum, ammount, dateWritten)
             );
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_check on");
 
             //if check record already existed
             if (tstAcct_check != null)

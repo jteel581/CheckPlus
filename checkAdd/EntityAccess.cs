@@ -20,14 +20,26 @@ namespace checkPlus
     {
         private CheckPlusDB cpdb;
         public AccountSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
+        public void TurnOnInsert()
+        {
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder on");
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address on");
+        }
+        public void TurnOffInsert()
+        {
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account off");
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder off");
+            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address off");
+        }
+
 
         /*  FUNCTION
-         *  build an account out of the unique characteristics of an account record
-         *      Account holder's first name and last name
+         *  build an account out of the unique characteristics of an account record:
          *      Bank's routing number
          *      Account's account number
          *  if a record does not exist with the provided information,
-         *      we return null
+         *      return null
          *      
          *  use it to build an Account instance 
          *      any time you need to call one of the "SQL-esque" Account functions below
@@ -54,7 +66,6 @@ namespace checkPlus
             {   //build a new account record because one does not already exist
                 return new Account()
                 {   
-                    Account_id = GetNewAccountID(),
                     Acct_holder_id = (
                         from ah in cpdb.Acct_holders
                         where ah.First_name == prmFirstNm
@@ -84,11 +95,6 @@ namespace checkPlus
 
 
         public List<Account> GetAllAccounts() { return cpdb.Accounts.ToList(); }
-        public int GetNewAccountID()
-        {
-            return (from a in cpdb.Accounts
-                    select a.Account_id).Max() + 1;
-        }
 
         public void UpdateAccount(Account acctToUpdate)
         {
@@ -151,7 +157,6 @@ namespace checkPlus
             {
                 return new Acct_check()
                 {
-                    Acct_check_id = GetNewAcct_check_id(),
                     Account_id = (
                         from a in cpdb.Accounts
                         join b in cpdb.Banks on a.Bank_id equals b.Bank_id
@@ -164,13 +169,6 @@ namespace checkPlus
                     Date_received = DateTime.Now
                 };
             }
-        }
-        public int GetNewAcct_check_id()
-        {
-            return (
-                from ac in cpdb.Acct_checks
-                select ac.Acct_check_id
-            ).Max() + 1;
         }
         public List<Acct_check> GetAllAcct_checks() { return cpdb.Acct_checks.ToList(); }
         public Acct_check GetAcct_check(string prmrout_num, string prmacct_num, string prmcheck_num)
@@ -204,16 +202,15 @@ namespace checkPlus
     {
         private CheckPlusDB cpdb;
         public Acct_holderSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
-        public int GetNewAcct_holder_id()
-        {
-            return (
-                from ah in cpdb.Acct_holders
-                select ah.Acct_holder_id
-            ).Max() + 1;
-        }
         public List<Acct_holder> GetAllAcct_holders() { return cpdb.Acct_holders.ToList(); }
+        
+        /*  FUNCTION
+         *  this has the possibility of returning more than one person
+         *      since first + last likely will not be a unique combination,
+         *      so it is to be used for searching
+        */
         public Acct_holder GetAcct_holder(string prmFirstNm, string prmLastNm)
-        {
+        {   
             return (
                 from ah in cpdb.Acct_holders
                 where ah.First_name == prmFirstNm

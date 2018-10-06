@@ -4,7 +4,7 @@
 */
 create table dbo.letter
 (
-	letter_id			int		not null,
+	letter_id			int		identity(100000, 1)		not null,
 	acct_check_id		int		not null,		--fk to the bad check which the letter must address
 	letter_stage_id		int		not null,		--fk
 	date_sent			date	null,

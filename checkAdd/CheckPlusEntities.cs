@@ -131,8 +131,6 @@ namespace checkPlus
     class Letter
     {
         [Key]
-        public int Letter_id { get; set; }
-        public int Account_check_id { get; set; }
         public int Letter_stage_id { get; set; }
         public DateTime? Date_sent { get; set; }
         public DateTime? Date_response { get; set; }
