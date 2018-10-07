@@ -95,7 +95,7 @@ namespace checkPlus
             string state = stateBox.Text;
             string zip = zipBox.Text;
             //Izaac added this box and string
-            string phnNum = phnNumBox.Text;
+            //string phnNum = phnNumBox.Text;
 
             //--------------------------------------------------------
             //start linq testing code chunk
@@ -103,7 +103,7 @@ namespace checkPlus
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder on");
             Account tstAccount = accSQL.InsertAccount(
-                accSQL.BuildAccount(firstName, lastName, routingNumber, accountNumber, address, city, state, zip, phnNum)
+                accSQL.BuildAccount(firstName, lastName, routingNumber, accountNumber, address, city, state, zip, "1111111111")
             );
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder off");
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account off");
@@ -121,7 +121,7 @@ namespace checkPlus
             //end linq testing code chunk
             //--------------------------------------------------------
 
-            pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber);
+            pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber, streetNumBox.Text, city, state, zip);
             database.addAccount(act);
             ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
             accountsListView.Items.Add(lvi);
@@ -139,11 +139,13 @@ namespace checkPlus
             string chkNum = checkNumBox.Text;
             double ammount = Convert.ToDouble(ammountBox.Text);
             //Izaac added this box and string
-            DateTime dateWritten = Convert.ToDateTime(dateWrittenBox.Text);
+            //DateTime dateWritten = Convert.ToDateTime(dateWrittenBox.Text);
 
             //--------------------------------------------------------
             //start linq testing code chunk
             //--------------------------------------------------------
+            /*
+
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_check on");
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
             Acct_check tstAcct_check = acct_chkSQL.InsertAcct_check(
@@ -163,7 +165,7 @@ namespace checkPlus
             //--------------------------------------------------------
             //end linq testing code chunk
             //--------------------------------------------------------
-
+            */
             pseudoCheck check = new pseudoCheck(acctNum, routNum, ammount);
             database.getAccountByNum(acctNum).addCheck(check);
             updateListView();
