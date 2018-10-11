@@ -24,13 +24,18 @@ namespace checkPlus
     {
         [Key]
         public int Account_id { get; set; }
-        public int Acct_holder_id { get; set; }
-        public int? Acct_holder_id_2 { get; set; }
+        public string First_name { get; set; }
+        public string Last_name { get; set; }
+        public string First_name_2 { get; set; }
+        public string Last_name_2 { get; set; }
         public int Bank_id { get; set; }
-        public int Address_id { get; set; }
+        public string Address { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+        public string Zip_code { get; set; }
         public string Account_number { get; set; }
-        public DateTime Date_start { get; set; }
-        public DateTime? Date_end { get; set; }
         public string Phone_number { get; set; }
     }
 
@@ -53,37 +58,7 @@ namespace checkPlus
 
 
     //----------------------------------------------------
-    //ACCT HOLDER
-    [Table("acct_holder")]
-    class Acct_holder
-    {
-        [Key]
-        public int Acct_holder_id { get; set; }
-        public string First_name { get; set; }
-        public string Last_name { get; set; }
-        public string Middle_name { get; set; }
-        public string Suffix { get; set; }
-        public string Title { get; set; }
-    }
-
-
-    //----------------------------------------------------
-    //ADDRESS
-    [Table("address")]
-    class Address
-    {
-        [Key]
-        public int Address_id { get; set; }
-        public string Address_nm { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }
-        public string Zip_code { get; set; }
-    }
-
-
-    //----------------------------------------------------
-    //ADDRESS
+    //BANK
     [Table("bank")]
     class Bank
     {
@@ -94,6 +69,12 @@ namespace checkPlus
         public string Contact_nm { get; set; }
         public string Contact_email { get; set; }
         public string Contact_phone { get; set; }
+        public string Bank_address { get; set; }
+        public string Bank_street { get; set; }
+        public string Bank_city { get; set; }
+        public string Bank_state { get; set; }
+        public string Bank_country { get; set; }
+        public string Bank_zip { get; set; }
     }
 
 
@@ -132,31 +113,19 @@ namespace checkPlus
     {
         [Key]
         public int Letter_stage_id { get; set; }
-        public DateTime? Date_sent { get; set; }
+        public DateTime? Date_sent_stg_1 { get; set; }
+        public DateTime? Date_sent_stg_2 { get; set; }
+        public DateTime? Date_sent_stg_3 { get; set; }
         public DateTime? Date_response { get; set; }
     }
 
-    //----------------------------------------------------
-    //LETTER STAGE
-    [Table("leter_stage")]
-    class Letter_stage
-    {
-        [Key]
-        public int Letter_stage_id { get; set; }
-        public string Letter_stage_nm { get; set; }
-        public string Default_text { get; set; }
-    }
-    
     class CheckPlusDB : DbContext
     {
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Acct_check> Acct_checks { get; set; }
-        public virtual DbSet<Acct_holder> Acct_holders { get; set; }
-        public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Cp_user> Cp_Users { get; set; }
         public virtual DbSet<Letter> Letters { get; set; }
-        public virtual DbSet<Letter_stage> Letter_Stages { get; set; }
     }
 }

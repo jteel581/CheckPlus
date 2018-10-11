@@ -30,3 +30,44 @@ C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\check
 C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.SqlServer.FileSystemTask.dll
 C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\EntityFramework.xml
 C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\EntityFramework.SqlServer.xml
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\checkAdd.exe.config
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\checkAdd.exe
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\checkAdd.pdb
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\EntityFramework.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\EntityFramework.SqlServer.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ASTasks.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.AzureStorageEnum.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\microsoft.sqlserver.batchparser.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.BatchParserClient.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.BulkInsertTask.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ConnectionDlg.Core.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ConnectionDlg.UI.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ConnectionInfoExtended.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Data.Tools.ExceptionMessageBox.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Diagnostics.STrace.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Dmf.Common.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Dmf.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.DmQueryTask.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ExecProcTask.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.FileSystemTask.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Tools.Extensibility.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.SqlClrProvider.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Smo.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.SqlEnum.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ServiceBrokerEnum.dll
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\EntityFramework.xml
+I:\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\EntityFramework.SqlServer.xml
+I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csprojAssemblyReference.cache
+I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.exe.config
+I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.ammountLabel.resources
+I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.Properties.Resources.resources
+I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.GenerateResource.cache
+I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.CoreCompileInputs.cache
+I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.CopyComplete
+I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.exe
+I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.pdb
