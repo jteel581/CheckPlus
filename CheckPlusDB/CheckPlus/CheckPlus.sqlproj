@@ -64,11 +64,8 @@
   <ItemGroup>
     <Build Include="Tables\account.sql" />
     <Build Include="Tables\acct_check.sql" />
-    <Build Include="Tables\address.sql" />
     <Build Include="Tables\letter.sql" />
-    <Build Include="Tables\letter_stage.sql" />
     <Build Include="Tables\client.sql" />
-    <Build Include="Tables\acct_holder.sql" />
     <None Include="Scripts\Initial Population.sql" />
     <Build Include="Tables\bank.sql" />
     <Build Include="Tables\cp_user.sql" />

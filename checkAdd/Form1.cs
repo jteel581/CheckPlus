@@ -20,7 +20,6 @@ namespace checkPlus
     {
         //db variables
         CheckPlusDB cpdb;
-        Acct_holderSQLer acct_holdSQL;
         AccountSQLer accSQL;
         Acct_checkSQLer acct_chkSQL;
 
@@ -36,8 +35,7 @@ namespace checkPlus
             //configuring db variables
             cpdb = new CheckPlusDB();
             cpdb.Database.Connection.ConnectionString = "Data Source=localhost;Initial Catalog=CheckPlus;Integrated Security=True";
-
-            acct_holdSQL = new Acct_holderSQLer(cpdb);
+            
             accSQL = new AccountSQLer(cpdb);
             acct_chkSQL = new Acct_checkSQLer(cpdb);
         }

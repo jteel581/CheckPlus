@@ -5,17 +5,19 @@
 create table dbo.account
 (
 	account_id			int			identity(100000, 1)		not null,
-	acct_holder_id		int									not null,	--fk to the id of the account holder (typically a person)
-	acct_holder_id_2	int									null,		--fk to possible secondary account holder
+	first_name			varchar(50)							not null,
+	last_name			varchar(50)							null,		--nullable because this could be a business, and in that case, first_name would be the only used field
+	first_name_2nd		varchar(50)							null,
+	last_name_2nd		varchar(50)							null,
 	bank_id				int									not null,	--fk to the id of the bank
-	address_id			int									not null,	--fk to the id of the address associated with the account
+	address_nm			varchar(100)						not null,
+	city				varchar(100)						not null,
+	state				varchar(50)							null,
+	country				varchar(100)						not null,
+	zip_code			varchar(25)							not null,
 	account_number		varchar(20)							not null,
-	date_start			date		default getdate()		not null,	--date that the account was entered into our system
-	date_end			date								null,		--date that we marked the account as ended/inactive; null indicates still in use;
 	phone_number		varchar(15)							null,		--phone number assigned to the account
 primary key (account_id asc),
-foreign key (acct_holder_id) references dbo.acct_holder (acct_holder_id),
-foreign key (acct_holder_id_2) references dbo.acct_holder (acct_holder_id),
 foreign key (bank_id) references dbo.bank (bank_id)
 )
 ;

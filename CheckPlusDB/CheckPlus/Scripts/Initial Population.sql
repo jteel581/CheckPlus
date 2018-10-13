@@ -3,31 +3,8 @@
 	notes:		must copy-paste into ssms and run manually
 */
 
---not up to date right now; do not use
-insert into dbo.acct_holder
-(		first_name,		last_name,			middle_name,		title			)
-select	'John',			'Smith',			'Xavier',			'Mr.'		union
-select	'Madelynn',		'Geraldino',		'Patricia',			'Mrs.'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Jamie',		'Jackson',			'Alex',				'Miss'		union
-select	'Maggie',		'Gordon',			'',					''
-;
+--NOT UP TO DATE; DO NOT USE
+
 
 insert into dbo.bank 
 (		bank_nm,							routing_number,					contact_nm,						contact_email,					contact_phone				)
@@ -45,23 +22,7 @@ select	'First Union Together Bank',		'000123678',					'Grant Billings',				'gjbi
 select	'Union Credit Union',				'000432178',					'Sherida Smith',				'sksmith@ucu.org',				'864-555-1234'				
 ;
 
-insert into dbo.address
-(		address_nm,							city,					state,			country,				zip_code			)
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'			union
-select	'1701 Wade Hemptan Blvd.',			'Charlotte',			'NC',			'United States',		'28803'
-;
+
 
 insert into dbo.account 
 (		acct_holder_id,			bank_id,			address_id,			account_number,				phone_number			)
