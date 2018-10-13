@@ -62,17 +62,6 @@
             this.lastNameLabel = new System.Windows.Forms.Label();
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.addCheckPage = new System.Windows.Forms.TabPage();
-            this.checkNumBox = new System.Windows.Forms.TextBox();
-            this.checkNumLabel = new System.Windows.Forms.Label();
-            this.addChkButton = new System.Windows.Forms.Button();
-            this.ammountBox = new System.Windows.Forms.TextBox();
-            this.accountBox2 = new System.Windows.Forms.TextBox();
-            this.routingBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.accountLabel2 = new System.Windows.Forms.Label();
-            this.routingLabel2 = new System.Windows.Forms.Label();
-            this.addCheckLabel = new System.Windows.Forms.Label();
             this.viewAccountsPage = new System.Windows.Forms.TabPage();
             this.searchButton = new System.Windows.Forms.Button();
             this.accountNameSearchBox = new System.Windows.Forms.TextBox();
@@ -113,7 +102,29 @@
             this.acctNumSearchLabel = new System.Windows.Forms.Label();
             this.lNameSearchLabel = new System.Windows.Forms.Label();
             this.fNameSearchLabel = new System.Windows.Forms.Label();
+            this.addCheckPage = new System.Windows.Forms.TabPage();
+            this.lNameBox2 = new System.Windows.Forms.TextBox();
+            this.fNameBox2 = new System.Windows.Forms.TextBox();
+            this.lNameLabel2 = new System.Windows.Forms.Label();
+            this.fNameLabel2 = new System.Windows.Forms.Label();
+            this.checkNumBox = new System.Windows.Forms.TextBox();
+            this.checkNumLabel = new System.Windows.Forms.Label();
+            this.addChkButton = new System.Windows.Forms.Button();
+            this.ammountBox = new System.Windows.Forms.TextBox();
+            this.accountBox2 = new System.Windows.Forms.TextBox();
+            this.routingBox2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.accountLabel2 = new System.Windows.Forms.Label();
+            this.routingLabel2 = new System.Windows.Forms.Label();
+            this.addCheckLabel = new System.Windows.Forms.Label();
             this.viewChecksPage = new System.Windows.Forms.TabPage();
+            this.viewCheckNumBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.viewChecksSearchButton = new System.Windows.Forms.Button();
+            this.viewCheckNameBox = new System.Windows.Forms.TextBox();
+            this.viewCheckActNumBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.checkListView = new System.Windows.Forms.ListView();
             this.acctNumCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -121,15 +132,8 @@
             this.numCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ammountCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.updateChecksPage = new System.Windows.Forms.TabPage();
-            this.searchChecksButton = new System.Windows.Forms.Button();
-            this.chkSearchActNumBox = new System.Windows.Forms.TextBox();
-            this.chkSearchActNumLabel = new System.Windows.Forms.Label();
-            this.chkSearchChkNumLabel = new System.Windows.Forms.Label();
-            this.chkSearchChkNumBox = new System.Windows.Forms.TextBox();
-            this.fNameLabel2 = new System.Windows.Forms.Label();
-            this.lNameLabel2 = new System.Windows.Forms.Label();
-            this.fNameBox2 = new System.Windows.Forms.TextBox();
-            this.lNameBox2 = new System.Windows.Forms.TextBox();
+            this.deleteCheckButton = new System.Windows.Forms.Button();
+            this.updateCheckButton = new System.Windows.Forms.Button();
             this.chkUpdateNumBox = new System.Windows.Forms.TextBox();
             this.chkNumLabl = new System.Windows.Forms.Label();
             this.chkUpdateAmtBox = new System.Windows.Forms.TextBox();
@@ -138,40 +142,36 @@
             this.chkAmtLabel = new System.Windows.Forms.Label();
             this.actNumLabel2 = new System.Windows.Forms.Label();
             this.rNumLabel2 = new System.Windows.Forms.Label();
-            this.updateCheckButton = new System.Windows.Forms.Button();
-            this.deleteCheckButton = new System.Windows.Forms.Button();
+            this.chkSearchChkNumBox = new System.Windows.Forms.TextBox();
+            this.chkSearchChkNumLabel = new System.Windows.Forms.Label();
+            this.searchChecksButton = new System.Windows.Forms.Button();
+            this.chkSearchActNumBox = new System.Windows.Forms.TextBox();
+            this.chkSearchActNumLabel = new System.Windows.Forms.Label();
             this.manageUsersPage = new System.Windows.Forms.TabPage();
-            this.manageFNameLabel = new System.Windows.Forms.Label();
-            this.manageLNameLabel = new System.Windows.Forms.Label();
-            this.manageFNameBox = new System.Windows.Forms.TextBox();
-            this.manageLNameBox = new System.Windows.Forms.TextBox();
-            this.manageSearchButton = new System.Windows.Forms.Button();
-            this.fNameLabel4 = new System.Windows.Forms.Label();
-            this.lastNameLabel4 = new System.Windows.Forms.Label();
-            this.userNameLabel2 = new System.Windows.Forms.Label();
-            this.supStatusBox = new System.Windows.Forms.CheckBox();
-            this.adminStatusBox = new System.Windows.Forms.CheckBox();
-            this.supPrivLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.manageUserNameBox = new System.Windows.Forms.TextBox();
-            this.manageLastNameBox = new System.Windows.Forms.TextBox();
-            this.manageFirstNameBox = new System.Windows.Forms.TextBox();
-            this.updateUserButton = new System.Windows.Forms.Button();
             this.deleteUserButton = new System.Windows.Forms.Button();
-            this.viewChecksSearchButton = new System.Windows.Forms.Button();
-            this.viewCheckNameBox = new System.Windows.Forms.TextBox();
-            this.viewCheckActNumBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.viewCheckNumBox = new System.Windows.Forms.TextBox();
+            this.updateUserButton = new System.Windows.Forms.Button();
+            this.manageFirstNameBox = new System.Windows.Forms.TextBox();
+            this.manageLastNameBox = new System.Windows.Forms.TextBox();
+            this.manageUserNameBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.supPrivLabel = new System.Windows.Forms.Label();
+            this.adminStatusBox = new System.Windows.Forms.CheckBox();
+            this.supStatusBox = new System.Windows.Forms.CheckBox();
+            this.userNameLabel2 = new System.Windows.Forms.Label();
+            this.lastNameLabel4 = new System.Windows.Forms.Label();
+            this.fNameLabel4 = new System.Windows.Forms.Label();
+            this.manageSearchButton = new System.Windows.Forms.Button();
+            this.manageLNameBox = new System.Windows.Forms.TextBox();
+            this.manageFNameBox = new System.Windows.Forms.TextBox();
+            this.manageLNameLabel = new System.Windows.Forms.Label();
+            this.manageFNameLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.homePage.SuspendLayout();
             this.loginPage.SuspendLayout();
             this.addAccountPage.SuspendLayout();
-            this.addCheckPage.SuspendLayout();
             this.viewAccountsPage.SuspendLayout();
             this.updateAccountsPage.SuspendLayout();
+            this.addCheckPage.SuspendLayout();
             this.viewChecksPage.SuspendLayout();
             this.updateChecksPage.SuspendLayout();
             this.manageUsersPage.SuspendLayout();
@@ -498,114 +498,6 @@
             this.label1.Size = new System.Drawing.Size(88, 17);
             this.label1.TabIndex = 33;
             this.label1.Text = "Add Account";
-            // 
-            // addCheckPage
-            // 
-            this.addCheckPage.Controls.Add(this.lNameBox2);
-            this.addCheckPage.Controls.Add(this.fNameBox2);
-            this.addCheckPage.Controls.Add(this.lNameLabel2);
-            this.addCheckPage.Controls.Add(this.fNameLabel2);
-            this.addCheckPage.Controls.Add(this.checkNumBox);
-            this.addCheckPage.Controls.Add(this.checkNumLabel);
-            this.addCheckPage.Controls.Add(this.addChkButton);
-            this.addCheckPage.Controls.Add(this.ammountBox);
-            this.addCheckPage.Controls.Add(this.accountBox2);
-            this.addCheckPage.Controls.Add(this.routingBox2);
-            this.addCheckPage.Controls.Add(this.label2);
-            this.addCheckPage.Controls.Add(this.accountLabel2);
-            this.addCheckPage.Controls.Add(this.routingLabel2);
-            this.addCheckPage.Controls.Add(this.addCheckLabel);
-            this.addCheckPage.Location = new System.Drawing.Point(4, 22);
-            this.addCheckPage.Name = "addCheckPage";
-            this.addCheckPage.Size = new System.Drawing.Size(779, 285);
-            this.addCheckPage.TabIndex = 3;
-            this.addCheckPage.Text = "Add Check";
-            this.addCheckPage.UseVisualStyleBackColor = true;
-            // 
-            // checkNumBox
-            // 
-            this.checkNumBox.Location = new System.Drawing.Point(100, 160);
-            this.checkNumBox.Name = "checkNumBox";
-            this.checkNumBox.Size = new System.Drawing.Size(100, 20);
-            this.checkNumBox.TabIndex = 58;
-            // 
-            // checkNumLabel
-            // 
-            this.checkNumLabel.AutoSize = true;
-            this.checkNumLabel.Location = new System.Drawing.Point(13, 163);
-            this.checkNumLabel.Name = "checkNumLabel";
-            this.checkNumLabel.Size = new System.Drawing.Size(81, 13);
-            this.checkNumLabel.TabIndex = 57;
-            this.checkNumLabel.Text = "Check Number:";
-            // 
-            // addChkButton
-            // 
-            this.addChkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addChkButton.Location = new System.Drawing.Point(10, 197);
-            this.addChkButton.Name = "addChkButton";
-            this.addChkButton.Size = new System.Drawing.Size(93, 25);
-            this.addChkButton.TabIndex = 56;
-            this.addChkButton.Text = "Add Check";
-            this.addChkButton.UseVisualStyleBackColor = true;
-            this.addChkButton.Click += new System.EventHandler(this.addChkButton_Click);
-            // 
-            // ammountBox
-            // 
-            this.ammountBox.Location = new System.Drawing.Point(100, 134);
-            this.ammountBox.Name = "ammountBox";
-            this.ammountBox.Size = new System.Drawing.Size(100, 20);
-            this.ammountBox.TabIndex = 55;
-            // 
-            // accountBox2
-            // 
-            this.accountBox2.Location = new System.Drawing.Point(100, 49);
-            this.accountBox2.Name = "accountBox2";
-            this.accountBox2.Size = new System.Drawing.Size(100, 20);
-            this.accountBox2.TabIndex = 54;
-            // 
-            // routingBox2
-            // 
-            this.routingBox2.Location = new System.Drawing.Point(100, 26);
-            this.routingBox2.Name = "routingBox2";
-            this.routingBox2.Size = new System.Drawing.Size(100, 20);
-            this.routingBox2.TabIndex = 53;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 137);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 13);
-            this.label2.TabIndex = 52;
-            this.label2.Text = "Check Amount:";
-            // 
-            // accountLabel2
-            // 
-            this.accountLabel2.AutoSize = true;
-            this.accountLabel2.Location = new System.Drawing.Point(4, 52);
-            this.accountLabel2.Name = "accountLabel2";
-            this.accountLabel2.Size = new System.Drawing.Size(90, 13);
-            this.accountLabel2.TabIndex = 51;
-            this.accountLabel2.Text = "Account Number:";
-            // 
-            // routingLabel2
-            // 
-            this.routingLabel2.AutoSize = true;
-            this.routingLabel2.Location = new System.Drawing.Point(7, 29);
-            this.routingLabel2.Name = "routingLabel2";
-            this.routingLabel2.Size = new System.Drawing.Size(87, 13);
-            this.routingLabel2.TabIndex = 50;
-            this.routingLabel2.Text = "Routing Number:";
-            // 
-            // addCheckLabel
-            // 
-            this.addCheckLabel.AutoSize = true;
-            this.addCheckLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addCheckLabel.Location = new System.Drawing.Point(9, 0);
-            this.addCheckLabel.Name = "addCheckLabel";
-            this.addCheckLabel.Size = new System.Drawing.Size(76, 17);
-            this.addCheckLabel.TabIndex = 49;
-            this.addCheckLabel.Text = "Add Check";
             // 
             // viewAccountsPage
             // 
@@ -960,6 +852,146 @@
             this.fNameSearchLabel.TabIndex = 0;
             this.fNameSearchLabel.Text = "First Name:";
             // 
+            // addCheckPage
+            // 
+            this.addCheckPage.Controls.Add(this.lNameBox2);
+            this.addCheckPage.Controls.Add(this.fNameBox2);
+            this.addCheckPage.Controls.Add(this.lNameLabel2);
+            this.addCheckPage.Controls.Add(this.fNameLabel2);
+            this.addCheckPage.Controls.Add(this.checkNumBox);
+            this.addCheckPage.Controls.Add(this.checkNumLabel);
+            this.addCheckPage.Controls.Add(this.addChkButton);
+            this.addCheckPage.Controls.Add(this.ammountBox);
+            this.addCheckPage.Controls.Add(this.accountBox2);
+            this.addCheckPage.Controls.Add(this.routingBox2);
+            this.addCheckPage.Controls.Add(this.label2);
+            this.addCheckPage.Controls.Add(this.accountLabel2);
+            this.addCheckPage.Controls.Add(this.routingLabel2);
+            this.addCheckPage.Controls.Add(this.addCheckLabel);
+            this.addCheckPage.Location = new System.Drawing.Point(4, 22);
+            this.addCheckPage.Name = "addCheckPage";
+            this.addCheckPage.Size = new System.Drawing.Size(779, 285);
+            this.addCheckPage.TabIndex = 3;
+            this.addCheckPage.Text = "Add Check";
+            this.addCheckPage.UseVisualStyleBackColor = true;
+            // 
+            // lNameBox2
+            // 
+            this.lNameBox2.Location = new System.Drawing.Point(100, 103);
+            this.lNameBox2.Name = "lNameBox2";
+            this.lNameBox2.Size = new System.Drawing.Size(100, 20);
+            this.lNameBox2.TabIndex = 62;
+            // 
+            // fNameBox2
+            // 
+            this.fNameBox2.Location = new System.Drawing.Point(100, 75);
+            this.fNameBox2.Name = "fNameBox2";
+            this.fNameBox2.Size = new System.Drawing.Size(100, 20);
+            this.fNameBox2.TabIndex = 61;
+            // 
+            // lNameLabel2
+            // 
+            this.lNameLabel2.AutoSize = true;
+            this.lNameLabel2.Location = new System.Drawing.Point(33, 106);
+            this.lNameLabel2.Name = "lNameLabel2";
+            this.lNameLabel2.Size = new System.Drawing.Size(61, 13);
+            this.lNameLabel2.TabIndex = 60;
+            this.lNameLabel2.Text = "Last Name:";
+            // 
+            // fNameLabel2
+            // 
+            this.fNameLabel2.AutoSize = true;
+            this.fNameLabel2.Location = new System.Drawing.Point(34, 78);
+            this.fNameLabel2.Name = "fNameLabel2";
+            this.fNameLabel2.Size = new System.Drawing.Size(60, 13);
+            this.fNameLabel2.TabIndex = 59;
+            this.fNameLabel2.Text = "First Name:";
+            // 
+            // checkNumBox
+            // 
+            this.checkNumBox.Location = new System.Drawing.Point(100, 160);
+            this.checkNumBox.Name = "checkNumBox";
+            this.checkNumBox.Size = new System.Drawing.Size(100, 20);
+            this.checkNumBox.TabIndex = 58;
+            // 
+            // checkNumLabel
+            // 
+            this.checkNumLabel.AutoSize = true;
+            this.checkNumLabel.Location = new System.Drawing.Point(13, 163);
+            this.checkNumLabel.Name = "checkNumLabel";
+            this.checkNumLabel.Size = new System.Drawing.Size(81, 13);
+            this.checkNumLabel.TabIndex = 57;
+            this.checkNumLabel.Text = "Check Number:";
+            // 
+            // addChkButton
+            // 
+            this.addChkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addChkButton.Location = new System.Drawing.Point(10, 197);
+            this.addChkButton.Name = "addChkButton";
+            this.addChkButton.Size = new System.Drawing.Size(93, 25);
+            this.addChkButton.TabIndex = 56;
+            this.addChkButton.Text = "Add Check";
+            this.addChkButton.UseVisualStyleBackColor = true;
+            this.addChkButton.Click += new System.EventHandler(this.addChkButton_Click);
+            // 
+            // ammountBox
+            // 
+            this.ammountBox.Location = new System.Drawing.Point(100, 134);
+            this.ammountBox.Name = "ammountBox";
+            this.ammountBox.Size = new System.Drawing.Size(100, 20);
+            this.ammountBox.TabIndex = 55;
+            // 
+            // accountBox2
+            // 
+            this.accountBox2.Location = new System.Drawing.Point(100, 49);
+            this.accountBox2.Name = "accountBox2";
+            this.accountBox2.Size = new System.Drawing.Size(100, 20);
+            this.accountBox2.TabIndex = 54;
+            // 
+            // routingBox2
+            // 
+            this.routingBox2.Location = new System.Drawing.Point(100, 26);
+            this.routingBox2.Name = "routingBox2";
+            this.routingBox2.Size = new System.Drawing.Size(100, 20);
+            this.routingBox2.TabIndex = 53;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 137);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 13);
+            this.label2.TabIndex = 52;
+            this.label2.Text = "Check Amount:";
+            // 
+            // accountLabel2
+            // 
+            this.accountLabel2.AutoSize = true;
+            this.accountLabel2.Location = new System.Drawing.Point(4, 52);
+            this.accountLabel2.Name = "accountLabel2";
+            this.accountLabel2.Size = new System.Drawing.Size(90, 13);
+            this.accountLabel2.TabIndex = 51;
+            this.accountLabel2.Text = "Account Number:";
+            // 
+            // routingLabel2
+            // 
+            this.routingLabel2.AutoSize = true;
+            this.routingLabel2.Location = new System.Drawing.Point(7, 29);
+            this.routingLabel2.Name = "routingLabel2";
+            this.routingLabel2.Size = new System.Drawing.Size(87, 13);
+            this.routingLabel2.TabIndex = 50;
+            this.routingLabel2.Text = "Routing Number:";
+            // 
+            // addCheckLabel
+            // 
+            this.addCheckLabel.AutoSize = true;
+            this.addCheckLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addCheckLabel.Location = new System.Drawing.Point(9, 0);
+            this.addCheckLabel.Name = "addCheckLabel";
+            this.addCheckLabel.Size = new System.Drawing.Size(76, 17);
+            this.addCheckLabel.TabIndex = 49;
+            this.addCheckLabel.Text = "Add Check";
+            // 
             // viewChecksPage
             // 
             this.viewChecksPage.Controls.Add(this.viewCheckNumBox);
@@ -977,6 +1009,65 @@
             this.viewChecksPage.TabIndex = 6;
             this.viewChecksPage.Text = "View Checks";
             this.viewChecksPage.UseVisualStyleBackColor = true;
+            this.viewChecksPage.Click += new System.EventHandler(this.viewChecksPage_Click);
+            // 
+            // viewCheckNumBox
+            // 
+            this.viewCheckNumBox.Location = new System.Drawing.Point(159, 57);
+            this.viewCheckNumBox.Name = "viewCheckNumBox";
+            this.viewCheckNumBox.Size = new System.Drawing.Size(100, 20);
+            this.viewCheckNumBox.TabIndex = 12;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(72, 60);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(81, 13);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Check Number:";
+            // 
+            // viewChecksSearchButton
+            // 
+            this.viewChecksSearchButton.Location = new System.Drawing.Point(364, 22);
+            this.viewChecksSearchButton.Name = "viewChecksSearchButton";
+            this.viewChecksSearchButton.Size = new System.Drawing.Size(75, 23);
+            this.viewChecksSearchButton.TabIndex = 10;
+            this.viewChecksSearchButton.Text = "Search";
+            this.viewChecksSearchButton.UseVisualStyleBackColor = true;
+            this.viewChecksSearchButton.Click += new System.EventHandler(this.viewChecksSearchButton_Click);
+            // 
+            // viewCheckNameBox
+            // 
+            this.viewCheckNameBox.Location = new System.Drawing.Point(159, 29);
+            this.viewCheckNameBox.Name = "viewCheckNameBox";
+            this.viewCheckNameBox.Size = new System.Drawing.Size(100, 20);
+            this.viewCheckNameBox.TabIndex = 9;
+            // 
+            // viewCheckActNumBox
+            // 
+            this.viewCheckActNumBox.Location = new System.Drawing.Point(159, 6);
+            this.viewCheckActNumBox.Name = "viewCheckActNumBox";
+            this.viewCheckActNumBox.Size = new System.Drawing.Size(100, 20);
+            this.viewCheckActNumBox.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 32);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(144, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Search by name on account:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(15, 6);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(138, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Search by account number:";
             // 
             // checkListView
             // 
@@ -1039,78 +1130,23 @@
             this.updateChecksPage.UseVisualStyleBackColor = true;
             this.updateChecksPage.Click += new System.EventHandler(this.updateChecksPage_Click);
             // 
-            // searchChecksButton
+            // deleteCheckButton
             // 
-            this.searchChecksButton.Location = new System.Drawing.Point(6, 71);
-            this.searchChecksButton.Name = "searchChecksButton";
-            this.searchChecksButton.Size = new System.Drawing.Size(75, 23);
-            this.searchChecksButton.TabIndex = 84;
-            this.searchChecksButton.Text = "Search";
-            this.searchChecksButton.UseVisualStyleBackColor = true;
+            this.deleteCheckButton.Location = new System.Drawing.Point(213, 243);
+            this.deleteCheckButton.Name = "deleteCheckButton";
+            this.deleteCheckButton.Size = new System.Drawing.Size(109, 23);
+            this.deleteCheckButton.TabIndex = 98;
+            this.deleteCheckButton.Text = "Delete Check";
+            this.deleteCheckButton.UseVisualStyleBackColor = true;
             // 
-            // chkSearchActNumBox
+            // updateCheckButton
             // 
-            this.chkSearchActNumBox.Location = new System.Drawing.Point(105, 10);
-            this.chkSearchActNumBox.Name = "chkSearchActNumBox";
-            this.chkSearchActNumBox.Size = new System.Drawing.Size(100, 20);
-            this.chkSearchActNumBox.TabIndex = 83;
-            // 
-            // chkSearchActNumLabel
-            // 
-            this.chkSearchActNumLabel.AutoSize = true;
-            this.chkSearchActNumLabel.Location = new System.Drawing.Point(9, 13);
-            this.chkSearchActNumLabel.Name = "chkSearchActNumLabel";
-            this.chkSearchActNumLabel.Size = new System.Drawing.Size(90, 13);
-            this.chkSearchActNumLabel.TabIndex = 80;
-            this.chkSearchActNumLabel.Text = "Account Number:";
-            // 
-            // chkSearchChkNumLabel
-            // 
-            this.chkSearchChkNumLabel.AutoSize = true;
-            this.chkSearchChkNumLabel.Location = new System.Drawing.Point(18, 41);
-            this.chkSearchChkNumLabel.Name = "chkSearchChkNumLabel";
-            this.chkSearchChkNumLabel.Size = new System.Drawing.Size(81, 13);
-            this.chkSearchChkNumLabel.TabIndex = 85;
-            this.chkSearchChkNumLabel.Text = "Check Number:";
-            // 
-            // chkSearchChkNumBox
-            // 
-            this.chkSearchChkNumBox.Location = new System.Drawing.Point(105, 38);
-            this.chkSearchChkNumBox.Name = "chkSearchChkNumBox";
-            this.chkSearchChkNumBox.Size = new System.Drawing.Size(100, 20);
-            this.chkSearchChkNumBox.TabIndex = 86;
-            // 
-            // fNameLabel2
-            // 
-            this.fNameLabel2.AutoSize = true;
-            this.fNameLabel2.Location = new System.Drawing.Point(34, 78);
-            this.fNameLabel2.Name = "fNameLabel2";
-            this.fNameLabel2.Size = new System.Drawing.Size(60, 13);
-            this.fNameLabel2.TabIndex = 59;
-            this.fNameLabel2.Text = "First Name:";
-            // 
-            // lNameLabel2
-            // 
-            this.lNameLabel2.AutoSize = true;
-            this.lNameLabel2.Location = new System.Drawing.Point(33, 106);
-            this.lNameLabel2.Name = "lNameLabel2";
-            this.lNameLabel2.Size = new System.Drawing.Size(61, 13);
-            this.lNameLabel2.TabIndex = 60;
-            this.lNameLabel2.Text = "Last Name:";
-            // 
-            // fNameBox2
-            // 
-            this.fNameBox2.Location = new System.Drawing.Point(100, 75);
-            this.fNameBox2.Name = "fNameBox2";
-            this.fNameBox2.Size = new System.Drawing.Size(100, 20);
-            this.fNameBox2.TabIndex = 61;
-            // 
-            // lNameBox2
-            // 
-            this.lNameBox2.Location = new System.Drawing.Point(100, 103);
-            this.lNameBox2.Name = "lNameBox2";
-            this.lNameBox2.Size = new System.Drawing.Size(100, 20);
-            this.lNameBox2.TabIndex = 62;
+            this.updateCheckButton.Location = new System.Drawing.Point(6, 244);
+            this.updateCheckButton.Name = "updateCheckButton";
+            this.updateCheckButton.Size = new System.Drawing.Size(93, 23);
+            this.updateCheckButton.TabIndex = 95;
+            this.updateCheckButton.Text = "Update Check";
+            this.updateCheckButton.UseVisualStyleBackColor = true;
             // 
             // chkUpdateNumBox
             // 
@@ -1176,23 +1212,46 @@
             this.rNumLabel2.TabIndex = 87;
             this.rNumLabel2.Text = "Routing Number:";
             // 
-            // updateCheckButton
+            // chkSearchChkNumBox
             // 
-            this.updateCheckButton.Location = new System.Drawing.Point(6, 244);
-            this.updateCheckButton.Name = "updateCheckButton";
-            this.updateCheckButton.Size = new System.Drawing.Size(93, 23);
-            this.updateCheckButton.TabIndex = 95;
-            this.updateCheckButton.Text = "Update Check";
-            this.updateCheckButton.UseVisualStyleBackColor = true;
+            this.chkSearchChkNumBox.Location = new System.Drawing.Point(105, 38);
+            this.chkSearchChkNumBox.Name = "chkSearchChkNumBox";
+            this.chkSearchChkNumBox.Size = new System.Drawing.Size(100, 20);
+            this.chkSearchChkNumBox.TabIndex = 86;
             // 
-            // deleteCheckButton
+            // chkSearchChkNumLabel
             // 
-            this.deleteCheckButton.Location = new System.Drawing.Point(213, 243);
-            this.deleteCheckButton.Name = "deleteCheckButton";
-            this.deleteCheckButton.Size = new System.Drawing.Size(109, 23);
-            this.deleteCheckButton.TabIndex = 98;
-            this.deleteCheckButton.Text = "Delete Check";
-            this.deleteCheckButton.UseVisualStyleBackColor = true;
+            this.chkSearchChkNumLabel.AutoSize = true;
+            this.chkSearchChkNumLabel.Location = new System.Drawing.Point(18, 41);
+            this.chkSearchChkNumLabel.Name = "chkSearchChkNumLabel";
+            this.chkSearchChkNumLabel.Size = new System.Drawing.Size(81, 13);
+            this.chkSearchChkNumLabel.TabIndex = 85;
+            this.chkSearchChkNumLabel.Text = "Check Number:";
+            // 
+            // searchChecksButton
+            // 
+            this.searchChecksButton.Location = new System.Drawing.Point(6, 71);
+            this.searchChecksButton.Name = "searchChecksButton";
+            this.searchChecksButton.Size = new System.Drawing.Size(75, 23);
+            this.searchChecksButton.TabIndex = 84;
+            this.searchChecksButton.Text = "Search";
+            this.searchChecksButton.UseVisualStyleBackColor = true;
+            // 
+            // chkSearchActNumBox
+            // 
+            this.chkSearchActNumBox.Location = new System.Drawing.Point(105, 10);
+            this.chkSearchActNumBox.Name = "chkSearchActNumBox";
+            this.chkSearchActNumBox.Size = new System.Drawing.Size(100, 20);
+            this.chkSearchActNumBox.TabIndex = 83;
+            // 
+            // chkSearchActNumLabel
+            // 
+            this.chkSearchActNumLabel.AutoSize = true;
+            this.chkSearchActNumLabel.Location = new System.Drawing.Point(9, 13);
+            this.chkSearchActNumLabel.Name = "chkSearchActNumLabel";
+            this.chkSearchActNumLabel.Size = new System.Drawing.Size(90, 13);
+            this.chkSearchActNumLabel.TabIndex = 80;
+            this.chkSearchActNumLabel.Text = "Account Number:";
             // 
             // manageUsersPage
             // 
@@ -1220,130 +1279,14 @@
             this.manageUsersPage.Text = "Manage Users";
             this.manageUsersPage.UseVisualStyleBackColor = true;
             // 
-            // manageFNameLabel
+            // deleteUserButton
             // 
-            this.manageFNameLabel.AutoSize = true;
-            this.manageFNameLabel.Location = new System.Drawing.Point(10, 4);
-            this.manageFNameLabel.Name = "manageFNameLabel";
-            this.manageFNameLabel.Size = new System.Drawing.Size(60, 13);
-            this.manageFNameLabel.TabIndex = 0;
-            this.manageFNameLabel.Text = "First Name:";
-            // 
-            // manageLNameLabel
-            // 
-            this.manageLNameLabel.AutoSize = true;
-            this.manageLNameLabel.Location = new System.Drawing.Point(9, 27);
-            this.manageLNameLabel.Name = "manageLNameLabel";
-            this.manageLNameLabel.Size = new System.Drawing.Size(61, 13);
-            this.manageLNameLabel.TabIndex = 1;
-            this.manageLNameLabel.Text = "Last Name:";
-            // 
-            // manageFNameBox
-            // 
-            this.manageFNameBox.Location = new System.Drawing.Point(76, 1);
-            this.manageFNameBox.Name = "manageFNameBox";
-            this.manageFNameBox.Size = new System.Drawing.Size(100, 20);
-            this.manageFNameBox.TabIndex = 2;
-            // 
-            // manageLNameBox
-            // 
-            this.manageLNameBox.Location = new System.Drawing.Point(76, 24);
-            this.manageLNameBox.Name = "manageLNameBox";
-            this.manageLNameBox.Size = new System.Drawing.Size(100, 20);
-            this.manageLNameBox.TabIndex = 3;
-            // 
-            // manageSearchButton
-            // 
-            this.manageSearchButton.Location = new System.Drawing.Point(13, 54);
-            this.manageSearchButton.Name = "manageSearchButton";
-            this.manageSearchButton.Size = new System.Drawing.Size(75, 23);
-            this.manageSearchButton.TabIndex = 4;
-            this.manageSearchButton.Text = "Search User";
-            this.manageSearchButton.UseVisualStyleBackColor = true;
-            // 
-            // fNameLabel4
-            // 
-            this.fNameLabel4.AutoSize = true;
-            this.fNameLabel4.Location = new System.Drawing.Point(61, 96);
-            this.fNameLabel4.Name = "fNameLabel4";
-            this.fNameLabel4.Size = new System.Drawing.Size(60, 13);
-            this.fNameLabel4.TabIndex = 5;
-            this.fNameLabel4.Text = "First Name:";
-            // 
-            // lastNameLabel4
-            // 
-            this.lastNameLabel4.AutoSize = true;
-            this.lastNameLabel4.Location = new System.Drawing.Point(60, 121);
-            this.lastNameLabel4.Name = "lastNameLabel4";
-            this.lastNameLabel4.Size = new System.Drawing.Size(61, 13);
-            this.lastNameLabel4.TabIndex = 6;
-            this.lastNameLabel4.Text = "Last Name:";
-            // 
-            // userNameLabel2
-            // 
-            this.userNameLabel2.AutoSize = true;
-            this.userNameLabel2.Location = new System.Drawing.Point(58, 144);
-            this.userNameLabel2.Name = "userNameLabel2";
-            this.userNameLabel2.Size = new System.Drawing.Size(63, 13);
-            this.userNameLabel2.TabIndex = 7;
-            this.userNameLabel2.Text = "User Name:";
-            // 
-            // supStatusBox
-            // 
-            this.supStatusBox.AutoSize = true;
-            this.supStatusBox.Location = new System.Drawing.Point(127, 173);
-            this.supStatusBox.Name = "supStatusBox";
-            this.supStatusBox.Size = new System.Drawing.Size(15, 14);
-            this.supStatusBox.TabIndex = 8;
-            this.supStatusBox.UseVisualStyleBackColor = true;
-            // 
-            // adminStatusBox
-            // 
-            this.adminStatusBox.AutoSize = true;
-            this.adminStatusBox.Location = new System.Drawing.Point(127, 200);
-            this.adminStatusBox.Name = "adminStatusBox";
-            this.adminStatusBox.Size = new System.Drawing.Size(15, 14);
-            this.adminStatusBox.TabIndex = 9;
-            this.adminStatusBox.UseVisualStyleBackColor = true;
-            // 
-            // supPrivLabel
-            // 
-            this.supPrivLabel.AutoSize = true;
-            this.supPrivLabel.Location = new System.Drawing.Point(13, 173);
-            this.supPrivLabel.Name = "supPrivLabel";
-            this.supPrivLabel.Size = new System.Drawing.Size(108, 13);
-            this.supPrivLabel.TabIndex = 10;
-            this.supPrivLabel.Text = "Supervisor Privilages:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 200);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(118, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Administrator Privilages:";
-            // 
-            // manageUserNameBox
-            // 
-            this.manageUserNameBox.Location = new System.Drawing.Point(127, 141);
-            this.manageUserNameBox.Name = "manageUserNameBox";
-            this.manageUserNameBox.Size = new System.Drawing.Size(100, 20);
-            this.manageUserNameBox.TabIndex = 12;
-            // 
-            // manageLastNameBox
-            // 
-            this.manageLastNameBox.Location = new System.Drawing.Point(127, 118);
-            this.manageLastNameBox.Name = "manageLastNameBox";
-            this.manageLastNameBox.Size = new System.Drawing.Size(100, 20);
-            this.manageLastNameBox.TabIndex = 13;
-            // 
-            // manageFirstNameBox
-            // 
-            this.manageFirstNameBox.Location = new System.Drawing.Point(127, 93);
-            this.manageFirstNameBox.Name = "manageFirstNameBox";
-            this.manageFirstNameBox.Size = new System.Drawing.Size(100, 20);
-            this.manageFirstNameBox.TabIndex = 14;
+            this.deleteUserButton.Location = new System.Drawing.Point(240, 249);
+            this.deleteUserButton.Name = "deleteUserButton";
+            this.deleteUserButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteUserButton.TabIndex = 16;
+            this.deleteUserButton.Text = "Delete User";
+            this.deleteUserButton.UseVisualStyleBackColor = true;
             // 
             // updateUserButton
             // 
@@ -1354,72 +1297,130 @@
             this.updateUserButton.Text = "Update User";
             this.updateUserButton.UseVisualStyleBackColor = true;
             // 
-            // deleteUserButton
+            // manageFirstNameBox
             // 
-            this.deleteUserButton.Location = new System.Drawing.Point(240, 249);
-            this.deleteUserButton.Name = "deleteUserButton";
-            this.deleteUserButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteUserButton.TabIndex = 16;
-            this.deleteUserButton.Text = "Delete User";
-            this.deleteUserButton.UseVisualStyleBackColor = true;
+            this.manageFirstNameBox.Location = new System.Drawing.Point(127, 93);
+            this.manageFirstNameBox.Name = "manageFirstNameBox";
+            this.manageFirstNameBox.Size = new System.Drawing.Size(100, 20);
+            this.manageFirstNameBox.TabIndex = 14;
             // 
-            // viewChecksSearchButton
+            // manageLastNameBox
             // 
-            this.viewChecksSearchButton.Location = new System.Drawing.Point(364, 22);
-            this.viewChecksSearchButton.Name = "viewChecksSearchButton";
-            this.viewChecksSearchButton.Size = new System.Drawing.Size(75, 23);
-            this.viewChecksSearchButton.TabIndex = 10;
-            this.viewChecksSearchButton.Text = "Search";
-            this.viewChecksSearchButton.UseVisualStyleBackColor = true;
-            this.viewChecksSearchButton.Click += new System.EventHandler(this.viewChecksSearchButton_Click);
+            this.manageLastNameBox.Location = new System.Drawing.Point(127, 118);
+            this.manageLastNameBox.Name = "manageLastNameBox";
+            this.manageLastNameBox.Size = new System.Drawing.Size(100, 20);
+            this.manageLastNameBox.TabIndex = 13;
             // 
-            // viewCheckNameBox
+            // manageUserNameBox
             // 
-            this.viewCheckNameBox.Location = new System.Drawing.Point(159, 29);
-            this.viewCheckNameBox.Name = "viewCheckNameBox";
-            this.viewCheckNameBox.Size = new System.Drawing.Size(100, 20);
-            this.viewCheckNameBox.TabIndex = 9;
+            this.manageUserNameBox.Location = new System.Drawing.Point(127, 141);
+            this.manageUserNameBox.Name = "manageUserNameBox";
+            this.manageUserNameBox.Size = new System.Drawing.Size(100, 20);
+            this.manageUserNameBox.TabIndex = 12;
             // 
-            // viewCheckActNumBox
+            // label4
             // 
-            this.viewCheckActNumBox.Location = new System.Drawing.Point(159, 6);
-            this.viewCheckActNumBox.Name = "viewCheckActNumBox";
-            this.viewCheckActNumBox.Size = new System.Drawing.Size(100, 20);
-            this.viewCheckActNumBox.TabIndex = 8;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 200);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(118, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Administrator Privilages:";
             // 
-            // label5
+            // supPrivLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 32);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(144, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Search by name on account:";
+            this.supPrivLabel.AutoSize = true;
+            this.supPrivLabel.Location = new System.Drawing.Point(13, 173);
+            this.supPrivLabel.Name = "supPrivLabel";
+            this.supPrivLabel.Size = new System.Drawing.Size(108, 13);
+            this.supPrivLabel.TabIndex = 10;
+            this.supPrivLabel.Text = "Supervisor Privilages:";
             // 
-            // label7
+            // adminStatusBox
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 6);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(138, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Search by account number:";
+            this.adminStatusBox.AutoSize = true;
+            this.adminStatusBox.Location = new System.Drawing.Point(127, 200);
+            this.adminStatusBox.Name = "adminStatusBox";
+            this.adminStatusBox.Size = new System.Drawing.Size(15, 14);
+            this.adminStatusBox.TabIndex = 9;
+            this.adminStatusBox.UseVisualStyleBackColor = true;
             // 
-            // label8
+            // supStatusBox
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(72, 60);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(81, 13);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "Check Number:";
+            this.supStatusBox.AutoSize = true;
+            this.supStatusBox.Location = new System.Drawing.Point(127, 173);
+            this.supStatusBox.Name = "supStatusBox";
+            this.supStatusBox.Size = new System.Drawing.Size(15, 14);
+            this.supStatusBox.TabIndex = 8;
+            this.supStatusBox.UseVisualStyleBackColor = true;
             // 
-            // viewCheckNumBox
+            // userNameLabel2
             // 
-            this.viewCheckNumBox.Location = new System.Drawing.Point(159, 57);
-            this.viewCheckNumBox.Name = "viewCheckNumBox";
-            this.viewCheckNumBox.Size = new System.Drawing.Size(100, 20);
-            this.viewCheckNumBox.TabIndex = 12;
+            this.userNameLabel2.AutoSize = true;
+            this.userNameLabel2.Location = new System.Drawing.Point(58, 144);
+            this.userNameLabel2.Name = "userNameLabel2";
+            this.userNameLabel2.Size = new System.Drawing.Size(63, 13);
+            this.userNameLabel2.TabIndex = 7;
+            this.userNameLabel2.Text = "User Name:";
+            // 
+            // lastNameLabel4
+            // 
+            this.lastNameLabel4.AutoSize = true;
+            this.lastNameLabel4.Location = new System.Drawing.Point(60, 121);
+            this.lastNameLabel4.Name = "lastNameLabel4";
+            this.lastNameLabel4.Size = new System.Drawing.Size(61, 13);
+            this.lastNameLabel4.TabIndex = 6;
+            this.lastNameLabel4.Text = "Last Name:";
+            // 
+            // fNameLabel4
+            // 
+            this.fNameLabel4.AutoSize = true;
+            this.fNameLabel4.Location = new System.Drawing.Point(61, 96);
+            this.fNameLabel4.Name = "fNameLabel4";
+            this.fNameLabel4.Size = new System.Drawing.Size(60, 13);
+            this.fNameLabel4.TabIndex = 5;
+            this.fNameLabel4.Text = "First Name:";
+            // 
+            // manageSearchButton
+            // 
+            this.manageSearchButton.Location = new System.Drawing.Point(13, 54);
+            this.manageSearchButton.Name = "manageSearchButton";
+            this.manageSearchButton.Size = new System.Drawing.Size(75, 23);
+            this.manageSearchButton.TabIndex = 4;
+            this.manageSearchButton.Text = "Search User";
+            this.manageSearchButton.UseVisualStyleBackColor = true;
+            // 
+            // manageLNameBox
+            // 
+            this.manageLNameBox.Location = new System.Drawing.Point(76, 24);
+            this.manageLNameBox.Name = "manageLNameBox";
+            this.manageLNameBox.Size = new System.Drawing.Size(100, 20);
+            this.manageLNameBox.TabIndex = 3;
+            // 
+            // manageFNameBox
+            // 
+            this.manageFNameBox.Location = new System.Drawing.Point(76, 1);
+            this.manageFNameBox.Name = "manageFNameBox";
+            this.manageFNameBox.Size = new System.Drawing.Size(100, 20);
+            this.manageFNameBox.TabIndex = 2;
+            // 
+            // manageLNameLabel
+            // 
+            this.manageLNameLabel.AutoSize = true;
+            this.manageLNameLabel.Location = new System.Drawing.Point(9, 27);
+            this.manageLNameLabel.Name = "manageLNameLabel";
+            this.manageLNameLabel.Size = new System.Drawing.Size(61, 13);
+            this.manageLNameLabel.TabIndex = 1;
+            this.manageLNameLabel.Text = "Last Name:";
+            // 
+            // manageFNameLabel
+            // 
+            this.manageFNameLabel.AutoSize = true;
+            this.manageFNameLabel.Location = new System.Drawing.Point(10, 4);
+            this.manageFNameLabel.Name = "manageFNameLabel";
+            this.manageFNameLabel.Size = new System.Drawing.Size(60, 13);
+            this.manageFNameLabel.TabIndex = 0;
+            this.manageFNameLabel.Text = "First Name:";
             // 
             // ammountLabel
             // 
@@ -1436,12 +1437,12 @@
             this.loginPage.PerformLayout();
             this.addAccountPage.ResumeLayout(false);
             this.addAccountPage.PerformLayout();
-            this.addCheckPage.ResumeLayout(false);
-            this.addCheckPage.PerformLayout();
             this.viewAccountsPage.ResumeLayout(false);
             this.viewAccountsPage.PerformLayout();
             this.updateAccountsPage.ResumeLayout(false);
             this.updateAccountsPage.PerformLayout();
+            this.addCheckPage.ResumeLayout(false);
+            this.addCheckPage.PerformLayout();
             this.viewChecksPage.ResumeLayout(false);
             this.viewChecksPage.PerformLayout();
             this.updateChecksPage.ResumeLayout(false);

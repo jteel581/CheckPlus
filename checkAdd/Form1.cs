@@ -386,5 +386,10 @@ namespace checkPlus
                 }
             }
         }
+
+        private void viewChecksPage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
