@@ -71,3 +71,10 @@ I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.CoreCompileInp
 I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.CopyComplete
 I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.exe
 I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.pdb
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.SqlServer.Tools.Extensibility.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.SqlServer.SqlClrProvider.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.SqlServer.Smo.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.SqlServer.SqlEnum.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.SqlServer.ServiceBrokerEnum.dll

@@ -51,7 +51,7 @@ namespace checkPlus
 
         private void TabControl1_Selected(Object sender, TabControlEventArgs e)
         {
-            if (tabControl1.SelectedIndex != 1 && tabControl1.SelectedIndex != 0)
+            if (tabControl1.SelectedIndex != 0)
             {
                 if (activeUser == null)
                 {
@@ -119,7 +119,7 @@ namespace checkPlus
             //end linq testing code chunk
             //--------------------------------------------------------
 
-            pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber, streetNumBox.Text, city, state, zip);
+            pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber, stNumBox.Text, city, state, zip);
             database.addAccount(act);
             ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
             accountsListView.Items.Add(lvi);
@@ -295,36 +295,20 @@ namespace checkPlus
 
         }
 
-        private void updateAcctSearchButton_Click(object sender, EventArgs e)
-        {
-            if (accountNumSearchBox.Text != null)
-            {
-                string actNum = accountNumSearchBox.Text;
-                var act = database.getAccountByNum(actNum);
-                fNameBox.Text = act.getFirstName();
-                lNameBox.Text = act.getLastName();
-                rNumBox.Text = act.getRoutingNum();
-                acctNumBox.Text = act.getAccountNum();
-                streetNumBox.Text = act.getStNum();
-                streetNameBox.Text = act.getStName();
-                updateActCityBox.Text = act.getCity();
-                updateActStateBox.Text = act.getState();
-                zipNumBox.Text = act.getZip();
-            }
-        }
+        
 
         private void saveChangesButton_Click(object sender, EventArgs e)
         {
             var act = database.getAccountByNum(accountNumSearchBox.Text);
-            act.setFirstName(fNameBox.Text);
-            act.setLastName(lNameBox.Text);
-            act.setRoutingNum(rNumBox.Text);
-            act.setAccountNum(acctNumBox.Text);
-            act.setStNum(streetNumBox.Text);
-            act.setStName(streetNameBox.Text);
-            act.setCity(updateActCityBox.Text);
-            act.setState(updateActStateBox.Text);
-            act.setZip(zipNumBox.Text);
+            act.setFirstName(firstNameBox.Text);
+            act.setLastName(lastNameBox.Text);
+            act.setRoutingNum(routingBox1.Text);
+            act.setAccountNum(accountBox1.Text);
+            act.setStNum(stNumBox.Text);
+            act.setStName(stNameBox.Text);
+            act.setCity(cityBox.Text);
+            act.setState(stateBox.Text);
+            act.setZip(zipBox.Text);
 
 
         }
@@ -385,7 +369,49 @@ namespace checkPlus
             }
         }
 
-        private void viewChecksPage_Click(object sender, EventArgs e)
+        
+
+        private void firstNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void stateLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cityLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void stNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void stNumLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void accountLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lastNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void zipLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void routingLabel1_Click(object sender, EventArgs e)
         {
 
         }
