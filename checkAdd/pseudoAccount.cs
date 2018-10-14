@@ -21,7 +21,7 @@ namespace checkPlus
         List<pseudoCheck> checks;
         int numOfChecks;
 
-        public pseudoAccount(string first, string last, string rout, string account, string stNum, string cityName, string stateName, string zipCode)
+        public pseudoAccount(string first, string last, string rout, string account, string stNum, string stName, string cityName, string stateName, string zipCode)
         {
             firstName = first;
             lastName = last;
@@ -29,10 +29,28 @@ namespace checkPlus
             accountNumber = account;
             curBal = 0;
             numOfChecks = 0;
+            streetNum = stNum;
+            streetName = stName;
             city = cityName;
             state = stateName;
             zip = zipCode;
             checks = new List<pseudoCheck>();
+        }
+
+        public List<pseudoCheck> getChecks() { return checks; }
+
+        public pseudoCheck getCheckByNum(string checkNum)
+        {
+            pseudoCheck check = null;
+            foreach(pseudoCheck chk in checks)
+            {
+                string checkNumStr = chk.getCheckNum().ToString();
+                if (checkNumStr == checkNum)
+                {
+                    return chk;
+                }
+            }
+            return check;
         }
 
         public string getAccountNum()
