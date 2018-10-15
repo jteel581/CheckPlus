@@ -100,7 +100,7 @@ namespace checkPlus
             string zip = zipBox.Text;
             //Izaac added this box and string
             //string phnNum = phnNumBox.Text;
-
+            /*
             //--------------------------------------------------------
             //start linq testing code chunk
             //--------------------------------------------------------
@@ -124,7 +124,7 @@ namespace checkPlus
             //--------------------------------------------------------
             //end linq testing code chunk
             //--------------------------------------------------------
-
+            */
             pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber, stNumBox.Text, stNameBox.Text, city, state, zip);
             database.addAccount(act);
             ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
@@ -175,9 +175,17 @@ namespace checkPlus
             //end linq testing code chunk
             //--------------------------------------------------------
             */
+
+
+
+
+            pseudoAccount act = database.getAccountByNum(acctNum);
             pseudoCheck check = new pseudoCheck(acctNum, routNum, ammount);
             database.getAccountByNum(acctNum).addCheck(check);
+            ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), check.getCheckNum().ToString(), check.getAmmount().ToString() });
+            checkListView.Items.Add(lvi);
             updateAccountListView();
+            updateCheckListView();
             accountBox2.Clear();
             routingBox2.Clear();
             ammountBox.Clear();
@@ -305,11 +313,6 @@ namespace checkPlus
 
 
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void loginButton_Click(object sender, EventArgs e)
         {
             string uName = usernameBox.Text;
@@ -360,18 +363,10 @@ namespace checkPlus
             deleteCheckButton.Enabled = false;
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void searchButton_Click(object sender, EventArgs e)
         {
+            accountsListView.SelectedItems.Clear();
+            accountsListView.SelectedIndices.Clear();
             if (accountNumSearchBox.Text != null && accountNameSearchBox.Text != null)
             {
                 // message box choose one
@@ -413,11 +408,6 @@ namespace checkPlus
                     i++;
                 }
             }
-        }
-
-        private void updateChecksPage_Click(object sender, EventArgs e)
-        {
-
         }
 
         
@@ -462,6 +452,8 @@ namespace checkPlus
 
         private void viewChecksSearchButton_Click(object sender, EventArgs e)
         {
+            checkListView.SelectedIndices.Clear();
+            checkListView.SelectedItems.Clear();
             if (viewCheckActNumBox.Text != null && viewCheckNameBox.Text != null)
             {
                 // message box choose one
@@ -501,7 +493,7 @@ namespace checkPlus
                     if ((fName == sName || lName == sName) && cNum == sCNum)
                     {
                         checkListView.Items[i].Selected = true;
-                        checkListView.TopItem = accountsListView.Items[i];
+                        checkListView.TopItem = checkListView.Items[i];
                         checkListView.Select();
 
                         return;
@@ -611,6 +603,56 @@ namespace checkPlus
                 accountBox2.Text = act.getAccountNum();
                 ammountBox.Text = check.getAccountNum();
                 checkNumBox.Text = check.getCheckNum().ToString();
+            }
+        }
+
+        private void searchUserButton_Click(object sender, EventArgs e)
+        {
+            userListView.SelectedIndices.Clear();
+            userListView.SelectedItems.Clear();
+            if (userFNameBox.Text == "" || userLNameBox.Text == "")
+            {
+                // complain that it needs more info
+            }
+            else
+            {
+                string fName = userFNameBox.Text;
+                string lName = userLNameBox.Text;
+                int i = 0;
+                foreach (ListViewItem lvi in userListView.Items)
+                {
+                    string userFname = lvi.SubItems[0].Text;
+                    string userLname = lvi.SubItems[1].Text;
+                    if (userFname == fName && userLname == lName)
+                    {
+                        userListView.Items[i].Selected = true;
+                        userListView.TopItem = userListView.Items[i];
+                        userListView.Select();
+                        return;
+                    }
+                    i++;
+                }
+            }
+        }
+
+        private void userListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (userListView.SelectedItems.Count != 0)
+            {
+                string fName = userListView.SelectedItems[0].SubItems[0].Text;
+                string lName = userListView.SelectedItems[0].SubItems[1].Text;
+                User usr = uc.getUserByName(fName, lName);
+                userFirstNameBox.Text = usr.getFirstName();
+                userLastNameBox.Text = usr.getLastName();
+                userUserNameBox.Text = usr.getUserName();
+                if (usr.supervisorPrivaleges)
+                {
+                    supStatusBox.Checked = true;
+                }
+                if (usr.adminPrivaleges)
+                {
+                    adminStatusBox.Checked = true;
+                }
             }
         }
     }

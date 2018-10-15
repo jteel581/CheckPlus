@@ -111,11 +111,18 @@
             this.routingLabel2 = new System.Windows.Forms.Label();
             this.addCheckLabel = new System.Windows.Forms.Label();
             this.manageUsersPage = new System.Windows.Forms.TabPage();
+            this.addUserButton = new System.Windows.Forms.Button();
+            this.addUserLabel = new System.Windows.Forms.Label();
+            this.userListView = new System.Windows.Forms.ListView();
+            this.firstNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lastNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.supervisorCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.adminCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.deleteUserButton = new System.Windows.Forms.Button();
             this.updateUserButton = new System.Windows.Forms.Button();
-            this.manageFirstNameBox = new System.Windows.Forms.TextBox();
-            this.manageLastNameBox = new System.Windows.Forms.TextBox();
-            this.manageUserNameBox = new System.Windows.Forms.TextBox();
+            this.userFirstNameBox = new System.Windows.Forms.TextBox();
+            this.userLastNameBox = new System.Windows.Forms.TextBox();
+            this.userUserNameBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.supPrivLabel = new System.Windows.Forms.Label();
             this.adminStatusBox = new System.Windows.Forms.CheckBox();
@@ -123,18 +130,11 @@
             this.userNameLabel2 = new System.Windows.Forms.Label();
             this.lastNameLabel4 = new System.Windows.Forms.Label();
             this.fNameLabel4 = new System.Windows.Forms.Label();
-            this.manageSearchButton = new System.Windows.Forms.Button();
-            this.manageLNameBox = new System.Windows.Forms.TextBox();
-            this.manageFNameBox = new System.Windows.Forms.TextBox();
+            this.searchUserButton = new System.Windows.Forms.Button();
+            this.userLNameBox = new System.Windows.Forms.TextBox();
+            this.userFNameBox = new System.Windows.Forms.TextBox();
             this.manageLNameLabel = new System.Windows.Forms.Label();
             this.manageFNameLabel = new System.Windows.Forms.Label();
-            this.userListView = new System.Windows.Forms.ListView();
-            this.firstNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lastNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.supervisorCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.adminCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.addUserLabel = new System.Windows.Forms.Label();
-            this.addUserButton = new System.Windows.Forms.Button();
             this.signedInAsLabel = new System.Windows.Forms.Label();
             this.userLabel = new System.Windows.Forms.Label();
             this.privilegesLabel = new System.Windows.Forms.Label();
@@ -909,9 +909,9 @@
             this.manageUsersPage.Controls.Add(this.userListView);
             this.manageUsersPage.Controls.Add(this.deleteUserButton);
             this.manageUsersPage.Controls.Add(this.updateUserButton);
-            this.manageUsersPage.Controls.Add(this.manageFirstNameBox);
-            this.manageUsersPage.Controls.Add(this.manageLastNameBox);
-            this.manageUsersPage.Controls.Add(this.manageUserNameBox);
+            this.manageUsersPage.Controls.Add(this.userFirstNameBox);
+            this.manageUsersPage.Controls.Add(this.userLastNameBox);
+            this.manageUsersPage.Controls.Add(this.userUserNameBox);
             this.manageUsersPage.Controls.Add(this.label4);
             this.manageUsersPage.Controls.Add(this.supPrivLabel);
             this.manageUsersPage.Controls.Add(this.adminStatusBox);
@@ -919,9 +919,9 @@
             this.manageUsersPage.Controls.Add(this.userNameLabel2);
             this.manageUsersPage.Controls.Add(this.lastNameLabel4);
             this.manageUsersPage.Controls.Add(this.fNameLabel4);
-            this.manageUsersPage.Controls.Add(this.manageSearchButton);
-            this.manageUsersPage.Controls.Add(this.manageLNameBox);
-            this.manageUsersPage.Controls.Add(this.manageFNameBox);
+            this.manageUsersPage.Controls.Add(this.searchUserButton);
+            this.manageUsersPage.Controls.Add(this.userLNameBox);
+            this.manageUsersPage.Controls.Add(this.userFNameBox);
             this.manageUsersPage.Controls.Add(this.manageLNameLabel);
             this.manageUsersPage.Controls.Add(this.manageFNameLabel);
             this.manageUsersPage.Location = new System.Drawing.Point(4, 22);
@@ -930,6 +930,61 @@
             this.manageUsersPage.TabIndex = 8;
             this.manageUsersPage.Text = "Manage Users";
             this.manageUsersPage.UseVisualStyleBackColor = true;
+            // 
+            // addUserButton
+            // 
+            this.addUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addUserButton.Location = new System.Drawing.Point(645, 56);
+            this.addUserButton.Name = "addUserButton";
+            this.addUserButton.Size = new System.Drawing.Size(108, 27);
+            this.addUserButton.TabIndex = 20;
+            this.addUserButton.Text = "Add User";
+            this.addUserButton.UseVisualStyleBackColor = true;
+            // 
+            // addUserLabel
+            // 
+            this.addUserLabel.AutoSize = true;
+            this.addUserLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addUserLabel.Location = new System.Drawing.Point(531, 8);
+            this.addUserLabel.Name = "addUserLabel";
+            this.addUserLabel.Size = new System.Drawing.Size(117, 17);
+            this.addUserLabel.TabIndex = 19;
+            this.addUserLabel.Text = "Add/Update User";
+            // 
+            // userListView
+            // 
+            this.userListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.firstNameCH,
+            this.lastNameCH,
+            this.supervisorCH,
+            this.adminCH});
+            this.userListView.Location = new System.Drawing.Point(13, 59);
+            this.userListView.Name = "userListView";
+            this.userListView.Size = new System.Drawing.Size(383, 229);
+            this.userListView.TabIndex = 17;
+            this.userListView.UseCompatibleStateImageBehavior = false;
+            this.userListView.View = System.Windows.Forms.View.Details;
+            this.userListView.SelectedIndexChanged += new System.EventHandler(this.userListView_SelectedIndexChanged);
+            // 
+            // firstNameCH
+            // 
+            this.firstNameCH.Text = "First Name";
+            this.firstNameCH.Width = 67;
+            // 
+            // lastNameCH
+            // 
+            this.lastNameCH.Text = "Last Name";
+            this.lastNameCH.Width = 63;
+            // 
+            // supervisorCH
+            // 
+            this.supervisorCH.Text = "Supervisor Privileges";
+            this.supervisorCH.Width = 120;
+            // 
+            // adminCH
+            // 
+            this.adminCH.Text = "Administrator Privileges";
+            this.adminCH.Width = 128;
             // 
             // deleteUserButton
             // 
@@ -952,26 +1007,26 @@
             this.updateUserButton.Text = "Save Changes";
             this.updateUserButton.UseVisualStyleBackColor = true;
             // 
-            // manageFirstNameBox
+            // userFirstNameBox
             // 
-            this.manageFirstNameBox.Location = new System.Drawing.Point(526, 56);
-            this.manageFirstNameBox.Name = "manageFirstNameBox";
-            this.manageFirstNameBox.Size = new System.Drawing.Size(100, 20);
-            this.manageFirstNameBox.TabIndex = 14;
+            this.userFirstNameBox.Location = new System.Drawing.Point(526, 56);
+            this.userFirstNameBox.Name = "userFirstNameBox";
+            this.userFirstNameBox.Size = new System.Drawing.Size(100, 20);
+            this.userFirstNameBox.TabIndex = 14;
             // 
-            // manageLastNameBox
+            // userLastNameBox
             // 
-            this.manageLastNameBox.Location = new System.Drawing.Point(526, 81);
-            this.manageLastNameBox.Name = "manageLastNameBox";
-            this.manageLastNameBox.Size = new System.Drawing.Size(100, 20);
-            this.manageLastNameBox.TabIndex = 13;
+            this.userLastNameBox.Location = new System.Drawing.Point(526, 81);
+            this.userLastNameBox.Name = "userLastNameBox";
+            this.userLastNameBox.Size = new System.Drawing.Size(100, 20);
+            this.userLastNameBox.TabIndex = 13;
             // 
-            // manageUserNameBox
+            // userUserNameBox
             // 
-            this.manageUserNameBox.Location = new System.Drawing.Point(526, 104);
-            this.manageUserNameBox.Name = "manageUserNameBox";
-            this.manageUserNameBox.Size = new System.Drawing.Size(100, 20);
-            this.manageUserNameBox.TabIndex = 12;
+            this.userUserNameBox.Location = new System.Drawing.Point(526, 104);
+            this.userUserNameBox.Name = "userUserNameBox";
+            this.userUserNameBox.Size = new System.Drawing.Size(100, 20);
+            this.userUserNameBox.TabIndex = 12;
             // 
             // label4
             // 
@@ -1036,28 +1091,29 @@
             this.fNameLabel4.TabIndex = 5;
             this.fNameLabel4.Text = "First Name:";
             // 
-            // manageSearchButton
+            // searchUserButton
             // 
-            this.manageSearchButton.Location = new System.Drawing.Point(195, 30);
-            this.manageSearchButton.Name = "manageSearchButton";
-            this.manageSearchButton.Size = new System.Drawing.Size(75, 23);
-            this.manageSearchButton.TabIndex = 4;
-            this.manageSearchButton.Text = "Search User";
-            this.manageSearchButton.UseVisualStyleBackColor = true;
+            this.searchUserButton.Location = new System.Drawing.Point(195, 30);
+            this.searchUserButton.Name = "searchUserButton";
+            this.searchUserButton.Size = new System.Drawing.Size(75, 23);
+            this.searchUserButton.TabIndex = 4;
+            this.searchUserButton.Text = "Search User";
+            this.searchUserButton.UseVisualStyleBackColor = true;
+            this.searchUserButton.Click += new System.EventHandler(this.searchUserButton_Click);
             // 
-            // manageLNameBox
+            // userLNameBox
             // 
-            this.manageLNameBox.Location = new System.Drawing.Point(76, 32);
-            this.manageLNameBox.Name = "manageLNameBox";
-            this.manageLNameBox.Size = new System.Drawing.Size(100, 20);
-            this.manageLNameBox.TabIndex = 3;
+            this.userLNameBox.Location = new System.Drawing.Point(76, 32);
+            this.userLNameBox.Name = "userLNameBox";
+            this.userLNameBox.Size = new System.Drawing.Size(100, 20);
+            this.userLNameBox.TabIndex = 3;
             // 
-            // manageFNameBox
+            // userFNameBox
             // 
-            this.manageFNameBox.Location = new System.Drawing.Point(76, 5);
-            this.manageFNameBox.Name = "manageFNameBox";
-            this.manageFNameBox.Size = new System.Drawing.Size(100, 20);
-            this.manageFNameBox.TabIndex = 2;
+            this.userFNameBox.Location = new System.Drawing.Point(76, 5);
+            this.userFNameBox.Name = "userFNameBox";
+            this.userFNameBox.Size = new System.Drawing.Size(100, 20);
+            this.userFNameBox.TabIndex = 2;
             // 
             // manageLNameLabel
             // 
@@ -1076,60 +1132,6 @@
             this.manageFNameLabel.Size = new System.Drawing.Size(60, 13);
             this.manageFNameLabel.TabIndex = 0;
             this.manageFNameLabel.Text = "First Name:";
-            // 
-            // userListView
-            // 
-            this.userListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.firstNameCH,
-            this.lastNameCH,
-            this.supervisorCH,
-            this.adminCH});
-            this.userListView.Location = new System.Drawing.Point(13, 59);
-            this.userListView.Name = "userListView";
-            this.userListView.Size = new System.Drawing.Size(383, 229);
-            this.userListView.TabIndex = 17;
-            this.userListView.UseCompatibleStateImageBehavior = false;
-            this.userListView.View = System.Windows.Forms.View.Details;
-            // 
-            // firstNameCH
-            // 
-            this.firstNameCH.Text = "First Name";
-            this.firstNameCH.Width = 67;
-            // 
-            // lastNameCH
-            // 
-            this.lastNameCH.Text = "Last Name";
-            this.lastNameCH.Width = 63;
-            // 
-            // supervisorCH
-            // 
-            this.supervisorCH.Text = "Supervisor Privileges";
-            this.supervisorCH.Width = 120;
-            // 
-            // adminCH
-            // 
-            this.adminCH.Text = "Administrator Privileges";
-            this.adminCH.Width = 128;
-            // 
-            // addUserLabel
-            // 
-            this.addUserLabel.AutoSize = true;
-            this.addUserLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addUserLabel.Location = new System.Drawing.Point(531, 8);
-            this.addUserLabel.Name = "addUserLabel";
-            this.addUserLabel.Size = new System.Drawing.Size(117, 17);
-            this.addUserLabel.TabIndex = 19;
-            this.addUserLabel.Text = "Add/Update User";
-            // 
-            // addUserButton
-            // 
-            this.addUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addUserButton.Location = new System.Drawing.Point(645, 56);
-            this.addUserButton.Name = "addUserButton";
-            this.addUserButton.Size = new System.Drawing.Size(108, 27);
-            this.addUserButton.TabIndex = 20;
-            this.addUserButton.Text = "Add User";
-            this.addUserButton.UseVisualStyleBackColor = true;
             // 
             // signedInAsLabel
             // 
@@ -1239,9 +1241,9 @@
         private System.Windows.Forms.TabPage manageUsersPage;
         private System.Windows.Forms.Button deleteUserButton;
         private System.Windows.Forms.Button updateUserButton;
-        private System.Windows.Forms.TextBox manageFirstNameBox;
-        private System.Windows.Forms.TextBox manageLastNameBox;
-        private System.Windows.Forms.TextBox manageUserNameBox;
+        private System.Windows.Forms.TextBox userFirstNameBox;
+        private System.Windows.Forms.TextBox userLastNameBox;
+        private System.Windows.Forms.TextBox userUserNameBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label supPrivLabel;
         private System.Windows.Forms.CheckBox adminStatusBox;
@@ -1249,9 +1251,9 @@
         private System.Windows.Forms.Label userNameLabel2;
         private System.Windows.Forms.Label lastNameLabel4;
         private System.Windows.Forms.Label fNameLabel4;
-        private System.Windows.Forms.Button manageSearchButton;
-        private System.Windows.Forms.TextBox manageLNameBox;
-        private System.Windows.Forms.TextBox manageFNameBox;
+        private System.Windows.Forms.Button searchUserButton;
+        private System.Windows.Forms.TextBox userLNameBox;
+        private System.Windows.Forms.TextBox userFNameBox;
         private System.Windows.Forms.Label manageLNameLabel;
         private System.Windows.Forms.Label manageFNameLabel;
         private System.Windows.Forms.TextBox textBox1;
