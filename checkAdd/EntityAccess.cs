@@ -23,14 +23,10 @@ namespace checkPlus
         public void TurnOnInsert()
         {
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address on");
         }
         public void TurnOffInsert()
         {
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address off");
         }
 
 
@@ -86,7 +82,13 @@ namespace checkPlus
         /*  FUNCTION
          *  returns a list of all accounts in the database
          */
-        public List<Account> GetAllAccounts() { return cpdb.Accounts.ToList(); }
+        public List<Account> GetAllAccounts()
+        {
+            return (
+                from a in cpdb.Accounts
+                select a
+            ).ToList();
+        }
 
         /*  FUNCTION
          *  pass in the account to update and an "Account record" with the new updated info
@@ -146,15 +148,11 @@ namespace checkPlus
         {
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_check on");
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address on");
         }
         public void TurnOffInsert()
         {
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_check off");
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address off");
         }
         public Acct_check BuildAcct_check
         (

@@ -8,3 +8,13 @@ I:\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\Model.xml
 I:\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\refactor.xml
 I:\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\postdeploy.sql
 I:\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\predeploy.sql
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\bin\Debug\CheckPlus.dacpac
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\bin\Debug\CheckPlus.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\bin\Debug\CheckPlus.pdb
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\CheckPlus.sqlprojAssemblyReference.cache
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\CheckPlus.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\CheckPlus.pdb
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\Model.xml
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\refactor.xml
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\postdeploy.sql
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\predeploy.sql
