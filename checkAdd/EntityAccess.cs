@@ -103,7 +103,7 @@ namespace checkPlus
             return (
                 from a in cpdb.Accounts
                 join ac in cpdb.Acct_checks on a.Account_id equals ac.Account_id
-                where ac.Date_paid != null
+                where ac.Date_paid == null
                     && a.Account_id == prmAcct.Account_id
                 select ac
             ).ToList();
@@ -116,16 +116,18 @@ namespace checkPlus
          *  connected to <prmAcct>
          *  ------------------------------------------
          */
-        public double GetAccountBalance(Account prmAcct)
+        public Decimal GetAccountBalance(Account prmAcct)
         {
-            //try pulling a and see what values are in it
-             return (
+            var amounts = (
                 from a in cpdb.Accounts
                 join ac in cpdb.Acct_checks on a.Account_id equals ac.Account_id
-                where ac.Date_paid != null
+                where ac.Date_paid == null
                     && a.Account_id == prmAcct.Account_id
                 select ac.Amount
-            ).Sum();
+            ).ToList();
+
+            if(amounts.Count() > 0) { return amounts.Sum(); }
+            else { return 0.0M; }
         }
 
 
@@ -255,7 +257,7 @@ namespace checkPlus
                             && b.Routing_number == prmRoutNum
                         select a.Account_id
                     ).FirstOrDefault(),
-                    Amount = prmAmt,
+                    Amount = Convert.ToDecimal(prmAmt),
                     Date_written = prmDateWrit,
                     Date_received = DateTime.Now
                 };

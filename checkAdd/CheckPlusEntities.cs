@@ -47,7 +47,7 @@ namespace checkPlus
         [Key]
         public int Acct_check_id { get; set; }
         public int Account_id { get; set; }
-        public double Amount { get; set; }
+        public Decimal Amount { get; set; }
         public DateTime Date_written { get; set; }
         public string Check_number { get; set; }
         public DateTime Date_received { get; set; }
@@ -84,7 +84,7 @@ namespace checkPlus
         [Key]
         public int Client_id { get; set; }
         public string Client_nm { get; set; }
-        public double Default_fee { get; set; }
+        public Decimal Default_fee { get; set; }
         public int Days_bw_letters { get; set; }
     }
 
