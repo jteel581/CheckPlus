@@ -20,19 +20,19 @@ namespace checkPlus
     {
         private CheckPlusDB cpdb;
         public AccountSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
+
+        //
         public void TurnOnInsert()
         {
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address on");
+            cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.account on");
+            cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.bank on");
         }
+        //
         public void TurnOffInsert()
         {
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address off");
+            cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.account off");
+            cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.bank off");
         }
-
 
         /*  FUNCTION
          *  build an account out of the unique characteristics of an account record:
@@ -52,7 +52,7 @@ namespace checkPlus
             string prmAcctNum, string prmPhnNum //account info
         )
         {
-            Account tst_Acct = (
+            Account tstAcct = (
                 from a in cpdb.Accounts
                 join b in cpdb.Banks on a.Bank_id equals b.Bank_id
                 where b.Routing_number == prmRoutNum
@@ -61,7 +61,7 @@ namespace checkPlus
             ).FirstOrDefault();
 
             //there already was an account with that information
-            if (tst_Acct != null) { return tst_Acct; }
+            if (tstAcct != null) { return tstAcct; }
             else
             {   //build a new account record because one does not already exist
                 return new Account()
@@ -77,20 +77,80 @@ namespace checkPlus
                     City = prmCity,
                     State = prmState,
                     Zip_code = prmZip,
+                    Country = "United States",
                     Account_number = prmAcctNum,
                     Phone_number = null
                 };
             }
         }
 
-        /*  FUNCTION
+        /*  FUNCTION -- GetAllAccounts
+         *  ------------------------------------------
          *  returns a list of all accounts in the database
+         *  ------------------------------------------
          */
         public List<Account> GetAllAccounts() { return cpdb.Accounts.ToList(); }
 
-        /*  FUNCTION
-         *  pass in the account to update and an "Account record" with the new updated info
-         *  set all the current account record's info to the provided new info
+
+        /*  FUNCTION -- GetChecksInAccount
+         *  ------------------------------------------
+         *  returns a list of all unpaid checks 
+         *  connected to an <prmAcct>
+         *  ------------------------------------------
+         */
+        public List<Acct_check> GetChecksInAccount(Account prmAcct)
+        {
+            return (
+                from a in cpdb.Accounts
+                join ac in cpdb.Acct_checks on a.Account_id equals ac.Account_id
+                where ac.Date_paid != null
+                    && a.Account_id == prmAcct.Account_id
+                select ac
+            ).ToList();
+        }
+
+
+        /*  FUNCTION -- GetAccountBalance
+         *  ------------------------------------------
+         *  returns the sum of all unpaid check amounts 
+         *  connected to <prmAcct>
+         *  ------------------------------------------
+         */
+        public double GetAccountBalance(Account prmAcct)
+        {
+            //try pulling a and see what values are in it
+             return (
+                from a in cpdb.Accounts
+                join ac in cpdb.Acct_checks on a.Account_id equals ac.Account_id
+                where ac.Date_paid != null
+                    && a.Account_id == prmAcct.Account_id
+                select ac.Amount
+            ).Sum();
+        }
+
+
+        /*  FUNCTION -- GetBankRountingNumber
+         *  ------------------------------------------
+         *  returns the routing number of the bank 
+         *  connected to <prmAcct>
+         *  ------------------------------------------
+         */
+        public string GetBankRoutingNumber(Account prmAcct)
+        {
+            return (
+                from a in cpdb.Accounts
+                join b in cpdb.Banks on a.Bank_id equals b.Bank_id
+                select b.Routing_number
+            ).FirstOrDefault();
+        }
+
+
+        /*  FUNCTION -- UpdateAccount
+         *  ------------------------------------------
+         *  pass in an Account object <prmAcctToUpdate> to update 
+         *      and an Account object <prmNewAcctInfo> with the new updated info
+         *  set all <prmAcctToUpdate>'s info to the <prmNewAcctInfo>'s info
+         *  ------------------------------------------
          */
         public void UpdateAccount(Account prmAcctToUpdate, Account prmNewAcctInfo)
         {
@@ -109,6 +169,13 @@ namespace checkPlus
             cpdb.SaveChanges();
         }
 
+        /*  FUNCTION -- InsertAccount
+         *  ------------------------------------------
+         *  attempt to insert a new record <prmAccount> into the database
+         *  if the account already exists, return <prmAccount>
+         *  else return null
+         *  ------------------------------------------
+         */
         public Account InsertAccount(Account prmAccount)
         {
             var tstAccount = (
@@ -126,6 +193,13 @@ namespace checkPlus
             return tstAccount;
         }
 
+        /*  FUNCTION -- DeleteAccount
+         *  ------------------------------------------
+         *  attempt to delete an existing record <prmAccount> in the database
+         *  if the account already exists, return <prmAccount>
+         *  else, return the newly created account
+         *  ------------------------------------------
+         */
         public void DeleteAccount(Account prmAccount)
         {
             cpdb.Accounts.Remove((
@@ -144,17 +218,13 @@ namespace checkPlus
         public Acct_checkSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
         public void TurnOnInsert()
         {
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_check on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address on");
+            cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.acct_check on");
+            cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.account on");
         }
         public void TurnOffInsert()
         {
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_check off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address off");
+            cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.acct_check off");
+            cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.account off");
         }
         public Acct_check BuildAcct_check
         (

@@ -32,7 +32,6 @@ namespace checkPlus
             chk = new pseudoCheck("000000021", "333333333", 28759.53, 1857);
             act.addCheck(chk);
             addAccount(act);
-            
         }
 
         public List<pseudoAccount> getAccountsList() { return psudoAccounts; }

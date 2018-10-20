@@ -3,6 +3,8 @@
 	notes:		must copy-paste into ssms and run manually
 */
 
+use CheckPlus;
+
 insert into dbo.bank 
 (		bank_nm,				routing_number,		contact_nm,			contact_email,		contact_phone,	bank_address,		bank_city,		bank_state, bank_country,		bank_zip	)
 --100000
@@ -32,7 +34,7 @@ select	'Union Credit Union',	'000432178',		'Sherida Smith',	'sksmith@ucu.org',	'
 ;
 
 insert into dbo.account 
-(		first_name,	last_name, 	bank_id,	address_nm,		city,		state,			country,			zip_code,	account_number,		phone_number			)
+(		first_name,	last_name, 	bank_id,	address,		city,		state,			country,			zip_code,	account_number,		phone_number			)
 --100000
 select	'John',		'Doe0',		100000,		'100 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'135468743564',		'864-555-8765'		union
 --100001

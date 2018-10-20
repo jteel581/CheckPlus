@@ -38,6 +38,7 @@ namespace checkPlus
             
             accSQL = new AccountSQLer(cpdb);
             acct_chkSQL = new Acct_checkSQLer(cpdb);
+
             updateAccountListView();
             updateCheckListView();
             updateUserListView();
@@ -80,37 +81,41 @@ namespace checkPlus
                     }
                 }
             }
-            
-            
-
         }
 
+        //on user click of button, attempt to add an account record
         private void addActButton_Click(object sender, EventArgs e)
-        {
-            
+        {   //stashing text input from the form into variables
             string firstName = firstNameBox.Text;
             string lastName = lastNameBox.Text;
             string routingNumber = routingBox1.Text;
             string accountNumber = accountBox1.Text;
-            //Izaac added these address strings for his data access function testing
-            //Jonathan already had created the boxes
             string address = stNumBox.Text + " " + stNameBox.Text;
             string city = cityBox.Text;
             string state = stateBox.Text;
             string zip = zipBox.Text;
-            //Izaac added this box and string
-            //string phnNum = phnNumBox.Text;
-            /*
+            string phnNum = phoneNumBox.Text;
+
             //--------------------------------------------------------
             //start linq testing code chunk
             //--------------------------------------------------------
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder on");
-            Account tstAccount = accSQL.InsertAccount(
-                accSQL.BuildAccount(firstName, lastName, routingNumber, accountNumber, address, city, state, zip, "1111111111")
+
+
+            //turn on ability to insert an account into the table
+            accSQL.TurnOnInsert();
+            //attempt to insert an account record
+            Account tstAccount = accSQL.InsertAccount
+            (   
+                accSQL.BuildAccount
+                (   //build an Account object using the information provided
+                    firstName, lastName, 
+                    routingNumber, 
+                    address, city, state, zip, 
+                    accountNumber, phnNum
+                )
             );
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account off");
+            //turn off ability to insert an account
+            accSQL.TurnOffInsert();
 
             //if attempt to insert account results in finding an exitsting account
             if (tstAccount != null)
@@ -119,16 +124,40 @@ namespace checkPlus
             }
             else
             {   //otherwise, it was a successful account addition
+                ListViewItem lvi = new ListViewItem
+                (new string[]
+                    {
+                        tstAccount.Account_number,
+                        tstAccount.First_name, tstAccount.Last_name,
+                        accSQL.GetChecksInAccount(tstAccount).Count().ToString("0000"),
+                        accSQL.GetAccountBalance(tstAccount).ToString()
+                    }
+                );
+                accountsListView.Items.Add(lvi);
                 DisplayMessageNoResponse("Success!", "New account added.");
             }
+
+
             //--------------------------------------------------------
             //end linq testing code chunk
             //--------------------------------------------------------
-            */
+            
+            /*
             pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber, stNumBox.Text, stNameBox.Text, city, state, zip);
             database.addAccount(act);
-            ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
+            ListViewItem lvi = new ListViewItem
+            (new string[] 
+                {
+                    act.getAccountNum(),
+                    act.getFirstName(), act.getLastName(),
+                    act.getNumOfChecks().ToString("0000"),
+                    act.getCurBal().ToString()
+                }
+            );
             accountsListView.Items.Add(lvi);
+            */
+
+            //clear input boxes
             firstNameBox.Clear();
             lastNameBox.Clear();
             routingBox1.Clear();
@@ -140,27 +169,32 @@ namespace checkPlus
             zipBox.Clear();
         }
 
+
+        //on user click of button, attempt to add a check record
         private void addChkButton_Click(object sender, EventArgs e)
         {
             string acctNum = accountBox2.Text;
             string routNum = routingBox2.Text;
-            //Izaac added this string; box already existed
             string chkNum = checkNumBox.Text;
             double ammount = Convert.ToDouble(ammountBox.Text);
-            //Izaac added this box and string
-            //DateTime dateWritten = Convert.ToDateTime(dateWrittenBox.Text);
+            DateTime dateWritten = Convert.ToDateTime(dateWrittenSelector.Text);
 
             //--------------------------------------------------------
             //start linq testing code chunk
             //--------------------------------------------------------
-            /*
 
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_check on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
-            Acct_check tstAcct_check = acct_chkSQL.InsertAcct_check(
-                acct_chkSQL.BuildAcct_check(acctNum, routNum, chkNum, ammount, dateWritten)
-            );
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_check on");
+
+            acct_chkSQL.TurnOnInsert();
+            Acct_check tstAcct_check = acct_chkSQL
+                .InsertAcct_check
+                (   
+                    acct_chkSQL.BuildAcct_check
+                    (
+                        acctNum, routNum, 
+                        chkNum, ammount, dateWritten
+                    )
+                );
+            acct_chkSQL.TurnOffInsert();
 
             //if check record already existed
             if (tstAcct_check != null)
@@ -171,14 +205,12 @@ namespace checkPlus
             {   //otherwise, it was a successful account addition
                 DisplayMessageNoResponse("Success!", "New check added.");
             }
+
+
             //--------------------------------------------------------
             //end linq testing code chunk
             //--------------------------------------------------------
-            */
-
-
-
-
+            
             pseudoAccount act = database.getAccountByNum(acctNum);
             pseudoCheck check = new pseudoCheck(acctNum, routNum, ammount);
             database.getAccountByNum(acctNum).addCheck(check);
@@ -186,6 +218,8 @@ namespace checkPlus
             checkListView.Items.Add(lvi);
             updateAccountListView();
             updateCheckListView();
+
+            //clear input boxes
             accountBox2.Clear();
             routingBox2.Clear();
             ammountBox.Clear();
@@ -279,16 +313,30 @@ namespace checkPlus
         }
 
         
-
+        //  if      {}  --  when first opening the application, populate with the existing records
+        //  else    {}  --  throughout use of the application, update the values displayed
         public void updateAccountListView()
         {
             if (accountsListView.Items.Count == 0)
             {
-                ListViewItem lvi; 
+                ListViewItem lvi;
                 foreach (pseudoAccount act in database.getAccountsList())
                 {
-
                     lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
+                    accountsListView.Items.Add(lvi);
+                }
+                foreach(Account act in accSQL.GetAllAccounts())
+                {
+                    lvi = new ListViewItem
+                    (
+                        new string[] 
+                        {
+                            act.Account_number,
+                            act.First_name, act.Last_name, 
+                            accSQL.GetChecksInAccount(act).Count().ToString("0000"),
+                            accSQL.GetAccountBalance(act).ToString()
+                        }
+                    );
                     accountsListView.Items.Add(lvi);
                 }
             }
@@ -308,7 +356,6 @@ namespace checkPlus
                     }
                 }
             }
-            
         }
 
 
@@ -416,7 +463,36 @@ namespace checkPlus
         {
             string accountNum = accountsListView.SelectedItems[0].SubItems[0].Text;
 
+            string firstName = firstNameBox.Text;
+            string lastName = lastNameBox.Text;
+            string routNum = routingBox1.Text;
+            string address = stNumBox.Text + " " + stNameBox.Text;
+            string city = cityBox.Text;
+            string state = stateBox.Text;
+            string zip = zipBox.Text;
+            string acctNum = accountBox1.Text;
+
             var act = database.getAccountByNum(accountNum);
+
+            accSQL.UpdateAccount
+            (
+                accSQL.BuildAccount
+                (
+                    act.getFirstName(), act.getLastName(),
+                    act.getRoutingNum(),
+                    act.getStNum() + " " + act.getStName(), act.getCity(), act.getState(), act.getZip(),
+                    act.getAccountNum(), null
+                ),
+                accSQL.BuildAccount
+                (
+                    firstName, lastName,
+                    routNum,
+                    address, city, state, zip,
+                    acctNum, null
+                )
+            )
+            ;
+
             act.setAccountNum(accountBox1.Text);
             act.setFirstName(firstNameBox.Text);
             act.setLastName(lastNameBox.Text);
@@ -654,6 +730,11 @@ namespace checkPlus
                     adminStatusBox.Checked = true;
                 }
             }
+        }
+
+        private void manageAccountPage_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
