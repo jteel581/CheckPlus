@@ -71,3 +71,51 @@ I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.CoreCompileInp
 I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.CopyComplete
 I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.exe
 I:\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.pdb
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.SqlServer.Tools.Extensibility.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.SqlServer.SqlClrProvider.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.SqlServer.Smo.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.SqlServer.SqlEnum.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.SqlServer.ServiceBrokerEnum.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\checkAdd.exe.config
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\checkAdd.exe
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\checkAdd.pdb
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\EntityFramework.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ASTasks.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.AzureStorageEnum.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\microsoft.sqlserver.batchparser.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.BatchParserClient.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.BulkInsertTask.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ConnectionDlg.Core.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ConnectionDlg.UI.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ConnectionInfoExtended.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Data.Tools.ExceptionMessageBox.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Diagnostics.STrace.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Dmf.Common.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Dmf.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.DmQueryTask.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ExecProcTask.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.FileSystemTask.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Tools.Extensibility.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.SqlClrProvider.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.Smo.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.SqlEnum.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\Microsoft.SqlServer.ServiceBrokerEnum.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\EntityFramework.xml
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csprojAssemblyReference.cache
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.exe.config
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.ammountLabel.resources
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.Properties.Resources.resources
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.GenerateResource.cache
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.CoreCompileInputs.cache
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.CopyComplete
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.exe
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\obj\Debug\checkAdd.pdb

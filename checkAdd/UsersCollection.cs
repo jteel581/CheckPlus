@@ -23,7 +23,20 @@ namespace checkPlus
             usr = new User("Joe", "Shmo", "jshmo", "jshmoiscool");
             users.Add(usr);
         }
-
+        public User getUserByName(string fName, string lName)
+        {
+            User u = null;
+            foreach (User usr in users)
+            {
+                string firstName = usr.getFirstName();
+                string lastname = usr.getLastName();
+                if (fName == firstName && lName == lastname )
+                {
+                    return usr;
+                }
+            }
+            return u;
+        }
         public void addUser(User usr)
         {
             users.Add(usr);
