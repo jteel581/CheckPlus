@@ -23,14 +23,10 @@ namespace checkPlus
         public void TurnOnInsert()
         {
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address on");
         }
         public void TurnOffInsert()
         {
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address off");
         }
 
 
@@ -146,15 +142,11 @@ namespace checkPlus
         {
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_check on");
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder on");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address on");
         }
         public void TurnOffInsert()
         {
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_check off");
             cpdb.Database.ExecuteSqlCommand("set identity insert dbo.account off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.acct_holder off");
-            cpdb.Database.ExecuteSqlCommand("set identity insert dbo.address off");
         }
         public Acct_check BuildAcct_check
         (
