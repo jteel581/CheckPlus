@@ -34,7 +34,12 @@ namespace checkPlus
 
             //configuring db variables
             cpdb = new CheckPlusDB();
-            cpdb.Database.Connection.ConnectionString = "Data Source=localhost;Initial Catalog=CheckPlus;Integrated Security=True";
+            cpdb.Database.Connection.ConnectionString = "" +
+                "Data Source=localhost;" +
+                "Initial Catalog=CheckPlus;" +
+                "Integrated Security=True;" +
+                "MultipleActiveResultSets=True"
+            ;
             
             accSQL = new AccountSQLer(cpdb);
             acct_chkSQL = new Acct_checkSQLer(cpdb);
@@ -269,6 +274,7 @@ namespace checkPlus
             if (checkListView.Items.Count == 0)
             {
                 ListViewItem lvi;
+                /*
                 foreach (pseudoAccount act in database.getAccountsList())
                 {
                     foreach (pseudoCheck check in act.getChecks())
@@ -276,6 +282,22 @@ namespace checkPlus
                         lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), check.getCheckNum().ToString(), check.getAmmount().ToString() });
                         checkListView.Items.Add(lvi);
                     }
+                }
+                */
+                foreach(Acct_check ac in cpdb.Acct_checks)
+                {
+                    lvi = new ListViewItem
+                    (
+                        new string[]
+                        {
+                            acct_chkSQL.GetAccountNumber(ac),
+                            acct_chkSQL.GetFirstName(ac),
+                            acct_chkSQL.GetLastName(ac),
+                            ac.Check_number,
+                            ac.Amount.ToString()
+                        }
+                    );
+                    checkListView.Items.Add(lvi);
                 }
             }
             else
@@ -320,11 +342,13 @@ namespace checkPlus
             if (accountsListView.Items.Count == 0)
             {
                 ListViewItem lvi;
-                foreach (pseudoAccount act in database.getAccountsList())
+                /*
+                 * foreach (pseudoAccount act in database.getAccountsList())
                 {
                     lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
                     accountsListView.Items.Add(lvi);
                 }
+                */
                 foreach(Account act in accSQL.GetAllAccounts())
                 {
                     lvi = new ListViewItem

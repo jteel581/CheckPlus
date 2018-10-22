@@ -103,7 +103,7 @@ namespace checkPlus
             return (
                 from a in cpdb.Accounts
                 join ac in cpdb.Acct_checks on a.Account_id equals ac.Account_id
-                where ac.Date_paid != null
+                where ac.Date_paid == null
                     && a.Account_id == prmAcct.Account_id
                 select ac
             ).ToList();
@@ -116,16 +116,18 @@ namespace checkPlus
          *  connected to <prmAcct>
          *  ------------------------------------------
          */
-        public double GetAccountBalance(Account prmAcct)
+        public Decimal GetAccountBalance(Account prmAcct)
         {
-            //try pulling a and see what values are in it
-             return (
+             var tstBalance = (
                 from a in cpdb.Accounts
                 join ac in cpdb.Acct_checks on a.Account_id equals ac.Account_id
-                where ac.Date_paid != null
+                where ac.Date_paid == null
                     && a.Account_id == prmAcct.Account_id
                 select ac.Amount
-            ).Sum();
+            ).ToList();
+
+            if(tstBalance != null) { return tstBalance.Sum(); }
+            else { return 0.0M; }
         }
 
 
@@ -216,6 +218,8 @@ namespace checkPlus
     {
         private CheckPlusDB cpdb;
         public Acct_checkSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
+
+
         public void TurnOnInsert()
         {
             cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.acct_check on");
@@ -226,6 +230,8 @@ namespace checkPlus
             cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.acct_check off");
             cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.account off");
         }
+
+
         public Acct_check BuildAcct_check
         (
             string prmAcctNum, //account info
@@ -255,13 +261,23 @@ namespace checkPlus
                             && b.Routing_number == prmRoutNum
                         select a.Account_id
                     ).FirstOrDefault(),
-                    Amount = prmAmt,
+                    Amount = Convert.ToDecimal(prmAmt),
                     Date_written = prmDateWrit,
                     Date_received = DateTime.Now
                 };
             }
         }
-        public List<Acct_check> GetAllAcct_checks() { return cpdb.Acct_checks.ToList(); }
+
+
+        public List<Acct_check> GetAllAcct_checks()
+        {
+            return (
+                from ac in cpdb.Acct_checks
+                select ac
+            ).ToList();
+        }
+
+
         public Acct_check GetAcct_check(Acct_check prmAcctCheck)
         {
             return (
@@ -270,6 +286,53 @@ namespace checkPlus
                 select ac
             ).FirstOrDefault();
         }
+
+
+        public string GetAccountNumber(Acct_check prmAcctCheck)
+        {
+            return (
+                from ac in cpdb.Acct_checks
+                join a in cpdb.Accounts on ac.Account_id equals a.Account_id
+                where ac.Acct_check_id == prmAcctCheck.Acct_check_id
+                select a.Account_number
+            ).FirstOrDefault();
+        }
+
+
+        public string GetRoutingNumber(Acct_check prmAcctCheck)
+        {
+            return (
+                from ac in cpdb.Acct_checks
+                join a in cpdb.Accounts on ac.Account_id equals a.Account_id
+                join b in cpdb.Banks on a.Bank_id equals b.Bank_id
+                where ac.Acct_check_id == prmAcctCheck.Acct_check_id
+                select b.Routing_number
+            ).FirstOrDefault();
+        }
+
+
+        public string GetFirstName(Acct_check prmAcctCheck)
+        {
+            return (
+                from ac in cpdb.Acct_checks
+                join a in cpdb.Accounts on ac.Account_id equals a.Account_id
+                where ac.Acct_check_id == prmAcctCheck.Acct_check_id
+                select a.First_name
+            ).FirstOrDefault();
+        }
+
+        
+        public string GetLastName(Acct_check prmAcctCheck)
+        {
+            return (
+                from ac in cpdb.Acct_checks
+                join a in cpdb.Accounts on ac.Account_id equals a.Account_id
+                where ac.Acct_check_id == prmAcctCheck.Acct_check_id
+                select a.Last_name
+            ).FirstOrDefault();
+        }
+
+
         public void UpdateAcct_check(Acct_check prmChkToUpdate, Acct_check prmChkNewInfo)
         {
             prmChkToUpdate.Acct_check_id = prmChkNewInfo.Acct_check_id;
@@ -282,6 +345,8 @@ namespace checkPlus
 
             cpdb.SaveChanges();
         }
+
+
         public Acct_check InsertAcct_check(Acct_check prmAcctCheck)
         {
             var tstAcct_check = (
@@ -311,6 +376,9 @@ namespace checkPlus
     }
 
 
+    //==========================================================================
+    //CLASS BankSQLer
+    //==========================================================================
     class BankSQLer
     {
         private CheckPlusDB cpdb;
