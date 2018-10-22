@@ -112,11 +112,12 @@ namespace checkPlus
             Account tstAccount = accSQL.InsertAccount
             (   
                 accSQL.BuildAccount
-                (   //build an Account object using the information provided
-                    firstName, lastName, 
-                    routingNumber, 
-                    address, city, state, zip, 
-                    accountNumber, phnNum
+                (   //build an Account object using the information provided 
+                    routingNumber,
+                    accountNumber,
+                    firstName, lastName,
+                    address, city, state, zip,  
+                    phnNum
                 )
             );
             //turn off ability to insert an account
@@ -324,7 +325,8 @@ namespace checkPlus
                             acct_chkSQL.GetFirstName(ac),
                             acct_chkSQL.GetLastName(ac),
                             ac.Check_number,
-                            ac.Amount.ToString()
+                            ac.Amount.ToString(),
+                            acct_chkSQL.GetRoutingNumber(ac)
                         }
                     );
                     checkListView.Items.Add(lvi);
@@ -334,6 +336,7 @@ namespace checkPlus
             {
                 foreach (ListViewItem lvi in checkListView.Items)
                 {
+                    /*
                     string accountNum = lvi.SubItems[0].Text;
                     string checkNum = lvi.SubItems[3].Text;
                     pseudoAccount act = database.getAccountByNum(accountNum);
@@ -347,18 +350,34 @@ namespace checkPlus
                             lvi.SubItems[2].Text = act.getLastName();
                             lvi.SubItems[3].Text = check.getCheckNum().ToString();
                             lvi.SubItems[4].Text = check.getAmmount().ToString();
-
+                            lvi.SubItems[5].Text = check.getRoutingNum();
                         }
                         else
                         {
                             lvi.Remove();
                         }
                     }
+                */
+                    Acct_check tstAcct_check = acct_chkSQL.BuildAcct_check
+                    (
+                        lvi.SubItems[0].Text,
+                        lvi.SubItems[5].Text,
+                        lvi.SubItems[3].Text
+                    )
+                    ;
+                    if (tstAcct_check != null)
+                    {
+                        lvi.SubItems[0].Text = acct_chkSQL.GetAccountNumber(tstAcct_check);
+                        lvi.SubItems[1].Text = acct_chkSQL.GetFirstName(tstAcct_check);
+                        lvi.SubItems[2].Text = acct_chkSQL.GetLastName(tstAcct_check);
+                        lvi.SubItems[3].Text = tstAcct_check.Check_number;
+                        lvi.SubItems[4].Text = tstAcct_check.Amount.ToString();
+                        lvi.SubItems[5].Text = acct_chkSQL.GetRoutingNumber(tstAcct_check);
+                    }
                     else
                     {
                         lvi.Remove();
                     }
-                    
                 }
             }
             checkListView.Sort();
@@ -383,31 +402,48 @@ namespace checkPlus
                 {
                     lvi = new ListViewItem
                     (
-                        new string[] 
+                        new string[]
                         {
                             act.Account_number,
-                            act.First_name, act.Last_name, 
+                            act.First_name, act.Last_name,
                             accSQL.GetChecksInAccount(act).Count().ToString("0000"),
-                            accSQL.GetAccountBalance(act).ToString()
+                            accSQL.GetAccountBalance(act).ToString(),
+                            accSQL.GetBankRoutingNumber(act)
                         }
                     );
                     accountsListView.Items.Add(lvi);
                 }
             }
             else
-            {
+            {   
                 foreach (ListViewItem lvi in accountsListView.Items)
                 {
-                    pseudoAccount act = database.getAccountByNum(lvi.SubItems[0].Text);
-                    if (act != null)
+                    /*
                     {
-                        lvi.SubItems[3].Text = act.getNumOfChecks().ToString();
-                        lvi.SubItems[4].Text = act.getCurBal().ToString();
+                        pseudoAccount act = database.getAccountByNum(lvi.SubItems[0].Text);
+                        if (act != null)
+                        {
+                            lvi.SubItems[3].Text = act.getNumOfChecks().ToString();
+                            lvi.SubItems[4].Text = act.getCurBal().ToString();
+                        }
+                        else
+                        {
+                            lvi.Remove();
+                        }
                     }
-                    else
+                    */
+                    Account tstAcct = accSQL.BuildAccount
+                    (
+                        lvi.SubItems[5].Text,
+                        lvi.SubItems[0].Text
+                    )
+                    ;
+                    if (tstAcct != null)
                     {
-                        lvi.Remove();
+                        lvi.SubItems[3].Text = accSQL.GetChecksInAccount(tstAcct).Count().ToString();
+                        lvi.SubItems[4].Text = accSQL.GetAccountBalance(tstAcct).ToString();
                     }
+                    else { lvi.Remove(); }
                 }
             }
         }
@@ -532,10 +568,8 @@ namespace checkPlus
             (
                 accSQL.BuildAccount
                 (
-                    act.getFirstName(), act.getLastName(),
                     act.getRoutingNum(),
-                    act.getStNum() + " " + act.getStName(), act.getCity(), act.getState(), act.getZip(),
-                    act.getAccountNum(), null
+                    act.getAccountNum()
                 ),
                 accSQL.BuildAccount
                 (
@@ -566,8 +600,31 @@ namespace checkPlus
             string accountNum = accountsListView.SelectedItems[0].SubItems[0].Text;
 
             var act = database.getAccountByNum(accountNum);
+
+            //----------------------------------
+            //start linq testing code chunk
+            //----------------------------------
+            string acctNum = accountBox2.Text;
+            string routNum = routingBox2.Text;
+
+
+            accSQL.DeleteAccount
+            (
+                accSQL.BuildAccount
+                (
+                    acctNum,
+                    routNum
+                )
+            )
+            ;
+            //----------------------------------
+            //end linq testing code chunk
+            //----------------------------------
+
             database.deleteAccount(act);
-            updateAccountListView();
+
+            //updateAccountListView();
+
             updateCheckListView();
             firstNameBox.Clear();
             lastNameBox.Clear();
@@ -698,18 +755,22 @@ namespace checkPlus
             if (accountsListView.SelectedItems.Count != 0)
             {
                 string accountNum = accountsListView.SelectedItems[0].SubItems[0].Text;
-                pseudoAccount act = database.getAccountByNum(accountNum);
-                firstNameBox.Text = act.getFirstName();
-                lastNameBox.Text = act.getLastName();
-                routingBox1.Text = act.getRoutingNum();
-                accountBox1.Text = act.getAccountNum();
-                stNameBox.Text = act.getStName();
-                stNumBox.Text = act.getStNum();
-                cityBox.Text = act.getCity();
-                stateBox.Text = act.getState();
-                zipBox.Text = act.getZip();
+                string routNum = accountsListView.SelectedItems[0].SubItems[5].Text;
+
+                //pseudoAccount act = database.getAccountByNum(accountNum);
+
+                Account tstAcct = accSQL.BuildAccount(routNum, accountNum);
+
+                firstNameBox.Text = tstAcct.First_name;
+                lastNameBox.Text = tstAcct.Last_name;
+                routingBox1.Text = accSQL.GetBankRoutingNumber(tstAcct);
+                accountBox1.Text = tstAcct.Account_number;
+                stNameBox.Text = tstAcct.Address;
+                stNumBox.Text = tstAcct.Address;
+                cityBox.Text = tstAcct.City;
+                stateBox.Text = tstAcct.State;
+                zipBox.Text = tstAcct.Zip_code;
             }
-            
         }
 
         private void saveChangesButton_Click_1(object sender, EventArgs e)
@@ -723,16 +784,23 @@ namespace checkPlus
         {
             if (checkListView.SelectedItems.Count != 0)
             {
+                string acctNum = checkListView.SelectedItems[0].SubItems[0].Text;
+                string routNum = checkListView.SelectedItems[0].SubItems[5].Text;
+                string checkNum = checkListView.SelectedItems[0].SubItems[3].Text;
+                /*
                 string accountNum = checkListView.SelectedItems[0].SubItems[0].Text;
                 pseudoAccount act = database.getAccountByNum(accountNum);
                 string checkNum = checkListView.SelectedItems[0].SubItems[3].Text;
                 pseudoCheck check = act.getCheckByNum(checkNum);
-                fNameBox2.Text = act.getFirstName();
-                lNameBox2.Text = act.getLastName();
-                routingBox2.Text = act.getRoutingNum();
-                accountBox2.Text = act.getAccountNum();
-                ammountBox.Text = check.getAccountNum();
-                checkNumBox.Text = check.getCheckNum().ToString();
+                */
+                Acct_check tstAcct_check = acct_chkSQL.BuildAcct_check(acctNum, routNum, checkNum);
+
+                fNameBox2.Text = acct_chkSQL.GetFirstName(tstAcct_check);
+                lNameBox2.Text = acct_chkSQL.GetLastName(tstAcct_check);
+                routingBox2.Text = acct_chkSQL.GetRoutingNumber(tstAcct_check);
+                accountBox2.Text = acct_chkSQL.GetAccountNumber(tstAcct_check);
+                ammountBox.Text = tstAcct_check.Amount.ToString();
+                checkNumBox.Text = tstAcct_check.Check_number; 
             }
         }
 

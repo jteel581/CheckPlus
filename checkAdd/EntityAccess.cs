@@ -46,10 +46,11 @@ namespace checkPlus
          */
         public Account BuildAccount
         (
-            string prmFirstNm, string prmLastNm, //account holder info
-            string prmRoutNum, //bank info
-            string prmAddress, string prmCity, string prmState, string prmZip, //address info
-            string prmAcctNum, string prmPhnNum //account info
+            string prmRoutNum,
+            string prmAcctNum, 
+            string prmFirstNm = "", string prmLastNm = "",
+            string prmAddress = "", string prmCity = "", string prmState = "", string prmZip = "",
+            string prmPhnNum = ""
         )
         {
             Account tstAcct = (
@@ -236,7 +237,7 @@ namespace checkPlus
         (
             string prmAcctNum, //account info
             string prmRoutNum, //bank info
-            string prmCheckNum, Decimal prmAmt, DateTime prmDateWrit //check info
+            string prmCheckNum, Decimal prmAmt = 0.0M, DateTime prmDateWrit = new DateTime()  //check info
         )
         {
             Acct_check tstAcct_check = (
