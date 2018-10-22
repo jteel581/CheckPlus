@@ -181,7 +181,7 @@ namespace checkPlus
             string acctNum = accountBox2.Text;
             string routNum = routingBox2.Text;
             string chkNum = checkNumBox.Text;
-            double ammount = Convert.ToDouble(ammountBox.Text);
+            Decimal ammount = Convert.ToDecimal(ammountBox.Text);
             DateTime dateWritten = Convert.ToDateTime(dateWrittenSelector.Text);
 
             //--------------------------------------------------------
@@ -208,6 +208,34 @@ namespace checkPlus
             }
             else
             {   //otherwise, it was a successful account addition
+                //probably want to make this better in future
+                    /* return newly generated id?
+                     * more careful return after the build thing?
+                     * just some considerations.....
+                     */
+                Acct_check newAcct_check = acct_chkSQL
+                    .GetAcct_check
+                    (
+                        acct_chkSQL.BuildAcct_check
+                        (
+                            acctNum, routNum,
+                            chkNum, ammount, dateWritten
+                        )
+                    )
+                    ;
+                ListViewItem lvi = new ListViewItem
+                (
+                    new string[]
+                    {
+                        acct_chkSQL.GetAccountNumber(newAcct_check),
+                        acct_chkSQL.GetFirstName(newAcct_check),
+                        acct_chkSQL.GetLastName(newAcct_check),
+                        newAcct_check.Check_number, 
+                        newAcct_check.Amount.ToString()
+                    }
+                )
+                ;
+                checkListView.Items.Add(lvi);
                 DisplayMessageNoResponse("Success!", "New check added.");
             }
 
@@ -216,6 +244,7 @@ namespace checkPlus
             //end linq testing code chunk
             //--------------------------------------------------------
             
+            /*
             pseudoAccount act = database.getAccountByNum(acctNum);
             pseudoCheck check = new pseudoCheck(acctNum, routNum, ammount);
             database.getAccountByNum(acctNum).addCheck(check);
@@ -223,6 +252,7 @@ namespace checkPlus
             checkListView.Items.Add(lvi);
             updateAccountListView();
             updateCheckListView();
+            */
 
             //clear input boxes
             accountBox2.Clear();

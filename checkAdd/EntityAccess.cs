@@ -236,7 +236,7 @@ namespace checkPlus
         (
             string prmAcctNum, //account info
             string prmRoutNum, //bank info
-            string prmCheckNum, double prmAmt, DateTime prmDateWrit //check info
+            string prmCheckNum, Decimal prmAmt, DateTime prmDateWrit //check info
         )
         {
             Acct_check tstAcct_check = (
@@ -261,9 +261,12 @@ namespace checkPlus
                             && b.Routing_number == prmRoutNum
                         select a.Account_id
                     ).FirstOrDefault(),
-                    Amount = Convert.ToDecimal(prmAmt),
+                    Check_number = prmCheckNum,
+                    Amount = prmAmt,
                     Date_written = prmDateWrit,
-                    Date_received = DateTime.Now
+                    Date_received = DateTime.Now,
+                    //just tacking this here for now until it needs to be implemented correctly
+                    Client_id = 100000
                 };
             }
         }

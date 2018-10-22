@@ -53,6 +53,7 @@ namespace checkPlus
         public DateTime Date_received { get; set; }
         public int? Amount_paid { get; set; }
         public DateTime? Date_paid { get; set; }
+        public int Client_id { get; set; }
     }
 
 

@@ -69,6 +69,7 @@
     <None Include="Scripts\Initial Population.sql" />
     <Build Include="Tables\bank.sql" />
     <Build Include="Tables\cp_user.sql" />
+    <None Include="Scripts\Show All Checks.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CheckPlus.publish.xml" />
