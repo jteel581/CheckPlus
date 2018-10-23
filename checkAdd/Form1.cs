@@ -400,15 +400,23 @@ namespace checkPlus
                 */
                 foreach(Account act in accSQL.GetAllAccounts())
                 {
+                    string acctNum = act.Account_number;
+                    string fName = act.First_name;
+                    string lName = act.Last_name;
+                    string checkCount = accSQL.GetChecksInAccount(act).Count().ToString();
+                    string acctBal = accSQL.GetAccountBalance(act).ToString();
+                    string routNum = accSQL.GetBankRoutingNumber(act);
+
                     lvi = new ListViewItem
                     (
                         new string[]
                         {
-                            act.Account_number,
-                            act.First_name, act.Last_name,
-                            accSQL.GetChecksInAccount(act).Count().ToString("0000"),
-                            accSQL.GetAccountBalance(act).ToString(),
-                            accSQL.GetBankRoutingNumber(act)
+                            acctNum, 
+                            fName,
+                            lName,
+                            checkCount,
+                            acctBal,
+                            routNum
                         }
                     );
                     accountsListView.Items.Add(lvi);
@@ -432,18 +440,17 @@ namespace checkPlus
                         }
                     }
                     */
-                    Account tstAcct = accSQL.BuildAccount
-                    (
-                        lvi.SubItems[5].Text,
-                        lvi.SubItems[0].Text
-                    )
-                    ;
+                    string routNum = lvi.SubItems[5].Text;
+                    string acctNum = lvi.SubItems[0].Text;
+
+                    Account tstAcct = accSQL.SelectAccount(accSQL.BuildAccount(routNum, acctNum));
+
                     if (tstAcct != null)
                     {
                         lvi.SubItems[3].Text = accSQL.GetChecksInAccount(tstAcct).Count().ToString();
                         lvi.SubItems[4].Text = accSQL.GetAccountBalance(tstAcct).ToString();
                     }
-                    else { lvi.Remove(); }
+                    else { accountsListView.Items.Remove(lvi); }
                 }
             }
         }
@@ -604,27 +611,19 @@ namespace checkPlus
             //----------------------------------
             //start linq testing code chunk
             //----------------------------------
-            string acctNum = accountBox2.Text;
-            string routNum = routingBox2.Text;
 
+            string acctNum = accountBox1.Text;
+            string routNum = routingBox1.Text;
 
-            accSQL.DeleteAccount
-            (
-                accSQL.BuildAccount
-                (
-                    acctNum,
-                    routNum
-                )
-            )
-            ;
+            accSQL.DeleteAccount(accSQL.BuildAccount(routNum, acctNum));
+
             //----------------------------------
             //end linq testing code chunk
             //----------------------------------
 
             database.deleteAccount(act);
 
-            //updateAccountListView();
-
+            updateAccountListView();
             updateCheckListView();
             firstNameBox.Clear();
             lastNameBox.Clear();

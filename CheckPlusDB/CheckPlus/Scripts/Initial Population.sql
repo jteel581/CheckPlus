@@ -10,25 +10,25 @@ insert into dbo.bank
 --100000
 select	'First Together Bank',	'000123678',		'Grant Billings',	'gjbill@fun.com',	'675-555-8976',	'123 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100001
-select	'Name Me 1 Bank',		'000123678',		'John Doe1',		'jdoe1@nm1.com',	'675-555-8976',	'124 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 1 Bank',		'239898788',		'John Doe1',		'jdoe1@nm1.com',	'675-555-8976',	'124 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100002
-select	'Name Me 2 Bank',		'000123678',		'John Doe2',		'jdoe2@nm2.com',	'675-555-8976',	'125 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 2 Bank',		'938747658',		'John Doe2',		'jdoe2@nm2.com',	'675-555-8976',	'125 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100003
-select	'Name Me 3 Bank',		'000123678',		'John Doe3',		'jdoe3@nm3.com',	'675-555-8976',	'126 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 3 Bank',		'342323678',		'John Doe3',		'jdoe3@nm3.com',	'675-555-8976',	'126 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100004
-select	'Name Me 4 Bank',		'000123678',		'John Doe4',		'jdoe4@nm4.com',	'675-555-8976',	'127 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 4 Bank',		'124453458',		'John Doe4',		'jdoe4@nm4.com',	'675-555-8976',	'127 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100005
-select	'Name Me 5 Bank',		'000123678',		'John Doe5',		'jdoe5@nm5.com',	'675-555-8976',	'128 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 5 Bank',		'002343678',		'John Doe5',		'jdoe5@nm5.com',	'675-555-8976',	'128 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100006
-select	'Name Me 6 Bank',		'000123678',		'John Doe6',		'jdoe6@nm6.com',	'675-555-8976',	'129 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 6 Bank',		'012334478',		'John Doe6',		'jdoe6@nm6.com',	'675-555-8976',	'129 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100007
-select	'Name Me 7 Bank',		'000123678',		'John Doe7',		'jdoe7@nm7.com',	'675-555-8976',	'120 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 7 Bank',		'010122378',		'John Doe7',		'jdoe7@nm7.com',	'675-555-8976',	'120 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100008
-select	'Name Me 8 Bank',		'000123678',		'John Doe8',		'jdoe8@nm8.com',	'675-555-8976',	'121 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 8 Bank',		'023433678',		'John Doe8',		'jdoe8@nm8.com',	'675-555-8976',	'121 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100009
-select	'Name Me 9 Bank',		'000123678',		'John Doe9',		'jdoe9@nm9.com',	'675-555-8976',	'122 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 9 Bank',		'123123678',		'John Doe9',		'jdoe9@nm9.com',	'675-555-8976',	'122 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100010
-select	'Name Me 10 Bank',		'000123678',		'John Doe10',		'jdoe10@nm10.com',	'675-555-8976',	'112 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 10 Bank',		'023666278',		'John Doe10',		'jdoe10@nm10.com',	'675-555-8976',	'112 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100011
 select	'Union Credit Union',	'000432178',		'Sherida Smith',	'sksmith@ucu.org',	'864-555-1234',	'113 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'						
 ;

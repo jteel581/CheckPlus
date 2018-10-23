@@ -90,7 +90,28 @@ namespace checkPlus
          *  returns a list of all accounts in the database
          *  ------------------------------------------
          */
-        public List<Account> GetAllAccounts() { return cpdb.Accounts.ToList(); }
+        public List<Account> GetAllAccounts()
+        {
+            return (
+                from a in cpdb.Accounts
+                select a
+            ).ToList();
+        }
+
+
+        /*  FUNCTION -- SelectAccount
+         *  ------------------------------------------
+         *  returns Account object corresponding to <prmAcct>
+         *  ------------------------------------------
+         */
+        public Account SelectAccount(Account prmAcct)
+        {
+            return (
+                from a in cpdb.Accounts
+                where a.Account_id == prmAcct.Account_id
+                select a
+            ).FirstOrDefault();
+        }
 
 
         /*  FUNCTION -- GetChecksInAccount
@@ -143,6 +164,7 @@ namespace checkPlus
             return (
                 from a in cpdb.Accounts
                 join b in cpdb.Banks on a.Bank_id equals b.Bank_id
+                where b.Bank_id == prmAcct.Bank_id
                 select b.Routing_number
             ).FirstOrDefault();
         }
@@ -172,6 +194,7 @@ namespace checkPlus
             cpdb.SaveChanges();
         }
 
+
         /*  FUNCTION -- InsertAccount
          *  ------------------------------------------
          *  attempt to insert a new record <prmAccount> into the database
@@ -196,6 +219,7 @@ namespace checkPlus
             return tstAccount;
         }
 
+
         /*  FUNCTION -- DeleteAccount
          *  ------------------------------------------
          *  attempt to delete an existing record <prmAccount> in the database
@@ -205,16 +229,27 @@ namespace checkPlus
          */
         public void DeleteAccount(Account prmAccount)
         {
-            cpdb.Accounts.Remove((
+            var tstAccount = (
                 from a in cpdb.Accounts
                 where a.Account_id == prmAccount.Account_id
                 select a
-            ).FirstOrDefault());
+            ).FirstOrDefault();
 
-            cpdb.SaveChanges();
+            if (tstAccount != null)
+            {
+                cpdb.Accounts.Remove(tstAccount);
+                cpdb.SaveChanges();
+            }
         }
     }
 
+
+    //================================================================================
+    //  CLASS Acct_checkSQLer
+    //================================================================================
+    /*  houses functions to access, update, insert, and delete dbo.acct_check records
+     *   
+     */
     class Acct_checkSQLer
     {
         private CheckPlusDB cpdb;
@@ -266,7 +301,7 @@ namespace checkPlus
                     Amount = prmAmt,
                     Date_written = prmDateWrit,
                     Date_received = DateTime.Now,
-                    //just tacking this here for now until it needs to be implemented correctly
+                    //just tacking Client_id here for now until it needs to be implemented correctly
                     Client_id = 100000
                 };
             }
