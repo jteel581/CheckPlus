@@ -18,6 +18,10 @@ namespace checkPlus
 {
     public partial class ammountLabel : Form
     {
+        //used for message boxes so that we don't have to type the strings every time....
+        private const string error = "Error";
+        private const string success = "Success!";
+
         //db variables
         CheckPlusDB cpdb;
         AccountSQLer accSQL;
@@ -126,7 +130,7 @@ namespace checkPlus
             //if attempt to insert account results in finding an exitsting account
             if (tstAccount != null)
             {   //display an error message
-                DisplayMessageNoResponse("Account already exists.", "Error");
+                DisplayMessageNoResponse("Account already exists.", error);
             }
             else
             {   //otherwise, it was a successful account addition
@@ -205,7 +209,7 @@ namespace checkPlus
             //if check record already existed
             if (tstAcct_check != null)
             {   //display an error message
-                DisplayMessageNoResponse("Check already exists.", "Error");
+                DisplayMessageNoResponse("Check already exists.", error);
             }
             else
             {   //otherwise, it was a successful account addition
@@ -237,7 +241,7 @@ namespace checkPlus
                 )
                 ;
                 checkListView.Items.Add(lvi);
-                DisplayMessageNoResponse("New check added.", "Success!");
+                DisplayMessageNoResponse("New check added.", success);
             }
 
 
@@ -587,6 +591,8 @@ namespace checkPlus
             )
             ;
 
+            updateAccountListView();
+
             act.setAccountNum(accountBox1.Text);
             act.setFirstName(firstNameBox.Text);
             act.setLastName(lastNameBox.Text);
@@ -597,29 +603,48 @@ namespace checkPlus
             act.setCity(cityBox.Text);
             act.setState(stateBox.Text);
             act.setZip(zipBox.Text);
-
-
         }
 
+
+        //==========================================================================================
+        // FUNCTIONs for DELETEing items in the db
+        //==========================================================================================
+
+        /*  --------------------------------------------------------
+         *  FUNCTION - deleteAccountButton_Click
+         *  --------------------------------------------------------
+         *  called when user clicks "Delete Account" button
+         *  if any items
+         */
         private void deleteAccountButton_Click(object sender, EventArgs e)
         {
-            //----------------------------------
-            //start linq testing code chunk
-            //----------------------------------
+            if (accountsListView.SelectedItems.Count > 0)
+            {   //loop through each item selected and do work
+                foreach (ListViewItem lvi in accountsListView.SelectedItems)
+                {   //grab the account number and routing number
+                    string acctNumSelected = lvi.SubItems[0].Text;
+                    string routNumSelected = lvi.SubItems[5].Text;
 
-            string acctNum = accountBox1.Text;
-            string routNum = routingBox1.Text;
+                    //get the account based on the account number and the routing number
+                    Account tstAccount = accSQL.SelectAccount(accSQL.BuildAccount(routNumSelected, acctNumSelected));
 
-            Account tstAccount = 
-                accSQL.DeleteAccount(accSQL.SelectAccount(accSQL.BuildAccount(routNum, acctNum)));
+                    //grab all the checks that are connected to that account so that we can delete them
+                    //we have to delete all of the checks before we delete the account
+                        //because referencial integrity
+                    List<Acct_check> acctChecks =
+                            accSQL.GetChecksInAccount(tstAccount);
+                    foreach(Acct_check ac in acctChecks) { acct_chkSQL.DeleteAcct_check(ac); }
 
-            //----------------------------------
-            //end linq testing code chunk
-            //----------------------------------
+                    //now delete the actual account
+                    Account delAccount =
+                        accSQL.DeleteAccount(tstAccount);
+                }
 
-            //update the views
-            updateAccountListView();
-            updateCheckListView();
+                //update the views
+                updateAccountListView();
+                updateCheckListView();
+            }
+            else { DisplayMessageNoResponse(error, "Please select account(s)."); }
 
             //clear boxes
             firstNameBox.Clear();
@@ -661,7 +686,7 @@ namespace checkPlus
                     "No check matching information in fields.\n"
                     + "Are there unsaved changes?";
 
-                DisplayMessageNoResponse("Error", message);
+                DisplayMessageNoResponse(error, message);
             }
             else
             {
@@ -749,7 +774,7 @@ namespace checkPlus
 
         private void accountsListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (accountsListView.SelectedItems.Count != 0)
+            if (accountsListView.SelectedItems.Count == 1)
             {
                 string accountNum = accountsListView.SelectedItems[0].SubItems[0].Text;
                 string routNum = accountsListView.SelectedItems[0].SubItems[5].Text;
@@ -759,7 +784,6 @@ namespace checkPlus
                 Account tstAcct = accSQL.BuildAccount(routNum, accountNum);
 
                 firstNameBox.Text = tstAcct.First_name;
-                lastNameBox.Text = tstAcct.Last_name;
                 routingBox1.Text = accSQL.GetBankRoutingNumber(tstAcct);
                 accountBox1.Text = tstAcct.Account_number;
                 stNameBox.Text = tstAcct.Address;
@@ -767,6 +791,18 @@ namespace checkPlus
                 cityBox.Text = tstAcct.City;
                 stateBox.Text = tstAcct.State;
                 zipBox.Text = tstAcct.Zip_code;
+            }
+            else
+            {   //clear boxes
+                firstNameBox.Clear();
+                lastNameBox.Clear();
+                routingBox1.Clear();
+                accountBox1.Clear();
+                stNumBox.Clear();
+                stNameBox.Clear();
+                cityBox.Clear();
+                stateBox.Clear();
+                zipBox.Clear();
             }
         }
 
