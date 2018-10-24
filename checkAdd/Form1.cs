@@ -56,9 +56,9 @@ namespace checkPlus
          *  helpful for displaying success/error messages
          *      throughout the application
          */
-        public void DisplayMessageNoResponse(string inHeading, string inMessage)
+        public void DisplayMessageNoResponse(string prmHeading, string prmMessage)
         {
-            MessageBox.Show(inHeading, inMessage, MessageBoxButtons.OK);
+            MessageBox.Show(prmHeading, prmMessage, MessageBoxButtons.OK);
         }
 
         private void TabControl1_Selected(Object sender, TabControlEventArgs e)
@@ -126,7 +126,7 @@ namespace checkPlus
             //if attempt to insert account results in finding an exitsting account
             if (tstAccount != null)
             {   //display an error message
-                DisplayMessageNoResponse("Error", "Account already exists.");
+                DisplayMessageNoResponse("Account already exists.", "Error");
             }
             else
             {   //otherwise, it was a successful account addition
@@ -140,7 +140,7 @@ namespace checkPlus
                     }
                 );
                 accountsListView.Items.Add(lvi);
-                DisplayMessageNoResponse("Success!", "New account added.");
+                DisplayMessageNoResponse("New account added.", "Success");
             }
 
 
@@ -205,7 +205,7 @@ namespace checkPlus
             //if check record already existed
             if (tstAcct_check != null)
             {   //display an error message
-                DisplayMessageNoResponse("Error", "Check already exists.");
+                DisplayMessageNoResponse("Check already exists.", "Error");
             }
             else
             {   //otherwise, it was a successful account addition
@@ -215,7 +215,7 @@ namespace checkPlus
                      * just some considerations.....
                      */
                 Acct_check newAcct_check = acct_chkSQL
-                    .GetAcct_check
+                    .SelectAcct_check
                     (
                         acct_chkSQL.BuildAcct_check
                         (
@@ -237,7 +237,7 @@ namespace checkPlus
                 )
                 ;
                 checkListView.Items.Add(lvi);
-                DisplayMessageNoResponse("Success!", "New check added.");
+                DisplayMessageNoResponse("New check added.", "Success!");
             }
 
 
@@ -300,88 +300,6 @@ namespace checkPlus
             checkListView.Sort();
         }
 
-        public void updateCheckListView()
-        {
-            if (checkListView.Items.Count == 0)
-            {
-                ListViewItem lvi;
-                /*
-                foreach (pseudoAccount act in database.getAccountsList())
-                {
-                    foreach (pseudoCheck check in act.getChecks())
-                    {
-                        lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), check.getCheckNum().ToString(), check.getAmmount().ToString() });
-                        checkListView.Items.Add(lvi);
-                    }
-                }
-                */
-                foreach(Acct_check ac in cpdb.Acct_checks)
-                {
-                    lvi = new ListViewItem
-                    (
-                        new string[]
-                        {
-                            acct_chkSQL.GetAccountNumber(ac),
-                            acct_chkSQL.GetFirstName(ac),
-                            acct_chkSQL.GetLastName(ac),
-                            ac.Check_number,
-                            ac.Amount.ToString(),
-                            acct_chkSQL.GetRoutingNumber(ac)
-                        }
-                    );
-                    checkListView.Items.Add(lvi);
-                }
-            }
-            else
-            {
-                foreach (ListViewItem lvi in checkListView.Items)
-                {
-                    /*
-                    string accountNum = lvi.SubItems[0].Text;
-                    string checkNum = lvi.SubItems[3].Text;
-                    pseudoAccount act = database.getAccountByNum(accountNum);
-                    if (act != null)
-                    {
-                        pseudoCheck check = act.getCheckByNum(checkNum);
-                        if (check != null)
-                        {
-                            lvi.SubItems[0].Text = check.getAccountNum();
-                            lvi.SubItems[1].Text = act.getFirstName();
-                            lvi.SubItems[2].Text = act.getLastName();
-                            lvi.SubItems[3].Text = check.getCheckNum().ToString();
-                            lvi.SubItems[4].Text = check.getAmmount().ToString();
-                            lvi.SubItems[5].Text = check.getRoutingNum();
-                        }
-                        else
-                        {
-                            lvi.Remove();
-                        }
-                    }
-                */
-                    Acct_check tstAcct_check = acct_chkSQL.BuildAcct_check
-                    (
-                        lvi.SubItems[0].Text,
-                        lvi.SubItems[5].Text,
-                        lvi.SubItems[3].Text
-                    )
-                    ;
-                    if (tstAcct_check != null)
-                    {
-                        lvi.SubItems[0].Text = acct_chkSQL.GetAccountNumber(tstAcct_check);
-                        lvi.SubItems[1].Text = acct_chkSQL.GetFirstName(tstAcct_check);
-                        lvi.SubItems[2].Text = acct_chkSQL.GetLastName(tstAcct_check);
-                        lvi.SubItems[3].Text = tstAcct_check.Check_number;
-                        lvi.SubItems[4].Text = tstAcct_check.Amount.ToString();
-                        lvi.SubItems[5].Text = acct_chkSQL.GetRoutingNumber(tstAcct_check);
-                    }
-                    else
-                    {
-                        lvi.Remove();
-                    }
-                }
-            }
-            checkListView.Sort();
-        }
 
         
         //  if      {}  --  when first opening the application, populate with the existing records
@@ -455,6 +373,87 @@ namespace checkPlus
             }
         }
 
+
+        public void updateCheckListView()
+        {
+            if (checkListView.Items.Count == 0)
+            {
+                ListViewItem lvi;
+                /*
+                foreach (pseudoAccount act in database.getAccountsList())
+                {
+                    foreach (pseudoCheck check in act.getChecks())
+                    {
+                        lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), check.getCheckNum().ToString(), check.getAmmount().ToString() });
+                        checkListView.Items.Add(lvi);
+                    }
+                }
+                */
+                foreach (Acct_check ac in cpdb.Acct_checks)
+                {
+                    lvi = new ListViewItem
+                    (
+                        new string[]
+                        {
+                            acct_chkSQL.GetAccountNumber(ac),
+                            acct_chkSQL.GetFirstName(ac),
+                            acct_chkSQL.GetLastName(ac),
+                            ac.Check_number,
+                            ac.Amount.ToString(),
+                            acct_chkSQL.GetRoutingNumber(ac)
+                        }
+                    );
+                    checkListView.Items.Add(lvi);
+                }
+            }
+            else
+            {
+                foreach (ListViewItem lvi in checkListView.Items)
+                {
+                    /*
+                    string accountNum = lvi.SubItems[0].Text;
+                    string checkNum = lvi.SubItems[3].Text;
+                    pseudoAccount act = database.getAccountByNum(accountNum);
+                    if (act != null)
+                    {
+                        pseudoCheck check = act.getCheckByNum(checkNum);
+                        if (check != null)
+                        {
+                            lvi.SubItems[0].Text = check.getAccountNum();
+                            lvi.SubItems[1].Text = act.getFirstName();
+                            lvi.SubItems[2].Text = act.getLastName();
+                            lvi.SubItems[3].Text = check.getCheckNum().ToString();
+                            lvi.SubItems[4].Text = check.getAmmount().ToString();
+                            lvi.SubItems[5].Text = check.getRoutingNum();
+                        }
+                        else
+                        {
+                            lvi.Remove();
+                        }
+                    }
+                */
+                    string acctNum = lvi.SubItems[0].Text;
+                    string routNum = lvi.SubItems[5].Text;
+                    string checkNum = lvi.SubItems[3].Text;
+
+                    Acct_check tstAcct_check =
+                        acct_chkSQL.SelectAcct_check(acct_chkSQL.BuildAcct_check(
+                            acctNum, routNum, checkNum));
+
+                    if (tstAcct_check != null)
+                    {
+                        lvi.SubItems[0].Text = acct_chkSQL.GetAccountNumber(tstAcct_check);
+                        lvi.SubItems[1].Text = acct_chkSQL.GetFirstName(tstAcct_check);
+                        lvi.SubItems[2].Text = acct_chkSQL.GetLastName(tstAcct_check);
+                        lvi.SubItems[3].Text = tstAcct_check.Check_number;
+                        lvi.SubItems[4].Text = tstAcct_check.Amount.ToString();
+                        lvi.SubItems[5].Text = acct_chkSQL.GetRoutingNumber(tstAcct_check);
+                    }
+                    else { checkListView.Items.Remove(lvi); }
+                }
+            }
+            checkListView.Sort();
+        }
 
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -604,10 +603,6 @@ namespace checkPlus
 
         private void deleteAccountButton_Click(object sender, EventArgs e)
         {
-            string accountNum = accountsListView.SelectedItems[0].SubItems[0].Text;
-
-            var act = database.getAccountByNum(accountNum);
-
             //----------------------------------
             //start linq testing code chunk
             //----------------------------------
@@ -615,16 +610,18 @@ namespace checkPlus
             string acctNum = accountBox1.Text;
             string routNum = routingBox1.Text;
 
-            accSQL.DeleteAccount(accSQL.BuildAccount(routNum, acctNum));
+            Account tstAccount = 
+                accSQL.DeleteAccount(accSQL.SelectAccount(accSQL.BuildAccount(routNum, acctNum)));
 
             //----------------------------------
             //end linq testing code chunk
             //----------------------------------
 
-            database.deleteAccount(act);
-
+            //update the views
             updateAccountListView();
             updateCheckListView();
+
+            //clear boxes
             firstNameBox.Clear();
             lastNameBox.Clear();
             routingBox1.Clear();
@@ -634,6 +631,53 @@ namespace checkPlus
             cityBox.Clear();
             stateBox.Clear();
             zipBox.Clear();
+        }
+
+
+        //------------------------------------------------
+        //  FUNCTION - deleteCheckButton_Click
+        //------------------------------------------------  
+        /*  user clicks Delete Check button
+         *  based on the values of the fields on the form, 
+         * 
+         * */
+        private void deleteCheckButton_Click(object sender, EventArgs e)
+        {
+            //----------------------------------
+            //start linq testing code chunk
+            //----------------------------------
+
+            string acctNum = accountBox2.Text;
+            string routNum = routingBox2.Text;
+            string checkNum = checkNumBox.Text;
+
+            Acct_check tstAcct_check = 
+                acct_chkSQL.DeleteAcct_check(
+                    acct_chkSQL.BuildAcct_check(acctNum, routNum, checkNum));
+
+            if (tstAcct_check == null)
+            {
+                string message = "" +
+                    "No check matching information in fields.\n"
+                    + "Are there unsaved changes?";
+
+                DisplayMessageNoResponse("Error", message);
+            }
+            else
+            {
+                updateAccountListView();
+                updateCheckListView();
+
+                routingBox2.Clear();
+                accountBox2.Clear();
+                fNameBox2.Clear();
+                lNameBox2.Clear();
+                ammountBox.Clear();
+                checkNumBox.Clear();
+            }
+            //----------------------------------
+            //end linq testing code chunk
+            //----------------------------------
         }
 
         private void viewChecksSearchButton_Click(object sender, EventArgs e)
@@ -689,52 +733,6 @@ namespace checkPlus
             }
         }
 
-        
-
-        private void firstNameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void stateLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cityLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void stNameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void stNumLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void accountLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lastNameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void zipLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void routingLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void passwordBox_Enter(object sender, EventArgs e)
         {
@@ -772,13 +770,6 @@ namespace checkPlus
             }
         }
 
-        private void saveChangesButton_Click_1(object sender, EventArgs e)
-        {
-            string accountNum = accountsListView.SelectedItems[0].SubItems[0].Text;
-            pseudoAccount act = database.getAccountByNum(accountNum);
-
-        }
-
         private void checkListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (checkListView.SelectedItems.Count != 0)
@@ -799,7 +790,9 @@ namespace checkPlus
                 routingBox2.Text = acct_chkSQL.GetRoutingNumber(tstAcct_check);
                 accountBox2.Text = acct_chkSQL.GetAccountNumber(tstAcct_check);
                 ammountBox.Text = tstAcct_check.Amount.ToString();
-                checkNumBox.Text = tstAcct_check.Check_number; 
+                checkNumBox.Text = tstAcct_check.Check_number;
+                dateWrittenSelector.Text = tstAcct_check.Date_written.ToString();
+                dateRecieved.Text = tstAcct_check.Date_received.ToString();
             }
         }
 
@@ -853,9 +846,22 @@ namespace checkPlus
             }
         }
 
-        private void manageAccountPage_Click(object sender, EventArgs e)
+        private void saveChangesButton_Click_1(object sender, EventArgs e)
         {
+            string accountNum = accountsListView.SelectedItems[0].SubItems[0].Text;
+            pseudoAccount act = database.getAccountByNum(accountNum);
 
         }
+
+        private void manageAccountPage_Click(object sender, EventArgs e) {}
+        private void firstNameLabel_Click(object sender, EventArgs e) { }
+        private void stateLabel_Click(object sender, EventArgs e) { }
+        private void cityLabel_Click(object sender, EventArgs e) { }
+        private void stNameLabel_Click(object sender, EventArgs e) { }
+        private void stNumLabel_Click(object sender, EventArgs e) { }
+        private void accountLabel1_Click(object sender, EventArgs e) { }
+        private void lastNameLabel_Click(object sender, EventArgs e) { }
+        private void zipLabel_Click(object sender, EventArgs e) { }
+        private void routingLabel1_Click(object sender, EventArgs e) { }
     }
 }

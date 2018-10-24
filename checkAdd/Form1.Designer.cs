@@ -76,8 +76,6 @@
             this.curBalanceCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.acctRoutNumCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.manageCheckPage = new System.Windows.Forms.TabPage();
-            this.phoneNumBox = new System.Windows.Forms.TextBox();
-            this.phoneNumLabel = new System.Windows.Forms.Label();
             this.deleteCheckButton = new System.Windows.Forms.Button();
             this.updateCheckButton = new System.Windows.Forms.Button();
             this.dateReceivedLabel = new System.Windows.Forms.Label();
@@ -141,6 +139,8 @@
             this.userLabel = new System.Windows.Forms.Label();
             this.privilegesLabel = new System.Windows.Forms.Label();
             this.privilegesLabel2 = new System.Windows.Forms.Label();
+            this.phoneNumBox = new System.Windows.Forms.TextBox();
+            this.phoneNumLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.homePage.SuspendLayout();
             this.manageAccountPage.SuspendLayout();
@@ -273,6 +273,8 @@
             // 
             // manageAccountPage
             // 
+            this.manageAccountPage.Controls.Add(this.phoneNumBox);
+            this.manageAccountPage.Controls.Add(this.phoneNumLabel);
             this.manageAccountPage.Controls.Add(this.deleteAccountButton);
             this.manageAccountPage.Controls.Add(this.saveChangesButton);
             this.manageAccountPage.Controls.Add(this.searchButton);
@@ -627,8 +629,6 @@
             // 
             // manageCheckPage
             // 
-            this.manageCheckPage.Controls.Add(this.phoneNumBox);
-            this.manageCheckPage.Controls.Add(this.phoneNumLabel);
             this.manageCheckPage.Controls.Add(this.deleteCheckButton);
             this.manageCheckPage.Controls.Add(this.updateCheckButton);
             this.manageCheckPage.Controls.Add(this.dateReceivedLabel);
@@ -665,24 +665,6 @@
             this.manageCheckPage.Text = "Manage Checks";
             this.manageCheckPage.UseVisualStyleBackColor = true;
             // 
-            // phoneNumBox
-            // 
-            this.phoneNumBox.Location = new System.Drawing.Point(874, 248);
-            this.phoneNumBox.Margin = new System.Windows.Forms.Padding(4);
-            this.phoneNumBox.Name = "phoneNumBox";
-            this.phoneNumBox.Size = new System.Drawing.Size(132, 22);
-            this.phoneNumBox.TabIndex = 102;
-            // 
-            // phoneNumLabel
-            // 
-            this.phoneNumLabel.AutoSize = true;
-            this.phoneNumLabel.Location = new System.Drawing.Point(758, 252);
-            this.phoneNumLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.phoneNumLabel.Name = "phoneNumLabel";
-            this.phoneNumLabel.Size = new System.Drawing.Size(107, 17);
-            this.phoneNumLabel.TabIndex = 101;
-            this.phoneNumLabel.Text = "Phone Number:";
-            // 
             // deleteCheckButton
             // 
             this.deleteCheckButton.Enabled = false;
@@ -694,6 +676,7 @@
             this.deleteCheckButton.TabIndex = 100;
             this.deleteCheckButton.Text = "Delete Check";
             this.deleteCheckButton.UseVisualStyleBackColor = true;
+            this.deleteCheckButton.Click += new System.EventHandler(this.deleteCheckButton_Click);
             // 
             // updateCheckButton
             // 
@@ -1012,7 +995,7 @@
             this.manageUsersPage.Location = new System.Drawing.Point(4, 25);
             this.manageUsersPage.Margin = new System.Windows.Forms.Padding(4);
             this.manageUsersPage.Name = "manageUsersPage";
-            this.manageUsersPage.Size = new System.Drawing.Size(1206, 417);
+            this.manageUsersPage.Size = new System.Drawing.Size(1181, 417);
             this.manageUsersPage.TabIndex = 8;
             this.manageUsersPage.Text = "Manage Users";
             this.manageUsersPage.UseVisualStyleBackColor = true;
@@ -1281,6 +1264,24 @@
             this.privilegesLabel2.TabIndex = 21;
             this.privilegesLabel2.Text = "Not signed in yet";
             // 
+            // phoneNumBox
+            // 
+            this.phoneNumBox.Location = new System.Drawing.Point(848, 336);
+            this.phoneNumBox.Margin = new System.Windows.Forms.Padding(4);
+            this.phoneNumBox.Name = "phoneNumBox";
+            this.phoneNumBox.Size = new System.Drawing.Size(132, 22);
+            this.phoneNumBox.TabIndex = 104;
+            // 
+            // phoneNumLabel
+            // 
+            this.phoneNumLabel.AutoSize = true;
+            this.phoneNumLabel.Location = new System.Drawing.Point(732, 340);
+            this.phoneNumLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.phoneNumLabel.Name = "phoneNumLabel";
+            this.phoneNumLabel.Size = new System.Drawing.Size(107, 17);
+            this.phoneNumLabel.TabIndex = 103;
+            this.phoneNumLabel.Text = "Phone Number:";
+            // 
             // ammountLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1388,8 +1389,6 @@
         private System.Windows.Forms.ColumnHeader curBalanceCH;
         private System.Windows.Forms.Button deleteAccountButton;
         private System.Windows.Forms.Button saveChangesButton;
-        private System.Windows.Forms.TextBox phoneNumBox;
-        private System.Windows.Forms.Label phoneNumLabel;
         private System.Windows.Forms.Button deleteCheckButton;
         private System.Windows.Forms.Button updateCheckButton;
         private System.Windows.Forms.Label dateReceivedLabel;
@@ -1422,6 +1421,8 @@
         private System.Windows.Forms.Label privilegesLabel2;
         private System.Windows.Forms.ColumnHeader routNumCH;
         private System.Windows.Forms.ColumnHeader acctRoutNumCH;
+        private System.Windows.Forms.TextBox phoneNumBox;
+        private System.Windows.Forms.Label phoneNumLabel;
     }
 }
 

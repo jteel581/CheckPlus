@@ -34,7 +34,9 @@ namespace checkPlus
             cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.bank off");
         }
 
-        /*  FUNCTION
+        /*  -----------------------------------------------------
+         *  FUNCTION - BuildAccount
+         *  -----------------------------------------------------
          *  build an account out of the unique characteristics of an account record:
          *      Bank's routing number
          *      Account's account number
@@ -43,6 +45,7 @@ namespace checkPlus
          *      
          *  use it to build an Account instance 
          *      any time you need to call one of the "SQL-esque" Account functions below
+         *  -----------------------------------------------------      
          */
         public Account BuildAccount
         (
@@ -85,10 +88,11 @@ namespace checkPlus
             }
         }
 
-        /*  FUNCTION -- GetAllAccounts
-         *  ------------------------------------------
+        /*  -----------------------------------------------------
+         *  FUNCTION -- GetAllAccounts
+         *  -----------------------------------------------------
          *  returns a list of all accounts in the database
-         *  ------------------------------------------
+         *  -----------------------------------------------------
          */
         public List<Account> GetAllAccounts()
         {
@@ -99,10 +103,11 @@ namespace checkPlus
         }
 
 
-        /*  FUNCTION -- SelectAccount
-         *  ------------------------------------------
+        /*  -----------------------------------------------------
+         *  FUNCTION -- SelectAccount
+         *  -----------------------------------------------------
          *  returns Account object corresponding to <prmAcct>
-         *  ------------------------------------------
+         *  -----------------------------------------------------
          */
         public Account SelectAccount(Account prmAcct)
         {
@@ -114,11 +119,12 @@ namespace checkPlus
         }
 
 
-        /*  FUNCTION -- GetChecksInAccount
-         *  ------------------------------------------
+        /*  -----------------------------------------------------
+         *  FUNCTION -- GetChecksInAccount
+         *  -----------------------------------------------------
          *  returns a list of all unpaid checks 
          *  connected to an <prmAcct>
-         *  ------------------------------------------
+         *  -----------------------------------------------------
          */
         public List<Acct_check> GetChecksInAccount(Account prmAcct)
         {
@@ -132,11 +138,12 @@ namespace checkPlus
         }
 
 
-        /*  FUNCTION -- GetAccountBalance
-         *  ------------------------------------------
+        /*  -----------------------------------------------------
+         *  FUNCTION -- GetAccountBalance
+         *  -----------------------------------------------------
          *  returns the sum of all unpaid check amounts 
          *  connected to <prmAcct>
-         *  ------------------------------------------
+         *  -----------------------------------------------------
          */
         public Decimal GetAccountBalance(Account prmAcct)
         {
@@ -153,11 +160,12 @@ namespace checkPlus
         }
 
 
-        /*  FUNCTION -- GetBankRountingNumber
-         *  ------------------------------------------
+        /*  -----------------------------------------------------
+         *  FUNCTION -- GetBankRountingNumber
+         *  -----------------------------------------------------
          *  returns the routing number of the bank 
          *  connected to <prmAcct>
-         *  ------------------------------------------
+         *  -----------------------------------------------------
          */
         public string GetBankRoutingNumber(Account prmAcct)
         {
@@ -170,12 +178,13 @@ namespace checkPlus
         }
 
 
-        /*  FUNCTION -- UpdateAccount
-         *  ------------------------------------------
+        /*  -----------------------------------------------------
+         *  FUNCTION -- UpdateAccount
+         *  -----------------------------------------------------
          *  pass in an Account object <prmAcctToUpdate> to update 
          *      and an Account object <prmNewAcctInfo> with the new updated info
          *  set all <prmAcctToUpdate>'s info to the <prmNewAcctInfo>'s info
-         *  ------------------------------------------
+         *  -----------------------------------------------------
          */
         public void UpdateAccount(Account prmAcctToUpdate, Account prmNewAcctInfo)
         {
@@ -195,12 +204,13 @@ namespace checkPlus
         }
 
 
-        /*  FUNCTION -- InsertAccount
-         *  ------------------------------------------
+        /*  -----------------------------------------------------
+         *  FUNCTION -- InsertAccount
+         *  -----------------------------------------------------
          *  attempt to insert a new record <prmAccount> into the database
          *  if the account already exists, return <prmAccount>
          *  else return null
-         *  ------------------------------------------
+         *  -----------------------------------------------------
          */
         public Account InsertAccount(Account prmAccount)
         {
@@ -220,14 +230,18 @@ namespace checkPlus
         }
 
 
-        /*  FUNCTION -- DeleteAccount
-         *  ------------------------------------------
-         *  attempt to delete an existing record <prmAccount> in the database
-         *  if the account already exists, return <prmAccount>
-         *  else, return the newly created account
-         *  ------------------------------------------
+        /*  -----------------------------------------------------
+         *  FUNCTION - DeleteAccount
+         *  -----------------------------------------------------
+         *  attempts to DELETE from the database
+         *      an account record that corresponds with the
+         *      <prmAccount> Account object
+         *  if an account is found, it will delete the record
+         *      and return the object
+         *  otherwise, it will return the null object
+         * ------------------------------------------------------
          */
-        public void DeleteAccount(Account prmAccount)
+        public Account DeleteAccount(Account prmAccount)
         {
             var tstAccount = (
                 from a in cpdb.Accounts
@@ -240,6 +254,7 @@ namespace checkPlus
                 cpdb.Accounts.Remove(tstAccount);
                 cpdb.SaveChanges();
             }
+            return tstAccount;
         }
     }
 
@@ -316,8 +331,15 @@ namespace checkPlus
             ).ToList();
         }
 
-
-        public Acct_check GetAcct_check(Acct_check prmAcctCheck)
+        /*  -----------------------------------------------------
+         *  FUNCTION - SelectAcct_check
+         *  -----------------------------------------------------
+         *  attempts to SELECT from the database an acct_check
+         *      record that corresponds to <prmAcctCheck>
+         *  returns null if nothing is found
+         * ------------------------------------------------------
+         */
+        public Acct_check SelectAcct_check(Acct_check prmAcctCheck)
         {
             return (
                 from ac in cpdb.Acct_checks
@@ -327,6 +349,12 @@ namespace checkPlus
         }
 
 
+        /*  -----------------------------------------------------
+         *  FUNCTION - GetAccountNumber
+         *  -----------------------------------------------------
+         *  
+         * ------------------------------------------------------
+         */
         public string GetAccountNumber(Acct_check prmAcctCheck)
         {
             return (
@@ -338,6 +366,12 @@ namespace checkPlus
         }
 
 
+        /*  -----------------------------------------------------
+         *  FUNCTION - GetRoutingNumber
+         *  -----------------------------------------------------
+         *
+         * ------------------------------------------------------
+         */
         public string GetRoutingNumber(Acct_check prmAcctCheck)
         {
             return (
@@ -350,6 +384,13 @@ namespace checkPlus
         }
 
 
+
+        /*  -----------------------------------------------------
+         *  FUNCTION - GetFirstName
+         *  -----------------------------------------------------
+         *  
+         * ------------------------------------------------------
+         */
         public string GetFirstName(Acct_check prmAcctCheck)
         {
             return (
@@ -360,7 +401,14 @@ namespace checkPlus
             ).FirstOrDefault();
         }
 
-        
+
+
+        /*  -----------------------------------------------------
+         *  FUNCTION - GetLastName
+         *  -----------------------------------------------------
+         *  
+         * ------------------------------------------------------
+         */
         public string GetLastName(Acct_check prmAcctCheck)
         {
             return (
@@ -371,10 +419,16 @@ namespace checkPlus
             ).FirstOrDefault();
         }
 
-
+        /*  -----------------------------------------------------
+         *  FUNCTION - UpdateAcct_check
+         *  -----------------------------------------------------
+         *  
+         * ------------------------------------------------------
+         */
         public void UpdateAcct_check(Acct_check prmChkToUpdate, Acct_check prmChkNewInfo)
         {
             prmChkToUpdate.Acct_check_id = prmChkNewInfo.Acct_check_id;
+            prmChkToUpdate.Account_id = prmChkNewInfo.Account_id;
             prmChkToUpdate.Amount = prmChkNewInfo.Amount;
             prmChkToUpdate.Check_number = prmChkNewInfo.Check_number;
             prmChkToUpdate.Date_written = prmChkNewInfo.Date_written;
@@ -385,7 +439,12 @@ namespace checkPlus
             cpdb.SaveChanges();
         }
 
-
+        /*  -----------------------------------------------------
+         *  FUNCTION - InsertAcct_check
+         *  -----------------------------------------------------
+         *  
+         * ------------------------------------------------------
+         */
         public Acct_check InsertAcct_check(Acct_check prmAcctCheck)
         {
             var tstAcct_check = (
@@ -402,15 +461,33 @@ namespace checkPlus
 
             return tstAcct_check;
         }
-        public void DeleteAcct_check(Acct_check prmAcctCheck)
+
+
+        /*  -----------------------------------------------------
+         *  FUNCTION - DeleteAcct_check
+         *  -----------------------------------------------------
+         *  attempts to delete a database acct_check record that
+         *      corresponds to <prmAcctCheck> Acct_check object
+         *  if there was no corresponding record,
+         *      return null 
+         *      and utilize that knowledge accordingly
+         * ------------------------------------------------------
+         */
+        public Acct_check DeleteAcct_check(Acct_check prmAcctCheck)
         {
-            cpdb.Acct_checks.Remove((
+            Acct_check tstAcct_check = (
                 from ac in cpdb.Acct_checks
                 where ac.Acct_check_id == prmAcctCheck.Acct_check_id
                 select ac
-            ).FirstOrDefault());
+            ).FirstOrDefault();
 
-            cpdb.SaveChanges();
+            if (tstAcct_check != null)
+            {
+                cpdb.Acct_checks.Remove(tstAcct_check);
+                cpdb.SaveChanges();
+            }
+
+            return tstAcct_check;
         }
     }
 
