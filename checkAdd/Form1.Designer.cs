@@ -139,11 +139,24 @@
             this.userLabel = new System.Windows.Forms.Label();
             this.privilegesLabel = new System.Windows.Forms.Label();
             this.privilegesLabel2 = new System.Windows.Forms.Label();
+            this.reportsPage = new System.Windows.Forms.TabPage();
+            this.reportsBox = new System.Windows.Forms.TextBox();
+            this.reportsLabel = new System.Windows.Forms.Label();
+            this.reportScopeLabel = new System.Windows.Forms.Label();
+            this.reportScope = new System.Windows.Forms.ComboBox();
+            this.reportRoutingNumberLabel = new System.Windows.Forms.Label();
+            this.reportAccountNumberLabel = new System.Windows.Forms.Label();
+            this.reportCheckNumberLabel = new System.Windows.Forms.Label();
+            this.reportRoutingNumberBox = new System.Windows.Forms.TextBox();
+            this.reportAccountNumberBox = new System.Windows.Forms.TextBox();
+            this.reportCheckNumBox = new System.Windows.Forms.TextBox();
+            this.reportGenerateReportButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.homePage.SuspendLayout();
             this.manageAccountPage.SuspendLayout();
             this.manageCheckPage.SuspendLayout();
             this.manageUsersPage.SuspendLayout();
+            this.reportsPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -152,6 +165,7 @@
             this.tabControl1.Controls.Add(this.manageAccountPage);
             this.tabControl1.Controls.Add(this.manageCheckPage);
             this.tabControl1.Controls.Add(this.manageUsersPage);
+            this.tabControl1.Controls.Add(this.reportsPage);
             this.tabControl1.Location = new System.Drawing.Point(-1, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1171,6 +1185,122 @@
             this.privilegesLabel2.TabIndex = 21;
             this.privilegesLabel2.Text = "Not signed in yet";
             // 
+            // reportsPage
+            // 
+            this.reportsPage.Controls.Add(this.reportGenerateReportButton);
+            this.reportsPage.Controls.Add(this.reportCheckNumBox);
+            this.reportsPage.Controls.Add(this.reportAccountNumberBox);
+            this.reportsPage.Controls.Add(this.reportRoutingNumberBox);
+            this.reportsPage.Controls.Add(this.reportCheckNumberLabel);
+            this.reportsPage.Controls.Add(this.reportAccountNumberLabel);
+            this.reportsPage.Controls.Add(this.reportRoutingNumberLabel);
+            this.reportsPage.Controls.Add(this.reportScope);
+            this.reportsPage.Controls.Add(this.reportScopeLabel);
+            this.reportsPage.Controls.Add(this.reportsLabel);
+            this.reportsPage.Controls.Add(this.reportsBox);
+            this.reportsPage.Location = new System.Drawing.Point(4, 22);
+            this.reportsPage.Name = "reportsPage";
+            this.reportsPage.Size = new System.Drawing.Size(779, 292);
+            this.reportsPage.TabIndex = 9;
+            this.reportsPage.Text = "Reports";
+            this.reportsPage.UseVisualStyleBackColor = true;
+            // 
+            // reportsBox
+            // 
+            this.reportsBox.Location = new System.Drawing.Point(367, 27);
+            this.reportsBox.Multiline = true;
+            this.reportsBox.Name = "reportsBox";
+            this.reportsBox.Size = new System.Drawing.Size(404, 262);
+            this.reportsBox.TabIndex = 0;
+            // 
+            // reportsLabel
+            // 
+            this.reportsLabel.AutoSize = true;
+            this.reportsLabel.Location = new System.Drawing.Point(364, 11);
+            this.reportsLabel.Name = "reportsLabel";
+            this.reportsLabel.Size = new System.Drawing.Size(44, 13);
+            this.reportsLabel.TabIndex = 1;
+            this.reportsLabel.Text = "Reports";
+            // 
+            // reportScopeLabel
+            // 
+            this.reportScopeLabel.AutoSize = true;
+            this.reportScopeLabel.Location = new System.Drawing.Point(6, 11);
+            this.reportScopeLabel.Name = "reportScopeLabel";
+            this.reportScopeLabel.Size = new System.Drawing.Size(88, 13);
+            this.reportScopeLabel.TabIndex = 2;
+            this.reportScopeLabel.Text = "Scope of Report:";
+            // 
+            // reportScope
+            // 
+            this.reportScope.FormattingEnabled = true;
+            this.reportScope.Items.AddRange(new object[] {
+            "Full Report",
+            "Bank Specific Report",
+            "Account Specific Report",
+            "Check Specific Report"});
+            this.reportScope.Location = new System.Drawing.Point(100, 8);
+            this.reportScope.Name = "reportScope";
+            this.reportScope.Size = new System.Drawing.Size(121, 21);
+            this.reportScope.TabIndex = 3;
+            // 
+            // reportRoutingNumberLabel
+            // 
+            this.reportRoutingNumberLabel.AutoSize = true;
+            this.reportRoutingNumberLabel.Location = new System.Drawing.Point(7, 44);
+            this.reportRoutingNumberLabel.Name = "reportRoutingNumberLabel";
+            this.reportRoutingNumberLabel.Size = new System.Drawing.Size(87, 13);
+            this.reportRoutingNumberLabel.TabIndex = 4;
+            this.reportRoutingNumberLabel.Text = "Routing Number:";
+            // 
+            // reportAccountNumberLabel
+            // 
+            this.reportAccountNumberLabel.AutoSize = true;
+            this.reportAccountNumberLabel.Location = new System.Drawing.Point(4, 79);
+            this.reportAccountNumberLabel.Name = "reportAccountNumberLabel";
+            this.reportAccountNumberLabel.Size = new System.Drawing.Size(90, 13);
+            this.reportAccountNumberLabel.TabIndex = 5;
+            this.reportAccountNumberLabel.Text = "Account Number:";
+            // 
+            // reportCheckNumberLabel
+            // 
+            this.reportCheckNumberLabel.AutoSize = true;
+            this.reportCheckNumberLabel.Location = new System.Drawing.Point(13, 112);
+            this.reportCheckNumberLabel.Name = "reportCheckNumberLabel";
+            this.reportCheckNumberLabel.Size = new System.Drawing.Size(81, 13);
+            this.reportCheckNumberLabel.TabIndex = 6;
+            this.reportCheckNumberLabel.Text = "Check Number:";
+            // 
+            // reportRoutingNumberBox
+            // 
+            this.reportRoutingNumberBox.Location = new System.Drawing.Point(100, 41);
+            this.reportRoutingNumberBox.Name = "reportRoutingNumberBox";
+            this.reportRoutingNumberBox.Size = new System.Drawing.Size(121, 20);
+            this.reportRoutingNumberBox.TabIndex = 7;
+            // 
+            // reportAccountNumberBox
+            // 
+            this.reportAccountNumberBox.Location = new System.Drawing.Point(100, 76);
+            this.reportAccountNumberBox.Name = "reportAccountNumberBox";
+            this.reportAccountNumberBox.Size = new System.Drawing.Size(121, 20);
+            this.reportAccountNumberBox.TabIndex = 8;
+            // 
+            // reportCheckNumBox
+            // 
+            this.reportCheckNumBox.Location = new System.Drawing.Point(100, 109);
+            this.reportCheckNumBox.Name = "reportCheckNumBox";
+            this.reportCheckNumBox.Size = new System.Drawing.Size(121, 20);
+            this.reportCheckNumBox.TabIndex = 9;
+            // 
+            // reportGenerateReportButton
+            // 
+            this.reportGenerateReportButton.Location = new System.Drawing.Point(9, 149);
+            this.reportGenerateReportButton.Name = "reportGenerateReportButton";
+            this.reportGenerateReportButton.Size = new System.Drawing.Size(104, 23);
+            this.reportGenerateReportButton.TabIndex = 10;
+            this.reportGenerateReportButton.Text = "Generate Report";
+            this.reportGenerateReportButton.UseVisualStyleBackColor = true;
+            // 
             // ammountLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1192,6 +1322,8 @@
             this.manageCheckPage.PerformLayout();
             this.manageUsersPage.ResumeLayout(false);
             this.manageUsersPage.PerformLayout();
+            this.reportsPage.ResumeLayout(false);
+            this.reportsPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1309,6 +1441,18 @@
         private System.Windows.Forms.Label userLabel;
         private System.Windows.Forms.Label privilegesLabel;
         private System.Windows.Forms.Label privilegesLabel2;
+        private System.Windows.Forms.TabPage reportsPage;
+        private System.Windows.Forms.Button reportGenerateReportButton;
+        private System.Windows.Forms.TextBox reportCheckNumBox;
+        private System.Windows.Forms.TextBox reportAccountNumberBox;
+        private System.Windows.Forms.TextBox reportRoutingNumberBox;
+        private System.Windows.Forms.Label reportCheckNumberLabel;
+        private System.Windows.Forms.Label reportAccountNumberLabel;
+        private System.Windows.Forms.Label reportRoutingNumberLabel;
+        private System.Windows.Forms.ComboBox reportScope;
+        private System.Windows.Forms.Label reportScopeLabel;
+        private System.Windows.Forms.Label reportsLabel;
+        private System.Windows.Forms.TextBox reportsBox;
     }
 }
 
