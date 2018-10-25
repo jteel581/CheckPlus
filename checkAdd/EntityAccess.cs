@@ -65,7 +65,10 @@ namespace checkPlus
             ).FirstOrDefault();
 
             //there already was an account with that information
-            if (tstAcct != null) { return tstAcct; }
+            if (tstAcct != null 
+                    && prmFirstNm == "" && prmLastNm == ""
+                    && prmAddress == "" && prmCity == "" && prmState == "" && prmZip == ""
+                    && prmPhnNum == "") { return tstAcct; }
             else
             {   //build a new account record because one does not already exist
                 return new Account()

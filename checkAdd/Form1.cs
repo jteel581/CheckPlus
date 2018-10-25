@@ -21,6 +21,7 @@ namespace checkPlus
         //used for message boxes so that we don't have to type the strings every time....
         private const string error = "Error";
         private const string success = "Success!";
+        private const string warning = "Warning";
 
         //db variables
         CheckPlusDB cpdb;
@@ -62,7 +63,7 @@ namespace checkPlus
          */
         public void DisplayMessageNoResponse(string prmHeading, string prmMessage)
         {
-            MessageBox.Show(prmHeading, prmMessage, MessageBoxButtons.OK);
+            MessageBox.Show(prmMessage, prmHeading, MessageBoxButtons.OK);
         }
 
         private void TabControl1_Selected(Object sender, TabControlEventArgs e)
@@ -368,9 +369,13 @@ namespace checkPlus
                     Account tstAcct = accSQL.SelectAccount(accSQL.BuildAccount(routNum, acctNum));
 
                     if (tstAcct != null)
-                    {
+                    {   //update all the information to reflect whatever changes were made
+                        lvi.SubItems[0].Text = tstAcct.Account_number;
+                        lvi.SubItems[1].Text = tstAcct.First_name;
+                        lvi.SubItems[2].Text = tstAcct.Last_name;
                         lvi.SubItems[3].Text = accSQL.GetChecksInAccount(tstAcct).Count().ToString();
                         lvi.SubItems[4].Text = accSQL.GetAccountBalance(tstAcct).ToString();
+                        lvi.SubItems[5].Text = accSQL.GetBankRoutingNumber(tstAcct);
                     }
                     else { accountsListView.Items.Remove(lvi); }
                 }
@@ -557,52 +562,76 @@ namespace checkPlus
             }
         }
 
-        
-
+        /*  ---------------------------------------------------------
+         *  FUNCTION - saveChangesButton_Click
+         *  ---------------------------------------------------------
+         *  called when the user clicks the "Save Changes" button
+         *  works only when the user has selected only 1 account
+         *      otherwise, an error message will occur
+         *  uses the information provided in the listing to populate
+         *      the text boxes
+         *  the user can then change the text in the text boxes
+         */
         private void saveChangesButton_Click(object sender, EventArgs e)
-        {
-            string accountNum = accountsListView.SelectedItems[0].SubItems[0].Text;
+        {   //did the user select only one account from the listing?
+            if (accountsListView.SelectedItems.Count == 1)
+            {   //get the index of the item being highlighted
+                //this highlighting disappears once the user clicks "Save Changes"
+                //  so we need to preserve the index
+                int acctListItemInd = accountsListView.FocusedItem.Index;
 
-            string firstName = firstNameBox.Text;
-            string lastName = lastNameBox.Text;
-            string routNum = routingBox1.Text;
-            string address = stNumBox.Text + " " + stNameBox.Text;
-            string city = cityBox.Text;
-            string state = stateBox.Text;
-            string zip = zipBox.Text;
-            string acctNum = accountBox1.Text;
+                //get the original data
+                string origAccountNum = accountsListView.Items[acctListItemInd].SubItems[0].Text;
+                string origRoutNum = accountsListView.Items[acctListItemInd].SubItems[5].Text;
 
-            var act = database.getAccountByNum(accountNum);
+                //get all the new information (not all of it has to have been changed,
+                //  but it may have been, so we want to grab ALL the things
+                string newFirstName = firstNameBox.Text;
+                string newLastName = lastNameBox.Text;
+                string newRoutNum = routingBox1.Text;
+                string newAddress = stNumBox.Text + " " + stNameBox.Text;
+                string newCity = cityBox.Text;
+                string newState = stateBox.Text;
+                string newZip = zipBox.Text;
+                string newAcctNum = accountBox1.Text;
+                string newPhoneNum = phoneNumBox.Text;
 
-            accSQL.UpdateAccount
-            (
-                accSQL.BuildAccount
-                (
-                    act.getRoutingNum(),
-                    act.getAccountNum()
-                ),
-                accSQL.BuildAccount
-                (
-                    firstName, lastName,
-                    routNum,
-                    address, city, state, zip,
-                    acctNum, null
-                )
-            )
-            ;
+                Account acctToUpd = accSQL.SelectAccount(accSQL.BuildAccount(origRoutNum, origAccountNum));
+                Account acctNewInfo = accSQL.BuildAccount(
+                    newRoutNum, newAcctNum,
+                    newFirstName, newLastName,
+                    newAddress,
+                    newCity, newState, newZip,
+                    newPhoneNum
+                );
 
-            updateAccountListView();
+                //see if an account with the updated information already exists
+                Account tstDupAcct = accSQL.SelectAccount(acctNewInfo);
 
-            act.setAccountNum(accountBox1.Text);
-            act.setFirstName(firstNameBox.Text);
-            act.setLastName(lastNameBox.Text);
-            act.setRoutingNum(routingBox1.Text);
-            act.setAccountNum(accountBox1.Text);
-            act.setStNum(stNumBox.Text);
-            act.setStName(stNameBox.Text);
-            act.setCity(cityBox.Text);
-            act.setState(stateBox.Text);
-            act.setZip(zipBox.Text);
+                if (tstDupAcct != null)
+                {   //if it does, display an error message and do nothing with the changes
+                    DisplayMessageNoResponse(error, "Account with that information already exists.");
+                }
+                else
+                {   //update database account record and update display listing
+                    accSQL.UpdateAccount(acctToUpd, acctNewInfo);
+                    updateAccountListView();
+                }
+
+                /*  OLD STUFF
+                act.setAccountNum(accountBox1.Text);
+                act.setFirstName(firstNameBox.Text);
+                act.setLastName(lastNameBox.Text);
+                act.setRoutingNum(routingBox1.Text);
+                act.setAccountNum(accountBox1.Text);
+                act.setStNum(stNumBox.Text);
+                act.setStName(stNameBox.Text);
+                act.setCity(cityBox.Text);
+                act.setState(stateBox.Text);
+                act.setZip(zipBox.Text);
+                */
+            }
+            else { DisplayMessageNoResponse(error, "Please select 1 account."); }
         }
 
 
@@ -775,15 +804,14 @@ namespace checkPlus
         private void accountsListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (accountsListView.SelectedItems.Count == 1)
-            {
-                string accountNum = accountsListView.SelectedItems[0].SubItems[0].Text;
+            {   
                 string routNum = accountsListView.SelectedItems[0].SubItems[5].Text;
-
-                //pseudoAccount act = database.getAccountByNum(accountNum);
+                string accountNum = accountsListView.SelectedItems[0].SubItems[0].Text;
 
                 Account tstAcct = accSQL.BuildAccount(routNum, accountNum);
 
                 firstNameBox.Text = tstAcct.First_name;
+                lastNameBox.Text = tstAcct.Last_name;
                 routingBox1.Text = accSQL.GetBankRoutingNumber(tstAcct);
                 accountBox1.Text = tstAcct.Account_number;
                 stNameBox.Text = tstAcct.Address;
@@ -791,6 +819,7 @@ namespace checkPlus
                 cityBox.Text = tstAcct.City;
                 stateBox.Text = tstAcct.State;
                 zipBox.Text = tstAcct.Zip_code;
+                phoneNumBox.Text = tstAcct.Phone_number;
             }
             else
             {   //clear boxes
@@ -803,6 +832,7 @@ namespace checkPlus
                 cityBox.Clear();
                 stateBox.Clear();
                 zipBox.Clear();
+                phoneNumBox.Clear();
             }
         }
 
