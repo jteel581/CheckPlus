@@ -7,10 +7,10 @@ create table dbo.account
 	account_id			int			identity(100000, 1)		not null,
 	first_name			varchar(50)							not null,
 	last_name			varchar(50)							null,		--nullable because this could be a business, and in that case, first_name would be the only used field
-	first_name_2nd		varchar(50)							null,
-	last_name_2nd		varchar(50)							null,
+	first_name_2		varchar(50)							null,
+	last_name_2			varchar(50)							null,
 	bank_id				int									not null,	--fk to the id of the bank
-	address_nm			varchar(100)						not null,
+	address				varchar(100)						not null,
 	city				varchar(100)						not null,
 	state				varchar(50)							null,
 	country				varchar(100)						not null,

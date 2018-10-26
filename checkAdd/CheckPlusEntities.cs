@@ -30,7 +30,6 @@ namespace checkPlus
         public string Last_name_2 { get; set; }
         public int Bank_id { get; set; }
         public string Address { get; set; }
-        public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
@@ -48,12 +47,13 @@ namespace checkPlus
         [Key]
         public int Acct_check_id { get; set; }
         public int Account_id { get; set; }
-        public double Amount { get; set; }
+        public Decimal Amount { get; set; }
         public DateTime Date_written { get; set; }
         public string Check_number { get; set; }
         public DateTime Date_received { get; set; }
         public int? Amount_paid { get; set; }
         public DateTime? Date_paid { get; set; }
+        public int Client_id { get; set; }
     }
 
 
@@ -70,7 +70,6 @@ namespace checkPlus
         public string Contact_email { get; set; }
         public string Contact_phone { get; set; }
         public string Bank_address { get; set; }
-        public string Bank_street { get; set; }
         public string Bank_city { get; set; }
         public string Bank_state { get; set; }
         public string Bank_country { get; set; }
@@ -86,7 +85,7 @@ namespace checkPlus
         [Key]
         public int Client_id { get; set; }
         public string Client_nm { get; set; }
-        public double Default_fee { get; set; }
+        public Decimal Default_fee { get; set; }
         public int Days_bw_letters { get; set; }
     }
 
