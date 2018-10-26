@@ -27,7 +27,6 @@ namespace checkPlus
             cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.account on");
             cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.bank on");
         }
-        //
         public void TurnOffInsert()
         {
             cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.account off");
@@ -40,6 +39,10 @@ namespace checkPlus
          *  build an account out of the unique characteristics of an account record:
          *      Bank's routing number
          *      Account's account number
+         *      (you can provide all the other pieces as well, but that's used moreso 
+         *          to build a new Account object for INSERTing or UPDATEing
+         *          a database account record)
+         *          
          *  if a record does not exist with the provided information,
          *      return null
          *      
@@ -64,13 +67,17 @@ namespace checkPlus
                 select a
             ).FirstOrDefault();
 
-            //there already was an account with that information
+            /*  basically, was it being used to find the database 
+             *      account record with a unique 
+             *      routing number and account number combo
+             *  or was it being used to build a new Account object
+             */
             if (tstAcct != null 
                     && prmFirstNm == "" && prmLastNm == ""
                     && prmAddress == "" && prmCity == "" && prmState == "" && prmZip == ""
                     && prmPhnNum == "") { return tstAcct; }
             else
-            {   //build a new account record because one does not already exist
+            {   
                 return new Account()
                 {
                     First_name = prmFirstNm,
@@ -166,7 +173,7 @@ namespace checkPlus
         /*  -----------------------------------------------------
          *  FUNCTION -- GetBankRountingNumber
          *  -----------------------------------------------------
-         *  returns the routing number of the bank 
+         *  returns the routing number of the bank
          *  connected to <prmAcct>
          *  -----------------------------------------------------
          */
@@ -223,13 +230,15 @@ namespace checkPlus
                 select a
                 ).FirstOrDefault();
 
+            Account newAcct;
             if (tstAccount == null)
             {
-                cpdb.Accounts.Add(prmAccount);
+                newAcct = cpdb.Accounts.Add(prmAccount);
                 cpdb.SaveChanges();
             }
+            else { newAcct = tstAccount; }
 
-            return tstAccount;
+            return newAcct;
         }
 
 
@@ -303,7 +312,7 @@ namespace checkPlus
                 select ac
             ).FirstOrDefault();
 
-            if (tstAcct_check != null) { return tstAcct_check; }
+            if (tstAcct_check != null && prmAmt == 0.0M) { return tstAcct_check; }
             else
             {
                 return new Acct_check()
@@ -430,7 +439,6 @@ namespace checkPlus
          */
         public void UpdateAcct_check(Acct_check prmChkToUpdate, Acct_check prmChkNewInfo)
         {
-            prmChkToUpdate.Acct_check_id = prmChkNewInfo.Acct_check_id;
             prmChkToUpdate.Account_id = prmChkNewInfo.Account_id;
             prmChkToUpdate.Amount = prmChkNewInfo.Amount;
             prmChkToUpdate.Check_number = prmChkNewInfo.Check_number;
@@ -446,7 +454,7 @@ namespace checkPlus
          *  FUNCTION - InsertAcct_check
          *  -----------------------------------------------------
          *  
-         * ------------------------------------------------------
+         *  -----------------------------------------------------
          */
         public Acct_check InsertAcct_check(Acct_check prmAcctCheck)
         {
@@ -456,13 +464,15 @@ namespace checkPlus
                 select ac
             ).FirstOrDefault();
 
+            Acct_check newAcctCheck;
             if (tstAcct_check == null)
             {
-                cpdb.Acct_checks.Add(prmAcctCheck);
+                newAcctCheck = cpdb.Acct_checks.Add(prmAcctCheck);
                 cpdb.SaveChanges();
             }
+            else { newAcctCheck = tstAcct_check; }
 
-            return tstAcct_check;
+            return newAcctCheck;
         }
 
 

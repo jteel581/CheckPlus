@@ -41,8 +41,10 @@
             this.usernameLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.manageAccountPage = new System.Windows.Forms.TabPage();
+            this.phoneNumBox = new System.Windows.Forms.TextBox();
+            this.phoneNumLabel = new System.Windows.Forms.Label();
             this.deleteAccountButton = new System.Windows.Forms.Button();
-            this.saveChangesButton = new System.Windows.Forms.Button();
+            this.updateAccountButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.accountNameSearchBox = new System.Windows.Forms.TextBox();
             this.accountNumSearchBox = new System.Windows.Forms.TextBox();
@@ -52,12 +54,10 @@
             this.zipBox = new System.Windows.Forms.TextBox();
             this.stateBox = new System.Windows.Forms.TextBox();
             this.cityBox = new System.Windows.Forms.TextBox();
-            this.stNameBox = new System.Windows.Forms.TextBox();
-            this.stNumBox = new System.Windows.Forms.TextBox();
+            this.addressBox = new System.Windows.Forms.TextBox();
             this.stateLabel = new System.Windows.Forms.Label();
             this.cityLabel = new System.Windows.Forms.Label();
             this.stNameLabel = new System.Windows.Forms.Label();
-            this.stNumLabel = new System.Windows.Forms.Label();
             this.addActButton = new System.Windows.Forms.Button();
             this.accountBox1 = new System.Windows.Forms.TextBox();
             this.routingBox1 = new System.Windows.Forms.TextBox();
@@ -78,9 +78,7 @@
             this.manageCheckPage = new System.Windows.Forms.TabPage();
             this.deleteCheckButton = new System.Windows.Forms.Button();
             this.updateCheckButton = new System.Windows.Forms.Button();
-            this.dateReceivedLabel = new System.Windows.Forms.Label();
             this.dateWrittenlabel = new System.Windows.Forms.Label();
-            this.dateRecieved = new System.Windows.Forms.DateTimePicker();
             this.dateWrittenSelector = new System.Windows.Forms.DateTimePicker();
             this.viewCheckNumBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -96,10 +94,6 @@
             this.numCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ammountCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.routNumCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lNameBox2 = new System.Windows.Forms.TextBox();
-            this.fNameBox2 = new System.Windows.Forms.TextBox();
-            this.lNameLabel2 = new System.Windows.Forms.Label();
-            this.fNameLabel2 = new System.Windows.Forms.Label();
             this.checkNumBox = new System.Windows.Forms.TextBox();
             this.checkNumLabel = new System.Windows.Forms.Label();
             this.addChkButton = new System.Windows.Forms.Button();
@@ -139,8 +133,6 @@
             this.userLabel = new System.Windows.Forms.Label();
             this.privilegesLabel = new System.Windows.Forms.Label();
             this.privilegesLabel2 = new System.Windows.Forms.Label();
-            this.phoneNumBox = new System.Windows.Forms.TextBox();
-            this.phoneNumLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.homePage.SuspendLayout();
             this.manageAccountPage.SuspendLayout();
@@ -276,7 +268,7 @@
             this.manageAccountPage.Controls.Add(this.phoneNumBox);
             this.manageAccountPage.Controls.Add(this.phoneNumLabel);
             this.manageAccountPage.Controls.Add(this.deleteAccountButton);
-            this.manageAccountPage.Controls.Add(this.saveChangesButton);
+            this.manageAccountPage.Controls.Add(this.updateAccountButton);
             this.manageAccountPage.Controls.Add(this.searchButton);
             this.manageAccountPage.Controls.Add(this.accountNameSearchBox);
             this.manageAccountPage.Controls.Add(this.accountNumSearchBox);
@@ -286,12 +278,10 @@
             this.manageAccountPage.Controls.Add(this.zipBox);
             this.manageAccountPage.Controls.Add(this.stateBox);
             this.manageAccountPage.Controls.Add(this.cityBox);
-            this.manageAccountPage.Controls.Add(this.stNameBox);
-            this.manageAccountPage.Controls.Add(this.stNumBox);
+            this.manageAccountPage.Controls.Add(this.addressBox);
             this.manageAccountPage.Controls.Add(this.stateLabel);
             this.manageAccountPage.Controls.Add(this.cityLabel);
             this.manageAccountPage.Controls.Add(this.stNameLabel);
-            this.manageAccountPage.Controls.Add(this.stNumLabel);
             this.manageAccountPage.Controls.Add(this.addActButton);
             this.manageAccountPage.Controls.Add(this.accountBox1);
             this.manageAccountPage.Controls.Add(this.routingBox1);
@@ -312,6 +302,24 @@
             this.manageAccountPage.UseVisualStyleBackColor = true;
             this.manageAccountPage.Click += new System.EventHandler(this.manageAccountPage_Click);
             // 
+            // phoneNumBox
+            // 
+            this.phoneNumBox.Location = new System.Drawing.Point(848, 303);
+            this.phoneNumBox.Margin = new System.Windows.Forms.Padding(4);
+            this.phoneNumBox.Name = "phoneNumBox";
+            this.phoneNumBox.Size = new System.Drawing.Size(132, 22);
+            this.phoneNumBox.TabIndex = 104;
+            // 
+            // phoneNumLabel
+            // 
+            this.phoneNumLabel.AutoSize = true;
+            this.phoneNumLabel.Location = new System.Drawing.Point(732, 307);
+            this.phoneNumLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.phoneNumLabel.Name = "phoneNumLabel";
+            this.phoneNumLabel.Size = new System.Drawing.Size(107, 17);
+            this.phoneNumLabel.TabIndex = 103;
+            this.phoneNumLabel.Text = "Phone Number:";
+            // 
             // deleteAccountButton
             // 
             this.deleteAccountButton.Enabled = false;
@@ -325,17 +333,17 @@
             this.deleteAccountButton.UseVisualStyleBackColor = true;
             this.deleteAccountButton.Click += new System.EventHandler(this.deleteAccountButton_Click);
             // 
-            // saveChangesButton
+            // updateAccountButton
             // 
-            this.saveChangesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveChangesButton.Location = new System.Drawing.Point(998, 114);
-            this.saveChangesButton.Margin = new System.Windows.Forms.Padding(4);
-            this.saveChangesButton.Name = "saveChangesButton";
-            this.saveChangesButton.Size = new System.Drawing.Size(161, 36);
-            this.saveChangesButton.TabIndex = 77;
-            this.saveChangesButton.Text = "Save Changes";
-            this.saveChangesButton.UseVisualStyleBackColor = true;
-            this.saveChangesButton.Click += new System.EventHandler(this.saveChangesButton_Click);
+            this.updateAccountButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateAccountButton.Location = new System.Drawing.Point(998, 114);
+            this.updateAccountButton.Margin = new System.Windows.Forms.Padding(4);
+            this.updateAccountButton.Name = "updateAccountButton";
+            this.updateAccountButton.Size = new System.Drawing.Size(161, 36);
+            this.updateAccountButton.TabIndex = 77;
+            this.updateAccountButton.Text = "Save Changes";
+            this.updateAccountButton.UseVisualStyleBackColor = true;
+            this.updateAccountButton.Click += new System.EventHandler(this.saveChangesButton_Click);
             // 
             // searchButton
             // 
@@ -388,7 +396,7 @@
             // zipLabel
             // 
             this.zipLabel.AutoSize = true;
-            this.zipLabel.Location = new System.Drawing.Point(807, 309);
+            this.zipLabel.Location = new System.Drawing.Point(807, 276);
             this.zipLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.zipLabel.Name = "zipLabel";
             this.zipLabel.Size = new System.Drawing.Size(32, 17);
@@ -398,7 +406,7 @@
             // 
             // zipBox
             // 
-            this.zipBox.Location = new System.Drawing.Point(848, 306);
+            this.zipBox.Location = new System.Drawing.Point(848, 273);
             this.zipBox.Margin = new System.Windows.Forms.Padding(4);
             this.zipBox.Name = "zipBox";
             this.zipBox.Size = new System.Drawing.Size(132, 22);
@@ -406,7 +414,7 @@
             // 
             // stateBox
             // 
-            this.stateBox.Location = new System.Drawing.Point(848, 274);
+            this.stateBox.Location = new System.Drawing.Point(848, 241);
             this.stateBox.Margin = new System.Windows.Forms.Padding(4);
             this.stateBox.Name = "stateBox";
             this.stateBox.Size = new System.Drawing.Size(132, 22);
@@ -414,32 +422,24 @@
             // 
             // cityBox
             // 
-            this.cityBox.Location = new System.Drawing.Point(848, 242);
+            this.cityBox.Location = new System.Drawing.Point(848, 209);
             this.cityBox.Margin = new System.Windows.Forms.Padding(4);
             this.cityBox.Name = "cityBox";
             this.cityBox.Size = new System.Drawing.Size(132, 22);
             this.cityBox.TabIndex = 53;
             // 
-            // stNameBox
+            // addressBox
             // 
-            this.stNameBox.Location = new System.Drawing.Point(848, 210);
-            this.stNameBox.Margin = new System.Windows.Forms.Padding(4);
-            this.stNameBox.Name = "stNameBox";
-            this.stNameBox.Size = new System.Drawing.Size(132, 22);
-            this.stNameBox.TabIndex = 52;
-            // 
-            // stNumBox
-            // 
-            this.stNumBox.Location = new System.Drawing.Point(848, 178);
-            this.stNumBox.Margin = new System.Windows.Forms.Padding(4);
-            this.stNumBox.Name = "stNumBox";
-            this.stNumBox.Size = new System.Drawing.Size(132, 22);
-            this.stNumBox.TabIndex = 51;
+            this.addressBox.Location = new System.Drawing.Point(848, 177);
+            this.addressBox.Margin = new System.Windows.Forms.Padding(4);
+            this.addressBox.Name = "addressBox";
+            this.addressBox.Size = new System.Drawing.Size(132, 22);
+            this.addressBox.TabIndex = 52;
             // 
             // stateLabel
             // 
             this.stateLabel.AutoSize = true;
-            this.stateLabel.Location = new System.Drawing.Point(794, 277);
+            this.stateLabel.Location = new System.Drawing.Point(794, 244);
             this.stateLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.stateLabel.Name = "stateLabel";
             this.stateLabel.Size = new System.Drawing.Size(45, 17);
@@ -450,7 +450,7 @@
             // cityLabel
             // 
             this.cityLabel.AutoSize = true;
-            this.cityLabel.Location = new System.Drawing.Point(804, 245);
+            this.cityLabel.Location = new System.Drawing.Point(804, 212);
             this.cityLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.cityLabel.Name = "cityLabel";
             this.cityLabel.Size = new System.Drawing.Size(35, 17);
@@ -461,24 +461,13 @@
             // stNameLabel
             // 
             this.stNameLabel.AutoSize = true;
-            this.stNameLabel.Location = new System.Drawing.Point(748, 213);
+            this.stNameLabel.Location = new System.Drawing.Point(773, 180);
             this.stNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.stNameLabel.Name = "stNameLabel";
-            this.stNameLabel.Size = new System.Drawing.Size(91, 17);
+            this.stNameLabel.Size = new System.Drawing.Size(64, 17);
             this.stNameLabel.TabIndex = 48;
-            this.stNameLabel.Text = "Street Name:";
+            this.stNameLabel.Text = "Address:";
             this.stNameLabel.Click += new System.EventHandler(this.stNameLabel_Click);
-            // 
-            // stNumLabel
-            // 
-            this.stNumLabel.AutoSize = true;
-            this.stNumLabel.Location = new System.Drawing.Point(736, 181);
-            this.stNumLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.stNumLabel.Name = "stNumLabel";
-            this.stNumLabel.Size = new System.Drawing.Size(104, 17);
-            this.stNumLabel.TabIndex = 47;
-            this.stNumLabel.Text = "Street Number:";
-            this.stNumLabel.Click += new System.EventHandler(this.stNumLabel_Click);
             // 
             // addActButton
             // 
@@ -631,9 +620,7 @@
             // 
             this.manageCheckPage.Controls.Add(this.deleteCheckButton);
             this.manageCheckPage.Controls.Add(this.updateCheckButton);
-            this.manageCheckPage.Controls.Add(this.dateReceivedLabel);
             this.manageCheckPage.Controls.Add(this.dateWrittenlabel);
-            this.manageCheckPage.Controls.Add(this.dateRecieved);
             this.manageCheckPage.Controls.Add(this.dateWrittenSelector);
             this.manageCheckPage.Controls.Add(this.viewCheckNumBox);
             this.manageCheckPage.Controls.Add(this.label8);
@@ -643,10 +630,6 @@
             this.manageCheckPage.Controls.Add(this.label5);
             this.manageCheckPage.Controls.Add(this.label7);
             this.manageCheckPage.Controls.Add(this.checkListView);
-            this.manageCheckPage.Controls.Add(this.lNameBox2);
-            this.manageCheckPage.Controls.Add(this.fNameBox2);
-            this.manageCheckPage.Controls.Add(this.lNameLabel2);
-            this.manageCheckPage.Controls.Add(this.fNameLabel2);
             this.manageCheckPage.Controls.Add(this.checkNumBox);
             this.manageCheckPage.Controls.Add(this.checkNumLabel);
             this.manageCheckPage.Controls.Add(this.addChkButton);
@@ -688,38 +671,21 @@
             this.updateCheckButton.TabIndex = 99;
             this.updateCheckButton.Text = "Save Changes";
             this.updateCheckButton.UseVisualStyleBackColor = true;
-            // 
-            // dateReceivedLabel
-            // 
-            this.dateReceivedLabel.AutoSize = true;
-            this.dateReceivedLabel.Location = new System.Drawing.Point(760, 328);
-            this.dateReceivedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.dateReceivedLabel.Name = "dateReceivedLabel";
-            this.dateReceivedLabel.Size = new System.Drawing.Size(105, 17);
-            this.dateReceivedLabel.TabIndex = 74;
-            this.dateReceivedLabel.Text = "Date Received:";
+            this.updateCheckButton.Click += new System.EventHandler(this.updateCheckButton_Click);
             // 
             // dateWrittenlabel
             // 
             this.dateWrittenlabel.AutoSize = true;
-            this.dateWrittenlabel.Location = new System.Drawing.Point(773, 290);
+            this.dateWrittenlabel.Location = new System.Drawing.Point(772, 240);
             this.dateWrittenlabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.dateWrittenlabel.Name = "dateWrittenlabel";
             this.dateWrittenlabel.Size = new System.Drawing.Size(91, 17);
             this.dateWrittenlabel.TabIndex = 73;
             this.dateWrittenlabel.Text = "Date Written:";
             // 
-            // dateRecieved
-            // 
-            this.dateRecieved.Location = new System.Drawing.Point(874, 321);
-            this.dateRecieved.Margin = new System.Windows.Forms.Padding(4);
-            this.dateRecieved.Name = "dateRecieved";
-            this.dateRecieved.Size = new System.Drawing.Size(265, 22);
-            this.dateRecieved.TabIndex = 72;
-            // 
             // dateWrittenSelector
             // 
-            this.dateWrittenSelector.Location = new System.Drawing.Point(874, 283);
+            this.dateWrittenSelector.Location = new System.Drawing.Point(874, 240);
             this.dateWrittenSelector.Margin = new System.Windows.Forms.Padding(4);
             this.dateWrittenSelector.Name = "dateWrittenSelector";
             this.dateWrittenSelector.Size = new System.Drawing.Size(265, 22);
@@ -839,45 +805,9 @@
             this.routNumCH.Text = "Routing Number";
             this.routNumCH.Width = 150;
             // 
-            // lNameBox2
-            // 
-            this.lNameBox2.Location = new System.Drawing.Point(874, 151);
-            this.lNameBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.lNameBox2.Name = "lNameBox2";
-            this.lNameBox2.Size = new System.Drawing.Size(132, 22);
-            this.lNameBox2.TabIndex = 62;
-            // 
-            // fNameBox2
-            // 
-            this.fNameBox2.Location = new System.Drawing.Point(874, 119);
-            this.fNameBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.fNameBox2.Name = "fNameBox2";
-            this.fNameBox2.Size = new System.Drawing.Size(132, 22);
-            this.fNameBox2.TabIndex = 61;
-            // 
-            // lNameLabel2
-            // 
-            this.lNameLabel2.AutoSize = true;
-            this.lNameLabel2.Location = new System.Drawing.Point(785, 155);
-            this.lNameLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lNameLabel2.Name = "lNameLabel2";
-            this.lNameLabel2.Size = new System.Drawing.Size(80, 17);
-            this.lNameLabel2.TabIndex = 60;
-            this.lNameLabel2.Text = "Last Name:";
-            // 
-            // fNameLabel2
-            // 
-            this.fNameLabel2.AutoSize = true;
-            this.fNameLabel2.Location = new System.Drawing.Point(786, 123);
-            this.fNameLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.fNameLabel2.Name = "fNameLabel2";
-            this.fNameLabel2.Size = new System.Drawing.Size(80, 17);
-            this.fNameLabel2.TabIndex = 59;
-            this.fNameLabel2.Text = "First Name:";
-            // 
             // checkNumBox
             // 
-            this.checkNumBox.Location = new System.Drawing.Point(874, 215);
+            this.checkNumBox.Location = new System.Drawing.Point(874, 192);
             this.checkNumBox.Margin = new System.Windows.Forms.Padding(4);
             this.checkNumBox.Name = "checkNumBox";
             this.checkNumBox.Size = new System.Drawing.Size(132, 22);
@@ -886,7 +816,7 @@
             // checkNumLabel
             // 
             this.checkNumLabel.AutoSize = true;
-            this.checkNumLabel.Location = new System.Drawing.Point(758, 219);
+            this.checkNumLabel.Location = new System.Drawing.Point(758, 196);
             this.checkNumLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkNumLabel.Name = "checkNumLabel";
             this.checkNumLabel.Size = new System.Drawing.Size(105, 17);
@@ -907,7 +837,7 @@
             // 
             // ammountBox
             // 
-            this.ammountBox.Location = new System.Drawing.Point(874, 183);
+            this.ammountBox.Location = new System.Drawing.Point(874, 145);
             this.ammountBox.Margin = new System.Windows.Forms.Padding(4);
             this.ammountBox.Name = "ammountBox";
             this.ammountBox.Size = new System.Drawing.Size(132, 22);
@@ -915,7 +845,7 @@
             // 
             // accountBox2
             // 
-            this.accountBox2.Location = new System.Drawing.Point(874, 87);
+            this.accountBox2.Location = new System.Drawing.Point(874, 100);
             this.accountBox2.Margin = new System.Windows.Forms.Padding(4);
             this.accountBox2.Name = "accountBox2";
             this.accountBox2.Size = new System.Drawing.Size(132, 22);
@@ -923,7 +853,7 @@
             // 
             // routingBox2
             // 
-            this.routingBox2.Location = new System.Drawing.Point(874, 55);
+            this.routingBox2.Location = new System.Drawing.Point(874, 59);
             this.routingBox2.Margin = new System.Windows.Forms.Padding(4);
             this.routingBox2.Name = "routingBox2";
             this.routingBox2.Size = new System.Drawing.Size(132, 22);
@@ -932,7 +862,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(760, 187);
+            this.label2.Location = new System.Drawing.Point(760, 149);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 17);
@@ -942,7 +872,7 @@
             // accountLabel2
             // 
             this.accountLabel2.AutoSize = true;
-            this.accountLabel2.Location = new System.Drawing.Point(746, 91);
+            this.accountLabel2.Location = new System.Drawing.Point(746, 104);
             this.accountLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.accountLabel2.Name = "accountLabel2";
             this.accountLabel2.Size = new System.Drawing.Size(117, 17);
@@ -952,7 +882,7 @@
             // routingLabel2
             // 
             this.routingLabel2.AutoSize = true;
-            this.routingLabel2.Location = new System.Drawing.Point(750, 59);
+            this.routingLabel2.Location = new System.Drawing.Point(750, 63);
             this.routingLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.routingLabel2.Name = "routingLabel2";
             this.routingLabel2.Size = new System.Drawing.Size(115, 17);
@@ -1264,24 +1194,6 @@
             this.privilegesLabel2.TabIndex = 21;
             this.privilegesLabel2.Text = "Not signed in yet";
             // 
-            // phoneNumBox
-            // 
-            this.phoneNumBox.Location = new System.Drawing.Point(848, 336);
-            this.phoneNumBox.Margin = new System.Windows.Forms.Padding(4);
-            this.phoneNumBox.Name = "phoneNumBox";
-            this.phoneNumBox.Size = new System.Drawing.Size(132, 22);
-            this.phoneNumBox.TabIndex = 104;
-            // 
-            // phoneNumLabel
-            // 
-            this.phoneNumLabel.AutoSize = true;
-            this.phoneNumLabel.Location = new System.Drawing.Point(732, 340);
-            this.phoneNumLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.phoneNumLabel.Name = "phoneNumLabel";
-            this.phoneNumLabel.Size = new System.Drawing.Size(107, 17);
-            this.phoneNumLabel.TabIndex = 103;
-            this.phoneNumLabel.Text = "Phone Number:";
-            // 
             // ammountLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1338,18 +1250,12 @@
         private System.Windows.Forms.TextBox zipBox;
         private System.Windows.Forms.TextBox stateBox;
         private System.Windows.Forms.TextBox cityBox;
-        private System.Windows.Forms.TextBox stNameBox;
-        private System.Windows.Forms.TextBox stNumBox;
+        private System.Windows.Forms.TextBox addressBox;
         private System.Windows.Forms.Label stateLabel;
         private System.Windows.Forms.Label cityLabel;
         private System.Windows.Forms.Label stNameLabel;
-        private System.Windows.Forms.Label stNumLabel;
         private System.Windows.Forms.TextBox checkNumBox;
         private System.Windows.Forms.Label checkNumLabel;
-        private System.Windows.Forms.TextBox lNameBox2;
-        private System.Windows.Forms.TextBox fNameBox2;
-        private System.Windows.Forms.Label lNameLabel2;
-        private System.Windows.Forms.Label fNameLabel2;
         private System.Windows.Forms.TabPage manageUsersPage;
         private System.Windows.Forms.Button deleteUserButton;
         private System.Windows.Forms.Button updateUserButton;
@@ -1388,12 +1294,10 @@
         private System.Windows.Forms.ColumnHeader numChecksCH;
         private System.Windows.Forms.ColumnHeader curBalanceCH;
         private System.Windows.Forms.Button deleteAccountButton;
-        private System.Windows.Forms.Button saveChangesButton;
+        private System.Windows.Forms.Button updateAccountButton;
         private System.Windows.Forms.Button deleteCheckButton;
         private System.Windows.Forms.Button updateCheckButton;
-        private System.Windows.Forms.Label dateReceivedLabel;
         private System.Windows.Forms.Label dateWrittenlabel;
-        private System.Windows.Forms.DateTimePicker dateRecieved;
         private System.Windows.Forms.DateTimePicker dateWrittenSelector;
         private System.Windows.Forms.TextBox viewCheckNumBox;
         private System.Windows.Forms.Label label8;

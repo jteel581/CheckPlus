@@ -57,7 +57,79 @@ namespace checkPlus
             checkListView.FullRowSelect = true;
         }
 
-        /*  FUNCTION
+        /*  --------------------------------------------------------
+         *  FUNCTION - ClearAccountTabTextBoxes
+         *  --------------------------------------------------------
+         */
+        public void ClearAccountTabTextBoxes()
+        {
+            firstNameBox.Clear();
+            lastNameBox.Clear();
+            routingBox1.Clear();
+            accountBox1.Clear();
+            addressBox.Clear();
+            cityBox.Clear();
+            stateBox.Clear();
+            zipBox.Clear();
+            phoneNumBox.Clear();
+        }
+
+        /*  --------------------------------------------------------
+         *  FUNCTION - ClearCheckTabTextBoxes
+         *  --------------------------------------------------------
+         */
+        public void ClearCheckTabTextBoxes()
+        {
+            accountBox2.Clear();
+            routingBox2.Clear();
+            checkNumBox.Clear();
+            ammountBox.Clear();
+        }
+
+
+        /*  --------------------------------------------------------
+         *  FUNCTION - VerifyAccountTextBoxes
+         *  --------------------------------------------------------
+         */
+        public bool VerifyAccountTextBoxes()
+        {
+            string badResponse = "Please enter a";
+            if (firstNameBox.Text == "") { badResponse += " First Name."; }
+            else if (lastNameBox.Text == "") { badResponse += " Last Name."; }
+            else if (routingBox1.Text == "") { badResponse += " Routing Number."; }
+            else if (accountBox1.Text == "") { badResponse += "n Account Number."; }
+            else if (addressBox.Text == "") { badResponse += "n Address."; }
+            else if (cityBox.Text == "") { badResponse += " City."; }
+            else if (stateBox.Text == "") { badResponse += " State."; }
+            else if (zipBox.Text == "") { badResponse += " ZIP code"; }
+            else if (phoneNumBox.Text == "") { badResponse += " Phone Number."; }
+            else { return true; }
+
+            DisplayMessageNoResponse(error, badResponse);
+            return false;
+        }
+
+
+        /*  --------------------------------------------------------
+         *  FUNCTION - VerifyCheckTextBoxes
+         *  --------------------------------------------------------
+         */
+        public bool VerifyCheckTextBoxes()
+        {
+            string badResponse = "Please enter a";
+            if (routingBox2.Text == "") { badResponse += " Routing Number."; }
+            else if (accountBox2.Text == "") { badResponse += "n Account Number."; }
+            else if (ammountBox.Text == "") { badResponse += "n Amount."; }
+            else if (checkNumBox.Text == "") { badResponse += " Check Number."; }
+            else { return true; }
+
+            DisplayMessageNoResponse(error, badResponse);
+            return false;
+        }
+
+        /*  --------------------------------------------------------
+         *  FUNCTION - DisplayMessageNoResponse
+         *  --------------------------------------------------------
          *  helpful for displaying success/error messages
          *      throughout the application
          */
@@ -65,6 +137,7 @@ namespace checkPlus
         {
             MessageBox.Show(prmMessage, prmHeading, MessageBoxButtons.OK);
         }
+
 
         private void TabControl1_Selected(Object sender, TabControlEventArgs e)
         {
@@ -93,178 +166,155 @@ namespace checkPlus
             }
         }
 
+
+
+        /*  ====================================================================================================================
+         *  ====================================================================================================================
+         *  FUNCTIONs for INSERTing records into the database
+         *  ====================================================================================================================
+         *  ====================================================================================================================
+         */
+
+
+
+        /*  --------------------------------------------------------
+         *  FUNCTION - addActButton_Click
+         *  --------------------------------------------------------
+         *  called when user clicks "Add Account" button
+         *  
+         *  verifies that information has been entered into the text boxes
+         *  
+         *  grabs all the information provided in the text boxes,
+         *      verifies it,
+         *      creates a new record
+         */
         //on user click of button, attempt to add an account record
         private void addActButton_Click(object sender, EventArgs e)
-        {   //stashing text input from the form into variables
-            string firstName = firstNameBox.Text;
-            string lastName = lastNameBox.Text;
-            string routingNumber = routingBox1.Text;
-            string accountNumber = accountBox1.Text;
-            string address = stNumBox.Text + " " + stNameBox.Text;
-            string city = cityBox.Text;
-            string state = stateBox.Text;
-            string zip = zipBox.Text;
-            string phnNum = phoneNumBox.Text;
+        {   
+            if (VerifyAccountTextBoxes())
+            {   //stashing text input from the form into variables
+                string firstName = firstNameBox.Text;
+                string lastName = lastNameBox.Text;
+                string routingNumber = routingBox1.Text;
+                string accountNumber = accountBox1.Text;
+                string address = addressBox.Text;
+                string city = cityBox.Text;
+                string state = stateBox.Text;
+                string zip = zipBox.Text;
+                string phnNum = phoneNumBox.Text;
 
-            //--------------------------------------------------------
-            //start linq testing code chunk
-            //--------------------------------------------------------
+                Account dupCheckAcct = accSQL.SelectAccount(accSQL.BuildAccount(routingNumber, accountNumber));
 
-
-            //turn on ability to insert an account into the table
-            accSQL.TurnOnInsert();
-            //attempt to insert an account record
-            Account tstAccount = accSQL.InsertAccount
-            (   
-                accSQL.BuildAccount
-                (   //build an Account object using the information provided 
-                    routingNumber,
-                    accountNumber,
-                    firstName, lastName,
-                    address, city, state, zip,  
-                    phnNum
-                )
-            );
-            //turn off ability to insert an account
-            accSQL.TurnOffInsert();
-
-            //if attempt to insert account results in finding an exitsting account
-            if (tstAccount != null)
-            {   //display an error message
-                DisplayMessageNoResponse("Account already exists.", error);
-            }
-            else
-            {   //otherwise, it was a successful account addition
-                ListViewItem lvi = new ListViewItem
-                (new string[]
-                    {
-                        tstAccount.Account_number,
-                        tstAccount.First_name, tstAccount.Last_name,
-                        accSQL.GetChecksInAccount(tstAccount).Count().ToString("0000"),
-                        accSQL.GetAccountBalance(tstAccount).ToString()
-                    }
-                );
-                accountsListView.Items.Add(lvi);
-                DisplayMessageNoResponse("New account added.", "Success");
-            }
-
-
-            //--------------------------------------------------------
-            //end linq testing code chunk
-            //--------------------------------------------------------
-            
-            /*
-            pseudoAccount act = new pseudoAccount(firstName, lastName, routingNumber, accountNumber, stNumBox.Text, stNameBox.Text, city, state, zip);
-            database.addAccount(act);
-            ListViewItem lvi = new ListViewItem
-            (new string[] 
-                {
-                    act.getAccountNum(),
-                    act.getFirstName(), act.getLastName(),
-                    act.getNumOfChecks().ToString("0000"),
-                    act.getCurBal().ToString()
+                if (dupCheckAcct != null)
+                {   //if account with that combo of rout num and acct num exists already, report dup error
+                    DisplayMessageNoResponse(error, "Account already exists.");
                 }
-            );
-            accountsListView.Items.Add(lvi);
-            */
+                else
+                {   //otherwise, insert a new account object and update the listing
+                    accSQL.TurnOnInsert();
 
-            //clear input boxes
-            firstNameBox.Clear();
-            lastNameBox.Clear();
-            routingBox1.Clear();
-            accountBox1.Clear();
-            stNumBox.Clear();
-            stNameBox.Clear();
-            cityBox.Clear();
-            stateBox.Clear();
-            zipBox.Clear();
+                    Account insAcct = accSQL.InsertAccount
+                    (accSQL.BuildAccount
+                        (
+                            routingNumber, accountNumber,
+                            firstName, lastName,
+                            address, city, state, zip,
+                            phnNum
+                        )
+                    );
+
+                    ListViewItem lvi = new ListViewItem
+                    (new string[]
+                        {   insAcct.Account_number,
+                        insAcct.First_name, insAcct.Last_name,
+                        accSQL.GetChecksInAccount(insAcct).Count().ToString(),
+                        accSQL.GetAccountBalance(insAcct).ToString(),
+                        accSQL.GetBankRoutingNumber(insAcct)
+                        }
+                    );
+                    accountsListView.Items.Add(lvi);
+                    DisplayMessageNoResponse(success, "New account added.");
+
+                    accSQL.TurnOffInsert();
+
+                    ClearAccountTabTextBoxes();
+                }
+            }
         }
 
 
-        //on user click of button, attempt to add a check record
+        /*  --------------------------------------------------------
+         *  FUNCTION - addChkButton_Click
+         *  --------------------------------------------------------
+         *  called when user clicks "Add Check" button
+         *  
+         *  grabs all the information provided in the text boxes,
+         *      verifies it,
+         *      creates a new acct_check record
+         *  reports an error if the information would've
+         *      resulted in a duplicate
+         */
         private void addChkButton_Click(object sender, EventArgs e)
         {
-            string acctNum = accountBox2.Text;
-            string routNum = routingBox2.Text;
-            string chkNum = checkNumBox.Text;
-            Decimal ammount = Convert.ToDecimal(ammountBox.Text);
-            DateTime dateWritten = Convert.ToDateTime(dateWrittenSelector.Text);
+            if (VerifyCheckTextBoxes())
+            {
+                string acctNum = accountBox2.Text;
+                string routNum = routingBox2.Text;
+                string chkNum = checkNumBox.Text;
+                Decimal ammount = Convert.ToDecimal(ammountBox.Text);
+                DateTime dateWritten = Convert.ToDateTime(dateWrittenSelector.Text);
 
-            //--------------------------------------------------------
-            //start linq testing code chunk
-            //--------------------------------------------------------
+                Acct_check dupChkChk = acct_chkSQL.SelectAcct_check(acct_chkSQL.BuildAcct_check(acctNum, routNum, chkNum));
 
+                if (dupChkChk != null)
+                {   //check with that acct num, rout num, and check num already exists, so display an error message
+                    DisplayMessageNoResponse(error, "Check already exists.");
+                }
+                else
+                {   //otherwise, insert a new check record and update the listing
+                    acct_chkSQL.TurnOnInsert();
 
-            acct_chkSQL.TurnOnInsert();
-            Acct_check tstAcct_check = acct_chkSQL
-                .InsertAcct_check
-                (   
-                    acct_chkSQL.BuildAcct_check
-                    (
-                        acctNum, routNum, 
-                        chkNum, ammount, dateWritten
-                    )
-                );
-            acct_chkSQL.TurnOffInsert();
-
-            //if check record already existed
-            if (tstAcct_check != null)
-            {   //display an error message
-                DisplayMessageNoResponse("Check already exists.", error);
-            }
-            else
-            {   //otherwise, it was a successful account addition
-                //probably want to make this better in future
-                    /* return newly generated id?
-                     * more careful return after the build thing?
-                     * just some considerations.....
-                     */
-                Acct_check newAcct_check = acct_chkSQL
-                    .SelectAcct_check
+                    Acct_check insAcct_check = acct_chkSQL
+                    .InsertAcct_check
                     (
                         acct_chkSQL.BuildAcct_check
                         (
                             acctNum, routNum,
                             chkNum, ammount, dateWritten
                         )
+                    );
+
+                    ListViewItem lvi = new ListViewItem
+                    (   new string[]
+                        {   acct_chkSQL.GetAccountNumber(insAcct_check),
+                            acct_chkSQL.GetFirstName(insAcct_check),
+                            acct_chkSQL.GetLastName(insAcct_check),
+                            insAcct_check.Check_number,
+                            insAcct_check.Amount.ToString()
+                        }
                     )
                     ;
-                ListViewItem lvi = new ListViewItem
-                (
-                    new string[]
-                    {
-                        acct_chkSQL.GetAccountNumber(newAcct_check),
-                        acct_chkSQL.GetFirstName(newAcct_check),
-                        acct_chkSQL.GetLastName(newAcct_check),
-                        newAcct_check.Check_number, 
-                        newAcct_check.Amount.ToString()
-                    }
-                )
-                ;
-                checkListView.Items.Add(lvi);
-                DisplayMessageNoResponse("New check added.", success);
+                    checkListView.Items.Add(lvi);
+                    updateAccountListView();
+                    DisplayMessageNoResponse(success, "New check added.");
+
+                    acct_chkSQL.TurnOffInsert();
+
+                    ClearCheckTabTextBoxes();
+                }
             }
-
-
-            //--------------------------------------------------------
-            //end linq testing code chunk
-            //--------------------------------------------------------
-            
-            /*
-            pseudoAccount act = database.getAccountByNum(acctNum);
-            pseudoCheck check = new pseudoCheck(acctNum, routNum, ammount);
-            database.getAccountByNum(acctNum).addCheck(check);
-            ListViewItem lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), check.getCheckNum().ToString(), check.getAmmount().ToString() });
-            checkListView.Items.Add(lvi);
-            updateAccountListView();
-            updateCheckListView();
-            */
-
-            //clear input boxes
-            accountBox2.Clear();
-            routingBox2.Clear();
-            ammountBox.Clear();
         }
+
+
+
+        /*  ====================================================================================================================
+         *  ====================================================================================================================
+         *  FUNCTIONs for UPDATEing records in the database
+         *  ====================================================================================================================
+         *  ====================================================================================================================
+         */
+
+
 
         public void updateUserListView()
         {
@@ -306,21 +356,21 @@ namespace checkPlus
         }
 
 
-        
-        //  if      {}  --  when first opening the application, populate with the existing records
-        //  else    {}  --  throughout use of the application, update the values displayed
+        /*  ---------------------------------------------------------
+         *  FUNCTION - updateAccountListView
+         *  ---------------------------------------------------------
+         *  called any time a user clicks a button that makes changes to accounts
+         *      check addition
+         *      changing account information
+         *      deleting an account, etc....
+         *  
+         *  if      {}  when first opening the application, populate with the existing records
+         *  else    {}  throughout use of the application, update the values displayed
+         */
         public void updateAccountListView()
         {
             if (accountsListView.Items.Count == 0)
             {
-                ListViewItem lvi;
-                /*
-                 * foreach (pseudoAccount act in database.getAccountsList())
-                {
-                    lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), act.getNumOfChecks().ToString("0000"), act.getCurBal().ToString() });
-                    accountsListView.Items.Add(lvi);
-                }
-                */
                 foreach(Account act in accSQL.GetAllAccounts())
                 {
                     string acctNum = act.Account_number;
@@ -329,8 +379,8 @@ namespace checkPlus
                     string checkCount = accSQL.GetChecksInAccount(act).Count().ToString();
                     string acctBal = accSQL.GetAccountBalance(act).ToString();
                     string routNum = accSQL.GetBankRoutingNumber(act);
-
-                    lvi = new ListViewItem
+                    
+                    ListViewItem lvi = new ListViewItem
                     (
                         new string[]
                         {
@@ -349,20 +399,6 @@ namespace checkPlus
             {   
                 foreach (ListViewItem lvi in accountsListView.Items)
                 {
-                    /*
-                    {
-                        pseudoAccount act = database.getAccountByNum(lvi.SubItems[0].Text);
-                        if (act != null)
-                        {
-                            lvi.SubItems[3].Text = act.getNumOfChecks().ToString();
-                            lvi.SubItems[4].Text = act.getCurBal().ToString();
-                        }
-                        else
-                        {
-                            lvi.Remove();
-                        }
-                    }
-                    */
                     string routNum = lvi.SubItems[5].Text;
                     string acctNum = lvi.SubItems[0].Text;
 
@@ -387,20 +423,9 @@ namespace checkPlus
         {
             if (checkListView.Items.Count == 0)
             {
-                ListViewItem lvi;
-                /*
-                foreach (pseudoAccount act in database.getAccountsList())
-                {
-                    foreach (pseudoCheck check in act.getChecks())
-                    {
-                        lvi = new ListViewItem(new string[] { act.getAccountNum(), act.getFirstName(), act.getLastName(), check.getCheckNum().ToString(), check.getAmmount().ToString() });
-                        checkListView.Items.Add(lvi);
-                    }
-                }
-                */
                 foreach (Acct_check ac in cpdb.Acct_checks)
                 {
-                    lvi = new ListViewItem
+                    ListViewItem lvi = new ListViewItem
                     (
                         new string[]
                         {
@@ -419,28 +444,6 @@ namespace checkPlus
             {
                 foreach (ListViewItem lvi in checkListView.Items)
                 {
-                    /*
-                    string accountNum = lvi.SubItems[0].Text;
-                    string checkNum = lvi.SubItems[3].Text;
-                    pseudoAccount act = database.getAccountByNum(accountNum);
-                    if (act != null)
-                    {
-                        pseudoCheck check = act.getCheckByNum(checkNum);
-                        if (check != null)
-                        {
-                            lvi.SubItems[0].Text = check.getAccountNum();
-                            lvi.SubItems[1].Text = act.getFirstName();
-                            lvi.SubItems[2].Text = act.getLastName();
-                            lvi.SubItems[3].Text = check.getCheckNum().ToString();
-                            lvi.SubItems[4].Text = check.getAmmount().ToString();
-                            lvi.SubItems[5].Text = check.getRoutingNum();
-                        }
-                        else
-                        {
-                            lvi.Remove();
-                        }
-                    }
-                */
                     string acctNum = lvi.SubItems[0].Text;
                     string routNum = lvi.SubItems[5].Text;
                     string checkNum = lvi.SubItems[3].Text;
@@ -565,79 +568,145 @@ namespace checkPlus
         /*  ---------------------------------------------------------
          *  FUNCTION - saveChangesButton_Click
          *  ---------------------------------------------------------
-         *  called when the user clicks the "Save Changes" button
+         *  called when the user clicks the "Save Changes" button 
+         *      on the accounts tab
+         *      
+         *  verifies the information provided in the text boxes 
+         *      
          *  works only when the user has selected only 1 account
          *      otherwise, an error message will occur
+         *      
          *  uses the information provided in the listing to populate
          *      the text boxes
+         *      
          *  the user can then change the text in the text boxes
          */
         private void saveChangesButton_Click(object sender, EventArgs e)
-        {   //did the user select only one account from the listing?
-            if (accountsListView.SelectedItems.Count == 1)
-            {   //get the index of the item being highlighted
-                //this highlighting disappears once the user clicks "Save Changes"
-                //  so we need to preserve the index
-                int acctListItemInd = accountsListView.FocusedItem.Index;
+        {
+            if (VerifyAccountTextBoxes())
+            {
+                //did the user select only one account from the listing?
+                if (accountsListView.SelectedItems.Count == 1)
+                {   //get the index of the item being highlighted
+                    //this highlighting disappears once the user clicks "Save Changes"
+                    //  so we need to preserve the index
+                    int acctListItemInd = accountsListView.FocusedItem.Index;
 
-                //get the original data
-                string origAccountNum = accountsListView.Items[acctListItemInd].SubItems[0].Text;
-                string origRoutNum = accountsListView.Items[acctListItemInd].SubItems[5].Text;
+                    //get the original data
+                    string origAccountNum = accountsListView.Items[acctListItemInd].SubItems[0].Text;
+                    string origRoutNum = accountsListView.Items[acctListItemInd].SubItems[5].Text;
 
-                //get all the new information (not all of it has to have been changed,
-                //  but it may have been, so we want to grab ALL the things
-                string newFirstName = firstNameBox.Text;
-                string newLastName = lastNameBox.Text;
-                string newRoutNum = routingBox1.Text;
-                string newAddress = stNumBox.Text + " " + stNameBox.Text;
-                string newCity = cityBox.Text;
-                string newState = stateBox.Text;
-                string newZip = zipBox.Text;
-                string newAcctNum = accountBox1.Text;
-                string newPhoneNum = phoneNumBox.Text;
+                    //get all the new information (not all of it has to have been changed,
+                    //  but it may have been, so we want to grab ALL the things
+                    string newFirstName = firstNameBox.Text;
+                    string newLastName = lastNameBox.Text;
+                    string newRoutNum = routingBox1.Text;
+                    string newAddress = addressBox.Text;
+                    string newCity = cityBox.Text;
+                    string newState = stateBox.Text;
+                    string newZip = zipBox.Text;
+                    string newAcctNum = accountBox1.Text;
+                    string newPhoneNum = phoneNumBox.Text;
 
-                Account acctToUpd = accSQL.SelectAccount(accSQL.BuildAccount(origRoutNum, origAccountNum));
-                Account acctNewInfo = accSQL.BuildAccount(
-                    newRoutNum, newAcctNum,
-                    newFirstName, newLastName,
-                    newAddress,
-                    newCity, newState, newZip,
-                    newPhoneNum
-                );
+                    //get the Account object that houses the unique pieces of the original
+                    Account acctToUpd = accSQL.SelectAccount(accSQL.BuildAccount(origRoutNum, origAccountNum));
+                    Account acctNewInfo = accSQL.BuildAccount(
+                        newRoutNum, newAcctNum,
+                        newFirstName, newLastName,
+                        newAddress,
+                        newCity, newState, newZip,
+                        newPhoneNum
+                    );
 
-                //see if an account with the updated information already exists
-                Account tstDupAcct = accSQL.SelectAccount(acctNewInfo);
-
-                if (tstDupAcct != null)
-                {   //if it does, display an error message and do nothing with the changes
-                    DisplayMessageNoResponse(error, "Account with that information already exists.");
+                    //see if an account with the updated information already exists
+                    Account tstDupAcct = accSQL.SelectAccount(acctNewInfo);
+                    if (tstDupAcct != null)
+                    {   //if it does, display an error message and do nothing with the changes
+                        DisplayMessageNoResponse(error, "Account with that information already exists.");
+                    }
+                    else
+                    {   //otherwise, update database account record and update display listing
+                        accSQL.UpdateAccount(acctToUpd, acctNewInfo);
+                        updateAccountListView();
+                        updateCheckListView();
+                    }
                 }
-                else
-                {   //update database account record and update display listing
-                    accSQL.UpdateAccount(acctToUpd, acctNewInfo);
-                    updateAccountListView();
-                }
-
-                /*  OLD STUFF
-                act.setAccountNum(accountBox1.Text);
-                act.setFirstName(firstNameBox.Text);
-                act.setLastName(lastNameBox.Text);
-                act.setRoutingNum(routingBox1.Text);
-                act.setAccountNum(accountBox1.Text);
-                act.setStNum(stNumBox.Text);
-                act.setStName(stNameBox.Text);
-                act.setCity(cityBox.Text);
-                act.setState(stateBox.Text);
-                act.setZip(zipBox.Text);
-                */
+                else { DisplayMessageNoResponse(error, "Please select 1 account."); }
             }
-            else { DisplayMessageNoResponse(error, "Please select 1 account."); }
         }
 
 
-        //==========================================================================================
-        // FUNCTIONs for DELETEing items in the db
-        //==========================================================================================
+        /*  ---------------------------------------------------------
+         *  FUNCTION - updateCheckButton_Click
+         *  ---------------------------------------------------------
+         *  called when the user clicks the "Save Changes" button
+         *  works only when the user has selected only 1 check
+         *      otherwise, an error message will occur
+         *      
+         *  uses the information provided in the listing to populate
+         *      the text boxes
+         *      
+         *  the user can then change the text in the text boxes
+         */
+        private void updateCheckButton_Click(object sender, EventArgs e)
+        {
+            if (VerifyCheckTextBoxes())
+            {
+                //did the user select only one check from the listing?
+                if (checkListView.SelectedItems.Count == 1)
+                {   //get the index of the item being highlighted
+                    //this highlighting disappears once the user clicks "Save Changes"
+                    //  so we need to preserve the index
+                    int chckListItemInd = checkListView.FocusedItem.Index;
+
+                    //get the original data
+                    string origAccountNum = checkListView.Items[chckListItemInd].SubItems[0].Text;
+                    string origRoutNum = checkListView.Items[chckListItemInd].SubItems[5].Text;
+                    string origCheckNum = checkListView.Items[chckListItemInd].SubItems[3].Text;
+
+                    //get all the new information (not all of it has to have been changed,
+                    //  but it may have been, so we want to grab ALL the things)
+                    string newRoutNum = routingBox2.Text;
+                    string newAcctNum = accountBox2.Text;
+                    Decimal newCheckAmt = Convert.ToDecimal(ammountBox.Text);
+                    string newCheckNum = checkNumBox.Text;
+                    DateTime newDateWrit = Convert.ToDateTime(dateWrittenSelector.Text);
+
+                    //get the Acct_check object that houses the unique pieces of the original
+                    Acct_check acct_chkToUpd = acct_chkSQL.BuildAcct_check(origAccountNum, origRoutNum, origCheckNum);
+                    Acct_check acct_chkNewInfo = acct_chkSQL.BuildAcct_check
+                    (newAcctNum, newRoutNum, newCheckNum,
+                        newCheckAmt, newDateWrit
+                    );
+
+                    //see if an acct_check with the updated information already exists
+                    Acct_check tstDupAcct_chk = acct_chkSQL.SelectAcct_check(acct_chkNewInfo);
+
+                    if (tstDupAcct_chk != null)
+                    {   //if it does, display an error message and do nothing with the changes
+                        DisplayMessageNoResponse(error, "Check with that information already exists.");
+                    }
+                    else
+                    {   //update database acct_check record and update display listing
+                        acct_chkSQL.UpdateAcct_check(acct_chkToUpd, acct_chkNewInfo);
+                        updateAccountListView();
+                        updateCheckListView();
+                    }
+                }
+                else { DisplayMessageNoResponse(error, "Please select 1 check."); }
+            }
+        }
+
+
+
+        /*  ==========================================================================================
+         *  ==========================================================================================
+         *  FUNCTIONs for DELETEing items in the db
+         *  ==========================================================================================
+         *  ==========================================================================================
+         */
+
+
 
         /*  --------------------------------------------------------
          *  FUNCTION - deleteAccountButton_Click
@@ -675,63 +744,38 @@ namespace checkPlus
             }
             else { DisplayMessageNoResponse(error, "Please select account(s)."); }
 
-            //clear boxes
-            firstNameBox.Clear();
-            lastNameBox.Clear();
-            routingBox1.Clear();
-            accountBox1.Clear();
-            stNumBox.Clear();
-            stNameBox.Clear();
-            cityBox.Clear();
-            stateBox.Clear();
-            zipBox.Clear();
+            ClearAccountTabTextBoxes();
         }
 
 
-        //------------------------------------------------
-        //  FUNCTION - deleteCheckButton_Click
-        //------------------------------------------------  
-        /*  user clicks Delete Check button
+        /*  ------------------------------------------------
+         *  FUNCTION - deleteCheckButton_Click
+         *  ------------------------------------------------  
+         *  user clicks Delete Check button
          *  based on the values of the fields on the form, 
          * 
          * */
         private void deleteCheckButton_Click(object sender, EventArgs e)
         {
-            //----------------------------------
-            //start linq testing code chunk
-            //----------------------------------
-
-            string acctNum = accountBox2.Text;
-            string routNum = routingBox2.Text;
-            string checkNum = checkNumBox.Text;
-
-            Acct_check tstAcct_check = 
-                acct_chkSQL.DeleteAcct_check(
-                    acct_chkSQL.BuildAcct_check(acctNum, routNum, checkNum));
-
-            if (tstAcct_check == null)
+            if (checkListView.SelectedItems.Count > 0)
             {
-                string message = "" +
-                    "No check matching information in fields.\n"
-                    + "Are there unsaved changes?";
+                string acctNum = accountBox2.Text;
+                string routNum = routingBox2.Text;
+                string checkNum = checkNumBox.Text;
 
-                DisplayMessageNoResponse(error, message);
-            }
-            else
-            {
-                updateAccountListView();
-                updateCheckListView();
+                Acct_check tstAcct_check =
+                    acct_chkSQL.DeleteAcct_check(
+                        acct_chkSQL.BuildAcct_check(acctNum, routNum, checkNum));
 
-                routingBox2.Clear();
-                accountBox2.Clear();
-                fNameBox2.Clear();
-                lNameBox2.Clear();
-                ammountBox.Clear();
-                checkNumBox.Clear();
+                if (tstAcct_check != null)
+                {
+                    updateAccountListView();
+                    updateCheckListView();
+
+                    ClearCheckTabTextBoxes();
+                }
             }
-            //----------------------------------
-            //end linq testing code chunk
-            //----------------------------------
+            else { DisplayMessageNoResponse(error, "Please select check(s)."); }
         }
 
         private void viewChecksSearchButton_Click(object sender, EventArgs e)
@@ -814,52 +858,32 @@ namespace checkPlus
                 lastNameBox.Text = tstAcct.Last_name;
                 routingBox1.Text = accSQL.GetBankRoutingNumber(tstAcct);
                 accountBox1.Text = tstAcct.Account_number;
-                stNameBox.Text = tstAcct.Address;
-                stNumBox.Text = tstAcct.Address;
+                addressBox.Text = tstAcct.Address;
                 cityBox.Text = tstAcct.City;
                 stateBox.Text = tstAcct.State;
                 zipBox.Text = tstAcct.Zip_code;
                 phoneNumBox.Text = tstAcct.Phone_number;
             }
-            else
-            {   //clear boxes
-                firstNameBox.Clear();
-                lastNameBox.Clear();
-                routingBox1.Clear();
-                accountBox1.Clear();
-                stNumBox.Clear();
-                stNameBox.Clear();
-                cityBox.Clear();
-                stateBox.Clear();
-                zipBox.Clear();
-                phoneNumBox.Clear();
-            }
+            else { ClearAccountTabTextBoxes(); }
         }
 
         private void checkListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (checkListView.SelectedItems.Count != 0)
+            if (checkListView.SelectedItems.Count == 1)
             {
                 string acctNum = checkListView.SelectedItems[0].SubItems[0].Text;
                 string routNum = checkListView.SelectedItems[0].SubItems[5].Text;
                 string checkNum = checkListView.SelectedItems[0].SubItems[3].Text;
-                /*
-                string accountNum = checkListView.SelectedItems[0].SubItems[0].Text;
-                pseudoAccount act = database.getAccountByNum(accountNum);
-                string checkNum = checkListView.SelectedItems[0].SubItems[3].Text;
-                pseudoCheck check = act.getCheckByNum(checkNum);
-                */
-                Acct_check tstAcct_check = acct_chkSQL.BuildAcct_check(acctNum, routNum, checkNum);
 
-                fNameBox2.Text = acct_chkSQL.GetFirstName(tstAcct_check);
-                lNameBox2.Text = acct_chkSQL.GetLastName(tstAcct_check);
+                Acct_check tstAcct_check = acct_chkSQL.SelectAcct_check(acct_chkSQL.BuildAcct_check(acctNum, routNum, checkNum));
+                
                 routingBox2.Text = acct_chkSQL.GetRoutingNumber(tstAcct_check);
                 accountBox2.Text = acct_chkSQL.GetAccountNumber(tstAcct_check);
                 ammountBox.Text = tstAcct_check.Amount.ToString();
                 checkNumBox.Text = tstAcct_check.Check_number;
                 dateWrittenSelector.Text = tstAcct_check.Date_written.ToString();
-                dateRecieved.Text = tstAcct_check.Date_received.ToString();
             }
+            else { ClearCheckTabTextBoxes(); }
         }
 
         private void searchUserButton_Click(object sender, EventArgs e)
