@@ -33,6 +33,7 @@ namespace checkPlus
             cpdb.Database.ExecuteSqlCommand("set identity_insert dbo.bank off");
         }
 
+
         /*  -----------------------------------------------------
          *  FUNCTION - BuildAccount
          *  -----------------------------------------------------
@@ -93,7 +94,7 @@ namespace checkPlus
                     Zip_code = prmZip,
                     Country = "United States",
                     Account_number = prmAcctNum,
-                    Phone_number = null
+                    Phone_number = prmPhnNum
                 };
             }
         }
@@ -121,11 +122,15 @@ namespace checkPlus
          */
         public Account SelectAccount(Account prmAcct)
         {
-            return (
-                from a in cpdb.Accounts
-                where a.Account_id == prmAcct.Account_id
-                select a
-            ).FirstOrDefault();
+            if (prmAcct == null) { return null; }
+            else
+            {
+                return (
+                    from a in cpdb.Accounts
+                    where a.Account_id == prmAcct.Account_id
+                    select a
+                ).FirstOrDefault();
+            }
         }
 
 
@@ -209,6 +214,7 @@ namespace checkPlus
             prmAcctToUpdate.Country = prmNewAcctInfo.Country;
             prmAcctToUpdate.Zip_code = prmNewAcctInfo.Zip_code;
             prmAcctToUpdate.Account_number = prmNewAcctInfo.Account_number;
+            prmAcctToUpdate.Phone_number = prmNewAcctInfo.Phone_number;
 
             cpdb.SaveChanges();
         }
@@ -353,11 +359,15 @@ namespace checkPlus
          */
         public Acct_check SelectAcct_check(Acct_check prmAcctCheck)
         {
-            return (
-                from ac in cpdb.Acct_checks
-                where ac.Acct_check_id == prmAcctCheck.Acct_check_id
-                select ac
-            ).FirstOrDefault();
+            if (prmAcctCheck == null) { return null; }
+            else
+            {
+                return (
+                    from ac in cpdb.Acct_checks
+                    where ac.Acct_check_id == prmAcctCheck.Acct_check_id
+                    select ac
+                ).FirstOrDefault();
+            }
         }
 
 
@@ -512,23 +522,66 @@ namespace checkPlus
     {
         private CheckPlusDB cpdb;
         public BankSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
+
+
+        /*  -----------------------------------------------------
+         *  FUNCTION - BuildBank
+         *  -----------------------------------------------------
+         *  
+         * ------------------------------------------------------
+         */
         public Bank BuildBank(string prmRoutNum)
         {
-            return (
+            Bank tstBank = (
                 from b in cpdb.Banks
                 where b.Routing_number == prmRoutNum
                 select b
             ).FirstOrDefault();
+
+            return tstBank;
         }
-        public List<Bank> GetAllBanks() { return cpdb.Banks.ToList(); }
-        public Bank GetBank(Bank prmBank)
+
+        /*  -----------------------------------------------------
+         *  FUNCTION - SelectAllBanks
+         *  -----------------------------------------------------
+         *  
+         * ------------------------------------------------------
+         */
+        public List<Bank> SelectAllBanks()
         {
             return (
                 from b in cpdb.Banks
-                where b.Bank_id == prmBank.Bank_id
                 select b
-            ).FirstOrDefault();
+            ).ToList();
         }
+
+
+        /*  -----------------------------------------------------
+         *  FUNCTION - SelectBank
+         *  -----------------------------------------------------
+         *  
+         * ------------------------------------------------------
+         */
+        public Bank SelectBank(Bank prmBank)
+        {
+            if (prmBank == null) { return null; }
+            else
+            {
+                return (
+                    from b in cpdb.Banks
+                    where b.Bank_id == prmBank.Bank_id
+                    select b
+                ).FirstOrDefault();
+            }
+        }
+
+
+        /*  -----------------------------------------------------
+         *  FUNCTION - DeleteBank
+         *  -----------------------------------------------------
+         *
+         * ------------------------------------------------------
+         */
         public void DeleteBank(Bank prmBank)
         {
             cpdb.Banks.Remove((
@@ -539,6 +592,14 @@ namespace checkPlus
 
             cpdb.SaveChanges();
         }
+
+
+        /*  -----------------------------------------------------
+         *  FUNCTION - InsertBank
+         *  -----------------------------------------------------
+         *  
+         * ------------------------------------------------------
+         */
         public Bank InsertBank(Bank prmBank)
         {
             var tstBank = (
@@ -547,13 +608,15 @@ namespace checkPlus
                 select b
             ).FirstOrDefault();
 
+            Bank newBank;
             if (tstBank == null)
             {
-                cpdb.Banks.Add(prmBank);
+                newBank = cpdb.Banks.Add(prmBank);
                 cpdb.SaveChanges();
             }
+            else { newBank = tstBank; }
 
-            return tstBank;
+            return newBank;
         }
     }
 }

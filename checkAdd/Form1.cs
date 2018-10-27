@@ -28,10 +28,12 @@ namespace checkPlus
         CheckPlusDB cpdb;
         AccountSQLer accSQL;
         Acct_checkSQLer acct_chkSQL;
+        BankSQLer bankSQL;
 
         pseudoDatabase database = new pseudoDatabase();
         UsersCollection uc = new UsersCollection();
         User activeUser = null;
+
         public ammountLabel()
         {
             InitializeComponent();
@@ -49,6 +51,7 @@ namespace checkPlus
             
             accSQL = new AccountSQLer(cpdb);
             acct_chkSQL = new Acct_checkSQLer(cpdb);
+            bankSQL = new BankSQLer(cpdb);
 
             updateAccountListView();
             updateCheckListView();
@@ -57,6 +60,7 @@ namespace checkPlus
             accountsListView.FullRowSelect = true;
             checkListView.FullRowSelect = true;
         }
+
 
         /*  --------------------------------------------------------
          *  FUNCTION - ClearAccountTabTextBoxes
@@ -75,6 +79,7 @@ namespace checkPlus
             phoneNumBox.Clear();
         }
 
+
         /*  --------------------------------------------------------
          *  FUNCTION - ClearCheckTabTextBoxes
          *  --------------------------------------------------------
@@ -87,24 +92,63 @@ namespace checkPlus
             ammountBox.Clear();
         }
 
+        //i think you're down the right track here, but keep working on implementing
+        public bool VerifyIntegerStringInput(string prmInt)
+        {
+            try { Convert.ToInt64(prmInt); }
+            catch { return false; }
+            return true;
+        }
+
 
         /*  --------------------------------------------------------
-         *  FUNCTION - VerifyAccountTextBoxes
+         *  FUNCTION - VerifyDecimalTypeStringInput
          *  --------------------------------------------------------
          */
+        public bool VerifyDecimalStringInput(string prmDec)
+        {
+            try { Convert.ToDecimal(prmDec); }
+            catch { return false; }
+            return true;
+        }
+
+
+        public bool VerifyPhoneNum(string prmPhone)
+        {
+            return true;
+        }
+
+
         public bool VerifyAccountTextBoxes()
         {
+            string fName = firstNameBox.Text;
+            string lName = lastNameBox.Text;
+            string routNum = routingBox1.Text;
+            string acctNum = accountBox1.Text;
+            string addr = addressBox.Text;
+            string city = cityBox.Text;
+            string state = stateBox.Text;
+            string zip = zipBox.Text;
+            string phoneNum = phoneNumBox.Text;
+
             string badResponse = "Please enter a";
-            if (firstNameBox.Text == "") { badResponse += " First Name."; }
-            else if (lastNameBox.Text == "") { badResponse += " Last Name."; }
-            else if (routingBox1.Text == "") { badResponse += " Routing Number."; }
-            else if (accountBox1.Text == "") { badResponse += "n Account Number."; }
-            else if (addressBox.Text == "") { badResponse += "n Address."; }
-            else if (cityBox.Text == "") { badResponse += " City."; }
-            else if (stateBox.Text == "") { badResponse += " State."; }
-            else if (zipBox.Text == "") { badResponse += " ZIP code"; }
-            else if (phoneNumBox.Text == "") { badResponse += " Phone Number."; }
-            else { return true; }
+            if (fName == "") { badResponse += " First Name."; }
+            else if (lName == "") { badResponse += " Last Name."; }
+            else if (routNum == "") { badResponse += " Routing Number."; }
+            else if (acctNum == "") { badResponse += "n Account Number."; }
+            else if (addr == "") { badResponse += "n Address."; }
+            else if (city == "") { badResponse += " City."; }
+            else if (state == "") { badResponse += " State."; }
+            else if (zip == "") { badResponse += " ZIP code"; }
+            else if (phoneNum == "") { badResponse += " Phone Number."; }
+            else
+            {
+                Bank tstBank = bankSQL.SelectBank(bankSQL.BuildBank(routNum));
+                Account tstAcct = accSQL.SelectAccount(accSQL.BuildAccount(routNum, acctNum));
+
+                if (tstBank == null) { badResponse += " information of an existing Bank."; }
+                else { return true; }
+            }
 
             DisplayMessageNoResponse(error, badResponse);
             return false;
@@ -117,16 +161,35 @@ namespace checkPlus
          */
         public bool VerifyCheckTextBoxes()
         {
-            string badResponse = "Please enter a";
-            if (routingBox2.Text == "") { badResponse += " Routing Number."; }
-            else if (accountBox2.Text == "") { badResponse += "n Account Number."; }
-            else if (ammountBox.Text == "") { badResponse += "n Amount."; }
-            else if (checkNumBox.Text == "") { badResponse += " Check Number."; }
-            else { return true; }
+            string routNum = routingBox2.Text;
+            string acctNum = accountBox2.Text;
+            string amount = ammountBox.Text;
+            string checkNum = checkNumBox.Text;
+
+            string badResponse = "Please enter";
+
+            if (routNum == "") { badResponse += " a Routing Number."; }
+            else if (acctNum == "") { badResponse += " an Account Number."; }
+            else if (amount == "") { badResponse += " an Amount."; }
+            else if (checkNum == "") { badResponse += " a Check Number."; }
+            else if (!VerifyIntegerStringInput(routNum)) { badResponse += " a valid Routing Number."; }
+            else if (!VerifyIntegerStringInput(acctNum)) { badResponse += " a valid Account Number."; }
+            else if (!VerifyDecimalStringInput(amount)) { badResponse += " a valid money Amount."; }
+            else if (!VerifyIntegerStringInput(checkNum)) { badResponse += " a valid check Number."; }
+            else
+            {
+                Bank tstBank = bankSQL.SelectBank(bankSQL.BuildBank(routNum));
+                Account tstAcct = accSQL.SelectAccount(accSQL.BuildAccount(routNum, acctNum));
+
+                if (tstBank == null) { badResponse += " information of an existing Bank."; }
+                else if (tstAcct == null) { badResponse += " information of an existing Account."; }
+                else { return true; }
+            }
 
             DisplayMessageNoResponse(error, badResponse);
             return false;
         }
+
 
         /*  --------------------------------------------------------
          *  FUNCTION - DisplayMessageNoResponse
@@ -140,6 +203,7 @@ namespace checkPlus
         }
 
 
+        
         private void TabControl1_Selected(Object sender, TabControlEventArgs e)
         {
             if (tabControl1.SelectedIndex != 0)
@@ -167,6 +231,66 @@ namespace checkPlus
             }
         }
 
+
+
+        /*  ====================================================================================================================
+         *  ====================================================================================================================
+         *  FUNCTIONs for logging into the application
+         *  ====================================================================================================================
+         *  ====================================================================================================================
+         */
+
+
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            string uName = usernameBox.Text;
+            string pWord = passwordBox.Text;
+
+            foreach (User usr in uc.getUsers())
+            {
+                if (usr.getUserName() == uName && usr.getPassword() == pWord)
+                {
+                    activeUser = usr;
+                    userLabel.Text = activeUser.getFirstName() + " " + activeUser.getLastName();
+                    userLabel.ForeColor = Color.Black;
+                    if (activeUser.adminPrivaleges)
+                    {
+                        privilegesLabel2.Text = "Admininstrator Privileges";
+                        deleteAccountButton.Enabled = true;
+                        deleteCheckButton.Enabled = true;
+                        deleteUserButton.Enabled = true;
+
+                    }
+                    else if (activeUser.supervisorPrivaleges)
+                    {
+                        privilegesLabel2.Text = "Supevisor Privileges";
+                        deleteAccountButton.Enabled = true;
+                        deleteCheckButton.Enabled = true;
+                    }
+                    else
+                    {
+                        privilegesLabel2.Text = "User Privileges";
+                        deleteCheckButton.Enabled = true;
+                    }
+                    privilegesLabel2.ForeColor = Color.Black;
+                    return;
+                }
+            }
+            // complain that username or password is incorrect
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            activeUser = null;
+            userLabel.Text = "Not signed in yet";
+            userLabel.ForeColor = Color.DarkRed;
+            privilegesLabel2.Text = "Not signed in yet";
+            privilegesLabel2.ForeColor = Color.DarkRed;
+            deleteUserButton.Enabled = false;
+            deleteAccountButton.Enabled = false;
+            deleteCheckButton.Enabled = false;
+        }
 
 
         /*  ====================================================================================================================
@@ -291,7 +415,8 @@ namespace checkPlus
                             acct_chkSQL.GetFirstName(insAcct_check),
                             acct_chkSQL.GetLastName(insAcct_check),
                             insAcct_check.Check_number,
-                            insAcct_check.Amount.ToString()
+                            insAcct_check.Amount.ToString(),
+                            acct_chkSQL.GetRoutingNumber(insAcct_check)
                         }
                     )
                     ;
@@ -307,14 +432,12 @@ namespace checkPlus
         }
 
 
-
         /*  ====================================================================================================================
          *  ====================================================================================================================
          *  FUNCTIONs for UPDATEing records in the database
          *  ====================================================================================================================
          *  ====================================================================================================================
          */
-
 
 
         public void updateUserListView()
@@ -469,56 +592,6 @@ namespace checkPlus
         }
 
 
-        private void loginButton_Click(object sender, EventArgs e)
-        {
-            string uName = usernameBox.Text;
-            string pWord = passwordBox.Text;
-
-            foreach(User usr in uc.getUsers())
-            {
-                if (usr.getUserName() == uName && usr.getPassword() == pWord)
-                {
-                    activeUser = usr;
-                    userLabel.Text = activeUser.getFirstName() + " " + activeUser.getLastName();
-                    userLabel.ForeColor = Color.Black;
-                    if (activeUser.adminPrivaleges)
-                    {
-                        privilegesLabel2.Text = "Admininstrator Privileges";
-                        deleteAccountButton.Enabled = true;
-                        deleteCheckButton.Enabled = true;
-                        deleteUserButton.Enabled = true;
-
-                    }
-                    else if (activeUser.supervisorPrivaleges)
-                    {
-                        privilegesLabel2.Text = "Supevisor Privileges";
-                        deleteAccountButton.Enabled = true;
-                        deleteCheckButton.Enabled = true;
-                    }
-                    else
-                    {
-                        privilegesLabel2.Text = "User Privileges";
-                        deleteCheckButton.Enabled = true;
-                    }
-                    privilegesLabel2.ForeColor = Color.Black;
-                    return;
-                }
-            }
-            // complain that username or password is incorrect
-        }
-
-        private void logoutButton_Click(object sender, EventArgs e)
-        {
-            activeUser = null;
-            userLabel.Text = "Not signed in yet";
-            userLabel.ForeColor = Color.DarkRed;
-            privilegesLabel2.Text = "Not signed in yet";
-            privilegesLabel2.ForeColor = Color.DarkRed;
-            deleteUserButton.Enabled = false;
-            deleteAccountButton.Enabled = false;
-            deleteCheckButton.Enabled = false;
-        }
-
         private void searchButton_Click(object sender, EventArgs e)
         {
             accountsListView.SelectedItems.Clear();
@@ -566,6 +639,17 @@ namespace checkPlus
             }
         }
 
+
+
+        /*  ====================================================================================================================
+         *  ====================================================================================================================
+         *  FUNCTIONs for UPDATEing records in the database
+         *  ====================================================================================================================
+         *  ====================================================================================================================
+         */
+
+
+
         /*  ---------------------------------------------------------
          *  FUNCTION - saveChangesButton_Click
          *  ---------------------------------------------------------
@@ -583,11 +667,10 @@ namespace checkPlus
          *  the user can then change the text in the text boxes
          */
         private void saveChangesButton_Click(object sender, EventArgs e)
-        {
-            if (VerifyAccountTextBoxes())
+        {   //did the user select only one account from the listing?
+            if (accountsListView.SelectedItems.Count == 1)
             {
-                //did the user select only one account from the listing?
-                if (accountsListView.SelectedItems.Count == 1)
+                if (VerifyAccountTextBoxes())
                 {   //get the index of the item being highlighted
                     //this highlighting disappears once the user clicks "Save Changes"
                     //  so we need to preserve the index
@@ -621,6 +704,7 @@ namespace checkPlus
 
                     //see if an account with the updated information already exists
                     Account tstDupAcct = accSQL.SelectAccount(acctNewInfo);
+
                     if (tstDupAcct != null)
                     {   //if it does, display an error message and do nothing with the changes
                         DisplayMessageNoResponse(error, "Account with that information already exists.");
@@ -628,12 +712,16 @@ namespace checkPlus
                     else
                     {   //otherwise, update database account record and update display listing
                         accSQL.UpdateAccount(acctToUpd, acctNewInfo);
+
+                        accountsListView.Items[acctListItemInd].SubItems[0].Text = acctToUpd.Account_number;
+                        accountsListView.Items[acctListItemInd].SubItems[5].Text = accSQL.GetBankRoutingNumber(acctToUpd);
+
                         updateAccountListView();
                         updateCheckListView();
                     }
                 }
-                else { DisplayMessageNoResponse(error, "Please select 1 account."); }
             }
+            else { DisplayMessageNoResponse(error, "Please select 1 account."); }
         }
 
 
@@ -651,10 +739,9 @@ namespace checkPlus
          */
         private void updateCheckButton_Click(object sender, EventArgs e)
         {
-            if (VerifyCheckTextBoxes())
-            {
-                //did the user select only one check from the listing?
-                if (checkListView.SelectedItems.Count == 1)
+            if (checkListView.SelectedItems.Count == 1)
+            {   //did the user select only one check from the listing?
+                if (VerifyCheckTextBoxes())
                 {   //get the index of the item being highlighted
                     //this highlighting disappears once the user clicks "Save Changes"
                     //  so we need to preserve the index
@@ -676,7 +763,8 @@ namespace checkPlus
                     //get the Acct_check object that houses the unique pieces of the original
                     Acct_check acct_chkToUpd = acct_chkSQL.BuildAcct_check(origAccountNum, origRoutNum, origCheckNum);
                     Acct_check acct_chkNewInfo = acct_chkSQL.BuildAcct_check
-                    (newAcctNum, newRoutNum, newCheckNum,
+                    (
+                        newAcctNum, newRoutNum, newCheckNum,
                         newCheckAmt, newDateWrit
                     );
 
@@ -690,12 +778,17 @@ namespace checkPlus
                     else
                     {   //update database acct_check record and update display listing
                         acct_chkSQL.UpdateAcct_check(acct_chkToUpd, acct_chkNewInfo);
+
+                        checkListView.Items[chckListItemInd].SubItems[0].Text = acct_chkSQL.GetAccountNumber(acct_chkToUpd);
+                        checkListView.Items[chckListItemInd].SubItems[5].Text = acct_chkSQL.GetRoutingNumber(acct_chkToUpd);
+                        checkListView.Items[chckListItemInd].SubItems[3].Text = acct_chkToUpd.Check_number;
+
                         updateAccountListView();
                         updateCheckListView();
                     }
                 }
-                else { DisplayMessageNoResponse(error, "Please select 1 check."); }
             }
+            else { DisplayMessageNoResponse(error, "Please select 1 check."); }
         }
 
 
@@ -760,20 +853,23 @@ namespace checkPlus
         {
             if (checkListView.SelectedItems.Count > 0)
             {
-                string acctNum = accountBox2.Text;
-                string routNum = routingBox2.Text;
-                string checkNum = checkNumBox.Text;
-
-                Acct_check tstAcct_check =
-                    acct_chkSQL.DeleteAcct_check(
-                        acct_chkSQL.BuildAcct_check(acctNum, routNum, checkNum));
-
-                if (tstAcct_check != null)
+                foreach (ListViewItem lvi in checkListView.SelectedItems)
                 {
-                    updateAccountListView();
-                    updateCheckListView();
+                    string acctNum = lvi.SubItems[0].Text;
+                    string routNum = lvi.SubItems[5].Text;
+                    string checkNum = lvi.SubItems[3].Text;
 
-                    ClearCheckTabTextBoxes();
+                    Acct_check tstAcct_check = acct_chkSQL.SelectAcct_check(acct_chkSQL.BuildAcct_check(acctNum, routNum, checkNum));
+
+                    if (tstAcct_check != null)
+                    {
+                        acct_chkSQL.DeleteAcct_check(tstAcct_check);
+
+                        updateAccountListView();
+                        updateCheckListView();
+
+                        ClearCheckTabTextBoxes();
+                    }
                 }
             }
             else { DisplayMessageNoResponse(error, "Please select check(s)."); }
