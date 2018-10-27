@@ -13,6 +13,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Configuration;
 using System.Data.Common;
 using System.Text.RegularExpressions;
+using checkAdd;
 
 namespace checkPlus
 {
@@ -953,5 +954,12 @@ namespace checkPlus
         private void lastNameLabel_Click(object sender, EventArgs e) { }
         private void zipLabel_Click(object sender, EventArgs e) { }
         private void routingLabel1_Click(object sender, EventArgs e) { }
+
+        private void unitTestsButton_Click(object sender, EventArgs e)
+        {
+            TestEntityAccess unitTest = new TestEntityAccess();
+            unitTest.runTests();
+            unitTestBox.Text = unitTest.getTestStr();
+        }
     }
 }
