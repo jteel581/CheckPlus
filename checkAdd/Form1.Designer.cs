@@ -133,6 +133,8 @@
             this.userLabel = new System.Windows.Forms.Label();
             this.privilegesLabel = new System.Windows.Forms.Label();
             this.privilegesLabel2 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.paidChkBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.homePage.SuspendLayout();
             this.manageAccountPage.SuspendLayout();
@@ -355,6 +357,7 @@
             this.searchButton.TabIndex = 62;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Visible = false;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // accountNameSearchBox
@@ -618,6 +621,8 @@
             // 
             // manageCheckPage
             // 
+            this.manageCheckPage.Controls.Add(this.paidChkBox);
+            this.manageCheckPage.Controls.Add(this.label9);
             this.manageCheckPage.Controls.Add(this.deleteCheckButton);
             this.manageCheckPage.Controls.Add(this.updateCheckButton);
             this.manageCheckPage.Controls.Add(this.dateWrittenlabel);
@@ -719,6 +724,7 @@
             this.viewChecksSearchButton.TabIndex = 68;
             this.viewChecksSearchButton.Text = "Search";
             this.viewChecksSearchButton.UseVisualStyleBackColor = true;
+            this.viewChecksSearchButton.Visible = false;
             this.viewChecksSearchButton.Click += new System.EventHandler(this.viewChecksSearchButton_Click);
             // 
             // viewCheckNameBox
@@ -1194,6 +1200,25 @@
             this.privilegesLabel2.TabIndex = 21;
             this.privilegesLabel2.Text = "Not signed in yet";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(823, 277);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 17);
+            this.label9.TabIndex = 101;
+            this.label9.Text = "Paid:";
+            // 
+            // paidChkBox
+            // 
+            this.paidChkBox.AutoSize = true;
+            this.paidChkBox.Location = new System.Drawing.Point(874, 278);
+            this.paidChkBox.Name = "paidChkBox";
+            this.paidChkBox.Size = new System.Drawing.Size(18, 17);
+            this.paidChkBox.TabIndex = 102;
+            this.paidChkBox.UseVisualStyleBackColor = true;
+            // 
             // ammountLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1327,7 +1352,8 @@
         private System.Windows.Forms.ColumnHeader acctRoutNumCH;
         private System.Windows.Forms.TextBox phoneNumBox;
         private System.Windows.Forms.Label phoneNumLabel;
+        private System.Windows.Forms.CheckBox paidChkBox;
+        private System.Windows.Forms.Label label9;
     }
 }
-
 
