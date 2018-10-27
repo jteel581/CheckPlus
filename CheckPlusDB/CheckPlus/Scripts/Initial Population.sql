@@ -1,4 +1,4 @@
-﻿/*
+/*
 	purpose:	just to populate the database with dummy data
 	notes:		must copy-paste into ssms and run manually
 */
@@ -169,4 +169,3 @@ select	100008,				'000001',			255.61,			'2018-07-24',	100007		union
 select	100009,				'000072',			335.67,			'2018-07-24',	100008		union
 select	100017,				'000110',			214.76,			'2018-07-24',	100001
 ;
-
