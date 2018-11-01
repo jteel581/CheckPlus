@@ -132,6 +132,18 @@ namespace checkPlus
                 ).FirstOrDefault();
             }
         }
+        public Account SelectAccount(string routNum, string acctNum)
+        {
+            Account tstAccount = (
+                from a in cpdb.Accounts
+                join b in cpdb.Banks on a.Bank_id equals b.Bank_id
+                where b.Routing_number == routNum
+                    && a.Account_number == acctNum
+                select a
+            ).FirstOrDefault();
+
+            return tstAccount;
+        }
 
 
         /*  -----------------------------------------------------
@@ -573,6 +585,22 @@ namespace checkPlus
                     select b
                 ).FirstOrDefault();
             }
+        }
+        public Bank SelectBank(string routNum)
+        {
+            return (
+                from b in cpdb.Banks
+                where b.Routing_number == routNum
+                select b
+            ).FirstOrDefault();
+        }
+        public Bank SelectBank(int bankID)
+        {
+            return (
+                from b in cpdb.Banks
+                where b.Bank_id == bankID
+                select b
+            ).FirstOrDefault();
         }
 
 

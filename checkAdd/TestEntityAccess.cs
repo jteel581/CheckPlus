@@ -11,6 +11,9 @@ namespace checkAdd
     class TestEntityAccess
     {
         string testString;
+
+        DatabaseHandler CPDB = DatabaseHandler.Instance;
+
         CheckPlusDB cpdb;
         AccountSQLer accSQL;
         Acct_checkSQLer acct_chkSQL;

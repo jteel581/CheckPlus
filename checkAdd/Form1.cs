@@ -30,7 +30,8 @@ namespace checkPlus
         Acct_checkSQLer acct_chkSQL;
         BankSQLer bankSQL;
 
-        pseudoDatabase database = new pseudoDatabase();
+        AccountHandler AccountHand = new AccountHandler();
+        
         UsersCollection uc = new UsersCollection();
         User activeUser = null;
 
@@ -203,6 +204,17 @@ namespace checkPlus
         }
 
 
+        /*  --------------------------------------------------------
+         *  FUNCTION - AddAccountToListView
+         *  --------------------------------------------------------
+         *  adds new account information to the list view in the "Manage Accounts" tab
+         */
+        public void AddAccountToListView(string acctNum, string firstName, string lastName, string curBal, string countChecks, string routNum)
+        {
+
+        }
+
+
         
         private void TabControl1_Selected(Object sender, TabControlEventArgs e)
         {
@@ -328,14 +340,21 @@ namespace checkPlus
                 string zip = zipBox.Text;
                 string phnNum = phoneNumBox.Text;
 
-                Account dupCheckAcct = accSQL.SelectAccount(accSQL.BuildAccount(routingNumber, accountNumber));
+                Account accountToInsert = AccountHand.InsertAccount(routingNumber, accountNumber, firstName, lastName, address, city, state, zip, phnNum);
 
-                if (dupCheckAcct != null)
-                {   //if account with that combo of rout num and acct num exists already, report dup error
+                //Account dupCheckAcct = accSQL.SelectAccount(accSQL.BuildAccount(routingNumber, accountNumber));
+                if (accountToInsert != null)
+                {
                     DisplayMessageNoResponse(error, "Account already exists.");
                 }
+                /*
+                if (AccountToInsert != null)
+                {   //if account with that combo of rout num and acct num exists already, report dup error
+                    DisplayMessageNoResponse(error, "Account already exists.");
+                }*/
                 else
                 {   //otherwise, insert a new account object and update the listing
+                    /*
                     accSQL.TurnOnInsert();
 
                     Account insAcct = accSQL.InsertAccount
@@ -347,18 +366,28 @@ namespace checkPlus
                             phnNum
                         )
                     );
+                    */
 
-                    ListViewItem lvi = new ListViewItem
-                    (new string[]
-                        {   insAcct.Account_number,
+                    /*
+                    ListViewItem lvi = new ListViewItem(new string[]
+                    {
+                        insAcct.Account_number,
                         insAcct.First_name, insAcct.Last_name,
                         accSQL.GetChecksInAccount(insAcct).Count().ToString(),
                         accSQL.GetAccountBalance(insAcct).ToString(),
                         accSQL.GetBankRoutingNumber(insAcct)
-                        }
+                    }
+                    
+
+                    {
+                        AccountToInsert.AccountInst.Account_number,
+                        AccountToInsert.AccountInst.First_name, AccountToInsert.AccountInst.Last_name,
+                        
+                    }
                     );
                     accountsListView.Items.Add(lvi);
                     DisplayMessageNoResponse(success, "New account added.");
+                    */
 
                     accSQL.TurnOffInsert();
 
@@ -1036,7 +1065,7 @@ namespace checkPlus
         private void saveChangesButton_Click_1(object sender, EventArgs e)
         {
             string accountNum = accountsListView.SelectedItems[0].SubItems[0].Text;
-            pseudoAccount act = database.getAccountByNum(accountNum);
+            //pseudoAccount act = database.getAccountByNum(accountNum);
 
         }
 

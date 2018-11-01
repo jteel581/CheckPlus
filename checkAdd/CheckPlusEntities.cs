@@ -54,6 +54,10 @@ namespace checkPlus
         public DateTime Date_received { get; set; }
         public int? Amount_paid { get; set; }
         public DateTime? Date_paid { get; set; }
+        public DateTime? Response_date { get; set; }
+        public DateTime? Letter1_send_date { get; set; }
+        public DateTime? Letter2_send_date { get; set; }
+        public DateTime? Letter3_send_date { get; set; }
         public int Client_id { get; set; }
     }
 
@@ -113,10 +117,10 @@ namespace checkPlus
     {
         [Key]
         public int Letter_stage_id { get; set; }
-        public DateTime? Date_sent_stg_1 { get; set; }
-        public DateTime? Date_sent_stg_2 { get; set; }
-        public DateTime? Date_sent_stg_3 { get; set; }
-        public DateTime? Date_response { get; set; }
+        public int Client_id { get; set; }
+        public string Letter1_text { get; set; }
+        public string Letter2_text { get; set; }
+        public string Letter3_text { get; set; }
     }
 
     class CheckPlusDB : DbContext

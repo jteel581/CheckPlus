@@ -19,3 +19,7 @@ C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\Check
 C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\CheckPlusDB\CheckPlus\bin\Debug\CheckPlus.pdb
 C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\CheckPlusDB\CheckPlus\obj\Debug\CheckPlus.dll
 C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\CheckPlusDB\CheckPlus\obj\Debug\CheckPlus.pdb
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\Model.xml
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\refactor.xml
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\postdeploy.sql
+C:\Users\imora\Documents\GitHub\CheckPlus\CheckPlusDB\CheckPlus\obj\Debug\predeploy.sql
