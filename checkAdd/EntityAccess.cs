@@ -487,17 +487,19 @@ namespace checkPlus
          *  
          * ------------------------------------------------------
          */
-        public void UpdateAcct_check(Acct_check prmChkToUpdate, Acct_check prmChkNewInfo)
+        public Acct_check UpdateAcct_check(Acct_check origCheck, Acct_check newInfoCheck)
         {
-            prmChkToUpdate.Account_id = prmChkNewInfo.Account_id;
-            prmChkToUpdate.Amount = prmChkNewInfo.Amount;
-            prmChkToUpdate.Check_number = prmChkNewInfo.Check_number;
-            prmChkToUpdate.Date_written = prmChkNewInfo.Date_written;
-            prmChkToUpdate.Date_received = prmChkNewInfo.Date_received;
-            prmChkToUpdate.Date_paid = prmChkNewInfo.Date_paid;
-            prmChkToUpdate.Amount_paid = prmChkNewInfo.Amount_paid;
+            origCheck.Account_id = newInfoCheck.Account_id;
+            origCheck.Amount = newInfoCheck.Amount;
+            origCheck.Check_number = newInfoCheck.Check_number;
+            origCheck.Date_written = newInfoCheck.Date_written;
+            origCheck.Date_received = newInfoCheck.Date_received;
+            origCheck.Date_paid = newInfoCheck.Date_paid;
+            origCheck.Amount_paid = newInfoCheck.Amount_paid;
 
             cpdb.SaveChanges();
+
+            return SelectAcct_check(GetRoutingNumber(newInfoCheck), GetAccountNumber(newInfoCheck), newInfoCheck.Check_number);
         }
 
         /*  -----------------------------------------------------

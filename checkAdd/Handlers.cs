@@ -117,6 +117,33 @@ namespace checkPlus
             return true;
         }
 
+
+        /*  --------------------------------------------------------
+         *  FUNCTIONs for verifying data access object instances
+         *      VerifyExistingBank - verifying Banks
+         *      VerfiyValidAccount - verifying Accounts
+         *      VerifyExistingCheck - verifying Acct_checks
+         *  --------------------------------------------------------
+         */
+        public bool VerifyExistingBank(string routNum)
+        {
+            Bank tstBank = BankHand.SelectBank(routNum);
+            if (tstBank == null) { return false; }
+            else { return true; }
+        }
+        public bool VerifyExistingAccount(string routNum, string acctNum)
+        {
+            Account tstAccount = AccountHand.SelectAccount(routNum, acctNum);
+            if (tstAccount == null) { return false; }
+            else { return true; }
+        }
+        public bool VerifyExistingCheck(string routNum, string acctNum, string checkNum)
+        {
+            Acct_check tstCheck = CheckHand.SelectCheck(routNum, acctNum, checkNum);
+            if (tstCheck == null) { return false; }
+            else { return true; }
+        }
+
         public AccountHandler GetAccountHandler() { return AccountHand; }
         public CheckHandler GetCheckHandler() { return CheckHand; }
         public BankHandler GetBankHandler() { return BankHand; }
@@ -185,6 +212,34 @@ namespace checkPlus
 
 
         /*  ---------------------------------------------------------------
+         *  FUNCTIONs for sundry verifications
+         *  ---------------------------------------------------------------
+         *  all stolen from ApplicationHandler
+         *  probably not the safest way to go about it, 
+         *      but this way, there's no code duplication
+         */
+        public bool VerifyIntegerStringInput(string intString)
+        {
+            ApplicationHandler appHand = new ApplicationHandler();
+            return appHand.VerifyIntegerStringInput(intString);
+        }
+        public bool VerifyDecimalStringInput(string decString)
+        {
+            ApplicationHandler appHand = new ApplicationHandler();
+            return appHand.VerifyDecimalStringInput(decString);
+        }
+        public bool VerifyExistingBank(string routNum)
+        {
+            ApplicationHandler appHand = new ApplicationHandler();
+            return appHand.VerifyExistingBank(routNum);
+        }
+        public bool VerifyExistingAccount(string routNum, string acctNum)
+        {
+            ApplicationHandler appHand = new ApplicationHandler();
+            return appHand.VerifyExistingAccount(routNum, acctNum);
+        }
+
+        /*  ---------------------------------------------------------------
          *  FUNCTION - VerifyAccountInfoInputWithStringFeedback
          *  ---------------------------------------------------------------
          *  pass in all the text input from the gui when working with accounts
@@ -208,10 +263,12 @@ namespace checkPlus
             else if (state == "") { badResponse += " State."; }
             else if (zip == "") { badResponse += " ZIP code"; }
             else if (phoneNum == "") { badResponse += " Phone Number."; }
+            else if (!VerifyIntegerStringInput(phoneNum) && phoneNum.Length >= 9) { badResponse += " a valid Phone Number. At least 9 digits."; }
+            else if (!VerifyIntegerStringInput(routNum)) { badResponse += " valid Routing Number."; }
+            else if (!VerifyIntegerStringInput(acctNum)) { badResponse += " valid Account Number."; }
             else
             {
-                Bank tstBank = BankSQL.SelectBank(routNum);
-                if (tstBank == null) { badResponse += " information of an existing Bank."; }
+                if (!VerifyExistingBank(routNum)) { badResponse += " information of an existing Bank."; }
                 else
                 {   //return an empty string signifying that everything has been verified
                     return "";
@@ -283,9 +340,7 @@ namespace checkPlus
         /*  ---------------------------------------------------------------
          *  FUNCTION - UpdateAccount
          *  ---------------------------------------------------------------
-         *  update an existing account record
-         *      after validating that a record with the <newRoutNum> and <newAcctNum>
-         *      does not already exist
+         *  update an existing account record after some validation
          *      
          *  if the new information cannot produce a valid account, return null
          *  otherwise, return the account with its new info
@@ -293,31 +348,24 @@ namespace checkPlus
         public Account UpdateAccount(
             string origRoutNum, string origAcctNum,
             string newRoutNum, string newAcctNum, string newFirstName, string newLastName, string newAddress, string newCity, string newState, string newZip, string newPhone)
-        {
-            Account origAccount = AccountSQL.SelectAccount(origRoutNum, origAcctNum);
-            Account dupTestAccount = null;
-
-            //if there is an attempt to change the routing number or account number
+        {   //if there is an attempt to change the routing number or account number
             if (origRoutNum != newRoutNum && origAcctNum != newAcctNum)
-            {   //then check to see if the new values would correspond to an existing account
-                //if they do, dupTestAccount will be set to that account, otherwise, it will remain null
-                dupTestAccount = AccountSQL.SelectAccount(newRoutNum, newAcctNum);
+            {   //if there was already an account with that routing number and account number,
+                //  return null to signify failure 
+                //  since we don't want to update an account's unique info 
+                //  to another account's unique info
+                if (VerifyExistingAccount(newRoutNum, newAcctNum)) { return null; }
             }
+            //otherwise, pull the orignial account and build an Account object that will have the new information
+            Account origAccount = AccountSQL.SelectAccount(origRoutNum, origAcctNum);
+            Account newInfoAccount = BuildNewAccount(
+                newRoutNum, newAcctNum,
+                newFirstName, newLastName, newAddress, newCity, newState, newZip, newPhone);
 
-            //if there was no account with that routing number and account number
-            if (dupTestAccount == null)
-            {   //then build an Account object that will have the new information
-                Account newInfoAccount = BuildNewAccount(
-                    newRoutNum, newAcctNum,
-                    newFirstName, newLastName, newAddress, newCity, newState, newZip, newPhone);
-
-                //if we cannot build that object due to bad bank info, return null
-                if (newInfoAccount == null) { return null; }
-                //otherwise, update the account with the new information and return an Account object with the new info
-                else { return AccountSQL.UpdateAccount(origAccount, newInfoAccount); };
-            }
-            //otherwise, return null to signify failer to update the account
-            else { return null; }
+            //if we cannot build that object due to bad bank info, return null
+            if (newInfoAccount == null) { return null; }
+            //otherwise, update the account with the new information and return an Account object with the new info
+            else { return AccountSQL.UpdateAccount(origAccount, newInfoAccount); };
         }
 
 
@@ -331,7 +379,7 @@ namespace checkPlus
         {
             Account tstAccount = AccountSQL.SelectAccount(routNum, acctNum);
 
-            if (tstAccount != null) { return AccountSQL.DeleteAccount(tstAccount); }
+            if (VerifyExistingAccount(routNum, acctNum)) { return AccountSQL.DeleteAccount(tstAccount); }
             return null;
         }
 
@@ -364,9 +412,11 @@ namespace checkPlus
     }
 
 
-    /*  ===================================================================================================================
+    /*  ==================================================================================================================================================
+     *  ==================================================================================================================================================
      *  CLASS - CheckHandler
-     *  ===================================================================================================================
+     *  ==================================================================================================================================================
+     *  ==================================================================================================================================================
      *  class to do all the work of talking to the acct_check data access objects 
      *      and all verification regarding account objects:
      *          - data input
@@ -380,79 +430,107 @@ namespace checkPlus
         BankSQLer BankSQL = DatabaseHandler.Instance.GetBankSQLer();
 
         /*  ---------------------------------------------------------------
-         *  FUNCTION - BuildAccount
+         *  FUNCTION - BuildNewCheck
          *  ---------------------------------------------------------------
-         *  build a new Account object (not database record)
+         *  build a new Acct_check object (not database record)
          *      with the provided information
          *      
          *  if <routNum> does not match an existing bank record,
          *      return null
+         *  if <routNum> and <acctNum> do not match an existing account record,
+         *      return null
          *      
          *  not accessible to the outside world
-         *  I want to keep the idea of "building an account"
-         *      local to this AccountHandler object
+         *  I want to keep the idea of "building an acct_check"
+         *      local to this CheckHandler object
          *      so that no one can build one willy nilly
          */
-        private Account BuildNewAccount
+        private Acct_check BuildNewCheck
         (
             string routNum, string acctNum,
-            string firstName, string lastName,
-            string address, string city, string state, string zip,
-            string phone
+            Decimal amount, DateTime dateWritten,
+            string checkNum, DateTime dateReceived
         )
         {   //first, check to see if there is an existing bank record with the <routNum>
             Bank tstBank = BankSQL.SelectBank(routNum);
-            if (tstBank == null)
+            //then, check to see if there is an existing account <routNum> and <acctNum>
+            Account tstAccount = AccountSQL.SelectAccount(routNum, acctNum);
+            if (tstBank == null || tstAccount == null)
             {   //if not, return null
                 return null;
             }
             else
-            {   //otherwise, build a new account object and return it
-                return new Account()
+            {   //otherwise, build a new acct_check object and return it
+                return new Acct_check()
                 {
-                    First_name = firstName,
-                    Last_name = lastName,
-                    Bank_id = tstBank.Bank_id,
-                    Account_number = acctNum,
-                    Address = address,
-                    City = city,
-                    State = state,
-                    Zip_code = zip,
-                    Country = "United States",
-                    Phone_number = phone
+                    Account_id = tstAccount.Account_id,
+                    Amount = amount,
+                    Date_written = dateWritten,
+                    Check_number = checkNum,
+                    Date_received = dateReceived
                 };
             }
         }
 
+        /*  ---------------------------------------------------------------
+         *  FUNCTIONs for sundry verifications
+         *  ---------------------------------------------------------------
+         *  all stolen from ApplicationHandler
+         *  probably not the safest way to go about it, 
+         *      but this way, there's no code duplication
+         */
+        public bool VerifyIntegerStringInput(string intString)
+        {
+            ApplicationHandler appHand = new ApplicationHandler();
+            return appHand.VerifyIntegerStringInput(intString);
+        }
+        public bool VerifyDecimalStringInput(string decString)
+        {
+            ApplicationHandler appHand = new ApplicationHandler();
+            return appHand.VerifyDecimalStringInput(decString);
+        }
+        public bool VerifyExistingBank(string routNum)
+        {
+            ApplicationHandler appHand = new ApplicationHandler();
+            return appHand.VerifyExistingBank(routNum);
+        }
+        public bool VerifyExistingAccount(string routNum, string acctNum)
+        {
+            ApplicationHandler appHand = new ApplicationHandler();
+            return appHand.VerifyExistingAccount(routNum, acctNum);
+        }
+        public bool VerifyExistingCheck(string routNum, string acctNum, string checkNum)
+        {
+            ApplicationHandler appHand = new ApplicationHandler();
+            return appHand.VerifyExistingCheck(routNum, acctNum, checkNum);
+        }
 
         /*  ---------------------------------------------------------------
-         *  FUNCTION - VerifyAccountInfoInputWithStringFeedback
+         *  FUNCTION - VerifyCheckInfoInputWithStringFeedback
          *  ---------------------------------------------------------------
-         *  pass in all the text input from the gui when working with accounts
+         *  pass in all the text input from the gui when working with checks
          *      and verify that all of the information is legal information
          */
-        public string VerifyAccountInfoInputWithStringFeedback
+        public string VerifyCheckInfoInputWithStringFeedback
         (
-            string firstName, string lastName,
             string routNum, string acctNum,
-            string addr, string city, string state, string zip,
-            string phoneNum
+            string amount, string checkNum
         )
         {   //start the string then finish it off in one of these if/else if statements
-            string badResponse = "Please enter a";
-            if (firstName == "") { badResponse += " First Name."; }
-            else if (lastName == "") { badResponse += " Last Name."; }
-            else if (routNum == "") { badResponse += " Routing Number."; }
-            else if (acctNum == "") { badResponse += "n Account Number."; }
-            else if (addr == "") { badResponse += "n Address."; }
-            else if (city == "") { badResponse += " City."; }
-            else if (state == "") { badResponse += " State."; }
-            else if (zip == "") { badResponse += " ZIP code"; }
-            else if (phoneNum == "") { badResponse += " Phone Number."; }
+            string badResponse = "Please enter";
+
+            if (routNum == "") { badResponse += " a Routing Number."; }
+            else if (acctNum == "") { badResponse += " an Account Number."; }
+            else if (amount == "") { badResponse += " an Amount."; }
+            else if (checkNum == "") { badResponse += " a Check Number."; }
+            else if (!VerifyIntegerStringInput(routNum)) { badResponse += " a valid Routing Number."; }
+            else if (!VerifyIntegerStringInput(acctNum)) { badResponse += " a valid Account Number."; }
+            else if (!VerifyDecimalStringInput(amount)) { badResponse += " a valid money Amount."; }
+            else if (!VerifyIntegerStringInput(checkNum)) { badResponse += " a valid check Number."; }
             else
             {
-                Bank tstBank = BankSQL.SelectBank(routNum);
-                if (tstBank == null) { badResponse += " information of an existing Bank."; }
+                if (!VerifyExistingBank(routNum)) { badResponse += " information of an existing Bank."; }
+                else if (!VerifyExistingAccount(routNum, acctNum)) { badResponse += " information of an existing Account."; }
                 else
                 {   //return an empty string signifying that everything has been verified
                     return "";
@@ -463,31 +541,31 @@ namespace checkPlus
 
 
         /*  ---------------------------------------------------------------
-         *  FUNCTION - SelectAllAccounts
+         *  FUNCTION - SelectAllChecks
          *  ---------------------------------------------------------------
-         *  used for retrieving a List of Account objects corresponding to
-         *      all account records in the database
+         *  used for retrieving a List of Acct_check objects corresponding to
+         *      all acct_check records in the database
          */
-        public List<Account> SelectAllAccounts()
+        public List<Acct_check> SelectAllChecks()
         {
-            return AccountSQL.GetAllAccounts();
+            return CheckSQL.GetAllAcct_checks();
         }
 
 
         /*  ---------------------------------------------------------------
-         *  FUNCTION - SelectAccount
+         *  FUNCTION - SelectCheck
          *  ---------------------------------------------------------------
          *  used for retrieving an Account record with
-         *      <routNum> and <acctNum>
-         *      <accountID>
+         *      <routNum> and <acctNum> and <checkNum>
+         *      <checkID>
          */
-        public Account SelectAccount(string routNum, string acctNum)
+        public Acct_check SelectCheck(string routNum, string acctNum, string checkNum)
         {
-            return AccountSQL.SelectAccount(routNum, acctNum);
+            return CheckSQL.SelectAcct_check(routNum, acctNum, checkNum);
         }
-        public Account SelectAccount(int accountID)
+        public Acct_check SelectCheck(int checkID)
         {
-            return AccountSQL.SelectAccount(accountID);
+            return CheckSQL.SelectAcct_check(checkID);
         }
 
 
@@ -501,69 +579,56 @@ namespace checkPlus
          *  if there already was a record with those unique identifiers,
          *      return null to show that no account was added
          */
-        public Account InsertAccount(string routNum, string acctNum, string firstName, string lastName, string address, string city, string state, string zip, string phone)
-        {   //see if an account already exists with <routNum> and <acctNum>
-            Account tstAccount = AccountSQL.SelectAccount(routNum, acctNum);
-
-            //if no account exists
-            if (tstAccount == null)
+        public Acct_check InsertCheck(string routNum, string acctNum, Decimal amount, DateTime dateWritten, string checkNum)
+        {   //if no check already exists
+            if (!VerifyExistingCheck(routNum, acctNum, checkNum))
             {   //attempt to build account; if the routing number does not have a bank to connect to, it will return null
-                Account newAccount = BuildNewAccount(routNum, acctNum, firstName, lastName, address, city, state, zip, phone);
+                Acct_check newCheck = BuildNewCheck(routNum, acctNum, amount, dateWritten, checkNum, DateTime.Today);
 
-                if (newAccount == null) { return null; }
+                //if a new Acct_check object could not be built, return null
+                if (newCheck == null) { return null; }
                 else
-                {   //insert a new account record with that new information and return the newly created account
-                    return AccountSQL.InsertAccount(newAccount);
+                {   //otherwise, insert a new account record with that new information and return the newly created account
+                    return CheckSQL.InsertAcct_check(newCheck);
                 }
             }
-            //otherwise, return null to signify that no account was inserted
+            //otherwise, return null to signify that no check was inserted
             else { return null; }
         }
 
 
         /*  ---------------------------------------------------------------
-         *  FUNCTION - UpdateAccount
+         *  FUNCTION - UpdateCheck
          *  ---------------------------------------------------------------
-         *  update an existing account record
-         *      after validating that a record with the <newRoutNum> and <newAcctNum>
-         *      does not already exist
+         *  update an existing check record
          *      
-         *  if the new information cannot produce a valid account, return null
+         *  if the new information cannot produce a valid check, return null
          *  otherwise, return the account with its new info
          */
-        public Account UpdateAccount(
-            string origRoutNum, string origAcctNum,
-            string newRoutNum, string newAcctNum, string newFirstName, string newLastName, string newAddress, string newCity, string newState, string newZip, string newPhone)
-        {
-            Account origAccount = AccountSQL.SelectAccount(origRoutNum, origAcctNum);
-            Account dupTestAccount = null;
-
-            //if there is an attempt to change the routing number or account number
-            if (origRoutNum != newRoutNum && origAcctNum != newAcctNum)
-            {   //then check to see if the new values would correspond to an existing account
-                //if they do, dupTestAccount will be set to that account, otherwise, it will remain null
-                dupTestAccount = AccountSQL.SelectAccount(newRoutNum, newAcctNum);
+        public Acct_check UpdateCheck(
+            string origRoutNum, string origAcctNum, string origCheckNum,
+            string newRoutNum, string newAcctNum, string newCheckNum, Decimal newAmount, DateTime newDateWritten)
+        {   //if there is an attempt to change the routing number or account number or check number
+            if (origRoutNum != newRoutNum && origAcctNum != newAcctNum && origCheckNum != newCheckNum)
+            {   //if there was already a check with that routing number and account number and check number
+                //  return null to signify failure 
+                //  since we don't want to update a check's unique info 
+                //  to another check's unique info
+                if (VerifyExistingCheck(newRoutNum, newAcctNum, newCheckNum)) { return null; }
             }
+            //otherwise, pull the orignial check and build an Acct_check object that will have the new information
+            Acct_check origCheck = CheckSQL.SelectAcct_check(origRoutNum, origAcctNum, origCheckNum);
+            Acct_check newInfoCheck = BuildNewCheck(newRoutNum, newAcctNum, newAmount, newDateWritten, newCheckNum, origCheck.Date_received);
 
-            //if there was no account with that routing number and account number
-            if (dupTestAccount == null)
-            {   //then build an Account object that will have the new information
-                Account newInfoAccount = BuildNewAccount(
-                    newRoutNum, newAcctNum,
-                    newFirstName, newLastName, newAddress, newCity, newState, newZip, newPhone);
-
-                //if we cannot build that object due to bad bank info, return null
-                if (newInfoAccount == null) { return null; }
-                //otherwise, update the account with the new information and return an Account object with the new info
-                else { return AccountSQL.UpdateAccount(origAccount, newInfoAccount); };
-            }
-            //otherwise, return null to signify failer to update the account
-            else { return null; }
+            //if we cannot build that object due to bad bank or account info, return null
+            if (newInfoCheck == null) { return null; }
+            //otherwise, update the account with the new information and return an Account object with the new info
+            else { return CheckSQL.UpdateAcct_check(origCheck, newInfoCheck); };
         }
 
 
         /*  ---------------------------------------------------------------
-         *  FUNCTION - DeleteAccount
+         *  FUNCTION - DeleteCheck
          *  ---------------------------------------------------------------
          *  delete an existing acct_check record with <routNum> and <acctNum> and <checkNum>
          *  

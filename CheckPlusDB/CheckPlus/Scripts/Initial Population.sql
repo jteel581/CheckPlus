@@ -8,29 +8,29 @@ use CheckPlus;
 insert into dbo.bank 
 (		bank_nm,				routing_number,		contact_nm,			contact_email,		contact_phone,	bank_address,		bank_city,		bank_state, bank_country,		bank_zip	)
 --100000
-select	'First Together Bank',	'000123678',		'Grant Billings',	'gjbill@fun.com',	'675-555-8976',	'123 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'First Together Bank',	'000123678',		'Grant Billings',	'gjbill@fun.com',	'6755558976',	'123 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100001
-select	'Name Me 1 Bank',		'239898788',		'John Doe1',		'jdoe1@nm1.com',	'675-555-8976',	'124 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 1 Bank',		'239898788',		'John Doe1',		'jdoe1@nm1.com',	'6755558976',	'124 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100002
-select	'Name Me 2 Bank',		'938747658',		'John Doe2',		'jdoe2@nm2.com',	'675-555-8976',	'125 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 2 Bank',		'938747658',		'John Doe2',		'jdoe2@nm2.com',	'6755558976',	'125 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100003
-select	'Name Me 3 Bank',		'342323678',		'John Doe3',		'jdoe3@nm3.com',	'675-555-8976',	'126 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 3 Bank',		'342323678',		'John Doe3',		'jdoe3@nm3.com',	'6755558976',	'126 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100004
-select	'Name Me 4 Bank',		'124453458',		'John Doe4',		'jdoe4@nm4.com',	'675-555-8976',	'127 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 4 Bank',		'124453458',		'John Doe4',		'jdoe4@nm4.com',	'6755558976',	'127 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100005
-select	'Name Me 5 Bank',		'002343678',		'John Doe5',		'jdoe5@nm5.com',	'675-555-8976',	'128 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 5 Bank',		'002343678',		'John Doe5',		'jdoe5@nm5.com',	'6755558976',	'128 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100006
-select	'Name Me 6 Bank',		'012334478',		'John Doe6',		'jdoe6@nm6.com',	'675-555-8976',	'129 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 6 Bank',		'012334478',		'John Doe6',		'jdoe6@nm6.com',	'6755558976',	'129 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100007
-select	'Name Me 7 Bank',		'010122378',		'John Doe7',		'jdoe7@nm7.com',	'675-555-8976',	'120 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 7 Bank',		'010122378',		'John Doe7',		'jdoe7@nm7.com',	'6755558976',	'120 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100008
-select	'Name Me 8 Bank',		'023433678',		'John Doe8',		'jdoe8@nm8.com',	'675-555-8976',	'121 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 8 Bank',		'023433678',		'John Doe8',		'jdoe8@nm8.com',	'6755558976',	'121 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100009
-select	'Name Me 9 Bank',		'123123678',		'John Doe9',		'jdoe9@nm9.com',	'675-555-8976',	'122 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 9 Bank',		'123123678',		'John Doe9',		'jdoe9@nm9.com',	'6755558976',	'122 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100010
-select	'Name Me 10 Bank',		'023666278',		'John Doe10',		'jdoe10@nm10.com',	'675-555-8976',	'112 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Name Me 10 Bank',		'023666278',		'John Doe10',		'jdoe10@nm10.com',	'6755558976',	'112 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100011
-select	'Union Credit Union',	'000432178',		'Sherida Smith',	'sksmith@ucu.org',	'864-555-1234',	'113 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'						
+select	'Union Credit Union',	'000432178',		'Sherida Smith',	'sksmith@ucu.org',	'8645551234',	'113 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'						
 ;
 
 insert into dbo.account 
@@ -38,31 +38,31 @@ insert into dbo.account
 --100000
 select	'Shawna',	'Tweep',	100000,		'100 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'135468743564',		'864-555-8765'		union
 --100001
-select	'Garret',	'Darlin',	100001,		'101 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'68786765343655',	'864-555-8765'		union
+select	'Garret',	'Darlin',	100001,		'101 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'68786765343655',	'8645558765'		union
 --100002
-select	'John',		'Doe2',		100002,		'102 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'655435468768',		'864-555-8765'		union
+select	'John',		'Doe2',		100002,		'102 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'655435468768',		'8645558765'		union
 --100003
-select	'John',		'Doe3',		100003,		'103 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6843543524135',	'864-555-8765'		union
+select	'John',		'Doe3',		100003,		'103 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6843543524135',	'8645558765'		union
 --100004
-select	'John',		'Doe4',		100001,		'104 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'35213875415435',	'864-555-8765'		union
+select	'John',		'Doe4',		100001,		'104 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'35213875415435',	'8645558765'		union
 --100005
-select	'John',		'Doe5',		100002,		'105 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'13549865435243',	'864-555-8765'		union
+select	'John',		'Doe5',		100002,		'105 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'13549865435243',	'8645558765'		union
 --100006
-select	'John',		'Doe6',		100003,		'106 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'688546835746241',	'864-555-8765'		union
+select	'John',		'Doe6',		100003,		'106 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'688546835746241',	'8645558765'		union
 --100007
-select	'John',		'Doe7',		100001,		'107 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6543543152413',	'864-555-8765'		union
+select	'John',		'Doe7',		100001,		'107 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6543543152413',	'8645558765'		union
 --100008
-select	'John',		'Doe8',		100002,		'108 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'54654321321635',	'864-555-8765'		union
+select	'John',		'Doe8',		100002,		'108 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'54654321321635',	'8645558765'		union
 --100009
-select	'John',		'Doe9',		100003,		'109 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6543216456354',	'864-555-8765'		union
+select	'John',		'Doe9',		100003,		'109 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6543216456354',	'8645558765'		union
 --100010
-select	'John',		'Doe10',	100004,		'110 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'585879874653132',	'864-555-8765'		union
+select	'John',		'Doe10',	100004,		'110 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'585879874653132',	'8645558765'		union
 --100011
-select	'John',		'Doe11',	100005,		'111 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'879843213213',		'864-555-8765'		union
+select	'John',		'Doe11',	100005,		'111 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'879843213213',		'8645558765'		union
 --100012
-select	'John',		'Doe12',	100006,		'112 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'879846321321',		'864-555-8765'		union
+select	'John',		'Doe12',	100006,		'112 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'879846321321',		'8645558765'		union
 --100013
-select	'John',		'Doe13',	100007,		'113 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6887651354654',	'864-555-8765'		union
+select	'John',		'Doe13',	100007,		'113 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6887651354654',	'8645558765'		union
 --100014
 select	'John',		'Doe14',	100004,		'114 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'45467897965311',	'864-555-8765'		union
 --100015
