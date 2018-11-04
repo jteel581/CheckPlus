@@ -6,10 +6,11 @@
 select 
 	a.account_id,
 	ac.acct_check_id,
-	b.routing_number,
-	a.account_number,
+	b.bank_id,
 	a.first_name,
 	a.last_name,
+	b.routing_number,
+	a.account_number,
 	ac.check_number,
 	ac.amount
 from dbo.account a
