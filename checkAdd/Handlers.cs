@@ -349,7 +349,7 @@ namespace checkPlus
             string origRoutNum, string origAcctNum,
             string newRoutNum, string newAcctNum, string newFirstName, string newLastName, string newAddress, string newCity, string newState, string newZip, string newPhone)
         {   //if there is an attempt to change the routing number or account number
-            if (origRoutNum != newRoutNum && origAcctNum != newAcctNum)
+            if (origRoutNum != newRoutNum || origAcctNum != newAcctNum)
             {   //if there was already an account with that routing number and account number,
                 //  return null to signify failure 
                 //  since we don't want to update an account's unique info 
@@ -467,7 +467,8 @@ namespace checkPlus
                     Amount = amount,
                     Date_written = dateWritten,
                     Check_number = checkNum,
-                    Date_received = dateReceived
+                    Date_received = dateReceived,
+                    Client_id = 100000
                 };
             }
         }
@@ -609,7 +610,7 @@ namespace checkPlus
             string origRoutNum, string origAcctNum, string origCheckNum,
             string newRoutNum, string newAcctNum, string newCheckNum, Decimal newAmount, DateTime newDateWritten)
         {   //if there is an attempt to change the routing number or account number or check number
-            if (origRoutNum != newRoutNum && origAcctNum != newAcctNum && origCheckNum != newCheckNum)
+            if (origRoutNum != newRoutNum || origAcctNum != newAcctNum || origCheckNum != newCheckNum)
             {   //if there was already a check with that routing number and account number and check number
                 //  return null to signify failure 
                 //  since we don't want to update a check's unique info 
@@ -634,7 +635,7 @@ namespace checkPlus
          *  
          *  if no existing acct_check exists, return a null record
          */
-        public Acct_check DeleteAccount(string routNum, string acctNum, string checkNum)
+        public Acct_check DeleteCheck(string routNum, string acctNum, string checkNum)
         {
             Acct_check tstCheck = CheckSQL.SelectAcct_check(routNum, acctNum, checkNum);
 

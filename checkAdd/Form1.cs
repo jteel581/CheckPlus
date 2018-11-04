@@ -1025,6 +1025,7 @@ namespace checkPlus
             TestEntityAccess unitTest = new TestEntityAccess();
             unitTest.RunSQLTests();
             unitTest.RunAccountHandlerTests();
+            unitTest.RunCheckHandlerTests();
             unitTestBox.Text = unitTest.getTestStr();
         }
     }

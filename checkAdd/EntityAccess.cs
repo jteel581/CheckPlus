@@ -235,7 +235,7 @@ namespace checkPlus
 
             cpdb.SaveChanges();
 
-            return SelectAccount(GetBankRoutingNumber(newAcctInfo), newAcctInfo.Account_number);
+            return SelectAccount(acctToUpdate.Account_id);
         }
 
 
@@ -434,13 +434,13 @@ namespace checkPlus
          *
          * ------------------------------------------------------
          */
-        public string GetRoutingNumber(Acct_check prmAcctCheck)
+        public string GetRoutingNumber(Acct_check acctCheck)
         {
             return (
                 from ac in cpdb.Acct_checks
                 join a in cpdb.Accounts on ac.Account_id equals a.Account_id
                 join b in cpdb.Banks on a.Bank_id equals b.Bank_id
-                where ac.Acct_check_id == prmAcctCheck.Acct_check_id
+                where ac.Acct_check_id == acctCheck.Acct_check_id
                 select b.Routing_number
             ).FirstOrDefault();
         }
@@ -499,7 +499,7 @@ namespace checkPlus
 
             cpdb.SaveChanges();
 
-            return SelectAcct_check(GetRoutingNumber(newInfoCheck), GetAccountNumber(newInfoCheck), newInfoCheck.Check_number);
+            return SelectAcct_check(origCheck.Acct_check_id);
         }
 
         /*  -----------------------------------------------------
