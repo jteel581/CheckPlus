@@ -21,7 +21,7 @@ namespace checkPlus
     //----------------------------------------------------
     //ACCOUNT
     [Table("account")]
-    class Account
+    public class Account
     {
         [Key]
         public int Account_id { get; set; }
@@ -43,7 +43,7 @@ namespace checkPlus
     //----------------------------------------------------
     //ACCT_CHECK
     [Table("acct_check")]
-    class Acct_check
+    public class Acct_check
     {
         [Key]
         public int Acct_check_id { get; set; }
@@ -65,7 +65,7 @@ namespace checkPlus
     //----------------------------------------------------
     //BANK
     [Table("bank")]
-    class Bank
+    public class Bank
     {
         [Key]
         public int Bank_id { get; set; }
@@ -85,7 +85,7 @@ namespace checkPlus
     //----------------------------------------------------
     //CLIENT
     [Table("client")]
-    class Client
+    public class Client
     {
         [Key]
         public int Client_id { get; set; }
@@ -98,7 +98,7 @@ namespace checkPlus
     //----------------------------------------------------
     //CP USER
     [Table("cp_user")]
-    class Cp_user
+    public class Cp_user
     {
         [Key]
         public int Cp_user_id { get; set; }
@@ -113,7 +113,7 @@ namespace checkPlus
     //----------------------------------------------------
     //LETTER
     [Table("letter")]
-    class Letter
+    public class Letter
     {
         [Key]
         public int Letter_stage_id { get; set; }
@@ -123,7 +123,7 @@ namespace checkPlus
         public string Letter3_text { get; set; }
     }
 
-    class CheckPlusDB : DbContext
+    public class CheckPlusDB : DbContext
     {
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Acct_check> Acct_checks { get; set; }

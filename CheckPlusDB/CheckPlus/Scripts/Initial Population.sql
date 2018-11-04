@@ -36,9 +36,9 @@ select	'Union Credit Union',	'000432178',		'Sherida Smith',	'sksmith@ucu.org',	'
 insert into dbo.account 
 (		first_name,	last_name, 	bank_id,	address,		city,		state,			country,			zip_code,	account_number,		phone_number			)
 --100000
-select	'John',		'Doe0',		100000,		'100 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'135468743564',		'864-555-8765'		union
+select	'Shawna',	'Tweep',	100000,		'100 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'135468743564',		'864-555-8765'		union
 --100001
-select	'John',		'Doe1',		100001,		'101 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'68786765343655',	'864-555-8765'		union
+select	'Garret',	'Darlin',	100001,		'101 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'68786765343655',	'864-555-8765'		union
 --100002
 select	'John',		'Doe2',		100002,		'102 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'655435468768',		'864-555-8765'		union
 --100003

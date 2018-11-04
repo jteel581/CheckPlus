@@ -117,32 +117,37 @@ namespace checkPlus
         /*  -----------------------------------------------------
          *  FUNCTION -- SelectAccount
          *  -----------------------------------------------------
-         *  returns Account object corresponding to <prmAcct>
+         *  returns Account object corresponding to: 
+         *      <prmAcct>
+         *      <routNum> and <acctNum>
+         *      <accountID>
          *  -----------------------------------------------------
          */
-        public Account SelectAccount(Account prmAcct)
+        public Account SelectAccount(Account account)
         {
-            if (prmAcct == null) { return null; }
-            else
-            {
-                return (
-                    from a in cpdb.Accounts
-                    where a.Account_id == prmAcct.Account_id
-                    select a
-                ).FirstOrDefault();
-            }
+            return (
+                from a in cpdb.Accounts
+                where a.Account_id == account.Account_id
+                select a
+            ).FirstOrDefault();
         }
         public Account SelectAccount(string routNum, string acctNum)
         {
-            Account tstAccount = (
+            return (
                 from a in cpdb.Accounts
                 join b in cpdb.Banks on a.Bank_id equals b.Bank_id
                 where b.Routing_number == routNum
                     && a.Account_number == acctNum
                 select a
             ).FirstOrDefault();
-
-            return tstAccount;
+        }
+        public Account SelectAccount(int accountID)
+        {
+            return (
+                from a in cpdb.Accounts
+                where a.Account_id == accountID
+                select a
+            ).FirstOrDefault();
         }
 
 
@@ -153,13 +158,13 @@ namespace checkPlus
          *  connected to an <prmAcct>
          *  -----------------------------------------------------
          */
-        public List<Acct_check> GetChecksInAccount(Account prmAcct)
+        public List<Acct_check> GetChecksInAccount(Account account)
         {
             return (
                 from a in cpdb.Accounts
                 join ac in cpdb.Acct_checks on a.Account_id equals ac.Account_id
                 where ac.Date_paid == null
-                    && a.Account_id == prmAcct.Account_id
+                    && a.Account_id == account.Account_id
                 select ac
             ).ToList();
         }
@@ -213,22 +218,24 @@ namespace checkPlus
          *  set all <prmAcctToUpdate>'s info to the <prmNewAcctInfo>'s info
          *  -----------------------------------------------------
          */
-        public void UpdateAccount(Account prmAcctToUpdate, Account prmNewAcctInfo)
+        public Account UpdateAccount(Account acctToUpdate, Account newAcctInfo)
         {
-            prmAcctToUpdate.First_name = prmNewAcctInfo.First_name;
-            prmAcctToUpdate.Last_name = prmNewAcctInfo.Last_name;
-            prmAcctToUpdate.First_name_2 = prmNewAcctInfo.First_name_2;
-            prmAcctToUpdate.Last_name_2 = prmNewAcctInfo.Last_name_2;
-            prmAcctToUpdate.Bank_id = prmNewAcctInfo.Bank_id;
-            prmAcctToUpdate.Address = prmNewAcctInfo.Address;
-            prmAcctToUpdate.City = prmNewAcctInfo.City;
-            prmAcctToUpdate.State = prmNewAcctInfo.State;
-            prmAcctToUpdate.Country = prmNewAcctInfo.Country;
-            prmAcctToUpdate.Zip_code = prmNewAcctInfo.Zip_code;
-            prmAcctToUpdate.Account_number = prmNewAcctInfo.Account_number;
-            prmAcctToUpdate.Phone_number = prmNewAcctInfo.Phone_number;
+            acctToUpdate.First_name = newAcctInfo.First_name;
+            acctToUpdate.Last_name = newAcctInfo.Last_name;
+            acctToUpdate.First_name_2 = newAcctInfo.First_name_2;
+            acctToUpdate.Last_name_2 = newAcctInfo.Last_name_2;
+            acctToUpdate.Bank_id = newAcctInfo.Bank_id;
+            acctToUpdate.Address = newAcctInfo.Address;
+            acctToUpdate.City = newAcctInfo.City;
+            acctToUpdate.State = newAcctInfo.State;
+            acctToUpdate.Country = newAcctInfo.Country;
+            acctToUpdate.Zip_code = newAcctInfo.Zip_code;
+            acctToUpdate.Account_number = newAcctInfo.Account_number;
+            acctToUpdate.Phone_number = newAcctInfo.Phone_number;
 
             cpdb.SaveChanges();
+
+            return SelectAccount(GetBankRoutingNumber(newAcctInfo), newAcctInfo.Account_number);
         }
 
 
@@ -364,9 +371,10 @@ namespace checkPlus
         /*  -----------------------------------------------------
          *  FUNCTION - SelectAcct_check
          *  -----------------------------------------------------
-         *  attempts to SELECT from the database an acct_check
-         *      record that corresponds to <prmAcctCheck>
-         *  returns null if nothing is found
+         *  attempts to SELECT from the database an acct_check of
+         *      <prmAcctCheck>
+         *      <routNum> and <acctNum> and <checkNum>
+         *      <acctCheckID>
          * ------------------------------------------------------
          */
         public Acct_check SelectAcct_check(Acct_check prmAcctCheck)
@@ -380,6 +388,26 @@ namespace checkPlus
                     select ac
                 ).FirstOrDefault();
             }
+        }
+        public Acct_check SelectAcct_check(string routNum, string acctNum, string checkNum)
+        {
+            return (
+                from ac in cpdb.Acct_checks
+                join a in cpdb.Accounts on ac.Account_id equals a.Account_id
+                join b in cpdb.Banks on a.Bank_id equals b.Bank_id
+                where b.Routing_number == routNum
+                    && a.Account_number == acctNum
+                    && ac.Check_number == checkNum
+                select ac
+            ).FirstOrDefault();
+        }
+        public Acct_check SelectAcct_check(int acctCheckID)
+        {
+            return (
+                from ac in cpdb.Acct_checks
+                where ac.Acct_check_id == acctCheckID
+                select ac
+            ).FirstOrDefault();
         }
 
 
@@ -508,11 +536,11 @@ namespace checkPlus
          *      and utilize that knowledge accordingly
          * ------------------------------------------------------
          */
-        public Acct_check DeleteAcct_check(Acct_check prmAcctCheck)
+        public Acct_check DeleteAcct_check(Acct_check acctCheck)
         {
             Acct_check tstAcct_check = (
                 from ac in cpdb.Acct_checks
-                where ac.Acct_check_id == prmAcctCheck.Acct_check_id
+                where ac.Acct_check_id == acctCheck.Acct_check_id
                 select ac
             ).FirstOrDefault();
 

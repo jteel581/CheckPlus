@@ -45,8 +45,8 @@
             this.manageAccountPage = new System.Windows.Forms.TabPage();
             this.phoneNumBox = new System.Windows.Forms.TextBox();
             this.phoneNumLabel = new System.Windows.Forms.Label();
-            this.deleteAccountButton = new System.Windows.Forms.Button();
-            this.updateAccountButton = new System.Windows.Forms.Button();
+            this.DeleteAccountButton = new System.Windows.Forms.Button();
+            this.UpdateAccountButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.accountNameSearchBox = new System.Windows.Forms.TextBox();
             this.accountNumSearchBox = new System.Windows.Forms.TextBox();
@@ -60,7 +60,7 @@
             this.stateLabel = new System.Windows.Forms.Label();
             this.cityLabel = new System.Windows.Forms.Label();
             this.stNameLabel = new System.Windows.Forms.Label();
-            this.addActButton = new System.Windows.Forms.Button();
+            this.InsertAccountButton = new System.Windows.Forms.Button();
             this.accountBox1 = new System.Windows.Forms.TextBox();
             this.routingBox1 = new System.Windows.Forms.TextBox();
             this.lastNameBox = new System.Windows.Forms.TextBox();
@@ -151,7 +151,7 @@
             this.tabControl1.Controls.Add(this.manageCheckPage);
             this.tabControl1.Controls.Add(this.manageUsersPage);
             this.tabControl1.Location = new System.Drawing.Point(-1, -1);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1189, 446);
@@ -171,9 +171,9 @@
             this.homePage.Controls.Add(this.usernameLabel);
             this.homePage.Controls.Add(this.label3);
             this.homePage.Location = new System.Drawing.Point(4, 25);
-            this.homePage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.homePage.Margin = new System.Windows.Forms.Padding(4);
             this.homePage.Name = "homePage";
-            this.homePage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.homePage.Padding = new System.Windows.Forms.Padding(4);
             this.homePage.Size = new System.Drawing.Size(1181, 417);
             this.homePage.TabIndex = 0;
             this.homePage.Text = "Home";
@@ -182,7 +182,7 @@
             // unitTestBox
             // 
             this.unitTestBox.Location = new System.Drawing.Point(21, 213);
-            this.unitTestBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitTestBox.Margin = new System.Windows.Forms.Padding(4);
             this.unitTestBox.Multiline = true;
             this.unitTestBox.Name = "unitTestBox";
             this.unitTestBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -192,7 +192,7 @@
             // unitTestsButton
             // 
             this.unitTestsButton.Location = new System.Drawing.Point(21, 176);
-            this.unitTestsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitTestsButton.Margin = new System.Windows.Forms.Padding(4);
             this.unitTestsButton.Name = "unitTestsButton";
             this.unitTestsButton.Size = new System.Drawing.Size(241, 28);
             this.unitTestsButton.TabIndex = 15;
@@ -204,7 +204,7 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(271, 37);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(280, 304);
@@ -214,7 +214,7 @@
             // logoutButton
             // 
             this.logoutButton.Location = new System.Drawing.Point(163, 140);
-            this.logoutButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.logoutButton.Margin = new System.Windows.Forms.Padding(4);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(100, 28);
             this.logoutButton.TabIndex = 13;
@@ -234,7 +234,7 @@
             // loginButton
             // 
             this.loginButton.Location = new System.Drawing.Point(21, 110);
-            this.loginButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(4);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(100, 28);
             this.loginButton.TabIndex = 11;
@@ -245,7 +245,7 @@
             // passwordBox
             // 
             this.passwordBox.Location = new System.Drawing.Point(100, 73);
-            this.passwordBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.passwordBox.Margin = new System.Windows.Forms.Padding(4);
             this.passwordBox.Name = "passwordBox";
             this.passwordBox.Size = new System.Drawing.Size(132, 22);
             this.passwordBox.TabIndex = 10;
@@ -254,7 +254,7 @@
             // usernameBox
             // 
             this.usernameBox.Location = new System.Drawing.Point(100, 39);
-            this.usernameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.usernameBox.Margin = new System.Windows.Forms.Padding(4);
             this.usernameBox.Name = "usernameBox";
             this.usernameBox.Size = new System.Drawing.Size(132, 22);
             this.usernameBox.TabIndex = 9;
@@ -294,8 +294,8 @@
             // 
             this.manageAccountPage.Controls.Add(this.phoneNumBox);
             this.manageAccountPage.Controls.Add(this.phoneNumLabel);
-            this.manageAccountPage.Controls.Add(this.deleteAccountButton);
-            this.manageAccountPage.Controls.Add(this.updateAccountButton);
+            this.manageAccountPage.Controls.Add(this.DeleteAccountButton);
+            this.manageAccountPage.Controls.Add(this.UpdateAccountButton);
             this.manageAccountPage.Controls.Add(this.searchButton);
             this.manageAccountPage.Controls.Add(this.accountNameSearchBox);
             this.manageAccountPage.Controls.Add(this.accountNumSearchBox);
@@ -309,7 +309,7 @@
             this.manageAccountPage.Controls.Add(this.stateLabel);
             this.manageAccountPage.Controls.Add(this.cityLabel);
             this.manageAccountPage.Controls.Add(this.stNameLabel);
-            this.manageAccountPage.Controls.Add(this.addActButton);
+            this.manageAccountPage.Controls.Add(this.InsertAccountButton);
             this.manageAccountPage.Controls.Add(this.accountBox1);
             this.manageAccountPage.Controls.Add(this.routingBox1);
             this.manageAccountPage.Controls.Add(this.lastNameBox);
@@ -321,7 +321,7 @@
             this.manageAccountPage.Controls.Add(this.label1);
             this.manageAccountPage.Controls.Add(this.accountsListView);
             this.manageAccountPage.Location = new System.Drawing.Point(4, 25);
-            this.manageAccountPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.manageAccountPage.Margin = new System.Windows.Forms.Padding(4);
             this.manageAccountPage.Name = "manageAccountPage";
             this.manageAccountPage.Size = new System.Drawing.Size(1181, 417);
             this.manageAccountPage.TabIndex = 2;
@@ -332,7 +332,7 @@
             // phoneNumBox
             // 
             this.phoneNumBox.Location = new System.Drawing.Point(848, 303);
-            this.phoneNumBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.phoneNumBox.Margin = new System.Windows.Forms.Padding(4);
             this.phoneNumBox.Name = "phoneNumBox";
             this.phoneNumBox.Size = new System.Drawing.Size(132, 22);
             this.phoneNumBox.TabIndex = 104;
@@ -347,36 +347,36 @@
             this.phoneNumLabel.TabIndex = 103;
             this.phoneNumLabel.Text = "Phone Number:";
             // 
-            // deleteAccountButton
+            // DeleteAccountButton
             // 
-            this.deleteAccountButton.Enabled = false;
-            this.deleteAccountButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteAccountButton.Location = new System.Drawing.Point(997, 178);
-            this.deleteAccountButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.deleteAccountButton.Name = "deleteAccountButton";
-            this.deleteAccountButton.Size = new System.Drawing.Size(161, 36);
-            this.deleteAccountButton.TabIndex = 78;
-            this.deleteAccountButton.Text = "Delete Account";
-            this.deleteAccountButton.UseVisualStyleBackColor = true;
-            this.deleteAccountButton.Click += new System.EventHandler(this.deleteAccountButton_Click);
+            this.DeleteAccountButton.Enabled = false;
+            this.DeleteAccountButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeleteAccountButton.Location = new System.Drawing.Point(997, 178);
+            this.DeleteAccountButton.Margin = new System.Windows.Forms.Padding(4);
+            this.DeleteAccountButton.Name = "DeleteAccountButton";
+            this.DeleteAccountButton.Size = new System.Drawing.Size(161, 36);
+            this.DeleteAccountButton.TabIndex = 78;
+            this.DeleteAccountButton.Text = "Delete Account";
+            this.DeleteAccountButton.UseVisualStyleBackColor = true;
+            this.DeleteAccountButton.Click += new System.EventHandler(this.DeleteAccountButton_Click);
             // 
-            // updateAccountButton
+            // UpdateAccountButton
             // 
-            this.updateAccountButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateAccountButton.Location = new System.Drawing.Point(997, 114);
-            this.updateAccountButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.updateAccountButton.Name = "updateAccountButton";
-            this.updateAccountButton.Size = new System.Drawing.Size(161, 36);
-            this.updateAccountButton.TabIndex = 77;
-            this.updateAccountButton.Text = "Save Changes";
-            this.updateAccountButton.UseVisualStyleBackColor = true;
-            this.updateAccountButton.Click += new System.EventHandler(this.saveChangesButton_Click);
+            this.UpdateAccountButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateAccountButton.Location = new System.Drawing.Point(997, 114);
+            this.UpdateAccountButton.Margin = new System.Windows.Forms.Padding(4);
+            this.UpdateAccountButton.Name = "UpdateAccountButton";
+            this.UpdateAccountButton.Size = new System.Drawing.Size(161, 36);
+            this.UpdateAccountButton.TabIndex = 77;
+            this.UpdateAccountButton.Text = "Save Changes";
+            this.UpdateAccountButton.UseVisualStyleBackColor = true;
+            this.UpdateAccountButton.Click += new System.EventHandler(this.UpdateAccountButton_Click);
             // 
             // searchButton
             // 
             this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchButton.Location = new System.Drawing.Point(355, 31);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(4);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(100, 28);
             this.searchButton.TabIndex = 62;
@@ -388,7 +388,7 @@
             // accountNameSearchBox
             // 
             this.accountNameSearchBox.Location = new System.Drawing.Point(213, 33);
-            this.accountNameSearchBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.accountNameSearchBox.Margin = new System.Windows.Forms.Padding(4);
             this.accountNameSearchBox.Name = "accountNameSearchBox";
             this.accountNameSearchBox.Size = new System.Drawing.Size(132, 22);
             this.accountNameSearchBox.TabIndex = 61;
@@ -396,7 +396,7 @@
             // accountNumSearchBox
             // 
             this.accountNumSearchBox.Location = new System.Drawing.Point(213, 5);
-            this.accountNumSearchBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.accountNumSearchBox.Margin = new System.Windows.Forms.Padding(4);
             this.accountNumSearchBox.Name = "accountNumSearchBox";
             this.accountNumSearchBox.Size = new System.Drawing.Size(132, 22);
             this.accountNumSearchBox.TabIndex = 60;
@@ -435,7 +435,7 @@
             // zipBox
             // 
             this.zipBox.Location = new System.Drawing.Point(848, 273);
-            this.zipBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zipBox.Margin = new System.Windows.Forms.Padding(4);
             this.zipBox.Name = "zipBox";
             this.zipBox.Size = new System.Drawing.Size(132, 22);
             this.zipBox.TabIndex = 55;
@@ -443,7 +443,7 @@
             // stateBox
             // 
             this.stateBox.Location = new System.Drawing.Point(848, 241);
-            this.stateBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.stateBox.Margin = new System.Windows.Forms.Padding(4);
             this.stateBox.Name = "stateBox";
             this.stateBox.Size = new System.Drawing.Size(132, 22);
             this.stateBox.TabIndex = 54;
@@ -451,7 +451,7 @@
             // cityBox
             // 
             this.cityBox.Location = new System.Drawing.Point(848, 209);
-            this.cityBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cityBox.Margin = new System.Windows.Forms.Padding(4);
             this.cityBox.Name = "cityBox";
             this.cityBox.Size = new System.Drawing.Size(132, 22);
             this.cityBox.TabIndex = 53;
@@ -459,7 +459,7 @@
             // addressBox
             // 
             this.addressBox.Location = new System.Drawing.Point(848, 177);
-            this.addressBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.addressBox.Margin = new System.Windows.Forms.Padding(4);
             this.addressBox.Name = "addressBox";
             this.addressBox.Size = new System.Drawing.Size(132, 22);
             this.addressBox.TabIndex = 52;
@@ -497,22 +497,22 @@
             this.stNameLabel.Text = "Address:";
             this.stNameLabel.Click += new System.EventHandler(this.stNameLabel_Click);
             // 
-            // addActButton
+            // InsertAccountButton
             // 
-            this.addActButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addActButton.Location = new System.Drawing.Point(997, 50);
-            this.addActButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.addActButton.Name = "addActButton";
-            this.addActButton.Size = new System.Drawing.Size(161, 36);
-            this.addActButton.TabIndex = 46;
-            this.addActButton.Text = "Add Account";
-            this.addActButton.UseVisualStyleBackColor = true;
-            this.addActButton.Click += new System.EventHandler(this.addActButton_Click);
+            this.InsertAccountButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InsertAccountButton.Location = new System.Drawing.Point(997, 50);
+            this.InsertAccountButton.Margin = new System.Windows.Forms.Padding(4);
+            this.InsertAccountButton.Name = "InsertAccountButton";
+            this.InsertAccountButton.Size = new System.Drawing.Size(161, 36);
+            this.InsertAccountButton.TabIndex = 46;
+            this.InsertAccountButton.Text = "Add Account";
+            this.InsertAccountButton.UseVisualStyleBackColor = true;
+            this.InsertAccountButton.Click += new System.EventHandler(this.InsertAccountButton_Click);
             // 
             // accountBox1
             // 
             this.accountBox1.Location = new System.Drawing.Point(848, 146);
-            this.accountBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.accountBox1.Margin = new System.Windows.Forms.Padding(4);
             this.accountBox1.Name = "accountBox1";
             this.accountBox1.Size = new System.Drawing.Size(132, 22);
             this.accountBox1.TabIndex = 45;
@@ -520,7 +520,7 @@
             // routingBox1
             // 
             this.routingBox1.Location = new System.Drawing.Point(848, 114);
-            this.routingBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.routingBox1.Margin = new System.Windows.Forms.Padding(4);
             this.routingBox1.Name = "routingBox1";
             this.routingBox1.Size = new System.Drawing.Size(132, 22);
             this.routingBox1.TabIndex = 44;
@@ -528,7 +528,7 @@
             // lastNameBox
             // 
             this.lastNameBox.Location = new System.Drawing.Point(848, 82);
-            this.lastNameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lastNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.lastNameBox.Name = "lastNameBox";
             this.lastNameBox.Size = new System.Drawing.Size(132, 22);
             this.lastNameBox.TabIndex = 43;
@@ -536,7 +536,7 @@
             // firstNameBox
             // 
             this.firstNameBox.Location = new System.Drawing.Point(848, 50);
-            this.firstNameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.firstNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.firstNameBox.Name = "firstNameBox";
             this.firstNameBox.Size = new System.Drawing.Size(132, 22);
             this.firstNameBox.TabIndex = 42;
@@ -606,7 +606,7 @@
             this.curBalanceCH,
             this.acctRoutNumCH});
             this.accountsListView.Location = new System.Drawing.Point(16, 65);
-            this.accountsListView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.accountsListView.Margin = new System.Windows.Forms.Padding(4);
             this.accountsListView.Name = "accountsListView";
             this.accountsListView.Size = new System.Drawing.Size(696, 288);
             this.accountsListView.TabIndex = 57;
@@ -671,7 +671,7 @@
             this.manageCheckPage.Controls.Add(this.routingLabel2);
             this.manageCheckPage.Controls.Add(this.addCheckLabel);
             this.manageCheckPage.Location = new System.Drawing.Point(4, 25);
-            this.manageCheckPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.manageCheckPage.Margin = new System.Windows.Forms.Padding(4);
             this.manageCheckPage.Name = "manageCheckPage";
             this.manageCheckPage.Size = new System.Drawing.Size(1181, 417);
             this.manageCheckPage.TabIndex = 3;
@@ -682,7 +682,7 @@
             // 
             this.paidChkBox.AutoSize = true;
             this.paidChkBox.Location = new System.Drawing.Point(873, 285);
-            this.paidChkBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.paidChkBox.Margin = new System.Windows.Forms.Padding(4);
             this.paidChkBox.Name = "paidChkBox";
             this.paidChkBox.Size = new System.Drawing.Size(18, 17);
             this.paidChkBox.TabIndex = 102;
@@ -703,7 +703,7 @@
             this.deleteCheckButton.Enabled = false;
             this.deleteCheckButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteCheckButton.Location = new System.Drawing.Point(1029, 183);
-            this.deleteCheckButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.deleteCheckButton.Margin = new System.Windows.Forms.Padding(4);
             this.deleteCheckButton.Name = "deleteCheckButton";
             this.deleteCheckButton.Size = new System.Drawing.Size(145, 31);
             this.deleteCheckButton.TabIndex = 100;
@@ -715,7 +715,7 @@
             // 
             this.updateCheckButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updateCheckButton.Location = new System.Drawing.Point(1029, 119);
-            this.updateCheckButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.updateCheckButton.Margin = new System.Windows.Forms.Padding(4);
             this.updateCheckButton.Name = "updateCheckButton";
             this.updateCheckButton.Size = new System.Drawing.Size(145, 31);
             this.updateCheckButton.TabIndex = 99;
@@ -736,7 +736,7 @@
             // dateWrittenSelector
             // 
             this.dateWrittenSelector.Location = new System.Drawing.Point(875, 240);
-            this.dateWrittenSelector.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateWrittenSelector.Margin = new System.Windows.Forms.Padding(4);
             this.dateWrittenSelector.Name = "dateWrittenSelector";
             this.dateWrittenSelector.Size = new System.Drawing.Size(265, 22);
             this.dateWrittenSelector.TabIndex = 71;
@@ -744,7 +744,7 @@
             // viewCheckNumBox
             // 
             this.viewCheckNumBox.Location = new System.Drawing.Point(204, 64);
-            this.viewCheckNumBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.viewCheckNumBox.Margin = new System.Windows.Forms.Padding(4);
             this.viewCheckNumBox.Name = "viewCheckNumBox";
             this.viewCheckNumBox.Size = new System.Drawing.Size(132, 22);
             this.viewCheckNumBox.TabIndex = 70;
@@ -763,7 +763,7 @@
             // 
             this.viewChecksSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.viewChecksSearchButton.Location = new System.Drawing.Point(345, 60);
-            this.viewChecksSearchButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.viewChecksSearchButton.Margin = new System.Windows.Forms.Padding(4);
             this.viewChecksSearchButton.Name = "viewChecksSearchButton";
             this.viewChecksSearchButton.Size = new System.Drawing.Size(100, 28);
             this.viewChecksSearchButton.TabIndex = 68;
@@ -775,7 +775,7 @@
             // viewCheckNameBox
             // 
             this.viewCheckNameBox.Location = new System.Drawing.Point(204, 33);
-            this.viewCheckNameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.viewCheckNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.viewCheckNameBox.Name = "viewCheckNameBox";
             this.viewCheckNameBox.Size = new System.Drawing.Size(132, 22);
             this.viewCheckNameBox.TabIndex = 67;
@@ -783,7 +783,7 @@
             // viewCheckActNumBox
             // 
             this.viewCheckActNumBox.Location = new System.Drawing.Point(204, 5);
-            this.viewCheckActNumBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.viewCheckActNumBox.Margin = new System.Windows.Forms.Padding(4);
             this.viewCheckActNumBox.Name = "viewCheckActNumBox";
             this.viewCheckActNumBox.Size = new System.Drawing.Size(132, 22);
             this.viewCheckActNumBox.TabIndex = 66;
@@ -818,7 +818,7 @@
             this.ammountCH,
             this.routNumCH});
             this.checkListView.Location = new System.Drawing.Point(7, 100);
-            this.checkListView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkListView.Margin = new System.Windows.Forms.Padding(4);
             this.checkListView.Name = "checkListView";
             this.checkListView.Size = new System.Drawing.Size(731, 254);
             this.checkListView.TabIndex = 63;
@@ -859,7 +859,7 @@
             // checkNumBox
             // 
             this.checkNumBox.Location = new System.Drawing.Point(875, 192);
-            this.checkNumBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkNumBox.Margin = new System.Windows.Forms.Padding(4);
             this.checkNumBox.Name = "checkNumBox";
             this.checkNumBox.Size = new System.Drawing.Size(132, 22);
             this.checkNumBox.TabIndex = 58;
@@ -878,7 +878,7 @@
             // 
             this.addChkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addChkButton.Location = new System.Drawing.Point(1029, 54);
-            this.addChkButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.addChkButton.Margin = new System.Windows.Forms.Padding(4);
             this.addChkButton.Name = "addChkButton";
             this.addChkButton.Size = new System.Drawing.Size(145, 31);
             this.addChkButton.TabIndex = 56;
@@ -889,7 +889,7 @@
             // ammountBox
             // 
             this.ammountBox.Location = new System.Drawing.Point(875, 145);
-            this.ammountBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ammountBox.Margin = new System.Windows.Forms.Padding(4);
             this.ammountBox.Name = "ammountBox";
             this.ammountBox.Size = new System.Drawing.Size(132, 22);
             this.ammountBox.TabIndex = 55;
@@ -897,7 +897,7 @@
             // accountBox2
             // 
             this.accountBox2.Location = new System.Drawing.Point(875, 100);
-            this.accountBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.accountBox2.Margin = new System.Windows.Forms.Padding(4);
             this.accountBox2.Name = "accountBox2";
             this.accountBox2.Size = new System.Drawing.Size(132, 22);
             this.accountBox2.TabIndex = 54;
@@ -905,7 +905,7 @@
             // routingBox2
             // 
             this.routingBox2.Location = new System.Drawing.Point(875, 59);
-            this.routingBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.routingBox2.Margin = new System.Windows.Forms.Padding(4);
             this.routingBox2.Name = "routingBox2";
             this.routingBox2.Size = new System.Drawing.Size(132, 22);
             this.routingBox2.TabIndex = 53;
@@ -974,7 +974,7 @@
             this.manageUsersPage.Controls.Add(this.manageLNameLabel);
             this.manageUsersPage.Controls.Add(this.manageFNameLabel);
             this.manageUsersPage.Location = new System.Drawing.Point(4, 25);
-            this.manageUsersPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.manageUsersPage.Margin = new System.Windows.Forms.Padding(4);
             this.manageUsersPage.Name = "manageUsersPage";
             this.manageUsersPage.Size = new System.Drawing.Size(1181, 417);
             this.manageUsersPage.TabIndex = 8;
@@ -985,7 +985,7 @@
             // 
             this.addUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addUserButton.Location = new System.Drawing.Point(860, 69);
-            this.addUserButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.addUserButton.Margin = new System.Windows.Forms.Padding(4);
             this.addUserButton.Name = "addUserButton";
             this.addUserButton.Size = new System.Drawing.Size(144, 33);
             this.addUserButton.TabIndex = 20;
@@ -1011,7 +1011,7 @@
             this.supervisorCH,
             this.adminCH});
             this.userListView.Location = new System.Drawing.Point(17, 73);
-            this.userListView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.userListView.Margin = new System.Windows.Forms.Padding(4);
             this.userListView.Name = "userListView";
             this.userListView.Size = new System.Drawing.Size(509, 281);
             this.userListView.TabIndex = 17;
@@ -1044,7 +1044,7 @@
             this.deleteUserButton.Enabled = false;
             this.deleteUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteUserButton.Location = new System.Drawing.Point(860, 192);
-            this.deleteUserButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.deleteUserButton.Margin = new System.Windows.Forms.Padding(4);
             this.deleteUserButton.Name = "deleteUserButton";
             this.deleteUserButton.Size = new System.Drawing.Size(144, 33);
             this.deleteUserButton.TabIndex = 16;
@@ -1055,7 +1055,7 @@
             // 
             this.updateUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updateUserButton.Location = new System.Drawing.Point(860, 128);
-            this.updateUserButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.updateUserButton.Margin = new System.Windows.Forms.Padding(4);
             this.updateUserButton.Name = "updateUserButton";
             this.updateUserButton.Size = new System.Drawing.Size(144, 33);
             this.updateUserButton.TabIndex = 15;
@@ -1065,7 +1065,7 @@
             // userFirstNameBox
             // 
             this.userFirstNameBox.Location = new System.Drawing.Point(701, 69);
-            this.userFirstNameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.userFirstNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.userFirstNameBox.Name = "userFirstNameBox";
             this.userFirstNameBox.Size = new System.Drawing.Size(132, 22);
             this.userFirstNameBox.TabIndex = 14;
@@ -1073,7 +1073,7 @@
             // userLastNameBox
             // 
             this.userLastNameBox.Location = new System.Drawing.Point(701, 100);
-            this.userLastNameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.userLastNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.userLastNameBox.Name = "userLastNameBox";
             this.userLastNameBox.Size = new System.Drawing.Size(132, 22);
             this.userLastNameBox.TabIndex = 13;
@@ -1081,7 +1081,7 @@
             // userUserNameBox
             // 
             this.userUserNameBox.Location = new System.Drawing.Point(701, 128);
-            this.userUserNameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.userUserNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.userUserNameBox.Name = "userUserNameBox";
             this.userUserNameBox.Size = new System.Drawing.Size(132, 22);
             this.userUserNameBox.TabIndex = 12;
@@ -1110,7 +1110,7 @@
             // 
             this.adminStatusBox.AutoSize = true;
             this.adminStatusBox.Location = new System.Drawing.Point(701, 201);
-            this.adminStatusBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.adminStatusBox.Margin = new System.Windows.Forms.Padding(4);
             this.adminStatusBox.Name = "adminStatusBox";
             this.adminStatusBox.Size = new System.Drawing.Size(18, 17);
             this.adminStatusBox.TabIndex = 9;
@@ -1120,7 +1120,7 @@
             // 
             this.supStatusBox.AutoSize = true;
             this.supStatusBox.Location = new System.Drawing.Point(701, 167);
-            this.supStatusBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.supStatusBox.Margin = new System.Windows.Forms.Padding(4);
             this.supStatusBox.Name = "supStatusBox";
             this.supStatusBox.Size = new System.Drawing.Size(18, 17);
             this.supStatusBox.TabIndex = 8;
@@ -1159,7 +1159,7 @@
             // searchUserButton
             // 
             this.searchUserButton.Location = new System.Drawing.Point(260, 37);
-            this.searchUserButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchUserButton.Margin = new System.Windows.Forms.Padding(4);
             this.searchUserButton.Name = "searchUserButton";
             this.searchUserButton.Size = new System.Drawing.Size(100, 28);
             this.searchUserButton.TabIndex = 4;
@@ -1170,7 +1170,7 @@
             // userLNameBox
             // 
             this.userLNameBox.Location = new System.Drawing.Point(101, 39);
-            this.userLNameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.userLNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.userLNameBox.Name = "userLNameBox";
             this.userLNameBox.Size = new System.Drawing.Size(132, 22);
             this.userLNameBox.TabIndex = 3;
@@ -1178,7 +1178,7 @@
             // userFNameBox
             // 
             this.userFNameBox.Location = new System.Drawing.Point(101, 6);
-            this.userFNameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.userFNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.userFNameBox.Name = "userFNameBox";
             this.userFNameBox.Size = new System.Drawing.Size(132, 22);
             this.userFNameBox.TabIndex = 2;
@@ -1255,7 +1255,7 @@
             this.Controls.Add(this.userLabel);
             this.Controls.Add(this.signedInAsLabel);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ammountLabel";
             this.Text = "Check Plus";
             this.tabControl1.ResumeLayout(false);
@@ -1295,7 +1295,7 @@
         private System.Windows.Forms.Label accountLabel2;
         private System.Windows.Forms.Label routingLabel2;
         private System.Windows.Forms.Label addCheckLabel;
-        private System.Windows.Forms.Button addActButton;
+        private System.Windows.Forms.Button InsertAccountButton;
         private System.Windows.Forms.Button addChkButton;
         private System.Windows.Forms.Label zipLabel;
         private System.Windows.Forms.TextBox zipBox;
@@ -1344,8 +1344,8 @@
         private System.Windows.Forms.ColumnHeader lastCH;
         private System.Windows.Forms.ColumnHeader numChecksCH;
         private System.Windows.Forms.ColumnHeader curBalanceCH;
-        private System.Windows.Forms.Button deleteAccountButton;
-        private System.Windows.Forms.Button updateAccountButton;
+        private System.Windows.Forms.Button DeleteAccountButton;
+        private System.Windows.Forms.Button UpdateAccountButton;
         private System.Windows.Forms.Button deleteCheckButton;
         private System.Windows.Forms.Button updateCheckButton;
         private System.Windows.Forms.Label dateWrittenlabel;

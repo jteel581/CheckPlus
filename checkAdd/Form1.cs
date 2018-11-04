@@ -30,7 +30,7 @@ namespace checkPlus
         Acct_checkSQLer acct_chkSQL;
         BankSQLer bankSQL;
 
-        AccountHandler AccountHand = new AccountHandler();
+        ApplicationHandler AppHand = new ApplicationHandler();
         
         UsersCollection uc = new UsersCollection();
         User activeUser = null;
@@ -54,8 +54,8 @@ namespace checkPlus
             acct_chkSQL = new Acct_checkSQLer(cpdb);
             bankSQL = new BankSQLer(cpdb);
 
-            updateAccountListView();
-            updateCheckListView();
+            UpdateAccountListView();
+            UpdateCheckListView();
             updateUserListView();
             userListView.FullRowSelect = true;
             accountsListView.FullRowSelect = true;
@@ -93,7 +93,7 @@ namespace checkPlus
             ammountBox.Clear();
         }
 
-        //i think you're down the right track here, but keep working on implementing
+        
         public bool VerifyIntegerStringInput(string prmInt)
         {
             try { Convert.ToInt64(prmInt); }
@@ -120,6 +120,12 @@ namespace checkPlus
         }
 
 
+        /*  --------------------------------------------------------
+         *  FUNCTION - VerifyAccountTextBoxes
+         *  --------------------------------------------------------
+         *  verify that all text boxes have input in them
+         *  and that the input is valid for each box
+         */
         public bool VerifyAccountTextBoxes()
         {
             string fName = firstNameBox.Text;
@@ -132,27 +138,16 @@ namespace checkPlus
             string zip = zipBox.Text;
             string phoneNum = phoneNumBox.Text;
 
-            string badResponse = "Please enter a";
-            if (fName == "") { badResponse += " First Name."; }
-            else if (lName == "") { badResponse += " Last Name."; }
-            else if (routNum == "") { badResponse += " Routing Number."; }
-            else if (acctNum == "") { badResponse += "n Account Number."; }
-            else if (addr == "") { badResponse += "n Address."; }
-            else if (city == "") { badResponse += " City."; }
-            else if (state == "") { badResponse += " State."; }
-            else if (zip == "") { badResponse += " ZIP code"; }
-            else if (phoneNum == "") { badResponse += " Phone Number."; }
-            else
-            {
-                Bank tstBank = bankSQL.SelectBank(bankSQL.BuildBank(routNum));
-                Account tstAcct = accSQL.SelectAccount(accSQL.BuildAccount(routNum, acctNum));
+            string response = AppHand.GetAccountHandler()
+                .VerifyAccountInfoInputWithStringFeedback(fName, lName, routNum, acctNum, addr, city, state, zip, phoneNum);
 
-                if (tstBank == null) { badResponse += " information of an existing Bank."; }
-                else { return true; }
-            }
-
-            DisplayMessageNoResponse(error, badResponse);
-            return false;
+            //if there is a response from VerifyAccountInfoInputWithStringFeedback
+            if (response != "")
+            {   //display an error message and return false
+                DisplayMessageNoResponse(error, response);
+                return false;
+            }   //otherwise, return true
+            else { return true; }
         }
 
 
@@ -209,9 +204,20 @@ namespace checkPlus
          *  --------------------------------------------------------
          *  adds new account information to the list view in the "Manage Accounts" tab
          */
-        public void AddAccountToListView(string acctNum, string firstName, string lastName, string curBal, string countChecks, string routNum)
+        public void AddAccountToListView(Account account)
         {
+            ListViewItem lvi = new ListViewItem
+            (   new string[]
+                {
+                    account.Account_number,
+                    account.First_name, account.Last_name,
+                    AppHand.GetAccountHandler().GetUnpaidChecksInAccount(account).Count().ToString(),
+                    AppHand.GetAccountHandler().GetCurrentBalance(account).ToString(),
+                    AppHand.GetBankHandler().GetRoutingNumber(account.Bank_id)
+                }
+            );
 
+            accountsListView.Items.Add(lvi);
         }
 
 
@@ -269,7 +275,7 @@ namespace checkPlus
                     if (activeUser.adminPrivaleges)
                     {
                         privilegesLabel2.Text = "Admininstrator Privileges";
-                        deleteAccountButton.Enabled = true;
+                        DeleteAccountButton.Enabled = true;
                         deleteCheckButton.Enabled = true;
                         deleteUserButton.Enabled = true;
 
@@ -277,7 +283,7 @@ namespace checkPlus
                     else if (activeUser.supervisorPrivaleges)
                     {
                         privilegesLabel2.Text = "Supevisor Privileges";
-                        deleteAccountButton.Enabled = true;
+                        DeleteAccountButton.Enabled = true;
                         deleteCheckButton.Enabled = true;
                     }
                     else
@@ -300,22 +306,74 @@ namespace checkPlus
             privilegesLabel2.Text = "Not signed in yet";
             privilegesLabel2.ForeColor = Color.DarkRed;
             deleteUserButton.Enabled = false;
-            deleteAccountButton.Enabled = false;
+            DeleteAccountButton.Enabled = false;
             deleteCheckButton.Enabled = false;
         }
 
-
-        /*  ====================================================================================================================
-         *  ====================================================================================================================
-         *  FUNCTIONs for INSERTing records into the database
-         *  ====================================================================================================================
-         *  ====================================================================================================================
+        /*  ---------------------------------------------------------
+         *  FUNCTION - UpdateAccountListView
+         *  ---------------------------------------------------------
+         *  called any time a user clicks a button that makes changes to accounts
+         *      check addition
+         *      changing account information
+         *      deleting an account, etc....
+         *  
+         *  if      {}  when first opening the application, populate with the existing records
+         *  else    {}  throughout use of the application, update the values displayed
          */
+        public void UpdateAccountListView()
+        {
+            if (accountsListView.Items.Count == 0)
+            {
+                foreach (Account act in AppHand.GetAccountHandler().SelectAllAccounts())
+                {
+                    string acctNum = act.Account_number;
+                    string fName = act.First_name;
+                    string lName = act.Last_name;
+                    string checkCount = AppHand.GetAccountHandler().GetUnpaidChecksInAccount(act).Count().ToString();
+                    string acctBal = AppHand.GetAccountHandler().GetCurrentBalance(act).ToString();
+                    string routNum = AppHand.GetBankHandler().GetRoutingNumber(act.Bank_id);
 
+                    AddAccountToListView(act);
+                }
+            }
+            else
+            {
+                foreach (ListViewItem lvi in accountsListView.Items)
+                {
+                    string routNum = lvi.SubItems[5].Text;
+                    string acctNum = lvi.SubItems[0].Text;
+
+                    Account tstAcct = AppHand.GetAccountHandler().SelectAccount(routNum, acctNum);
+
+                    if (tstAcct != null)
+                    {   //update all the information to reflect whatever changes were made
+                        lvi.SubItems[0].Text = tstAcct.Account_number;
+                        lvi.SubItems[1].Text = tstAcct.First_name;
+                        lvi.SubItems[2].Text = tstAcct.Last_name;
+                        lvi.SubItems[3].Text = AppHand.GetAccountHandler().GetUnpaidChecksInAccount(tstAcct).Count().ToString();
+                        lvi.SubItems[4].Text = AppHand.GetAccountHandler().GetCurrentBalance(tstAcct).ToString();
+                        lvi.SubItems[5].Text = AppHand.GetBankHandler().GetRoutingNumber(tstAcct.Bank_id);
+                    }
+                    else { accountsListView.Items.Remove(lvi); }
+                }
+            }
+        }
+
+
+        /*      ===========================================================================================================================================================================
+        *   ===============================================================================================================================================================================
+        *   ===============================================================================================================================================================================
+        *   FUNCTIONs for Account buttons
+        *       named for what they are doing in cahoots with the database
+        *   ===============================================================================================================================================================================
+        *   ===============================================================================================================================================================================
+        *       ===========================================================================================================================================================================
+        */
 
 
         /*  --------------------------------------------------------
-         *  FUNCTION - addActButton_Click
+         *  FUNCTION - InsertActButton_Click
          *  --------------------------------------------------------
          *  called when user clicks "Add Account" button
          *  
@@ -326,8 +384,8 @@ namespace checkPlus
          *      creates a new record
          */
         //on user click of button, attempt to add an account record
-        private void addActButton_Click(object sender, EventArgs e)
-        {   
+        private void InsertAccountButton_Click(object sender, EventArgs e)
+        {
             if (VerifyAccountTextBoxes())
             {   //stashing text input from the form into variables
                 string firstName = firstNameBox.Text;
@@ -340,61 +398,142 @@ namespace checkPlus
                 string zip = zipBox.Text;
                 string phnNum = phoneNumBox.Text;
 
-                Account accountToInsert = AccountHand.InsertAccount(routingNumber, accountNumber, firstName, lastName, address, city, state, zip, phnNum);
+                //attempt to insert an account with the information provided
+                //if it is attempting to insert a duplicate account, accountToInsert will be null
+                Account accountToInsert = AppHand.GetAccountHandler()
+                    .InsertAccount(routingNumber, accountNumber, firstName, lastName, address, city, state, zip, phnNum);
 
-                //Account dupCheckAcct = accSQL.SelectAccount(accSQL.BuildAccount(routingNumber, accountNumber));
-                if (accountToInsert != null)
-                {
+                //if the insert failed due to an existing account, accountToInsert will be null
+                if (accountToInsert == null)
+                {   //so display an error message
                     DisplayMessageNoResponse(error, "Account already exists.");
                 }
-                /*
-                if (AccountToInsert != null)
-                {   //if account with that combo of rout num and acct num exists already, report dup error
-                    DisplayMessageNoResponse(error, "Account already exists.");
-                }*/
                 else
-                {   //otherwise, insert a new account object and update the listing
-                    /*
-                    accSQL.TurnOnInsert();
-
-                    Account insAcct = accSQL.InsertAccount
-                    (accSQL.BuildAccount
-                        (
-                            routingNumber, accountNumber,
-                            firstName, lastName,
-                            address, city, state, zip,
-                            phnNum
-                        )
-                    );
-                    */
-
-                    /*
-                    ListViewItem lvi = new ListViewItem(new string[]
-                    {
-                        insAcct.Account_number,
-                        insAcct.First_name, insAcct.Last_name,
-                        accSQL.GetChecksInAccount(insAcct).Count().ToString(),
-                        accSQL.GetAccountBalance(insAcct).ToString(),
-                        accSQL.GetBankRoutingNumber(insAcct)
-                    }
-                    
-
-                    {
-                        AccountToInsert.AccountInst.Account_number,
-                        AccountToInsert.AccountInst.First_name, AccountToInsert.AccountInst.Last_name,
-                        
-                    }
-                    );
-                    accountsListView.Items.Add(lvi);
+                {   //otherwise, update the listing and report a new account added, then clear the text boxes
+                    AddAccountToListView(accountToInsert);
                     DisplayMessageNoResponse(success, "New account added.");
-                    */
-
-                    accSQL.TurnOffInsert();
-
                     ClearAccountTabTextBoxes();
                 }
             }
         }
+
+
+        /*  ---------------------------------------------------------
+         *  FUNCTION - UpdateAccountButton_Click
+         *  ---------------------------------------------------------
+         *  called when the user clicks the "Save Changes" button 
+         *      on the accounts tab
+         *      
+         *  verifies the information provided in the text boxes 
+         *      
+         *  works only when the user has selected only 1 account
+         *      otherwise, an error message will occur
+         *      
+         *  uses the information provided in the listing to populate
+         *      the text boxes
+         *      
+         *  the user can then change the text in the text boxes
+         */
+        private void UpdateAccountButton_Click(object sender, EventArgs e)
+        {   //did the user select only one account from the listing?
+            if (accountsListView.SelectedItems.Count == 1)
+            {
+                if (VerifyAccountTextBoxes())
+                {   //get the index of the item being highlighted
+                    //this highlighting disappears once the user clicks "Save Changes"
+                    //  so we need to preserve the index
+                    int acctListItemInd = accountsListView.FocusedItem.Index;
+
+                    //get the original data
+                    string origAccountNum = accountsListView.Items[acctListItemInd].SubItems[0].Text;
+                    string origRoutNum = accountsListView.Items[acctListItemInd].SubItems[5].Text;
+
+                    //get all the new information (not all of it has to have been changed,
+                    //  but it may have been, so we want to grab ALL the things
+                    string newFirstName = firstNameBox.Text;
+                    string newLastName = lastNameBox.Text;
+                    string newRoutNum = routingBox1.Text;
+                    string newAddress = addressBox.Text;
+                    string newCity = cityBox.Text;
+                    string newState = stateBox.Text;
+                    string newZip = zipBox.Text;
+                    string newAcctNum = accountBox1.Text;
+                    string newPhoneNum = phoneNumBox.Text;
+
+                    //attempt to update the account
+                    //if the update is unsuccessful, updatedAccount will be null
+                    Account updatedAccount = AppHand.GetAccountHandler()
+                        .UpdateAccount(
+                            origRoutNum, origAccountNum,
+                            newRoutNum, newAcctNum, newFirstName, newLastName, newAddress, newCity, newState, newZip, newPhoneNum);
+
+                    if (updatedAccount == null)
+                    {   //if it does, display an error message and do nothing with the changes
+                        DisplayMessageNoResponse(error, "Account with that information already exists.");
+                    }
+                    else
+                    {   //otherwise, update database account record and update display listing
+                        accountsListView.Items[acctListItemInd].SubItems[0].Text = updatedAccount.Account_number;
+                        accountsListView.Items[acctListItemInd].SubItems[5].Text = AppHand.GetBankHandler().GetRoutingNumber(updatedAccount.Bank_id);
+
+                        UpdateAccountListView();
+                        UpdateCheckListView();
+                    }
+                }
+            }
+            else { DisplayMessageNoResponse(error, "Please select 1 account."); }
+        }
+
+
+        /*  --------------------------------------------------------
+         *  FUNCTION - DeleteAccountButton_Click
+         *  --------------------------------------------------------
+         *  called when user clicks "Delete Account" button
+         *  if any items
+         */
+        private void DeleteAccountButton_Click(object sender, EventArgs e)
+        {
+            if (accountsListView.SelectedItems.Count > 0)
+            {   //loop through each item selected and do work
+                foreach (ListViewItem lvi in accountsListView.SelectedItems)
+                {   //grab the account number and routing number
+                    string acctNumSelected = lvi.SubItems[0].Text;
+                    string routNumSelected = lvi.SubItems[5].Text;
+
+                    //get the account based on the account number and the routing number
+                    Account tstAccount = accSQL.SelectAccount(accSQL.BuildAccount(routNumSelected, acctNumSelected));
+
+                    //grab all the checks that are connected to that account so that we can delete them
+                    //we have to delete all of the checks before we delete the account
+                    //because referencial integrity
+                    List<Acct_check> acctChecks =
+                            accSQL.GetChecksInAccount(tstAccount);
+                    foreach (Acct_check ac in acctChecks) { acct_chkSQL.DeleteAcct_check(ac); }
+
+                    //now delete the actual account
+                    Account delAccount =
+                        accSQL.DeleteAccount(tstAccount);
+                }
+
+                //update the views
+                UpdateAccountListView();
+                UpdateCheckListView();
+            }
+            else { DisplayMessageNoResponse(error, "Please select account(s)."); }
+
+            ClearAccountTabTextBoxes();
+        }
+
+
+        /*      ===========================================================================================================================================================================
+         *   ===============================================================================================================================================================================
+         *   ===============================================================================================================================================================================
+         *   FUNCTIONs for Check buttons
+         *       named for what they are doing in cahoots with the database
+         *   ===============================================================================================================================================================================
+         *   ===============================================================================================================================================================================
+         *       ===========================================================================================================================================================================
+         */
 
 
         /*  --------------------------------------------------------
@@ -450,7 +589,7 @@ namespace checkPlus
                     )
                     ;
                     checkListView.Items.Add(lvi);
-                    updateAccountListView();
+                    UpdateAccountListView();
                     DisplayMessageNoResponse(success, "New check added.");
 
                     acct_chkSQL.TurnOffInsert();
@@ -459,14 +598,6 @@ namespace checkPlus
                 }
             }
         }
-
-
-        /*  ====================================================================================================================
-         *  ====================================================================================================================
-         *  FUNCTIONs for UPDATEing records in the database
-         *  ====================================================================================================================
-         *  ====================================================================================================================
-         */
 
 
         public void updateUserListView()
@@ -509,70 +640,10 @@ namespace checkPlus
         }
 
 
-        /*  ---------------------------------------------------------
-         *  FUNCTION - updateAccountListView
-         *  ---------------------------------------------------------
-         *  called any time a user clicks a button that makes changes to accounts
-         *      check addition
-         *      changing account information
-         *      deleting an account, etc....
-         *  
-         *  if      {}  when first opening the application, populate with the existing records
-         *  else    {}  throughout use of the application, update the values displayed
-         */
-        public void updateAccountListView()
-        {
-            if (accountsListView.Items.Count == 0)
-            {
-                foreach(Account act in accSQL.GetAllAccounts())
-                {
-                    string acctNum = act.Account_number;
-                    string fName = act.First_name;
-                    string lName = act.Last_name;
-                    string checkCount = accSQL.GetChecksInAccount(act).Count().ToString();
-                    string acctBal = accSQL.GetAccountBalance(act).ToString();
-                    string routNum = accSQL.GetBankRoutingNumber(act);
-                    
-                    ListViewItem lvi = new ListViewItem
-                    (
-                        new string[]
-                        {
-                            acctNum, 
-                            fName,
-                            lName,
-                            checkCount,
-                            acctBal,
-                            routNum
-                        }
-                    );
-                    accountsListView.Items.Add(lvi);
-                }
-            }
-            else
-            {   
-                foreach (ListViewItem lvi in accountsListView.Items)
-                {
-                    string routNum = lvi.SubItems[5].Text;
-                    string acctNum = lvi.SubItems[0].Text;
-
-                    Account tstAcct = accSQL.SelectAccount(accSQL.BuildAccount(routNum, acctNum));
-
-                    if (tstAcct != null)
-                    {   //update all the information to reflect whatever changes were made
-                        lvi.SubItems[0].Text = tstAcct.Account_number;
-                        lvi.SubItems[1].Text = tstAcct.First_name;
-                        lvi.SubItems[2].Text = tstAcct.Last_name;
-                        lvi.SubItems[3].Text = accSQL.GetChecksInAccount(tstAcct).Count().ToString();
-                        lvi.SubItems[4].Text = accSQL.GetAccountBalance(tstAcct).ToString();
-                        lvi.SubItems[5].Text = accSQL.GetBankRoutingNumber(tstAcct);
-                    }
-                    else { accountsListView.Items.Remove(lvi); }
-                }
-            }
-        }
+        
 
 
-        public void updateCheckListView()
+        public void UpdateCheckListView()
         {
             if (checkListView.Items.Count == 0)
             {
@@ -666,92 +737,7 @@ namespace checkPlus
                     i++;
                 }
             }
-        }
-
-
-
-        /*  ====================================================================================================================
-         *  ====================================================================================================================
-         *  FUNCTIONs for UPDATEing records in the database
-         *  ====================================================================================================================
-         *  ====================================================================================================================
-         */
-
-
-
-        /*  ---------------------------------------------------------
-         *  FUNCTION - saveChangesButton_Click
-         *  ---------------------------------------------------------
-         *  called when the user clicks the "Save Changes" button 
-         *      on the accounts tab
-         *      
-         *  verifies the information provided in the text boxes 
-         *      
-         *  works only when the user has selected only 1 account
-         *      otherwise, an error message will occur
-         *      
-         *  uses the information provided in the listing to populate
-         *      the text boxes
-         *      
-         *  the user can then change the text in the text boxes
-         */
-        private void saveChangesButton_Click(object sender, EventArgs e)
-        {   //did the user select only one account from the listing?
-            if (accountsListView.SelectedItems.Count == 1)
-            {
-                if (VerifyAccountTextBoxes())
-                {   //get the index of the item being highlighted
-                    //this highlighting disappears once the user clicks "Save Changes"
-                    //  so we need to preserve the index
-                    int acctListItemInd = accountsListView.FocusedItem.Index;
-
-                    //get the original data
-                    string origAccountNum = accountsListView.Items[acctListItemInd].SubItems[0].Text;
-                    string origRoutNum = accountsListView.Items[acctListItemInd].SubItems[5].Text;
-
-                    //get all the new information (not all of it has to have been changed,
-                    //  but it may have been, so we want to grab ALL the things
-                    string newFirstName = firstNameBox.Text;
-                    string newLastName = lastNameBox.Text;
-                    string newRoutNum = routingBox1.Text;
-                    string newAddress = addressBox.Text;
-                    string newCity = cityBox.Text;
-                    string newState = stateBox.Text;
-                    string newZip = zipBox.Text;
-                    string newAcctNum = accountBox1.Text;
-                    string newPhoneNum = phoneNumBox.Text;
-
-                    //get the Account object that houses the unique pieces of the original
-                    Account acctToUpd = accSQL.SelectAccount(accSQL.BuildAccount(origRoutNum, origAccountNum));
-                    Account acctNewInfo = accSQL.BuildAccount(
-                        newRoutNum, newAcctNum,
-                        newFirstName, newLastName,
-                        newAddress,
-                        newCity, newState, newZip,
-                        newPhoneNum
-                    );
-
-                    //see if an account with the updated information already exists
-                    Account tstDupAcct = accSQL.SelectAccount(acctNewInfo);
-
-                    if (tstDupAcct != null)
-                    {   //if it does, display an error message and do nothing with the changes
-                        DisplayMessageNoResponse(error, "Account with that information already exists.");
-                    }
-                    else
-                    {   //otherwise, update database account record and update display listing
-                        accSQL.UpdateAccount(acctToUpd, acctNewInfo);
-
-                        accountsListView.Items[acctListItemInd].SubItems[0].Text = acctToUpd.Account_number;
-                        accountsListView.Items[acctListItemInd].SubItems[5].Text = accSQL.GetBankRoutingNumber(acctToUpd);
-
-                        updateAccountListView();
-                        updateCheckListView();
-                    }
-                }
-            }
-            else { DisplayMessageNoResponse(error, "Please select 1 account."); }
-        }
+        }        
 
 
         /*  ---------------------------------------------------------
@@ -812,8 +798,8 @@ namespace checkPlus
                         checkListView.Items[chckListItemInd].SubItems[5].Text = acct_chkSQL.GetRoutingNumber(acct_chkToUpd);
                         checkListView.Items[chckListItemInd].SubItems[3].Text = acct_chkToUpd.Check_number;
 
-                        updateAccountListView();
-                        updateCheckListView();
+                        UpdateAccountListView();
+                        UpdateCheckListView();
                     }
                 }
             }
@@ -822,53 +808,7 @@ namespace checkPlus
 
 
 
-        /*  ==========================================================================================
-         *  ==========================================================================================
-         *  FUNCTIONs for DELETEing items in the db
-         *  ==========================================================================================
-         *  ==========================================================================================
-         */
-
-
-
-        /*  --------------------------------------------------------
-         *  FUNCTION - deleteAccountButton_Click
-         *  --------------------------------------------------------
-         *  called when user clicks "Delete Account" button
-         *  if any items
-         */
-        private void deleteAccountButton_Click(object sender, EventArgs e)
-        {
-            if (accountsListView.SelectedItems.Count > 0)
-            {   //loop through each item selected and do work
-                foreach (ListViewItem lvi in accountsListView.SelectedItems)
-                {   //grab the account number and routing number
-                    string acctNumSelected = lvi.SubItems[0].Text;
-                    string routNumSelected = lvi.SubItems[5].Text;
-
-                    //get the account based on the account number and the routing number
-                    Account tstAccount = accSQL.SelectAccount(accSQL.BuildAccount(routNumSelected, acctNumSelected));
-
-                    //grab all the checks that are connected to that account so that we can delete them
-                    //we have to delete all of the checks before we delete the account
-                        //because referencial integrity
-                    List<Acct_check> acctChecks =
-                            accSQL.GetChecksInAccount(tstAccount);
-                    foreach(Acct_check ac in acctChecks) { acct_chkSQL.DeleteAcct_check(ac); }
-
-                    //now delete the actual account
-                    Account delAccount =
-                        accSQL.DeleteAccount(tstAccount);
-                }
-
-                //update the views
-                updateAccountListView();
-                updateCheckListView();
-            }
-            else { DisplayMessageNoResponse(error, "Please select account(s)."); }
-
-            ClearAccountTabTextBoxes();
-        }
+        
 
 
         /*  ------------------------------------------------
@@ -894,8 +834,8 @@ namespace checkPlus
                     {
                         acct_chkSQL.DeleteAcct_check(tstAcct_check);
 
-                        updateAccountListView();
-                        updateCheckListView();
+                        UpdateAccountListView();
+                        UpdateCheckListView();
 
                         ClearCheckTabTextBoxes();
                     }
@@ -1083,7 +1023,8 @@ namespace checkPlus
         private void unitTestsButton_Click(object sender, EventArgs e)
         {
             TestEntityAccess unitTest = new TestEntityAccess();
-            unitTest.runTests();
+            unitTest.RunSQLTests();
+            unitTest.RunAccountHandlerTests();
             unitTestBox.Text = unitTest.getTestStr();
         }
     }
