@@ -166,7 +166,7 @@ namespace checkPlus
         BankSQLer BankSQL = DatabaseHandler.Instance.GetBankSQLer();
 
         /*  ---------------------------------------------------------------
-         *  FUNCTION - BuildAccount
+         *  FUNCTION - BuildNewAccount
          *  ---------------------------------------------------------------
          *  build a new Account object (not database record)
          *      with the provided information
@@ -396,7 +396,7 @@ namespace checkPlus
 
 
         /*  ---------------------------------------------------------------
-         *  FUNCTION - GetUnpaidChecksInAccount
+         *  FUNCTION - GetCurrentBalance
          *  ---------------------------------------------------------------
          *  retrieve the balance of the checks in the account
          */
@@ -408,6 +408,35 @@ namespace checkPlus
                 balance += c.Amount;
             }
             return balance;
+        }
+
+
+        /*  ---------------------------------------------------------------
+         *  FUNCTION - GetAccountNumber
+         *  ---------------------------------------------------------------
+         *  retrieve the account number of the account
+         */
+        public string GetAccountNumber(int accountID)
+        {
+            return AccountSQL.SelectAccount(accountID).Account_number;
+        }
+        /*  ---------------------------------------------------------------
+         *  FUNCTION - GetFirstName
+         *  ---------------------------------------------------------------
+         *  retrieve the first name of the account
+         */
+        public string GetFirstName(int accountID)
+        {
+            return AccountSQL.SelectAccount(accountID).First_name;
+        }
+        /*  ---------------------------------------------------------------
+         *  FUNCTION - GetLastName
+         *  ---------------------------------------------------------------
+         *  retrieve the last name of the account
+         */
+        public string GetLastName(int accountID)
+        {
+            return AccountSQL.SelectAccount(accountID).Last_name;
         }
     }
 

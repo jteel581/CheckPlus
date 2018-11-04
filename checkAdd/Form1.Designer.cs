@@ -70,7 +70,7 @@
             this.lastNameLabel = new System.Windows.Forms.Label();
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.accountsListView = new System.Windows.Forms.ListView();
+            this.AccountsListView = new System.Windows.Forms.ListView();
             this.accNumCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.firstCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lastCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -80,8 +80,8 @@
             this.manageCheckPage = new System.Windows.Forms.TabPage();
             this.paidChkBox = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.deleteCheckButton = new System.Windows.Forms.Button();
-            this.updateCheckButton = new System.Windows.Forms.Button();
+            this.DeleteCheckButton = new System.Windows.Forms.Button();
+            this.UpdateCheckButton = new System.Windows.Forms.Button();
             this.dateWrittenlabel = new System.Windows.Forms.Label();
             this.dateWrittenSelector = new System.Windows.Forms.DateTimePicker();
             this.viewCheckNumBox = new System.Windows.Forms.TextBox();
@@ -91,7 +91,7 @@
             this.viewCheckActNumBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.checkListView = new System.Windows.Forms.ListView();
+            this.CheckListView = new System.Windows.Forms.ListView();
             this.acctNumCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -100,7 +100,7 @@
             this.routNumCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.checkNumBox = new System.Windows.Forms.TextBox();
             this.checkNumLabel = new System.Windows.Forms.Label();
-            this.addChkButton = new System.Windows.Forms.Button();
+            this.InsertCheckButton = new System.Windows.Forms.Button();
             this.ammountBox = new System.Windows.Forms.TextBox();
             this.accountBox2 = new System.Windows.Forms.TextBox();
             this.routingBox2 = new System.Windows.Forms.TextBox();
@@ -319,7 +319,7 @@
             this.manageAccountPage.Controls.Add(this.lastNameLabel);
             this.manageAccountPage.Controls.Add(this.firstNameLabel);
             this.manageAccountPage.Controls.Add(this.label1);
-            this.manageAccountPage.Controls.Add(this.accountsListView);
+            this.manageAccountPage.Controls.Add(this.AccountsListView);
             this.manageAccountPage.Location = new System.Drawing.Point(4, 25);
             this.manageAccountPage.Margin = new System.Windows.Forms.Padding(4);
             this.manageAccountPage.Name = "manageAccountPage";
@@ -596,23 +596,23 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "Add/Update Account";
             // 
-            // accountsListView
+            // AccountsListView
             // 
-            this.accountsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.AccountsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.accNumCH,
             this.firstCH,
             this.lastCH,
             this.numChecksCH,
             this.curBalanceCH,
             this.acctRoutNumCH});
-            this.accountsListView.Location = new System.Drawing.Point(16, 65);
-            this.accountsListView.Margin = new System.Windows.Forms.Padding(4);
-            this.accountsListView.Name = "accountsListView";
-            this.accountsListView.Size = new System.Drawing.Size(696, 288);
-            this.accountsListView.TabIndex = 57;
-            this.accountsListView.UseCompatibleStateImageBehavior = false;
-            this.accountsListView.View = System.Windows.Forms.View.Details;
-            this.accountsListView.SelectedIndexChanged += new System.EventHandler(this.accountsListView_SelectedIndexChanged);
+            this.AccountsListView.Location = new System.Drawing.Point(16, 65);
+            this.AccountsListView.Margin = new System.Windows.Forms.Padding(4);
+            this.AccountsListView.Name = "AccountsListView";
+            this.AccountsListView.Size = new System.Drawing.Size(696, 288);
+            this.AccountsListView.TabIndex = 57;
+            this.AccountsListView.UseCompatibleStateImageBehavior = false;
+            this.AccountsListView.View = System.Windows.Forms.View.Details;
+            this.AccountsListView.SelectedIndexChanged += new System.EventHandler(this.AccountsListView_SelectedIndexChanged);
             // 
             // accNumCH
             // 
@@ -648,8 +648,8 @@
             // 
             this.manageCheckPage.Controls.Add(this.paidChkBox);
             this.manageCheckPage.Controls.Add(this.label9);
-            this.manageCheckPage.Controls.Add(this.deleteCheckButton);
-            this.manageCheckPage.Controls.Add(this.updateCheckButton);
+            this.manageCheckPage.Controls.Add(this.DeleteCheckButton);
+            this.manageCheckPage.Controls.Add(this.UpdateCheckButton);
             this.manageCheckPage.Controls.Add(this.dateWrittenlabel);
             this.manageCheckPage.Controls.Add(this.dateWrittenSelector);
             this.manageCheckPage.Controls.Add(this.viewCheckNumBox);
@@ -659,10 +659,10 @@
             this.manageCheckPage.Controls.Add(this.viewCheckActNumBox);
             this.manageCheckPage.Controls.Add(this.label5);
             this.manageCheckPage.Controls.Add(this.label7);
-            this.manageCheckPage.Controls.Add(this.checkListView);
+            this.manageCheckPage.Controls.Add(this.CheckListView);
             this.manageCheckPage.Controls.Add(this.checkNumBox);
             this.manageCheckPage.Controls.Add(this.checkNumLabel);
-            this.manageCheckPage.Controls.Add(this.addChkButton);
+            this.manageCheckPage.Controls.Add(this.InsertCheckButton);
             this.manageCheckPage.Controls.Add(this.ammountBox);
             this.manageCheckPage.Controls.Add(this.accountBox2);
             this.manageCheckPage.Controls.Add(this.routingBox2);
@@ -698,30 +698,30 @@
             this.label9.TabIndex = 101;
             this.label9.Text = "Paid:";
             // 
-            // deleteCheckButton
+            // DeleteCheckButton
             // 
-            this.deleteCheckButton.Enabled = false;
-            this.deleteCheckButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteCheckButton.Location = new System.Drawing.Point(1029, 183);
-            this.deleteCheckButton.Margin = new System.Windows.Forms.Padding(4);
-            this.deleteCheckButton.Name = "deleteCheckButton";
-            this.deleteCheckButton.Size = new System.Drawing.Size(145, 31);
-            this.deleteCheckButton.TabIndex = 100;
-            this.deleteCheckButton.Text = "Delete Check";
-            this.deleteCheckButton.UseVisualStyleBackColor = true;
-            this.deleteCheckButton.Click += new System.EventHandler(this.deleteCheckButton_Click);
+            this.DeleteCheckButton.Enabled = false;
+            this.DeleteCheckButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeleteCheckButton.Location = new System.Drawing.Point(1029, 183);
+            this.DeleteCheckButton.Margin = new System.Windows.Forms.Padding(4);
+            this.DeleteCheckButton.Name = "DeleteCheckButton";
+            this.DeleteCheckButton.Size = new System.Drawing.Size(145, 31);
+            this.DeleteCheckButton.TabIndex = 100;
+            this.DeleteCheckButton.Text = "Delete Check";
+            this.DeleteCheckButton.UseVisualStyleBackColor = true;
+            this.DeleteCheckButton.Click += new System.EventHandler(this.DeleteCheckButton_Click);
             // 
-            // updateCheckButton
+            // UpdateCheckButton
             // 
-            this.updateCheckButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateCheckButton.Location = new System.Drawing.Point(1029, 119);
-            this.updateCheckButton.Margin = new System.Windows.Forms.Padding(4);
-            this.updateCheckButton.Name = "updateCheckButton";
-            this.updateCheckButton.Size = new System.Drawing.Size(145, 31);
-            this.updateCheckButton.TabIndex = 99;
-            this.updateCheckButton.Text = "Save Changes";
-            this.updateCheckButton.UseVisualStyleBackColor = true;
-            this.updateCheckButton.Click += new System.EventHandler(this.updateCheckButton_Click);
+            this.UpdateCheckButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateCheckButton.Location = new System.Drawing.Point(1029, 119);
+            this.UpdateCheckButton.Margin = new System.Windows.Forms.Padding(4);
+            this.UpdateCheckButton.Name = "UpdateCheckButton";
+            this.UpdateCheckButton.Size = new System.Drawing.Size(145, 31);
+            this.UpdateCheckButton.TabIndex = 99;
+            this.UpdateCheckButton.Text = "Save Changes";
+            this.UpdateCheckButton.UseVisualStyleBackColor = true;
+            this.UpdateCheckButton.Click += new System.EventHandler(this.UpdateCheckButton_Click);
             // 
             // dateWrittenlabel
             // 
@@ -808,23 +808,23 @@
             this.label7.TabIndex = 64;
             this.label7.Text = "Search by account number:";
             // 
-            // checkListView
+            // CheckListView
             // 
-            this.checkListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.CheckListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.acctNumCH,
             this.fNameCH,
             this.lNameCH,
             this.numCH,
             this.ammountCH,
             this.routNumCH});
-            this.checkListView.Location = new System.Drawing.Point(7, 100);
-            this.checkListView.Margin = new System.Windows.Forms.Padding(4);
-            this.checkListView.Name = "checkListView";
-            this.checkListView.Size = new System.Drawing.Size(731, 254);
-            this.checkListView.TabIndex = 63;
-            this.checkListView.UseCompatibleStateImageBehavior = false;
-            this.checkListView.View = System.Windows.Forms.View.Details;
-            this.checkListView.SelectedIndexChanged += new System.EventHandler(this.checkListView_SelectedIndexChanged);
+            this.CheckListView.Location = new System.Drawing.Point(7, 100);
+            this.CheckListView.Margin = new System.Windows.Forms.Padding(4);
+            this.CheckListView.Name = "CheckListView";
+            this.CheckListView.Size = new System.Drawing.Size(731, 254);
+            this.CheckListView.TabIndex = 63;
+            this.CheckListView.UseCompatibleStateImageBehavior = false;
+            this.CheckListView.View = System.Windows.Forms.View.Details;
+            this.CheckListView.SelectedIndexChanged += new System.EventHandler(this.CheckListView_SelectedIndexChanged);
             // 
             // acctNumCH
             // 
@@ -874,17 +874,17 @@
             this.checkNumLabel.TabIndex = 57;
             this.checkNumLabel.Text = "Check Number:";
             // 
-            // addChkButton
+            // InsertCheckButton
             // 
-            this.addChkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addChkButton.Location = new System.Drawing.Point(1029, 54);
-            this.addChkButton.Margin = new System.Windows.Forms.Padding(4);
-            this.addChkButton.Name = "addChkButton";
-            this.addChkButton.Size = new System.Drawing.Size(145, 31);
-            this.addChkButton.TabIndex = 56;
-            this.addChkButton.Text = "Add Check";
-            this.addChkButton.UseVisualStyleBackColor = true;
-            this.addChkButton.Click += new System.EventHandler(this.addChkButton_Click);
+            this.InsertCheckButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InsertCheckButton.Location = new System.Drawing.Point(1029, 54);
+            this.InsertCheckButton.Margin = new System.Windows.Forms.Padding(4);
+            this.InsertCheckButton.Name = "InsertCheckButton";
+            this.InsertCheckButton.Size = new System.Drawing.Size(145, 31);
+            this.InsertCheckButton.TabIndex = 56;
+            this.InsertCheckButton.Text = "Add Check";
+            this.InsertCheckButton.UseVisualStyleBackColor = true;
+            this.InsertCheckButton.Click += new System.EventHandler(this.InsertCheckButton_Click);
             // 
             // ammountBox
             // 
@@ -1296,7 +1296,7 @@
         private System.Windows.Forms.Label routingLabel2;
         private System.Windows.Forms.Label addCheckLabel;
         private System.Windows.Forms.Button InsertAccountButton;
-        private System.Windows.Forms.Button addChkButton;
+        private System.Windows.Forms.Button InsertCheckButton;
         private System.Windows.Forms.Label zipLabel;
         private System.Windows.Forms.TextBox zipBox;
         private System.Windows.Forms.TextBox stateBox;
@@ -1338,7 +1338,7 @@
         private System.Windows.Forms.TextBox accountNumSearchBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label searchByAccountNumLabel;
-        private System.Windows.Forms.ListView accountsListView;
+        private System.Windows.Forms.ListView AccountsListView;
         private System.Windows.Forms.ColumnHeader accNumCH;
         private System.Windows.Forms.ColumnHeader firstCH;
         private System.Windows.Forms.ColumnHeader lastCH;
@@ -1346,8 +1346,8 @@
         private System.Windows.Forms.ColumnHeader curBalanceCH;
         private System.Windows.Forms.Button DeleteAccountButton;
         private System.Windows.Forms.Button UpdateAccountButton;
-        private System.Windows.Forms.Button deleteCheckButton;
-        private System.Windows.Forms.Button updateCheckButton;
+        private System.Windows.Forms.Button DeleteCheckButton;
+        private System.Windows.Forms.Button UpdateCheckButton;
         private System.Windows.Forms.Label dateWrittenlabel;
         private System.Windows.Forms.DateTimePicker dateWrittenSelector;
         private System.Windows.Forms.TextBox viewCheckNumBox;
@@ -1357,7 +1357,7 @@
         private System.Windows.Forms.TextBox viewCheckActNumBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ListView checkListView;
+        private System.Windows.Forms.ListView CheckListView;
         private System.Windows.Forms.ColumnHeader acctNumCH;
         private System.Windows.Forms.ColumnHeader fNameCH;
         private System.Windows.Forms.ColumnHeader lNameCH;
