@@ -35,71 +35,6 @@ namespace checkPlus
 
 
         /*  -----------------------------------------------------
-         *  FUNCTION - BuildAccount
-         *  -----------------------------------------------------
-         *  build an account out of the unique characteristics of an account record:
-         *      Bank's routing number
-         *      Account's account number
-         *      (you can provide all the other pieces as well, but that's used moreso 
-         *          to build a new Account object for INSERTing or UPDATEing
-         *          a database account record)
-         *          
-         *  if a record does not exist with the provided information,
-         *      return null
-         *      
-         *  use it to build an Account instance 
-         *      any time you need to call one of the "SQL-esque" Account functions below
-         *  -----------------------------------------------------      
-         */
-        public Account BuildAccount
-        (
-            string prmRoutNum,
-            string prmAcctNum, 
-            string prmFirstNm = "", string prmLastNm = "",
-            string prmAddress = "", string prmCity = "", string prmState = "", string prmZip = "",
-            string prmPhnNum = ""
-        )
-        {
-            Account tstAcct = (
-                from a in cpdb.Accounts
-                join b in cpdb.Banks on a.Bank_id equals b.Bank_id
-                where b.Routing_number == prmRoutNum
-                    && a.Account_number == prmAcctNum
-                select a
-            ).FirstOrDefault();
-
-            /*  basically, was it being used to find the database 
-             *      account record with a unique 
-             *      routing number and account number combo
-             *  or was it being used to build a new Account object
-             */
-            if (tstAcct != null 
-                    && prmFirstNm == "" && prmLastNm == ""
-                    && prmAddress == "" && prmCity == "" && prmState == "" && prmZip == ""
-                    && prmPhnNum == "") { return tstAcct; }
-            else
-            {   
-                return new Account()
-                {
-                    First_name = prmFirstNm,
-                    Last_name = prmLastNm,
-                    Bank_id = (
-                        from b in cpdb.Banks
-                        where b.Routing_number == prmRoutNum
-                        select b.Bank_id
-                    ).FirstOrDefault(),
-                    Address = prmAddress,
-                    City = prmCity,
-                    State = prmState,
-                    Zip_code = prmZip,
-                    Country = "United States",
-                    Account_number = prmAcctNum,
-                    Phone_number = prmPhnNum
-                };
-            }
-        }
-
-        /*  -----------------------------------------------------
          *  FUNCTION -- GetAllAccounts
          *  -----------------------------------------------------
          *  returns a list of all accounts in the database
@@ -320,46 +255,6 @@ namespace checkPlus
         }
 
 
-        public Acct_check BuildAcct_check
-        (
-            string prmAcctNum, //account info
-            string prmRoutNum, //bank info
-            string prmCheckNum, Decimal prmAmt = 0.0M, DateTime prmDateWrit = new DateTime()  //check info
-        )
-        {
-            Acct_check tstAcct_check = (
-                from ac in cpdb.Acct_checks
-                join a in cpdb.Accounts on ac.Account_id equals a.Account_id
-                join b in cpdb.Banks on a.Bank_id equals b.Bank_id
-                where a.Account_number == prmAcctNum
-                    && b.Routing_number == prmRoutNum
-                    && ac.Check_number == prmCheckNum
-                select ac
-            ).FirstOrDefault();
-
-            if (tstAcct_check != null && prmAmt == 0.0M) { return tstAcct_check; }
-            else
-            {
-                return new Acct_check()
-                {
-                    Account_id = (
-                        from a in cpdb.Accounts
-                        join b in cpdb.Banks on a.Bank_id equals b.Bank_id
-                        where a.Account_number == prmAcctNum
-                            && b.Routing_number == prmRoutNum
-                        select a.Account_id
-                    ).FirstOrDefault(),
-                    Check_number = prmCheckNum,
-                    Amount = prmAmt,
-                    Date_written = prmDateWrit,
-                    Date_received = DateTime.Now,
-                    //just tacking Client_id here for now until it needs to be implemented correctly
-                    Client_id = 100000
-                };
-            }
-        }
-
-
         public List<Acct_check> GetAllAcct_checks()
         {
             return (
@@ -567,21 +462,109 @@ namespace checkPlus
 
 
         /*  -----------------------------------------------------
-         *  FUNCTION - BuildBank
+         *  FUNCTION - SelectAllBanks
          *  -----------------------------------------------------
          *  
          * ------------------------------------------------------
          */
-        public Bank BuildBank(string prmRoutNum)
+        public List<Bank> SelectAllBanks()
         {
-            Bank tstBank = (
+            return (
                 from b in cpdb.Banks
-                where b.Routing_number == prmRoutNum
+                select b
+            ).ToList();
+        }
+
+
+        /*  -----------------------------------------------------
+         *  FUNCTION - SelectBank
+         *  -----------------------------------------------------
+         *  
+         * ------------------------------------------------------
+         */
+        public Bank SelectBank(Bank prmBank)
+        {
+            if (prmBank == null) { return null; }
+            else
+            {
+                return (
+                    from b in cpdb.Banks
+                    where b.Bank_id == prmBank.Bank_id
+                    select b
+                ).FirstOrDefault();
+            }
+        }
+        public Bank SelectBank(string routNum)
+        {
+            return (
+                from b in cpdb.Banks
+                where b.Routing_number == routNum
+                select b
+            ).FirstOrDefault();
+        }
+        public Bank SelectBank(int bankID)
+        {
+            return (
+                from b in cpdb.Banks
+                where b.Bank_id == bankID
+                select b
+            ).FirstOrDefault();
+        }
+
+
+        /*  -----------------------------------------------------
+         *  FUNCTION - DeleteBank
+         *  -----------------------------------------------------
+         *
+         * ------------------------------------------------------
+         */
+        public void DeleteBank(Bank prmBank)
+        {
+            cpdb.Banks.Remove((
+                from b in cpdb.Banks
+                where b.Bank_id == prmBank.Bank_id
+                select b
+            ).FirstOrDefault());
+
+            cpdb.SaveChanges();
+        }
+
+
+        /*  -----------------------------------------------------
+         *  FUNCTION - InsertBank
+         *  -----------------------------------------------------
+         *  
+         * ------------------------------------------------------
+         */
+        public Bank InsertBank(Bank prmBank)
+        {
+            var tstBank = (
+                from b in cpdb.Banks
+                where b.Bank_id == prmBank.Bank_id
                 select b
             ).FirstOrDefault();
 
-            return tstBank;
+            Bank newBank;
+            if (tstBank == null)
+            {
+                newBank = cpdb.Banks.Add(prmBank);
+                cpdb.SaveChanges();
+            }
+            else { newBank = tstBank; }
+
+            return newBank;
         }
+    }
+
+
+    //==========================================================================
+    //CLASS UserSQLer
+    //==========================================================================
+    class UserSQLer
+    {
+        private CheckPlusDB cpdb;
+        public UserSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
+
 
         /*  -----------------------------------------------------
          *  FUNCTION - SelectAllBanks
