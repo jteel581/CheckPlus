@@ -54,7 +54,7 @@ namespace checkAdd
         {
             // Tests for manage accounts
             // Create account test and Retrieve account test
-
+            /*
             accSQL.TurnOnInsert();
 
             Account insAcct = accSQL.InsertAccount
@@ -128,6 +128,7 @@ namespace checkAdd
             // Edit check test
 
             // Remove check test
+            */
             return true;
         }
         public string getTestStr() { return TestString; }

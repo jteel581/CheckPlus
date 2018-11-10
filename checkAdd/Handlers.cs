@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using checkAdd.Properties;
 
 /*  
  *  these classes are used by the application to handle validations
@@ -22,6 +24,12 @@ namespace checkPlus
         private static DatabaseHandler DBInstance = null;
         private static readonly object DBLock = new object();
 
+        private SettingsPropertyCollection Props = checkAdd.Properties.Settings.Default.Properties;
+
+        private string DBServer, DBTest, DBLogin, DBPW;
+
+        private string CPDBConn;
+
         CheckPlusDB CPDB;
 
         AccountSQLer AccSQL;
@@ -30,13 +38,22 @@ namespace checkPlus
 
         private DatabaseHandler()
         {
+            DBServer = Props["db_server"].DefaultValue.ToString();
+            DBTest = Props["db_test"].DefaultValue.ToString();
+            DBLogin = Props["db_login"].DefaultValue.ToString();
+            DBPW = Props["db_pw"].DefaultValue.ToString();
+
             CPDB = new CheckPlusDB();
-            CPDB.Database.Connection.ConnectionString = "" +
-                "Data Source=localhost;" +
-                "Initial Catalog=CheckPlus;" +
-                "Integrated Security=True;" +
+
+            CPDBConn = "" +
+                "Data Source=" + DBServer + ";" +
+                "Initial Catalog=" + DBTest + ";" +
+                "User Id=" + DBLogin + ";" +
+                "Password=" + DBPW + ";" +
                 "MultipleActiveResultSets=True"
             ;
+
+            CPDB.Database.Connection.ConnectionString = CPDBConn;
 
             AccSQL = new AccountSQLer(CPDB);
             Acct_chkSQL = new Acct_checkSQLer(CPDB);
@@ -382,6 +399,13 @@ namespace checkPlus
             if (VerifyExistingAccount(routNum, acctNum)) { return AccountSQL.DeleteAccount(tstAccount); }
             return null;
         }
+        public Account DeleteAccount(Account account)
+        {
+            Account tstAccount = AccountSQL.SelectAccount(account);
+
+            if (tstAccount != null) { return AccountSQL.DeleteAccount(tstAccount); }
+            return null;
+        }
 
 
         /*  ---------------------------------------------------------------
@@ -669,6 +693,13 @@ namespace checkPlus
             Acct_check tstCheck = CheckSQL.SelectAcct_check(routNum, acctNum, checkNum);
 
             if (tstCheck != null) { return CheckSQL.DeleteAcct_check(tstCheck); }
+            return null;
+        }
+        public Acct_check DeleteCheck(Acct_check check)
+        {
+            Acct_check tstCheck = CheckSQL.SelectAcct_check(check);
+
+            if(tstCheck != null) { return CheckSQL.DeleteAcct_check(tstCheck); }
             return null;
         }
     }

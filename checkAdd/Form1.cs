@@ -24,12 +24,6 @@ namespace checkPlus
         private const string success = "Success!";
         private const string warning = "Warning";
 
-        //db variables
-        CheckPlusDB cpdb;
-        AccountSQLer accSQL;
-        Acct_checkSQLer acct_chkSQL;
-        BankSQLer bankSQL;
-
         ApplicationHandler AppHand = new ApplicationHandler();
         
         UsersCollection uc = new UsersCollection();
@@ -40,19 +34,6 @@ namespace checkPlus
             InitializeComponent();
             AccountsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             tabControl1.Selected += new TabControlEventHandler(TabControl1_Selected);
-
-            //configuring db variables
-            cpdb = new CheckPlusDB();
-            cpdb.Database.Connection.ConnectionString = "" +
-                "Data Source=localhost;" +
-                "Initial Catalog=CheckPlus;" +
-                "Integrated Security=True;" +
-                "MultipleActiveResultSets=True"
-            ;
-            
-            accSQL = new AccountSQLer(cpdb);
-            acct_chkSQL = new Acct_checkSQLer(cpdb);
-            bankSQL = new BankSQLer(cpdb);
 
             UpdateAccountListView();
             UpdateCheckListView();
@@ -561,18 +542,18 @@ namespace checkPlus
                     string routNumSelected = lvi.SubItems[5].Text;
 
                     //get the account based on the account number and the routing number
-                    Account tstAccount = accSQL.SelectAccount(accSQL.BuildAccount(routNumSelected, acctNumSelected));
+                    Account tstAccount = AppHand.GetAccountHandler().SelectAccount(routNumSelected, acctNumSelected);
 
                     //grab all the checks that are connected to that account so that we can delete them
                     //we have to delete all of the checks before we delete the account
                     //because referencial integrity
                     List<Acct_check> acctChecks =
-                            accSQL.GetChecksInAccount(tstAccount);
-                    foreach (Acct_check ac in acctChecks) { acct_chkSQL.DeleteAcct_check(ac); }
+                            AppHand.GetAccountHandler().GetUnpaidChecksInAccount(tstAccount);
+                    foreach (Acct_check ac in acctChecks) { AppHand.GetCheckHandler().DeleteCheck(ac); }
 
                     //now delete the actual account
                     Account delAccount =
-                        accSQL.DeleteAccount(tstAccount);
+                        AppHand.GetAccountHandler().DeleteAccount(tstAccount);
                 }
 
                 //update the views
@@ -736,7 +717,7 @@ namespace checkPlus
         {
             if (CheckListView.Items.Count == 0)
             {
-                foreach (Acct_check ac in cpdb.Acct_checks)
+                foreach (Acct_check ac in AppHand.GetCheckHandler().SelectAllChecks())
                 {
                     Account checkAccount = AppHand.GetAccountHandler().SelectAccount(ac.Account_id);
                     Bank checkAccountBank = AppHand.GetBankHandler().SelectBank(checkAccount.Bank_id);
