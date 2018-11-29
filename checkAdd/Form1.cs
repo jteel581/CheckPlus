@@ -1004,5 +1004,10 @@ namespace checkPlus
             unitTest.RunCheckHandlerTests();
             unitTestBox.Text = unitTest.getTestStr();
         }
+
+        private void cityBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -335,7 +335,7 @@
             this.phoneNumBox.Margin = new System.Windows.Forms.Padding(4);
             this.phoneNumBox.Name = "phoneNumBox";
             this.phoneNumBox.Size = new System.Drawing.Size(132, 22);
-            this.phoneNumBox.TabIndex = 104;
+            this.phoneNumBox.TabIndex = 158;
             // 
             // phoneNumLabel
             // 
@@ -355,7 +355,7 @@
             this.DeleteAccountButton.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteAccountButton.Name = "DeleteAccountButton";
             this.DeleteAccountButton.Size = new System.Drawing.Size(161, 36);
-            this.DeleteAccountButton.TabIndex = 78;
+            this.DeleteAccountButton.TabIndex = 161;
             this.DeleteAccountButton.Text = "Delete Account";
             this.DeleteAccountButton.UseVisualStyleBackColor = true;
             this.DeleteAccountButton.Click += new System.EventHandler(this.DeleteAccountButton_Click);
@@ -367,7 +367,7 @@
             this.UpdateAccountButton.Margin = new System.Windows.Forms.Padding(4);
             this.UpdateAccountButton.Name = "UpdateAccountButton";
             this.UpdateAccountButton.Size = new System.Drawing.Size(161, 36);
-            this.UpdateAccountButton.TabIndex = 77;
+            this.UpdateAccountButton.TabIndex = 160;
             this.UpdateAccountButton.Text = "Save Changes";
             this.UpdateAccountButton.UseVisualStyleBackColor = true;
             this.UpdateAccountButton.Click += new System.EventHandler(this.UpdateAccountButton_Click);
@@ -438,7 +438,7 @@
             this.zipBox.Margin = new System.Windows.Forms.Padding(4);
             this.zipBox.Name = "zipBox";
             this.zipBox.Size = new System.Drawing.Size(132, 22);
-            this.zipBox.TabIndex = 55;
+            this.zipBox.TabIndex = 157;
             // 
             // stateBox
             // 
@@ -446,7 +446,7 @@
             this.stateBox.Margin = new System.Windows.Forms.Padding(4);
             this.stateBox.Name = "stateBox";
             this.stateBox.Size = new System.Drawing.Size(132, 22);
-            this.stateBox.TabIndex = 54;
+            this.stateBox.TabIndex = 156;
             // 
             // cityBox
             // 
@@ -454,7 +454,8 @@
             this.cityBox.Margin = new System.Windows.Forms.Padding(4);
             this.cityBox.Name = "cityBox";
             this.cityBox.Size = new System.Drawing.Size(132, 22);
-            this.cityBox.TabIndex = 53;
+            this.cityBox.TabIndex = 155;
+            this.cityBox.TextChanged += new System.EventHandler(this.cityBox_TextChanged);
             // 
             // addressBox
             // 
@@ -462,7 +463,7 @@
             this.addressBox.Margin = new System.Windows.Forms.Padding(4);
             this.addressBox.Name = "addressBox";
             this.addressBox.Size = new System.Drawing.Size(132, 22);
-            this.addressBox.TabIndex = 52;
+            this.addressBox.TabIndex = 154;
             // 
             // stateLabel
             // 
@@ -504,7 +505,7 @@
             this.InsertAccountButton.Margin = new System.Windows.Forms.Padding(4);
             this.InsertAccountButton.Name = "InsertAccountButton";
             this.InsertAccountButton.Size = new System.Drawing.Size(161, 36);
-            this.InsertAccountButton.TabIndex = 46;
+            this.InsertAccountButton.TabIndex = 159;
             this.InsertAccountButton.Text = "Add Account";
             this.InsertAccountButton.UseVisualStyleBackColor = true;
             this.InsertAccountButton.Click += new System.EventHandler(this.InsertAccountButton_Click);
@@ -515,7 +516,7 @@
             this.accountBox1.Margin = new System.Windows.Forms.Padding(4);
             this.accountBox1.Name = "accountBox1";
             this.accountBox1.Size = new System.Drawing.Size(132, 22);
-            this.accountBox1.TabIndex = 45;
+            this.accountBox1.TabIndex = 153;
             // 
             // routingBox1
             // 
@@ -523,7 +524,7 @@
             this.routingBox1.Margin = new System.Windows.Forms.Padding(4);
             this.routingBox1.Name = "routingBox1";
             this.routingBox1.Size = new System.Drawing.Size(132, 22);
-            this.routingBox1.TabIndex = 44;
+            this.routingBox1.TabIndex = 152;
             // 
             // lastNameBox
             // 
@@ -531,7 +532,7 @@
             this.lastNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.lastNameBox.Name = "lastNameBox";
             this.lastNameBox.Size = new System.Drawing.Size(132, 22);
-            this.lastNameBox.TabIndex = 43;
+            this.lastNameBox.TabIndex = 151;
             // 
             // firstNameBox
             // 
@@ -539,7 +540,7 @@
             this.firstNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.firstNameBox.Name = "firstNameBox";
             this.firstNameBox.Size = new System.Drawing.Size(132, 22);
-            this.firstNameBox.TabIndex = 42;
+            this.firstNameBox.TabIndex = 150;
             // 
             // accountLabel1
             // 
@@ -685,7 +686,7 @@
             this.paidChkBox.Margin = new System.Windows.Forms.Padding(4);
             this.paidChkBox.Name = "paidChkBox";
             this.paidChkBox.Size = new System.Drawing.Size(18, 17);
-            this.paidChkBox.TabIndex = 102;
+            this.paidChkBox.TabIndex = 155;
             this.paidChkBox.UseVisualStyleBackColor = true;
             // 
             // label9
@@ -706,7 +707,7 @@
             this.DeleteCheckButton.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteCheckButton.Name = "DeleteCheckButton";
             this.DeleteCheckButton.Size = new System.Drawing.Size(145, 31);
-            this.DeleteCheckButton.TabIndex = 100;
+            this.DeleteCheckButton.TabIndex = 158;
             this.DeleteCheckButton.Text = "Delete Check";
             this.DeleteCheckButton.UseVisualStyleBackColor = true;
             this.DeleteCheckButton.Click += new System.EventHandler(this.DeleteCheckButton_Click);
@@ -718,7 +719,7 @@
             this.UpdateCheckButton.Margin = new System.Windows.Forms.Padding(4);
             this.UpdateCheckButton.Name = "UpdateCheckButton";
             this.UpdateCheckButton.Size = new System.Drawing.Size(145, 31);
-            this.UpdateCheckButton.TabIndex = 99;
+            this.UpdateCheckButton.TabIndex = 157;
             this.UpdateCheckButton.Text = "Save Changes";
             this.UpdateCheckButton.UseVisualStyleBackColor = true;
             this.UpdateCheckButton.Click += new System.EventHandler(this.UpdateCheckButton_Click);
@@ -739,7 +740,7 @@
             this.dateWrittenSelector.Margin = new System.Windows.Forms.Padding(4);
             this.dateWrittenSelector.Name = "dateWrittenSelector";
             this.dateWrittenSelector.Size = new System.Drawing.Size(265, 22);
-            this.dateWrittenSelector.TabIndex = 71;
+            this.dateWrittenSelector.TabIndex = 154;
             // 
             // viewCheckNumBox
             // 
@@ -862,7 +863,7 @@
             this.checkNumBox.Margin = new System.Windows.Forms.Padding(4);
             this.checkNumBox.Name = "checkNumBox";
             this.checkNumBox.Size = new System.Drawing.Size(132, 22);
-            this.checkNumBox.TabIndex = 58;
+            this.checkNumBox.TabIndex = 153;
             // 
             // checkNumLabel
             // 
@@ -881,7 +882,7 @@
             this.InsertCheckButton.Margin = new System.Windows.Forms.Padding(4);
             this.InsertCheckButton.Name = "InsertCheckButton";
             this.InsertCheckButton.Size = new System.Drawing.Size(145, 31);
-            this.InsertCheckButton.TabIndex = 56;
+            this.InsertCheckButton.TabIndex = 156;
             this.InsertCheckButton.Text = "Add Check";
             this.InsertCheckButton.UseVisualStyleBackColor = true;
             this.InsertCheckButton.Click += new System.EventHandler(this.InsertCheckButton_Click);
@@ -892,7 +893,7 @@
             this.ammountBox.Margin = new System.Windows.Forms.Padding(4);
             this.ammountBox.Name = "ammountBox";
             this.ammountBox.Size = new System.Drawing.Size(132, 22);
-            this.ammountBox.TabIndex = 55;
+            this.ammountBox.TabIndex = 152;
             // 
             // accountBox2
             // 
@@ -900,7 +901,7 @@
             this.accountBox2.Margin = new System.Windows.Forms.Padding(4);
             this.accountBox2.Name = "accountBox2";
             this.accountBox2.Size = new System.Drawing.Size(132, 22);
-            this.accountBox2.TabIndex = 54;
+            this.accountBox2.TabIndex = 151;
             // 
             // routingBox2
             // 
@@ -908,7 +909,7 @@
             this.routingBox2.Margin = new System.Windows.Forms.Padding(4);
             this.routingBox2.Name = "routingBox2";
             this.routingBox2.Size = new System.Drawing.Size(132, 22);
-            this.routingBox2.TabIndex = 53;
+            this.routingBox2.TabIndex = 150;
             // 
             // label2
             // 
