@@ -341,6 +341,23 @@ namespace checkPlus
         }
 
 
+        /*  -----------------------------------------------------
+         *  FUNCTION - GetClient
+         *  -----------------------------------------------------
+         *  return a Client object corresponding to the
+         *      client_id of <check>
+         *  ------------------------------------------------------
+         */
+        public Client GetClient(Acct_check check)
+        {
+            return (
+                from c in cpdb.Clients
+                where c.Client_id == check.Client_id
+                select c
+            ).FirstOrDefault();
+        }
+
+
 
         /*  -----------------------------------------------------
          *  FUNCTION - GetFirstName
@@ -658,6 +675,16 @@ namespace checkPlus
             else { newUser = tstUser; }
 
             return newUser;
+        }
+
+        public Cp_user UpdateUser(Cp_user userToUpdate, Cp_user userNewInfo)
+        {
+            userToUpdate.Client_id = userNewInfo.Client_id;
+            userToUpdate.First_name = userNewInfo.First_name;
+            userToUpdate.Last_name = userNewInfo.Last_name;
+            userToUpdate.Username = userNewInfo.Username;
+            userToUpdate.User_role_cd = userNewInfo.User_role_cd;
+            return null;
         }
     }
 }

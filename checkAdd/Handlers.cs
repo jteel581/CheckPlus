@@ -705,6 +705,23 @@ namespace checkPlus
             if(tstCheck != null) { return CheckSQL.DeleteAcct_check(tstCheck); }
             return null;
         }
+
+
+        /*  ---------------------------------------------------------------
+         *  FUNCTION - GetClient
+         *  ---------------------------------------------------------------
+         *  return the Client object corresponding to Client_id of <check>
+         *  
+         *  return null if no check record corresponds to <check>
+         *  ---------------------------------------------------------------
+         */
+        public Client GetClient(Acct_check check)
+        {
+            Acct_check tstCheck = CheckSQL.SelectAcct_check(check);
+
+            if(tstCheck != null) { return CheckSQL.GetClient(tstCheck); }
+            return null;
+        }
     }
 
 
