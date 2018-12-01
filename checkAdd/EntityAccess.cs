@@ -567,68 +567,68 @@ namespace checkPlus
 
 
         /*  -----------------------------------------------------
-         *  FUNCTION - SelectAllBanks
+         *  FUNCTION - SelectAllUsers
          *  -----------------------------------------------------
          *  
          * ------------------------------------------------------
          */
-        public List<Bank> SelectAllBanks()
+        public List<Cp_user> SelectAllUsers()
         {
             return (
-                from b in cpdb.Banks
-                select b
+                from u in cpdb.Cp_Users
+                select u
             ).ToList();
         }
 
 
         /*  -----------------------------------------------------
-         *  FUNCTION - SelectBank
+         *  FUNCTION - SelectUser
          *  -----------------------------------------------------
          *  
          * ------------------------------------------------------
          */
-        public Bank SelectBank(Bank prmBank)
+        public Cp_user SelectUser(Cp_user user)
         {
-            if (prmBank == null) { return null; }
+            if (user == null) { return null; }
             else
             {
                 return (
-                    from b in cpdb.Banks
-                    where b.Bank_id == prmBank.Bank_id
-                    select b
+                    from u in cpdb.Cp_Users
+                    where u.Cp_user_id == user.Cp_user_id
+                    select u
                 ).FirstOrDefault();
             }
         }
-        public Bank SelectBank(string routNum)
+        public Cp_user SelectUser(string username)
         {
             return (
-                from b in cpdb.Banks
-                where b.Routing_number == routNum
-                select b
+                from u in cpdb.Cp_Users
+                where u.Username == username
+                select u
             ).FirstOrDefault();
         }
-        public Bank SelectBank(int bankID)
+        public Cp_user SelectUser(int userID)
         {
             return (
-                from b in cpdb.Banks
-                where b.Bank_id == bankID
-                select b
+                from u in cpdb.Cp_Users
+                where u.Cp_user_id == userID
+                select u
             ).FirstOrDefault();
         }
 
 
         /*  -----------------------------------------------------
-         *  FUNCTION - DeleteBank
+         *  FUNCTION - DeleteUser
          *  -----------------------------------------------------
          *
          * ------------------------------------------------------
          */
-        public void DeleteBank(Bank prmBank)
+        public void DeleteUser(Cp_user user)
         {
-            cpdb.Banks.Remove((
-                from b in cpdb.Banks
-                where b.Bank_id == prmBank.Bank_id
-                select b
+            cpdb.Cp_Users.Remove((
+                from u in cpdb.Cp_Users
+                where u.Cp_user_id == user.Cp_user_id
+                select u
             ).FirstOrDefault());
 
             cpdb.SaveChanges();
@@ -636,28 +636,28 @@ namespace checkPlus
 
 
         /*  -----------------------------------------------------
-         *  FUNCTION - InsertBank
+         *  FUNCTION - InsertUser
          *  -----------------------------------------------------
          *  
          * ------------------------------------------------------
          */
-        public Bank InsertBank(Bank prmBank)
+        public Cp_user InsertUser(Cp_user user)
         {
-            var tstBank = (
-                from b in cpdb.Banks
-                where b.Bank_id == prmBank.Bank_id
-                select b
+            var tstUser = (
+                from u in cpdb.Cp_Users
+                where u.Cp_user_id == user.Cp_user_id
+                select u
             ).FirstOrDefault();
 
-            Bank newBank;
-            if (tstBank == null)
+            Cp_user newUser;
+            if (tstUser == null)
             {
-                newBank = cpdb.Banks.Add(prmBank);
+                newUser = cpdb.Cp_Users.Add(user);
                 cpdb.SaveChanges();
             }
-            else { newBank = tstBank; }
+            else { newUser = tstUser; }
 
-            return newBank;
+            return newUser;
         }
     }
 }

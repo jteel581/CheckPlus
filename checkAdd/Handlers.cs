@@ -35,6 +35,7 @@ namespace checkPlus
         AccountSQLer AccSQL;
         Acct_checkSQLer Acct_chkSQL;
         BankSQLer BankSQL;
+        UserSQLer UserSQL;
 
         private DatabaseHandler()
         {
@@ -58,6 +59,7 @@ namespace checkPlus
             AccSQL = new AccountSQLer(CPDB);
             Acct_chkSQL = new Acct_checkSQLer(CPDB);
             BankSQL = new BankSQLer(CPDB);
+            UserSQL = new UserSQLer(CPDB);
         }
 
         public static DatabaseHandler Instance
@@ -75,6 +77,7 @@ namespace checkPlus
         public AccountSQLer GetAccountSQLer() { return AccSQL; }
         public Acct_checkSQLer GetAcct_checkSQLer() { return Acct_chkSQL; }
         public BankSQLer GetBankSQLer() { return BankSQL; }
+        public UserSQLer GetUserSQLer() { return UserSQL; }
     }
 
 
@@ -741,6 +744,33 @@ namespace checkPlus
 
             if (tstBank == null) { return null; }
             else { return tstBank.Routing_number; }
+        }
+    }
+
+
+    /*  ===================================================================================================================
+     *  CLASS - UserHandler
+     *  ===================================================================================================================
+     *  
+     */
+    class UserHandler
+    {
+        UserSQLer UserSQL = DatabaseHandler.Instance.GetUserSQLer();
+
+        /*  ---------------------------------------------------------------
+         *  FUNCTION - SelectBank
+         *  ---------------------------------------------------------------
+         *  used for retrieving a bank record with
+         *      <routNum>
+         *      <bankID>
+         */
+        public Cp_user SelectUser(string username)
+        {
+            return UserSQL.SelectUser(username);
+        }
+        public Cp_user SelectUser(int userID)
+        {
+            return UserSQL.SelectUser(userID);
         }
     }
 }
