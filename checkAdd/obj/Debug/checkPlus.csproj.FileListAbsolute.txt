@@ -130,3 +130,30 @@ C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\check
 C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.AnalysisServices.xml
 C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.AnalysisServices.Core.xml
 C:\Users\jondt_000\Documents\College\CS\Software Development\CheckPlus\src\checkAdd\bin\Debug\Microsoft.AnalysisServices.Tabular.xml
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\checkAdd.exe.config
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\checkAdd.exe
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\checkAdd.pdb
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\EntityFramework.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\EntityFramework.xml
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\obj\Debug\checkPlus.csprojAssemblyReference.cache
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\obj\Debug\checkAdd.exe.config
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\obj\Debug\checkPlus.ammountLabel.resources
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\obj\Debug\checkAdd.Properties.Resources.resources
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.GenerateResource.cache
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.CoreCompileInputs.cache
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\obj\Debug\checkPlus.csproj.CopyComplete
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\obj\Debug\checkAdd.exe
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\obj\Debug\checkAdd.pdb
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\MigraDoc.DocumentObjectModel-WPF.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\MigraDoc.Rendering-WPF.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\MigraDoc.RtfRendering-WPF.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\PdfSharp-WPF.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\PdfSharp.Charting-WPF.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\de\MigraDoc.DocumentObjectModel-WPF.resources.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\de\MigraDoc.Rendering-WPF.resources.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\de\MigraDoc.RtfRendering-WPF.resources.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\de\PdfSharp-WPF.resources.dll
+C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\de\PdfSharp.Charting-WPF.resources.dll
