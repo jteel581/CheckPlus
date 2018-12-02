@@ -36,6 +36,7 @@ namespace checkPlus
         Acct_checkSQLer Acct_chkSQL;
         BankSQLer BankSQL;
         UserSQLer UserSQL;
+        ClientSQLer ClientSQL;
 
         private DatabaseHandler()
         {
@@ -46,6 +47,7 @@ namespace checkPlus
 
             CPDB = new CheckPlusDB();
 
+            /*
             CPDBConn = "" +
                 "Data Source=" + DBServer + ";" +
                 "Initial Catalog=" + DBTest + ";" +
@@ -53,6 +55,9 @@ namespace checkPlus
                 "Password=" + DBPW + ";" +
                 "MultipleActiveResultSets=True"
             ;
+            */
+
+            CPDBConn = "Data Source=.; Initial Catalog=CheckPlus; Integrated Security=True; MultipleActiveResultSets=True";
 
             CPDB.Database.Connection.ConnectionString = CPDBConn;
 
@@ -60,6 +65,7 @@ namespace checkPlus
             Acct_chkSQL = new Acct_checkSQLer(CPDB);
             BankSQL = new BankSQLer(CPDB);
             UserSQL = new UserSQLer(CPDB);
+            ClientSQL = new ClientSQLer(CPDB);
         }
 
         public static DatabaseHandler Instance
@@ -78,6 +84,7 @@ namespace checkPlus
         public Acct_checkSQLer GetAcct_checkSQLer() { return Acct_chkSQL; }
         public BankSQLer GetBankSQLer() { return BankSQL; }
         public UserSQLer GetUserSQLer() { return UserSQL; }
+        public ClientSQLer GetClientSQLer() { return ClientSQL; }
     }
 
 
@@ -97,12 +104,14 @@ namespace checkPlus
         AccountHandler AccountHand { get; set; }
         CheckHandler CheckHand { get; set; }
         BankHandler BankHand { get; set; }
+        UserHandler UserHand { get; set; }
 
         public ApplicationHandler()
         {
             AccountHand = new AccountHandler();
             CheckHand = new CheckHandler();
             BankHand = new BankHandler();
+            UserHand = new UserHandler();
         }
 
 
@@ -163,10 +172,17 @@ namespace checkPlus
             if (tstCheck == null) { return false; }
             else { return true; }
         }
+        public bool VerifyExistingUser(string username)
+        {
+            Cp_user tstUser = UserHand.SelectUser(username);
+            if (tstUser == null) { return false; }
+            else { return true; }
+        }
 
         public AccountHandler GetAccountHandler() { return AccountHand; }
         public CheckHandler GetCheckHandler() { return CheckHand; }
         public BankHandler GetBankHandler() { return BankHand; }
+        public UserHandler GetUserHandler() { return UserHand; }
     }
 
     
@@ -230,7 +246,7 @@ namespace checkPlus
             }
         }
 
-
+        
         /*  ---------------------------------------------------------------
          *  FUNCTIONs for sundry verifications
          *  ---------------------------------------------------------------
@@ -627,7 +643,7 @@ namespace checkPlus
 
 
         /*  ---------------------------------------------------------------
-         *  FUNCTION - InsertAccount
+         *  FUNCTION - InsertCheck
          *  ---------------------------------------------------------------
          *  insert a new account record
          *      after validating that a record with the <routNum> and <acctNum>
@@ -772,7 +788,40 @@ namespace checkPlus
      */
     class UserHandler
     {
+        public bool VerifyExistingUser(string username)
+        {
+            ApplicationHandler appHand = new ApplicationHandler();
+            return appHand.VerifyExistingUser(username);
+        }
+
+
         UserSQLer UserSQL = DatabaseHandler.Instance.GetUserSQLer();
+        ClientSQLer ClientSQL = DatabaseHandler.Instance.GetClientSQLer();
+
+
+        private Cp_user BuildNewUser(string firstName, string lastName, string clientName, string username, string password, string userRole)
+        {
+            Cp_user newUser = UserSQL.SelectUser(username);
+
+            if(newUser == null) { return null; }
+            else
+            {
+                Client tstClient = ClientSQL.SelectClient(clientName); 
+                return new Cp_user()
+                {
+                    Client_id = tstClient.Client_id,
+                    First_name = firstName,
+                    Last_name = lastName,
+                    Username = username,
+                    User_password = password,
+                    User_role_cd = userRole
+                };
+            }
+        }
+
+
+        public List<Cp_user> SelectAllUsers() { return UserSQL.SelectAllUsers(); }
+
 
         /*  ---------------------------------------------------------------
          *  FUNCTION - SelectBank
@@ -788,6 +837,56 @@ namespace checkPlus
         public Cp_user SelectUser(int userID)
         {
             return UserSQL.SelectUser(userID);
+        }
+
+        
+        public Cp_user InsertUser(string firstName, string clientName, string lastname, string username, string password, string userRole)
+        {
+            if (!VerifyExistingUser(username))
+            {
+                Cp_user newUser = UserSQL.SelectUser(username);
+                return UserSQL.InsertUser(newUser);
+            }
+            else { return null; }
+        }
+
+
+        public Cp_user UpdateUser(string origUsername, 
+            string newClientName, string newFirstName, string newLastName, string newUsername, string newPassword, string newUserRole
+        )
+        {
+            if (origUsername != newUsername)
+            {   //check to make sure you aren't changing it to an existing username
+                if(!VerifyExistingUser(newUsername)) { return null; }
+            }
+            else
+            {
+                Cp_user origUser = UserSQL.SelectUser(origUsername);
+                Cp_user newUserInfo = BuildNewUser(newFirstName, newLastName, newClientName, newUsername, newPassword, newUserRole);
+
+                Cp_user updatedUser = UserSQL.UpdateUser(origUser, newUserInfo);
+                return updatedUser;
+            }
+            return null;
+        }
+
+
+        public Cp_user DeleteUser(string username)
+        {
+            if (!VerifyExistingUser(username))
+            {
+                Cp_user user = UserSQL.SelectUser(username);
+                UserSQL.DeleteUser(user);
+
+                return user;
+            }
+            else { return null; }
+        }
+
+
+        public Client GetClient(int clientID)
+        {
+            return ClientSQL.SelectClient(clientID);
         }
     }
 }

@@ -27,20 +27,13 @@ namespace checkPlus
         ApplicationHandler AppHand = new ApplicationHandler();
         
         UsersCollection uc = new UsersCollection();
-        User activeUser = null;
+        Cp_user activeUser = null;
 
         public ammountLabel()
         {
             InitializeComponent();
             AccountsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            tabControl1.Selected += new TabControlEventHandler(TabControl1_Selected);
-
-            UpdateAccountListView();
-            UpdateCheckListView();
-            updateUserListView();
-            userListView.FullRowSelect = true;
-            AccountsListView.FullRowSelect = true;
-            CheckListView.FullRowSelect = true;
+            HomeTab.Selected += new TabControlEventHandler(HomeTabSelected);
         }
 
 
@@ -74,7 +67,31 @@ namespace checkPlus
             ammountBox.Clear();
         }
 
-        
+
+        /*  --------------------------------------------------------
+         *  FUNCTION - ClearUserTabTextBoxes
+         *  --------------------------------------------------------
+         */
+        public void ClearUserTabTextBoxes()
+        {
+            userFirstNameBox.Clear();
+            userLastNameBox.Clear();
+            usernameBox.Clear();
+            supStatusBox.Checked = false;
+            adminStatusBox.Checked = false;
+        }
+
+
+
+        public void ClearAllListViews()
+        {
+            AccountsListView.Items.Clear();
+            CheckListView.Items.Clear();
+            userListView.Items.Clear();
+        }
+
+
+
         public bool VerifyIntegerStringInput(string prmInt)
         {
             try { Convert.ToInt64(prmInt); }
@@ -156,6 +173,15 @@ namespace checkPlus
         }
 
 
+        public bool VerifyUserBoxes()
+        {
+            string firstName = userFirstNameBox.Text;
+            string lastName = userLastNameBox.Text;
+            string username = userUserNameBox.Text;
+            return true;
+        }
+
+
         /*  --------------------------------------------------------
          *  FUNCTION - DisplayMessageNoResponse
          *  --------------------------------------------------------
@@ -217,10 +243,17 @@ namespace checkPlus
         }
 
 
+        /*  ====================================================================================================================
+         *  ====================================================================================================================
+         *  FUNCTIONs related to Users
+         *  ====================================================================================================================
+         *  ====================================================================================================================
+         */
 
-        private void TabControl1_Selected(Object sender, TabControlEventArgs e)
+
+        private void HomeTabSelected(Object sender, TabControlEventArgs e)
         {
-            if (tabControl1.SelectedIndex != 0)
+            if (HomeTab.SelectedIndex != 0)
             {
                 if (activeUser == null)
                 {
@@ -229,15 +262,15 @@ namespace checkPlus
                     switch (MessageBox.Show(message, caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
                     {
                         case DialogResult.Yes:
-                            tabControl1.SelectedIndex = 0;
+                            HomeTab.SelectedIndex = 0;
                             break;
 
                         case DialogResult.No:
-                            tabControl1.SelectedIndex = 0;
+                            HomeTab.SelectedIndex = 0;
                             break;
 
                         case DialogResult.Cancel:
-                            tabControl1.SelectedIndex = 0;
+                            HomeTab.SelectedIndex = 0;
                             break;
 
                     }
@@ -246,29 +279,24 @@ namespace checkPlus
         }
 
 
-
-        /*  ====================================================================================================================
-         *  ====================================================================================================================
-         *  FUNCTIONs for logging into the application
-         *  ====================================================================================================================
-         *  ====================================================================================================================
+        /*  ---------------------------------------------------------
+         *  FUNCTION - LoginButton_Click
+         *  ---------------------------------------------------------
+         *  called when the user clicks the Login button on the Home tab
          */
-
-
-
-        private void loginButton_Click(object sender, EventArgs e)
+        private void LoginButton_Click(object sender, EventArgs e)
         {
             string uName = usernameBox.Text;
             string pWord = passwordBox.Text;
 
-            foreach (User usr in uc.getUsers())
+            foreach (Cp_user usr in AppHand.GetUserHandler().SelectAllUsers())
             {
-                if (usr.getUserName() == uName && usr.getPassword() == pWord)
+                if (usr.Username == uName && usr.User_password == pWord)
                 {
                     activeUser = usr;
-                    userLabel.Text = activeUser.getFirstName() + " " + activeUser.getLastName();
+                    userLabel.Text = activeUser.First_name + " " + activeUser.Last_name;
                     userLabel.ForeColor = Color.Black;
-                    if (activeUser.adminPrivaleges)
+                    if (activeUser.User_role_cd == "A")
                     {
                         privilegesLabel2.Text = "Admininstrator Privileges";
                         DeleteAccountButton.Enabled = true;
@@ -276,7 +304,7 @@ namespace checkPlus
                         deleteUserButton.Enabled = true;
 
                     }
-                    else if (activeUser.supervisorPrivaleges)
+                    else if (activeUser.User_role_cd == "S")
                     {
                         privilegesLabel2.Text = "Supevisor Privileges";
                         DeleteAccountButton.Enabled = true;
@@ -288,13 +316,40 @@ namespace checkPlus
                         DeleteCheckButton.Enabled = true;
                     }
                     privilegesLabel2.ForeColor = Color.Black;
+
+                    UpdateAccountListView();
+                    UpdateCheckListView();
+                    UpdateUserListView();
+                    userListView.FullRowSelect = true;
+                    AccountsListView.FullRowSelect = true;
+                    CheckListView.FullRowSelect = true;
                     return;
                 }
             }
-            // complain that username or password is incorrect
+            DisplayMessageNoResponse("Error", "Incorrect username or password. \nPlease try again.");            
         }
 
-        private void logoutButton_Click(object sender, EventArgs e)
+
+        /*  ---------------------------------------------------------
+         *  FUNCTION - LogoutButton_Click
+         *  ---------------------------------------------------------
+         *  called when the user clicks the Logout button on the Home tab
+         *  makes activeUser null and changes some properties
+         */
+        private void LogoutButton_Click_1(object sender, EventArgs e)
+        {
+            activeUser = null;
+            userLabel.Text = "Not signed in yet";
+            userLabel.ForeColor = Color.DarkRed;
+            privilegesLabel2.Text = "Not signed in yet";
+            privilegesLabel2.ForeColor = Color.DarkRed;
+            deleteUserButton.Enabled = false;
+            DeleteAccountButton.Enabled = false;
+            DeleteCheckButton.Enabled = false;
+
+            ClearAllListViews();
+        }
+        private void LogoutButton_Click(object sender, EventArgs e)
         {
             activeUser = null;
             userLabel.Text = "Not signed in yet";
@@ -305,6 +360,84 @@ namespace checkPlus
             DeleteAccountButton.Enabled = false;
             DeleteCheckButton.Enabled = false;
         }
+
+
+        /*  ---------------------------------------------------------
+         *  FUNCTION - UpdateUserListView
+         *  ---------------------------------------------------------
+         *  when the application is opened
+         */
+        public void UpdateUserListView()
+        {
+            if (userListView.Items.Count == 0)
+            {
+                ListViewItem lvi;
+                foreach(Cp_user usr in AppHand.GetUserHandler().SelectAllUsers())
+                {
+                    string admin = usr.User_role_cd == "A" ? "Granted" : "Not Granted";
+                    string sup = usr.User_role_cd == "S" ? "Granted" : "Not Granted";
+                    lvi = new ListViewItem(new string[] { usr.First_name, usr.Last_name, sup, admin });
+                    userListView.Items.Add(lvi);
+                }
+            }
+            else
+            {
+                foreach (ListViewItem lvi in userListView.Items)
+                {
+                    string fName = lvi.SubItems[0].ToString();
+                    string lName = lvi.SubItems[1].ToString();
+                    User usr = uc.getUserByName(fName, lName);
+
+
+                    if (usr != null)
+                    {
+
+                        lvi.SubItems[2].Text = usr.supervisorPrivaleges ? "Granted" : "Not Granted";
+                        lvi.SubItems[3].Text = usr.adminPrivaleges ? "Granted" : "Not Granted";
+
+                    }
+                    else
+                    {
+                        lvi.Remove();
+                    }
+                }
+            }
+            userListView.Sort();
+        }
+
+        
+        private void passwordBox_Enter(object sender, EventArgs e)
+        {
+            LoginButton.PerformClick();
+        }
+
+
+        private void passwordBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoginButton.PerformClick();
+            }
+        }
+
+
+        private void InsertUserButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void UpdateUserButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void DeleteUserButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
         /*  ---------------------------------------------------------
          *  FUNCTION - UpdateAccountListView
@@ -766,46 +899,6 @@ namespace checkPlus
         }
 
 
-        public void updateUserListView()
-        {
-            if (userListView.Items.Count == 0)
-            {
-                ListViewItem lvi;
-                foreach (User usr in uc.getUsers())
-                {
-                    string sup = usr.supervisorPrivaleges ? "Granted" : "Not Granted";
-                    string admin = usr.adminPrivaleges ? "Granted" : "Not Granted";
-                    lvi = new ListViewItem(new string[] { usr.getFirstName(), usr.getLastName(), sup, admin });
-                    userListView.Items.Add(lvi);
-                    
-                }
-            }
-            else
-            {
-                foreach (ListViewItem lvi in userListView.Items)
-                {
-                    string fName = lvi.SubItems[0].ToString();
-                    string lName = lvi.SubItems[1].ToString();
-                    User usr = uc.getUserByName(fName, lName);
-                   
-                    
-                    if (usr != null)
-                    {
-
-                        lvi.SubItems[2].Text = usr.supervisorPrivaleges ? "Granted" : "Not Granted";
-                        lvi.SubItems[3].Text = usr.adminPrivaleges ? "Granted" : "Not Granted";
-
-                    }
-                    else
-                    {
-                        lvi.Remove();
-                    }
-                }
-            }
-            CheckListView.Sort();
-        }
-
-
         private void searchButton_Click(object sender, EventArgs e)
         {
             AccountsListView.SelectedItems.Clear();
@@ -912,20 +1005,6 @@ namespace checkPlus
         }
 
 
-        private void passwordBox_Enter(object sender, EventArgs e)
-        {
-            loginButton.PerformClick();
-        }
-
-        private void passwordBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                loginButton.PerformClick();
-            }
-        }
-
-
         
 
         private void searchUserButton_Click(object sender, EventArgs e)
@@ -978,24 +1057,6 @@ namespace checkPlus
             }
         }
 
-        private void saveChangesButton_Click_1(object sender, EventArgs e)
-        {
-            string accountNum = AccountsListView.SelectedItems[0].SubItems[0].Text;
-            //pseudoAccount act = database.getAccountByNum(accountNum);
-
-        }
-
-        private void manageAccountPage_Click(object sender, EventArgs e) {}
-        private void firstNameLabel_Click(object sender, EventArgs e) { }
-        private void stateLabel_Click(object sender, EventArgs e) { }
-        private void cityLabel_Click(object sender, EventArgs e) { }
-        private void stNameLabel_Click(object sender, EventArgs e) { }
-        private void stNumLabel_Click(object sender, EventArgs e) { }
-        private void accountLabel1_Click(object sender, EventArgs e) { }
-        private void lastNameLabel_Click(object sender, EventArgs e) { }
-        private void zipLabel_Click(object sender, EventArgs e) { }
-        private void routingLabel1_Click(object sender, EventArgs e) { }
-
         private void unitTestsButton_Click(object sender, EventArgs e)
         {
             TestEntityAccess unitTest = new TestEntityAccess();
@@ -1003,11 +1064,6 @@ namespace checkPlus
             unitTest.RunAccountHandlerTests();
             unitTest.RunCheckHandlerTests();
             unitTestBox.Text = unitTest.getTestStr();
-        }
-
-        private void cityBox_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

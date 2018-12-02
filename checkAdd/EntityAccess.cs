@@ -683,8 +683,51 @@ namespace checkPlus
             userToUpdate.First_name = userNewInfo.First_name;
             userToUpdate.Last_name = userNewInfo.Last_name;
             userToUpdate.Username = userNewInfo.Username;
+            userToUpdate.User_password = userNewInfo.User_password;
             userToUpdate.User_role_cd = userNewInfo.User_role_cd;
             return null;
+        }
+    }
+
+
+    class ClientSQLer
+    {
+        private CheckPlusDB cpdb;
+        public ClientSQLer(CheckPlusDB in_cpdb) { cpdb = in_cpdb; }
+
+
+        public List<Client> SelectAllClients()
+        {
+            return (
+                from c in cpdb.Clients
+                select c
+            ).ToList();
+        }
+
+
+        public Client SelectClient(Client client)
+        {
+            return (
+                from c in cpdb.Clients
+                where c.Client_id == client.Client_id
+                select c
+            ).FirstOrDefault();
+        }
+        public Client SelectClient(int clientID)
+        {
+            return (
+                from c in cpdb.Clients
+                where c.Client_id == clientID
+                select c
+            ).FirstOrDefault();
+        }
+        public Client SelectClient(string clientName)
+        {
+            return (
+                from c in cpdb.Clients
+                where c.Client_nm == clientName
+                select c
+            ).FirstOrDefault();
         }
     }
 }

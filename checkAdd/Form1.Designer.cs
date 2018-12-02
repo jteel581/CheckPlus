@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ammountLabel));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.HomeTab = new System.Windows.Forms.TabControl();
             this.homePage = new System.Windows.Forms.TabPage();
             this.unitTestBox = new System.Windows.Forms.TextBox();
             this.unitTestsButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.logoutButton = new System.Windows.Forms.Button();
+            this.LogoutButton = new System.Windows.Forms.Button();
             this.logoutLabel = new System.Windows.Forms.Label();
-            this.loginButton = new System.Windows.Forms.Button();
+            this.LoginButton = new System.Windows.Forms.Button();
             this.passwordBox = new System.Windows.Forms.TextBox();
             this.usernameBox = new System.Windows.Forms.TextBox();
             this.passwordLabel = new System.Windows.Forms.Label();
@@ -137,34 +137,34 @@
             this.userLabel = new System.Windows.Forms.Label();
             this.privilegesLabel = new System.Windows.Forms.Label();
             this.privilegesLabel2 = new System.Windows.Forms.Label();
-            this.tabControl1.SuspendLayout();
+            this.HomeTab.SuspendLayout();
             this.homePage.SuspendLayout();
             this.manageAccountPage.SuspendLayout();
             this.manageCheckPage.SuspendLayout();
             this.manageUsersPage.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // HomeTab
             // 
-            this.tabControl1.Controls.Add(this.homePage);
-            this.tabControl1.Controls.Add(this.manageAccountPage);
-            this.tabControl1.Controls.Add(this.manageCheckPage);
-            this.tabControl1.Controls.Add(this.manageUsersPage);
-            this.tabControl1.Location = new System.Drawing.Point(-1, -1);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1189, 446);
-            this.tabControl1.TabIndex = 17;
+            this.HomeTab.Controls.Add(this.homePage);
+            this.HomeTab.Controls.Add(this.manageAccountPage);
+            this.HomeTab.Controls.Add(this.manageCheckPage);
+            this.HomeTab.Controls.Add(this.manageUsersPage);
+            this.HomeTab.Location = new System.Drawing.Point(-1, -1);
+            this.HomeTab.Margin = new System.Windows.Forms.Padding(4);
+            this.HomeTab.Name = "HomeTab";
+            this.HomeTab.SelectedIndex = 0;
+            this.HomeTab.Size = new System.Drawing.Size(1189, 446);
+            this.HomeTab.TabIndex = 17;
             // 
             // homePage
             // 
             this.homePage.Controls.Add(this.unitTestBox);
             this.homePage.Controls.Add(this.unitTestsButton);
             this.homePage.Controls.Add(this.textBox1);
-            this.homePage.Controls.Add(this.logoutButton);
+            this.homePage.Controls.Add(this.LogoutButton);
             this.homePage.Controls.Add(this.logoutLabel);
-            this.homePage.Controls.Add(this.loginButton);
+            this.homePage.Controls.Add(this.LoginButton);
             this.homePage.Controls.Add(this.passwordBox);
             this.homePage.Controls.Add(this.usernameBox);
             this.homePage.Controls.Add(this.passwordLabel);
@@ -211,15 +211,16 @@
             this.textBox1.TabIndex = 14;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
-            // logoutButton
+            // LogoutButton
             // 
-            this.logoutButton.Location = new System.Drawing.Point(163, 140);
-            this.logoutButton.Margin = new System.Windows.Forms.Padding(4);
-            this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(100, 28);
-            this.logoutButton.TabIndex = 13;
-            this.logoutButton.Text = "Logout";
-            this.logoutButton.UseVisualStyleBackColor = true;
+            this.LogoutButton.Location = new System.Drawing.Point(163, 140);
+            this.LogoutButton.Margin = new System.Windows.Forms.Padding(4);
+            this.LogoutButton.Name = "LogoutButton";
+            this.LogoutButton.Size = new System.Drawing.Size(100, 28);
+            this.LogoutButton.TabIndex = 13;
+            this.LogoutButton.Text = "Logout";
+            this.LogoutButton.UseVisualStyleBackColor = true;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click_1);
             // 
             // logoutLabel
             // 
@@ -231,16 +232,16 @@
             this.logoutLabel.TabIndex = 12;
             this.logoutLabel.Text = "Currently logged in?";
             // 
-            // loginButton
+            // LoginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(21, 110);
-            this.loginButton.Margin = new System.Windows.Forms.Padding(4);
-            this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(100, 28);
-            this.loginButton.TabIndex = 11;
-            this.loginButton.Text = "Login";
-            this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            this.LoginButton.Location = new System.Drawing.Point(21, 110);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(4);
+            this.LoginButton.Name = "LoginButton";
+            this.LoginButton.Size = new System.Drawing.Size(100, 28);
+            this.LoginButton.TabIndex = 11;
+            this.LoginButton.Text = "Login";
+            this.LoginButton.UseVisualStyleBackColor = true;
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // passwordBox
             // 
@@ -327,7 +328,6 @@
             this.manageAccountPage.TabIndex = 2;
             this.manageAccountPage.Text = "Manage Accounts";
             this.manageAccountPage.UseVisualStyleBackColor = true;
-            this.manageAccountPage.Click += new System.EventHandler(this.manageAccountPage_Click);
             // 
             // phoneNumBox
             // 
@@ -430,7 +430,6 @@
             this.zipLabel.Size = new System.Drawing.Size(32, 17);
             this.zipLabel.TabIndex = 56;
             this.zipLabel.Text = "Zip:";
-            this.zipLabel.Click += new System.EventHandler(this.zipLabel_Click);
             // 
             // zipBox
             // 
@@ -455,7 +454,6 @@
             this.cityBox.Name = "cityBox";
             this.cityBox.Size = new System.Drawing.Size(132, 22);
             this.cityBox.TabIndex = 155;
-            this.cityBox.TextChanged += new System.EventHandler(this.cityBox_TextChanged);
             // 
             // addressBox
             // 
@@ -474,7 +472,6 @@
             this.stateLabel.Size = new System.Drawing.Size(45, 17);
             this.stateLabel.TabIndex = 50;
             this.stateLabel.Text = "State:";
-            this.stateLabel.Click += new System.EventHandler(this.stateLabel_Click);
             // 
             // cityLabel
             // 
@@ -485,7 +482,6 @@
             this.cityLabel.Size = new System.Drawing.Size(35, 17);
             this.cityLabel.TabIndex = 49;
             this.cityLabel.Text = "City:";
-            this.cityLabel.Click += new System.EventHandler(this.cityLabel_Click);
             // 
             // stNameLabel
             // 
@@ -496,7 +492,6 @@
             this.stNameLabel.Size = new System.Drawing.Size(64, 17);
             this.stNameLabel.TabIndex = 48;
             this.stNameLabel.Text = "Address:";
-            this.stNameLabel.Click += new System.EventHandler(this.stNameLabel_Click);
             // 
             // InsertAccountButton
             // 
@@ -551,7 +546,6 @@
             this.accountLabel1.Size = new System.Drawing.Size(117, 17);
             this.accountLabel1.TabIndex = 39;
             this.accountLabel1.Text = "Account Number:";
-            this.accountLabel1.Click += new System.EventHandler(this.accountLabel1_Click);
             // 
             // routingLabel1
             // 
@@ -562,7 +556,6 @@
             this.routingLabel1.Size = new System.Drawing.Size(115, 17);
             this.routingLabel1.TabIndex = 38;
             this.routingLabel1.Text = "Routing Number:";
-            this.routingLabel1.Click += new System.EventHandler(this.routingLabel1_Click);
             // 
             // lastNameLabel
             // 
@@ -573,7 +566,6 @@
             this.lastNameLabel.Size = new System.Drawing.Size(80, 17);
             this.lastNameLabel.TabIndex = 35;
             this.lastNameLabel.Text = "Last Name:";
-            this.lastNameLabel.Click += new System.EventHandler(this.lastNameLabel_Click);
             // 
             // firstNameLabel
             // 
@@ -584,7 +576,6 @@
             this.firstNameLabel.Size = new System.Drawing.Size(80, 17);
             this.firstNameLabel.TabIndex = 34;
             this.firstNameLabel.Text = "First Name:";
-            this.firstNameLabel.Click += new System.EventHandler(this.firstNameLabel_Click);
             // 
             // label1
             // 
@@ -992,6 +983,7 @@
             this.addUserButton.TabIndex = 20;
             this.addUserButton.Text = "Add User";
             this.addUserButton.UseVisualStyleBackColor = true;
+            this.addUserButton.Click += new System.EventHandler(this.InsertUserButton_Click);
             // 
             // addUserLabel
             // 
@@ -1051,6 +1043,7 @@
             this.deleteUserButton.TabIndex = 16;
             this.deleteUserButton.Text = "Delete User";
             this.deleteUserButton.UseVisualStyleBackColor = true;
+            this.deleteUserButton.Click += new System.EventHandler(this.DeleteUserButton_Click);
             // 
             // updateUserButton
             // 
@@ -1062,6 +1055,7 @@
             this.updateUserButton.TabIndex = 15;
             this.updateUserButton.Text = "Save Changes";
             this.updateUserButton.UseVisualStyleBackColor = true;
+            this.updateUserButton.Click += new System.EventHandler(this.UpdateUserButton_Click);
             // 
             // userFirstNameBox
             // 
@@ -1093,9 +1087,9 @@
             this.label4.Location = new System.Drawing.Point(536, 201);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(160, 17);
+            this.label4.Size = new System.Drawing.Size(155, 17);
             this.label4.TabIndex = 11;
-            this.label4.Text = "Administrator Privilages:";
+            this.label4.Text = "Administrator Priviliges:";
             // 
             // supPrivLabel
             // 
@@ -1103,9 +1097,9 @@
             this.supPrivLabel.Location = new System.Drawing.Point(549, 167);
             this.supPrivLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.supPrivLabel.Name = "supPrivLabel";
-            this.supPrivLabel.Size = new System.Drawing.Size(145, 17);
+            this.supPrivLabel.Size = new System.Drawing.Size(140, 17);
             this.supPrivLabel.TabIndex = 10;
-            this.supPrivLabel.Text = "Supervisor Privilages:";
+            this.supPrivLabel.Text = "Supervisor Priviliges:";
             // 
             // adminStatusBox
             // 
@@ -1130,12 +1124,12 @@
             // userNameLabel2
             // 
             this.userNameLabel2.AutoSize = true;
-            this.userNameLabel2.Location = new System.Drawing.Point(609, 132);
+            this.userNameLabel2.Location = new System.Drawing.Point(616, 133);
             this.userNameLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userNameLabel2.Name = "userNameLabel2";
-            this.userNameLabel2.Size = new System.Drawing.Size(83, 17);
+            this.userNameLabel2.Size = new System.Drawing.Size(77, 17);
             this.userNameLabel2.TabIndex = 7;
-            this.userNameLabel2.Text = "User Name:";
+            this.userNameLabel2.Text = "Username:";
             // 
             // lastNameLabel4
             // 
@@ -1255,11 +1249,11 @@
             this.Controls.Add(this.privilegesLabel);
             this.Controls.Add(this.userLabel);
             this.Controls.Add(this.signedInAsLabel);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.HomeTab);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ammountLabel";
             this.Text = "Check Plus";
-            this.tabControl1.ResumeLayout(false);
+            this.HomeTab.ResumeLayout(false);
             this.homePage.ResumeLayout(false);
             this.homePage.PerformLayout();
             this.manageAccountPage.ResumeLayout(false);
@@ -1275,7 +1269,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl HomeTab;
         private System.Windows.Forms.TabPage homePage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabPage manageAccountPage;
@@ -1327,9 +1321,9 @@
         private System.Windows.Forms.Label manageLNameLabel;
         private System.Windows.Forms.Label manageFNameLabel;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button logoutButton;
+        private System.Windows.Forms.Button LogoutButton;
         private System.Windows.Forms.Label logoutLabel;
-        private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.TextBox passwordBox;
         private System.Windows.Forms.TextBox usernameBox;
         private System.Windows.Forms.Label passwordLabel;
