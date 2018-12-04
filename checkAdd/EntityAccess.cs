@@ -677,6 +677,7 @@ namespace checkPlus
             return newUser;
         }
 
+
         public Cp_user UpdateUser(Cp_user userToUpdate, Cp_user userNewInfo)
         {
             userToUpdate.Client_id = userNewInfo.Client_id;
@@ -728,6 +729,25 @@ namespace checkPlus
                 where c.Client_nm == clientName
                 select c
             ).FirstOrDefault();
+        }
+
+        public Client InsertClient(Client client)
+        {
+            Client tstClient = (
+                from c in cpdb.Clients
+                where c.Client_id == client.Client_id
+                select c
+            ).FirstOrDefault();
+
+            Client newClient;
+            if (tstClient == null)
+            {
+                newClient = cpdb.Clients.Add(tstClient);
+                cpdb.SaveChanges();
+            }
+            else { newClient = tstClient; }
+
+            return newClient;
         }
     }
 }

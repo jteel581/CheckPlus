@@ -25,17 +25,96 @@ namespace checkPlus
         private const string warning = "Warning";
 
         ApplicationHandler AppHand = new ApplicationHandler();
-        
-        UsersCollection uc = new UsersCollection();
-        Cp_user activeUser = null;
+
+        TabPage AccountsPage;
+        TabPage ChecksPage;
+        TabPage UsersPage;
+
+        Cp_user ActiveUser = null;
+
+        //use this if we get "login as" functionality 
+        //Cp_user SecondaryUser = null;
+
+        /*  --------------------------------------------------------
+         *  FUNCTION - RemoveAllTabs
+         *  --------------------------------------------------------
+         *  used to remove all tabs from the application
+         *  
+         *  this is the initial state of the application
+         *      and the state after someone logs out
+         */
+        public void RemoveAllTabs()
+        {
+            ApplicationTabs.TabPages.Remove(ManageAccountsPage);
+            ApplicationTabs.TabPages.Remove(ManageChecksPage);
+            ApplicationTabs.TabPages.Remove(ManageUsersPage);
+        }
 
         public ammountLabel()
         {
             InitializeComponent();
             AccountsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            HomeTab.Selected += new TabControlEventHandler(HomeTabSelected);
+            ApplicationTabs.Selected += new TabControlEventHandler(HomeTabSelected);
+
+            //preserving our tabs in class variables due to subsequent deletion
+            AccountsPage = ManageAccountsPage;
+            ChecksPage = ManageChecksPage;
+            UsersPage = ManageUsersPage;
+
+            RemoveAllTabs();
+
+            usernameBox.Focus();
         }
 
+
+        /*  --------------------------------------------------------
+         *  FUNCTION - AllowFunctionalityBasedOnLoginRole
+         *  --------------------------------------------------------
+         *  depending on your <role>, you will be able to see only
+         *      certain portions of the application
+         *  
+         *  "A" -- everything
+         *  "S" -- everything
+         *  "U" -- reports
+         */
+        public void AllowFunctionalityBasedOnLoginRole(Cp_user user)
+        {
+            switch (user.User_role_cd)
+            {
+                case "A":
+                    ApplicationTabs.TabPages.Add(AccountsPage);
+                    ApplicationTabs.TabPages.Add(ChecksPage);
+                    ApplicationTabs.TabPages.Add(UsersPage);
+                    break;
+                case "S":
+                    ApplicationTabs.TabPages.Add(AccountsPage);
+                    ApplicationTabs.TabPages.Add(ChecksPage);
+                    ApplicationTabs.TabPages.Add(UsersPage);
+                    break;
+                case "U":
+                    if (user.Client_id == null)
+                    {
+                        ApplicationTabs.TabPages.Add(AccountsPage);
+                        ApplicationTabs.TabPages.Add(ChecksPage);
+                        DeleteAccountButton.Visible = false;
+                        DeleteCheckButton.Visible = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+        /*  --------------------------------------------------------
+         *  FUNCTION - ClearHomeTabBoxes
+         *  --------------------------------------------------------
+         */
+        public void ClearHomeTabTextBoxes()
+        {
+            usernameBox.Clear();
+            passwordBox.Clear();
+        }
 
         /*  --------------------------------------------------------
          *  FUNCTION - ClearAccountTabTextBoxes
@@ -77,10 +156,11 @@ namespace checkPlus
             userFirstNameBox.Clear();
             userLastNameBox.Clear();
             usernameBox.Clear();
+            UserPasswordBox.Clear();
             supStatusBox.Checked = false;
             adminStatusBox.Checked = false;
+            UserClientComboBx.ResetText();
         }
-
 
 
         public void ClearAllListViews()
@@ -89,7 +169,6 @@ namespace checkPlus
             CheckListView.Items.Clear();
             userListView.Items.Clear();
         }
-
 
 
         public bool VerifyIntegerStringInput(string prmInt)
@@ -243,6 +322,22 @@ namespace checkPlus
         }
 
 
+        public void AddUserToListView(Cp_user user)
+        {
+            Cp_user newUser = AppHand.GetUserHandler().SelectUser(user.Cp_user_id);
+            ListViewItem lvi = new ListViewItem
+            (
+                new string[]
+                {
+                    newUser.First_name,
+                    newUser.Last_name,
+                    newUser.User_role_cd == "A" || newUser.User_role_cd == "S" ? "Granted" : "Not Granted",
+                    newUser.User_role_cd == "A" ? "Granted" : "Not Granted"
+                }
+            );
+            userListView.Items.Add(lvi);
+        }
+
         /*  ====================================================================================================================
          *  ====================================================================================================================
          *  FUNCTIONs related to Users
@@ -251,28 +346,55 @@ namespace checkPlus
          */
 
 
+        private void userListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (userListView.SelectedItems.Count == 1)
+            {
+                string fName = userListView.SelectedItems[0].SubItems[0].Text;
+                string lName = userListView.SelectedItems[0].SubItems[1].Text;
+                Cp_user usr = AppHand.GetUserHandler().SelectUser(userListView.SelectedItems[0].SubItems[2].Text);
+
+                userFirstNameBox.Text = usr.First_name;
+                userLastNameBox.Text = usr.Last_name;
+                userUserNameBox.Text = usr.Username;
+                UserPasswordBox.Text = usr.User_password;
+                if (usr.User_role_cd == "S")
+                {
+                    supStatusBox.Checked = true;
+                }
+                if (usr.User_role_cd == "A")
+                {
+                    adminStatusBox.Checked = true;
+                }
+            }
+            else
+            {
+                ClearUserTabTextBoxes();
+            }
+        }
+
+
         private void HomeTabSelected(Object sender, TabControlEventArgs e)
         {
-            if (HomeTab.SelectedIndex != 0)
+            if (ApplicationTabs.SelectedIndex != 0)
             {
-                if (activeUser == null)
+                if (ActiveUser == null)
                 {
                     string message = "You must be logged in to access this page! Log in now?";
                     string caption = "User not logged in";
                     switch (MessageBox.Show(message, caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
                     {
                         case DialogResult.Yes:
-                            HomeTab.SelectedIndex = 0;
+                            ApplicationTabs.SelectedIndex = 0;
                             break;
 
                         case DialogResult.No:
-                            HomeTab.SelectedIndex = 0;
+                            ApplicationTabs.SelectedIndex = 0;
                             break;
 
                         case DialogResult.Cancel:
-                            HomeTab.SelectedIndex = 0;
+                            ApplicationTabs.SelectedIndex = 0;
                             break;
-
                     }
                 }
             }
@@ -286,6 +408,8 @@ namespace checkPlus
          */
         private void LoginButton_Click(object sender, EventArgs e)
         {
+            RemoveAllTabs();
+
             string uName = usernameBox.Text;
             string pWord = passwordBox.Text;
 
@@ -293,18 +417,17 @@ namespace checkPlus
             {
                 if (usr.Username == uName && usr.User_password == pWord)
                 {
-                    activeUser = usr;
-                    userLabel.Text = activeUser.First_name + " " + activeUser.Last_name;
+                    ActiveUser = usr;
+                    userLabel.Text = ActiveUser.First_name + " " + ActiveUser.Last_name;
                     userLabel.ForeColor = Color.Black;
-                    if (activeUser.User_role_cd == "A")
+                    if (ActiveUser.User_role_cd == "A")
                     {
                         privilegesLabel2.Text = "Admininstrator Privileges";
                         DeleteAccountButton.Enabled = true;
                         DeleteCheckButton.Enabled = true;
                         deleteUserButton.Enabled = true;
-
                     }
-                    else if (activeUser.User_role_cd == "S")
+                    else if (ActiveUser.User_role_cd == "S")
                     {
                         privilegesLabel2.Text = "Supevisor Privileges";
                         DeleteAccountButton.Enabled = true;
@@ -317,16 +440,24 @@ namespace checkPlus
                     }
                     privilegesLabel2.ForeColor = Color.Black;
 
+                    AllowFunctionalityBasedOnLoginRole(ActiveUser);
+
                     UpdateAccountListView();
                     UpdateCheckListView();
                     UpdateUserListView();
+
                     userListView.FullRowSelect = true;
                     AccountsListView.FullRowSelect = true;
                     CheckListView.FullRowSelect = true;
+
+                    ClearHomeTabTextBoxes();
+
                     return;
                 }
             }
-            DisplayMessageNoResponse("Error", "Incorrect username or password. \nPlease try again.");            
+
+            ClearHomeTabTextBoxes();
+            DisplayMessageNoResponse("Error", "Incorrect username or password. \nPlease try again.");
         }
 
 
@@ -336,9 +467,9 @@ namespace checkPlus
          *  called when the user clicks the Logout button on the Home tab
          *  makes activeUser null and changes some properties
          */
-        private void LogoutButton_Click_1(object sender, EventArgs e)
+        private void LogoutButton_Click(object sender, EventArgs e)
         {
-            activeUser = null;
+            ActiveUser = null;
             userLabel.Text = "Not signed in yet";
             userLabel.ForeColor = Color.DarkRed;
             privilegesLabel2.Text = "Not signed in yet";
@@ -348,17 +479,7 @@ namespace checkPlus
             DeleteCheckButton.Enabled = false;
 
             ClearAllListViews();
-        }
-        private void LogoutButton_Click(object sender, EventArgs e)
-        {
-            activeUser = null;
-            userLabel.Text = "Not signed in yet";
-            userLabel.ForeColor = Color.DarkRed;
-            privilegesLabel2.Text = "Not signed in yet";
-            privilegesLabel2.ForeColor = Color.DarkRed;
-            deleteUserButton.Enabled = false;
-            DeleteAccountButton.Enabled = false;
-            DeleteCheckButton.Enabled = false;
+            RemoveAllTabs();
         }
 
 
@@ -376,7 +497,7 @@ namespace checkPlus
                 {
                     string admin = usr.User_role_cd == "A" ? "Granted" : "Not Granted";
                     string sup = usr.User_role_cd == "S" ? "Granted" : "Not Granted";
-                    lvi = new ListViewItem(new string[] { usr.First_name, usr.Last_name, sup, admin });
+                    lvi = new ListViewItem(new string[] { usr.First_name, usr.Last_name, usr.Username, sup, admin });
                     userListView.Items.Add(lvi);
                 }
             }
@@ -386,15 +507,14 @@ namespace checkPlus
                 {
                     string fName = lvi.SubItems[0].ToString();
                     string lName = lvi.SubItems[1].ToString();
-                    User usr = uc.getUserByName(fName, lName);
+                    string uname = lvi.SubItems[2].ToString();
 
+                    Cp_user usr = AppHand.GetUserHandler().SelectUser(uname);
 
                     if (usr != null)
                     {
-
-                        lvi.SubItems[2].Text = usr.supervisorPrivaleges ? "Granted" : "Not Granted";
-                        lvi.SubItems[3].Text = usr.adminPrivaleges ? "Granted" : "Not Granted";
-
+                        lvi.SubItems[3].Text = usr.User_role_cd == "S" ? "Granted" : "Not Granted";
+                        lvi.SubItems[4].Text = usr.User_role_cd == "A" ? "Granted" : "Not Granted";
                     }
                     else
                     {
@@ -423,7 +543,31 @@ namespace checkPlus
 
         private void InsertUserButton_Click(object sender, EventArgs e)
         {
+            if (VerifyUserBoxes())
+            {   //stashing text input from the form into variables
+                string firstName = userFirstNameBox.Text;
+                string lastName = userLastNameBox.Text;
+                string username = userUserNameBox.Text;
+                string password = UserPasswordBox.Text;
+                string userRole = supStatusBox.Checked ? (adminStatusBox.Checked ? "A" : "S") : "U";
+                string clientName = UserClientComboBx.Text;
 
+                //attempt to insert a user with the information provided
+                //if it is attempting to insert a duplicate user, userToInsert will be null
+                Cp_user userToInsert = AppHand.GetUserHandler().InsertUser(firstName, clientName, lastName, username, password, userRole);
+
+                //if the insert failed due to an existing user, userToInsert will be null
+                if (userToInsert == null)
+                {   //so display an error message
+                    DisplayMessageNoResponse(error, "User already exists.");
+                }
+                else
+                {   //otherwise, update the listing and report a new user added, then clear the text boxes
+                    AddUserToListView(userToInsert);
+                    DisplayMessageNoResponse(success, "New user added.");
+                    ClearUserTabTextBoxes();
+                }
+            }
         }
 
 
@@ -1036,26 +1180,6 @@ namespace checkPlus
             }
         }
 
-        private void userListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (userListView.SelectedItems.Count != 0)
-            {
-                string fName = userListView.SelectedItems[0].SubItems[0].Text;
-                string lName = userListView.SelectedItems[0].SubItems[1].Text;
-                User usr = uc.getUserByName(fName, lName);
-                userFirstNameBox.Text = usr.getFirstName();
-                userLastNameBox.Text = usr.getLastName();
-                userUserNameBox.Text = usr.getUserName();
-                if (usr.supervisorPrivaleges)
-                {
-                    supStatusBox.Checked = true;
-                }
-                if (usr.adminPrivaleges)
-                {
-                    adminStatusBox.Checked = true;
-                }
-            }
-        }
 
         private void unitTestsButton_Click(object sender, EventArgs e)
         {

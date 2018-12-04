@@ -105,6 +105,7 @@ namespace checkPlus
         CheckHandler CheckHand { get; set; }
         BankHandler BankHand { get; set; }
         UserHandler UserHand { get; set; }
+        ClientHandler ClientHand { get; set; }
 
         public ApplicationHandler()
         {
@@ -112,6 +113,7 @@ namespace checkPlus
             CheckHand = new CheckHandler();
             BankHand = new BankHandler();
             UserHand = new UserHandler();
+            ClientHand = new ClientHandler();
         }
 
 
@@ -178,11 +180,18 @@ namespace checkPlus
             if (tstUser == null) { return false; }
             else { return true; }
         }
+        public bool VerifyExistingClient(string clientName)
+        {
+            Client tstClient = ClientHand.SelectClient(clientName);
+            if (tstClient == null) { return false; }
+            else { return true; }
+        }
 
         public AccountHandler GetAccountHandler() { return AccountHand; }
         public CheckHandler GetCheckHandler() { return CheckHand; }
         public BankHandler GetBankHandler() { return BankHand; }
         public UserHandler GetUserHandler() { return UserHand; }
+        public ClientHandler GetClientHandler() { return ClientHand; }
     }
 
     
@@ -799,14 +808,32 @@ namespace checkPlus
         ClientSQLer ClientSQL = DatabaseHandler.Instance.GetClientSQLer();
 
 
+        /*  ---------------------------------------------------------------
+         *  FUNCTION - BuildNewUser
+         *  ---------------------------------------------------------------
+         *  used to build a new Cp_user object with the provided parameters
+         *  
+         *  if there was no <clientName> selected, then the new Cp_user's 
+         *      Client_id will be null
+         *  otherwise, set the Client_id corresponding to the <clientName>
+         */
         private Cp_user BuildNewUser(string firstName, string lastName, string clientName, string username, string password, string userRole)
         {
-            Cp_user newUser = UserSQL.SelectUser(username);
-
-            if(newUser == null) { return null; }
+            if (clientName == "")
+            {
+                return new Cp_user()
+                {
+                    Client_id = null,
+                    First_name = firstName,
+                    Last_name = lastName,
+                    Username = username,
+                    User_password = password,
+                    User_role_cd = userRole
+                };
+            }
             else
             {
-                Client tstClient = ClientSQL.SelectClient(clientName); 
+                Client tstClient = ClientSQL.SelectClient(clientName);
                 return new Cp_user()
                 {
                     Client_id = tstClient.Client_id,
@@ -824,27 +851,19 @@ namespace checkPlus
 
 
         /*  ---------------------------------------------------------------
-         *  FUNCTION - SelectBank
+         *  FUNCTION - SelectUser
          *  ---------------------------------------------------------------
-         *  used for retrieving a bank record with
-         *      <routNum>
-         *      <bankID>
+         *  
          */
-        public Cp_user SelectUser(string username)
-        {
-            return UserSQL.SelectUser(username);
-        }
-        public Cp_user SelectUser(int userID)
-        {
-            return UserSQL.SelectUser(userID);
-        }
-
+        public Cp_user SelectUser(string username) { return UserSQL.SelectUser(username); }
+        public Cp_user SelectUser(int userID) { return UserSQL.SelectUser(userID); }
         
-        public Cp_user InsertUser(string firstName, string clientName, string lastname, string username, string password, string userRole)
+        
+        public Cp_user InsertUser(string firstName, string clientName, string lastName, string username, string password, string userRole)
         {
             if (!VerifyExistingUser(username))
             {
-                Cp_user newUser = UserSQL.SelectUser(username);
+                Cp_user newUser = BuildNewUser(firstName, lastName, clientName, username, password, userRole);
                 return UserSQL.InsertUser(newUser);
             }
             else { return null; }
@@ -882,6 +901,96 @@ namespace checkPlus
             }
             else { return null; }
         }
+
+
+        public Client GetClient(int clientID) { return ClientSQL.SelectClient(clientID); }
+    }
+
+
+
+    /*  ===================================================================================================================
+     *  CLASS - ClientHandler
+     *  ===================================================================================================================
+     *  
+     */
+    class ClientHandler
+    {
+        public bool VerifyExistingClient(string clientName)
+        {
+            ApplicationHandler appHand = new ApplicationHandler();
+            return appHand.VerifyExistingClient(clientName);
+        }
+
+        ClientSQLer ClientSQL = DatabaseHandler.Instance.GetClientSQLer();
+
+        private Client BuildNewClient(string clientName, Decimal defaultFee, int daysBetweenLetters)
+        {
+            Client newClient = ClientSQL.SelectClient(clientName);
+
+            if (newClient == null) { return null; }
+            else
+            {
+                return new Client()
+                {
+                    Client_nm = clientName,
+                    Default_fee = defaultFee,
+                    Days_bw_letters = daysBetweenLetters
+                };
+            }
+        }
+
+
+        /*  ---------------------------------------------------------------
+         *  FUNCTION - SelectClient
+         *  ---------------------------------------------------------------
+         */
+        public Client SelectClient(string clientName) { return ClientSQL.SelectClient(clientName); }
+        public Client SelectClient(int clientID) { return ClientSQL.SelectClient(clientID); }
+        public List<Client> SelectAllClients() { return ClientSQL.SelectAllClients(); }
+
+
+        public Client InsertClient(string clientName, Decimal defaultFee, int daysBetweenLetters)
+        {
+            if (!VerifyExistingClient(clientName))
+            {
+                Client newClient = BuildNewClient(clientName, defaultFee, daysBetweenLetters);
+                return ClientSQL.InsertClient(newClient);
+            }
+            else { return null; }
+        }
+
+
+        //public Cp_user UpdateUser(string origUsername,
+        //    string newClientName, string newFirstName, string newLastName, string newUsername, string newPassword, string newUserRole
+        //)
+        //{
+        //    if (origUsername != newUsername)
+        //    {   //check to make sure you aren't changing it to an existing username
+        //        if (!VerifyExistingUser(newUsername)) { return null; }
+        //    }
+        //    else
+        //    {
+        //        Cp_user origUser = UserSQL.SelectUser(origUsername);
+        //        Cp_user newUserInfo = BuildNewUser(newFirstName, newLastName, newClientName, newUsername, newPassword, newUserRole);
+
+        //        Cp_user updatedUser = UserSQL.UpdateUser(origUser, newUserInfo);
+        //        return updatedUser;
+        //    }
+        //    return null;
+        //}
+
+
+        //public Cp_user DeleteUser(string username)
+        //{
+        //    if (!VerifyExistingUser(username))
+        //    {
+        //        Cp_user user = UserSQL.SelectUser(username);
+        //        UserSQL.DeleteUser(user);
+
+        //        return user;
+        //    }
+        //    else { return null; }
+        //}
 
 
         public Client GetClient(int clientID)

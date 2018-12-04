@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ammountLabel));
-            this.HomeTab = new System.Windows.Forms.TabControl();
-            this.homePage = new System.Windows.Forms.TabPage();
+            this.ApplicationTabs = new System.Windows.Forms.TabControl();
+            this.HomePage = new System.Windows.Forms.TabPage();
             this.unitTestBox = new System.Windows.Forms.TextBox();
             this.unitTestsButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -42,7 +42,7 @@
             this.passwordLabel = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.manageAccountPage = new System.Windows.Forms.TabPage();
+            this.ManageAccountsPage = new System.Windows.Forms.TabPage();
             this.phoneNumBox = new System.Windows.Forms.TextBox();
             this.phoneNumLabel = new System.Windows.Forms.Label();
             this.DeleteAccountButton = new System.Windows.Forms.Button();
@@ -77,7 +77,7 @@
             this.numChecksCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.curBalanceCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.acctRoutNumCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.manageCheckPage = new System.Windows.Forms.TabPage();
+            this.ManageChecksPage = new System.Windows.Forms.TabPage();
             this.paidChkBox = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.DeleteCheckButton = new System.Windows.Forms.Button();
@@ -108,12 +108,17 @@
             this.accountLabel2 = new System.Windows.Forms.Label();
             this.routingLabel2 = new System.Windows.Forms.Label();
             this.addCheckLabel = new System.Windows.Forms.Label();
-            this.manageUsersPage = new System.Windows.Forms.TabPage();
+            this.ManageUsersPage = new System.Windows.Forms.TabPage();
+            this.UserClientComboBx = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.UserPasswordBox = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.addUserButton = new System.Windows.Forms.Button();
             this.addUserLabel = new System.Windows.Forms.Label();
             this.userListView = new System.Windows.Forms.ListView();
             this.firstNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lastNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.UsernameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.supervisorCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.adminCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.deleteUserButton = new System.Windows.Forms.Button();
@@ -137,47 +142,47 @@
             this.userLabel = new System.Windows.Forms.Label();
             this.privilegesLabel = new System.Windows.Forms.Label();
             this.privilegesLabel2 = new System.Windows.Forms.Label();
-            this.HomeTab.SuspendLayout();
-            this.homePage.SuspendLayout();
-            this.manageAccountPage.SuspendLayout();
-            this.manageCheckPage.SuspendLayout();
-            this.manageUsersPage.SuspendLayout();
+            this.ApplicationTabs.SuspendLayout();
+            this.HomePage.SuspendLayout();
+            this.ManageAccountsPage.SuspendLayout();
+            this.ManageChecksPage.SuspendLayout();
+            this.ManageUsersPage.SuspendLayout();
             this.SuspendLayout();
             // 
-            // HomeTab
+            // ApplicationTabs
             // 
-            this.HomeTab.Controls.Add(this.homePage);
-            this.HomeTab.Controls.Add(this.manageAccountPage);
-            this.HomeTab.Controls.Add(this.manageCheckPage);
-            this.HomeTab.Controls.Add(this.manageUsersPage);
-            this.HomeTab.Location = new System.Drawing.Point(-1, -1);
-            this.HomeTab.Margin = new System.Windows.Forms.Padding(4);
-            this.HomeTab.Name = "HomeTab";
-            this.HomeTab.SelectedIndex = 0;
-            this.HomeTab.Size = new System.Drawing.Size(1189, 446);
-            this.HomeTab.TabIndex = 17;
+            this.ApplicationTabs.Controls.Add(this.HomePage);
+            this.ApplicationTabs.Controls.Add(this.ManageAccountsPage);
+            this.ApplicationTabs.Controls.Add(this.ManageChecksPage);
+            this.ApplicationTabs.Controls.Add(this.ManageUsersPage);
+            this.ApplicationTabs.Location = new System.Drawing.Point(-1, -1);
+            this.ApplicationTabs.Margin = new System.Windows.Forms.Padding(4);
+            this.ApplicationTabs.Name = "ApplicationTabs";
+            this.ApplicationTabs.SelectedIndex = 0;
+            this.ApplicationTabs.Size = new System.Drawing.Size(1189, 446);
+            this.ApplicationTabs.TabIndex = 17;
             // 
-            // homePage
+            // HomePage
             // 
-            this.homePage.Controls.Add(this.unitTestBox);
-            this.homePage.Controls.Add(this.unitTestsButton);
-            this.homePage.Controls.Add(this.textBox1);
-            this.homePage.Controls.Add(this.LogoutButton);
-            this.homePage.Controls.Add(this.logoutLabel);
-            this.homePage.Controls.Add(this.LoginButton);
-            this.homePage.Controls.Add(this.passwordBox);
-            this.homePage.Controls.Add(this.usernameBox);
-            this.homePage.Controls.Add(this.passwordLabel);
-            this.homePage.Controls.Add(this.usernameLabel);
-            this.homePage.Controls.Add(this.label3);
-            this.homePage.Location = new System.Drawing.Point(4, 25);
-            this.homePage.Margin = new System.Windows.Forms.Padding(4);
-            this.homePage.Name = "homePage";
-            this.homePage.Padding = new System.Windows.Forms.Padding(4);
-            this.homePage.Size = new System.Drawing.Size(1181, 417);
-            this.homePage.TabIndex = 0;
-            this.homePage.Text = "Home";
-            this.homePage.UseVisualStyleBackColor = true;
+            this.HomePage.Controls.Add(this.unitTestBox);
+            this.HomePage.Controls.Add(this.unitTestsButton);
+            this.HomePage.Controls.Add(this.textBox1);
+            this.HomePage.Controls.Add(this.LogoutButton);
+            this.HomePage.Controls.Add(this.logoutLabel);
+            this.HomePage.Controls.Add(this.LoginButton);
+            this.HomePage.Controls.Add(this.passwordBox);
+            this.HomePage.Controls.Add(this.usernameBox);
+            this.HomePage.Controls.Add(this.passwordLabel);
+            this.HomePage.Controls.Add(this.usernameLabel);
+            this.HomePage.Controls.Add(this.label3);
+            this.HomePage.Location = new System.Drawing.Point(4, 25);
+            this.HomePage.Margin = new System.Windows.Forms.Padding(4);
+            this.HomePage.Name = "HomePage";
+            this.HomePage.Padding = new System.Windows.Forms.Padding(4);
+            this.HomePage.Size = new System.Drawing.Size(1181, 417);
+            this.HomePage.TabIndex = 0;
+            this.HomePage.Text = "Home";
+            this.HomePage.UseVisualStyleBackColor = true;
             // 
             // unitTestBox
             // 
@@ -220,7 +225,7 @@
             this.LogoutButton.TabIndex = 13;
             this.LogoutButton.Text = "Logout";
             this.LogoutButton.UseVisualStyleBackColor = true;
-            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click_1);
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // logoutLabel
             // 
@@ -291,43 +296,43 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Welcome To Check Plus";
             // 
-            // manageAccountPage
+            // ManageAccountsPage
             // 
-            this.manageAccountPage.Controls.Add(this.phoneNumBox);
-            this.manageAccountPage.Controls.Add(this.phoneNumLabel);
-            this.manageAccountPage.Controls.Add(this.DeleteAccountButton);
-            this.manageAccountPage.Controls.Add(this.UpdateAccountButton);
-            this.manageAccountPage.Controls.Add(this.searchButton);
-            this.manageAccountPage.Controls.Add(this.accountNameSearchBox);
-            this.manageAccountPage.Controls.Add(this.accountNumSearchBox);
-            this.manageAccountPage.Controls.Add(this.label6);
-            this.manageAccountPage.Controls.Add(this.searchByAccountNumLabel);
-            this.manageAccountPage.Controls.Add(this.zipLabel);
-            this.manageAccountPage.Controls.Add(this.zipBox);
-            this.manageAccountPage.Controls.Add(this.stateBox);
-            this.manageAccountPage.Controls.Add(this.cityBox);
-            this.manageAccountPage.Controls.Add(this.addressBox);
-            this.manageAccountPage.Controls.Add(this.stateLabel);
-            this.manageAccountPage.Controls.Add(this.cityLabel);
-            this.manageAccountPage.Controls.Add(this.stNameLabel);
-            this.manageAccountPage.Controls.Add(this.InsertAccountButton);
-            this.manageAccountPage.Controls.Add(this.accountBox1);
-            this.manageAccountPage.Controls.Add(this.routingBox1);
-            this.manageAccountPage.Controls.Add(this.lastNameBox);
-            this.manageAccountPage.Controls.Add(this.firstNameBox);
-            this.manageAccountPage.Controls.Add(this.accountLabel1);
-            this.manageAccountPage.Controls.Add(this.routingLabel1);
-            this.manageAccountPage.Controls.Add(this.lastNameLabel);
-            this.manageAccountPage.Controls.Add(this.firstNameLabel);
-            this.manageAccountPage.Controls.Add(this.label1);
-            this.manageAccountPage.Controls.Add(this.AccountsListView);
-            this.manageAccountPage.Location = new System.Drawing.Point(4, 25);
-            this.manageAccountPage.Margin = new System.Windows.Forms.Padding(4);
-            this.manageAccountPage.Name = "manageAccountPage";
-            this.manageAccountPage.Size = new System.Drawing.Size(1181, 417);
-            this.manageAccountPage.TabIndex = 2;
-            this.manageAccountPage.Text = "Manage Accounts";
-            this.manageAccountPage.UseVisualStyleBackColor = true;
+            this.ManageAccountsPage.Controls.Add(this.phoneNumBox);
+            this.ManageAccountsPage.Controls.Add(this.phoneNumLabel);
+            this.ManageAccountsPage.Controls.Add(this.DeleteAccountButton);
+            this.ManageAccountsPage.Controls.Add(this.UpdateAccountButton);
+            this.ManageAccountsPage.Controls.Add(this.searchButton);
+            this.ManageAccountsPage.Controls.Add(this.accountNameSearchBox);
+            this.ManageAccountsPage.Controls.Add(this.accountNumSearchBox);
+            this.ManageAccountsPage.Controls.Add(this.label6);
+            this.ManageAccountsPage.Controls.Add(this.searchByAccountNumLabel);
+            this.ManageAccountsPage.Controls.Add(this.zipLabel);
+            this.ManageAccountsPage.Controls.Add(this.zipBox);
+            this.ManageAccountsPage.Controls.Add(this.stateBox);
+            this.ManageAccountsPage.Controls.Add(this.cityBox);
+            this.ManageAccountsPage.Controls.Add(this.addressBox);
+            this.ManageAccountsPage.Controls.Add(this.stateLabel);
+            this.ManageAccountsPage.Controls.Add(this.cityLabel);
+            this.ManageAccountsPage.Controls.Add(this.stNameLabel);
+            this.ManageAccountsPage.Controls.Add(this.InsertAccountButton);
+            this.ManageAccountsPage.Controls.Add(this.accountBox1);
+            this.ManageAccountsPage.Controls.Add(this.routingBox1);
+            this.ManageAccountsPage.Controls.Add(this.lastNameBox);
+            this.ManageAccountsPage.Controls.Add(this.firstNameBox);
+            this.ManageAccountsPage.Controls.Add(this.accountLabel1);
+            this.ManageAccountsPage.Controls.Add(this.routingLabel1);
+            this.ManageAccountsPage.Controls.Add(this.lastNameLabel);
+            this.ManageAccountsPage.Controls.Add(this.firstNameLabel);
+            this.ManageAccountsPage.Controls.Add(this.label1);
+            this.ManageAccountsPage.Controls.Add(this.AccountsListView);
+            this.ManageAccountsPage.Location = new System.Drawing.Point(4, 25);
+            this.ManageAccountsPage.Margin = new System.Windows.Forms.Padding(4);
+            this.ManageAccountsPage.Name = "ManageAccountsPage";
+            this.ManageAccountsPage.Size = new System.Drawing.Size(1181, 417);
+            this.ManageAccountsPage.TabIndex = 2;
+            this.ManageAccountsPage.Text = "Manage Accounts";
+            this.ManageAccountsPage.UseVisualStyleBackColor = true;
             // 
             // phoneNumBox
             // 
@@ -636,39 +641,39 @@
             this.acctRoutNumCH.Text = "Routing Number";
             this.acctRoutNumCH.Width = 82;
             // 
-            // manageCheckPage
+            // ManageChecksPage
             // 
-            this.manageCheckPage.Controls.Add(this.paidChkBox);
-            this.manageCheckPage.Controls.Add(this.label9);
-            this.manageCheckPage.Controls.Add(this.DeleteCheckButton);
-            this.manageCheckPage.Controls.Add(this.UpdateCheckButton);
-            this.manageCheckPage.Controls.Add(this.dateWrittenlabel);
-            this.manageCheckPage.Controls.Add(this.dateWrittenSelector);
-            this.manageCheckPage.Controls.Add(this.viewCheckNumBox);
-            this.manageCheckPage.Controls.Add(this.label8);
-            this.manageCheckPage.Controls.Add(this.viewChecksSearchButton);
-            this.manageCheckPage.Controls.Add(this.viewCheckNameBox);
-            this.manageCheckPage.Controls.Add(this.viewCheckActNumBox);
-            this.manageCheckPage.Controls.Add(this.label5);
-            this.manageCheckPage.Controls.Add(this.label7);
-            this.manageCheckPage.Controls.Add(this.CheckListView);
-            this.manageCheckPage.Controls.Add(this.checkNumBox);
-            this.manageCheckPage.Controls.Add(this.checkNumLabel);
-            this.manageCheckPage.Controls.Add(this.InsertCheckButton);
-            this.manageCheckPage.Controls.Add(this.ammountBox);
-            this.manageCheckPage.Controls.Add(this.accountBox2);
-            this.manageCheckPage.Controls.Add(this.routingBox2);
-            this.manageCheckPage.Controls.Add(this.label2);
-            this.manageCheckPage.Controls.Add(this.accountLabel2);
-            this.manageCheckPage.Controls.Add(this.routingLabel2);
-            this.manageCheckPage.Controls.Add(this.addCheckLabel);
-            this.manageCheckPage.Location = new System.Drawing.Point(4, 25);
-            this.manageCheckPage.Margin = new System.Windows.Forms.Padding(4);
-            this.manageCheckPage.Name = "manageCheckPage";
-            this.manageCheckPage.Size = new System.Drawing.Size(1181, 417);
-            this.manageCheckPage.TabIndex = 3;
-            this.manageCheckPage.Text = "Manage Checks";
-            this.manageCheckPage.UseVisualStyleBackColor = true;
+            this.ManageChecksPage.Controls.Add(this.paidChkBox);
+            this.ManageChecksPage.Controls.Add(this.label9);
+            this.ManageChecksPage.Controls.Add(this.DeleteCheckButton);
+            this.ManageChecksPage.Controls.Add(this.UpdateCheckButton);
+            this.ManageChecksPage.Controls.Add(this.dateWrittenlabel);
+            this.ManageChecksPage.Controls.Add(this.dateWrittenSelector);
+            this.ManageChecksPage.Controls.Add(this.viewCheckNumBox);
+            this.ManageChecksPage.Controls.Add(this.label8);
+            this.ManageChecksPage.Controls.Add(this.viewChecksSearchButton);
+            this.ManageChecksPage.Controls.Add(this.viewCheckNameBox);
+            this.ManageChecksPage.Controls.Add(this.viewCheckActNumBox);
+            this.ManageChecksPage.Controls.Add(this.label5);
+            this.ManageChecksPage.Controls.Add(this.label7);
+            this.ManageChecksPage.Controls.Add(this.CheckListView);
+            this.ManageChecksPage.Controls.Add(this.checkNumBox);
+            this.ManageChecksPage.Controls.Add(this.checkNumLabel);
+            this.ManageChecksPage.Controls.Add(this.InsertCheckButton);
+            this.ManageChecksPage.Controls.Add(this.ammountBox);
+            this.ManageChecksPage.Controls.Add(this.accountBox2);
+            this.ManageChecksPage.Controls.Add(this.routingBox2);
+            this.ManageChecksPage.Controls.Add(this.label2);
+            this.ManageChecksPage.Controls.Add(this.accountLabel2);
+            this.ManageChecksPage.Controls.Add(this.routingLabel2);
+            this.ManageChecksPage.Controls.Add(this.addCheckLabel);
+            this.ManageChecksPage.Location = new System.Drawing.Point(4, 25);
+            this.ManageChecksPage.Margin = new System.Windows.Forms.Padding(4);
+            this.ManageChecksPage.Name = "ManageChecksPage";
+            this.ManageChecksPage.Size = new System.Drawing.Size(1181, 417);
+            this.ManageChecksPage.TabIndex = 3;
+            this.ManageChecksPage.Text = "Manage Checks";
+            this.ManageChecksPage.UseVisualStyleBackColor = true;
             // 
             // paidChkBox
             // 
@@ -943,35 +948,75 @@
             this.addCheckLabel.TabIndex = 49;
             this.addCheckLabel.Text = "Add/Update Check";
             // 
-            // manageUsersPage
+            // ManageUsersPage
             // 
-            this.manageUsersPage.Controls.Add(this.addUserButton);
-            this.manageUsersPage.Controls.Add(this.addUserLabel);
-            this.manageUsersPage.Controls.Add(this.userListView);
-            this.manageUsersPage.Controls.Add(this.deleteUserButton);
-            this.manageUsersPage.Controls.Add(this.updateUserButton);
-            this.manageUsersPage.Controls.Add(this.userFirstNameBox);
-            this.manageUsersPage.Controls.Add(this.userLastNameBox);
-            this.manageUsersPage.Controls.Add(this.userUserNameBox);
-            this.manageUsersPage.Controls.Add(this.label4);
-            this.manageUsersPage.Controls.Add(this.supPrivLabel);
-            this.manageUsersPage.Controls.Add(this.adminStatusBox);
-            this.manageUsersPage.Controls.Add(this.supStatusBox);
-            this.manageUsersPage.Controls.Add(this.userNameLabel2);
-            this.manageUsersPage.Controls.Add(this.lastNameLabel4);
-            this.manageUsersPage.Controls.Add(this.fNameLabel4);
-            this.manageUsersPage.Controls.Add(this.searchUserButton);
-            this.manageUsersPage.Controls.Add(this.userLNameBox);
-            this.manageUsersPage.Controls.Add(this.userFNameBox);
-            this.manageUsersPage.Controls.Add(this.manageLNameLabel);
-            this.manageUsersPage.Controls.Add(this.manageFNameLabel);
-            this.manageUsersPage.Location = new System.Drawing.Point(4, 25);
-            this.manageUsersPage.Margin = new System.Windows.Forms.Padding(4);
-            this.manageUsersPage.Name = "manageUsersPage";
-            this.manageUsersPage.Size = new System.Drawing.Size(1181, 417);
-            this.manageUsersPage.TabIndex = 8;
-            this.manageUsersPage.Text = "Manage Users";
-            this.manageUsersPage.UseVisualStyleBackColor = true;
+            this.ManageUsersPage.Controls.Add(this.UserClientComboBx);
+            this.ManageUsersPage.Controls.Add(this.label11);
+            this.ManageUsersPage.Controls.Add(this.UserPasswordBox);
+            this.ManageUsersPage.Controls.Add(this.label10);
+            this.ManageUsersPage.Controls.Add(this.addUserButton);
+            this.ManageUsersPage.Controls.Add(this.addUserLabel);
+            this.ManageUsersPage.Controls.Add(this.userListView);
+            this.ManageUsersPage.Controls.Add(this.deleteUserButton);
+            this.ManageUsersPage.Controls.Add(this.updateUserButton);
+            this.ManageUsersPage.Controls.Add(this.userFirstNameBox);
+            this.ManageUsersPage.Controls.Add(this.userLastNameBox);
+            this.ManageUsersPage.Controls.Add(this.userUserNameBox);
+            this.ManageUsersPage.Controls.Add(this.label4);
+            this.ManageUsersPage.Controls.Add(this.supPrivLabel);
+            this.ManageUsersPage.Controls.Add(this.adminStatusBox);
+            this.ManageUsersPage.Controls.Add(this.supStatusBox);
+            this.ManageUsersPage.Controls.Add(this.userNameLabel2);
+            this.ManageUsersPage.Controls.Add(this.lastNameLabel4);
+            this.ManageUsersPage.Controls.Add(this.fNameLabel4);
+            this.ManageUsersPage.Controls.Add(this.searchUserButton);
+            this.ManageUsersPage.Controls.Add(this.userLNameBox);
+            this.ManageUsersPage.Controls.Add(this.userFNameBox);
+            this.ManageUsersPage.Controls.Add(this.manageLNameLabel);
+            this.ManageUsersPage.Controls.Add(this.manageFNameLabel);
+            this.ManageUsersPage.Location = new System.Drawing.Point(4, 25);
+            this.ManageUsersPage.Margin = new System.Windows.Forms.Padding(4);
+            this.ManageUsersPage.Name = "ManageUsersPage";
+            this.ManageUsersPage.Size = new System.Drawing.Size(1181, 417);
+            this.ManageUsersPage.TabIndex = 8;
+            this.ManageUsersPage.Text = "Manage Users";
+            this.ManageUsersPage.UseVisualStyleBackColor = true;
+            // 
+            // UserClientComboBx
+            // 
+            this.UserClientComboBx.FormattingEnabled = true;
+            this.UserClientComboBx.Location = new System.Drawing.Point(701, 256);
+            this.UserClientComboBx.Name = "UserClientComboBx";
+            this.UserClientComboBx.Size = new System.Drawing.Size(303, 24);
+            this.UserClientComboBx.TabIndex = 405;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(616, 256);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 17);
+            this.label11.TabIndex = 404;
+            this.label11.Text = "Client:";
+            // 
+            // UserPasswordBox
+            // 
+            this.UserPasswordBox.Location = new System.Drawing.Point(701, 158);
+            this.UserPasswordBox.Margin = new System.Windows.Forms.Padding(4);
+            this.UserPasswordBox.Name = "UserPasswordBox";
+            this.UserPasswordBox.Size = new System.Drawing.Size(132, 22);
+            this.UserPasswordBox.TabIndex = 403;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(616, 163);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(73, 17);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Password:";
             // 
             // addUserButton
             // 
@@ -1001,6 +1046,7 @@
             this.userListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.firstNameCH,
             this.lastNameCH,
+            this.UsernameCH,
             this.supervisorCH,
             this.adminCH});
             this.userListView.Location = new System.Drawing.Point(17, 73);
@@ -1021,6 +1067,10 @@
             // 
             this.lastNameCH.Text = "Last Name";
             this.lastNameCH.Width = 63;
+            // 
+            // UsernameCH
+            // 
+            this.UsernameCH.Text = "Username";
             // 
             // supervisorCH
             // 
@@ -1063,7 +1113,7 @@
             this.userFirstNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.userFirstNameBox.Name = "userFirstNameBox";
             this.userFirstNameBox.Size = new System.Drawing.Size(132, 22);
-            this.userFirstNameBox.TabIndex = 14;
+            this.userFirstNameBox.TabIndex = 400;
             // 
             // userLastNameBox
             // 
@@ -1071,7 +1121,7 @@
             this.userLastNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.userLastNameBox.Name = "userLastNameBox";
             this.userLastNameBox.Size = new System.Drawing.Size(132, 22);
-            this.userLastNameBox.TabIndex = 13;
+            this.userLastNameBox.TabIndex = 401;
             // 
             // userUserNameBox
             // 
@@ -1079,12 +1129,12 @@
             this.userUserNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.userUserNameBox.Name = "userUserNameBox";
             this.userUserNameBox.Size = new System.Drawing.Size(132, 22);
-            this.userUserNameBox.TabIndex = 12;
+            this.userUserNameBox.TabIndex = 402;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(536, 201);
+            this.label4.Location = new System.Drawing.Point(536, 226);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(155, 17);
@@ -1094,7 +1144,7 @@
             // supPrivLabel
             // 
             this.supPrivLabel.AutoSize = true;
-            this.supPrivLabel.Location = new System.Drawing.Point(549, 167);
+            this.supPrivLabel.Location = new System.Drawing.Point(549, 192);
             this.supPrivLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.supPrivLabel.Name = "supPrivLabel";
             this.supPrivLabel.Size = new System.Drawing.Size(140, 17);
@@ -1104,7 +1154,7 @@
             // adminStatusBox
             // 
             this.adminStatusBox.AutoSize = true;
-            this.adminStatusBox.Location = new System.Drawing.Point(701, 201);
+            this.adminStatusBox.Location = new System.Drawing.Point(701, 226);
             this.adminStatusBox.Margin = new System.Windows.Forms.Padding(4);
             this.adminStatusBox.Name = "adminStatusBox";
             this.adminStatusBox.Size = new System.Drawing.Size(18, 17);
@@ -1114,7 +1164,7 @@
             // supStatusBox
             // 
             this.supStatusBox.AutoSize = true;
-            this.supStatusBox.Location = new System.Drawing.Point(701, 167);
+            this.supStatusBox.Location = new System.Drawing.Point(701, 192);
             this.supStatusBox.Margin = new System.Windows.Forms.Padding(4);
             this.supStatusBox.Name = "supStatusBox";
             this.supStatusBox.Size = new System.Drawing.Size(18, 17);
@@ -1249,19 +1299,19 @@
             this.Controls.Add(this.privilegesLabel);
             this.Controls.Add(this.userLabel);
             this.Controls.Add(this.signedInAsLabel);
-            this.Controls.Add(this.HomeTab);
+            this.Controls.Add(this.ApplicationTabs);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ammountLabel";
             this.Text = "Check Plus";
-            this.HomeTab.ResumeLayout(false);
-            this.homePage.ResumeLayout(false);
-            this.homePage.PerformLayout();
-            this.manageAccountPage.ResumeLayout(false);
-            this.manageAccountPage.PerformLayout();
-            this.manageCheckPage.ResumeLayout(false);
-            this.manageCheckPage.PerformLayout();
-            this.manageUsersPage.ResumeLayout(false);
-            this.manageUsersPage.PerformLayout();
+            this.ApplicationTabs.ResumeLayout(false);
+            this.HomePage.ResumeLayout(false);
+            this.HomePage.PerformLayout();
+            this.ManageAccountsPage.ResumeLayout(false);
+            this.ManageAccountsPage.PerformLayout();
+            this.ManageChecksPage.ResumeLayout(false);
+            this.ManageChecksPage.PerformLayout();
+            this.ManageUsersPage.ResumeLayout(false);
+            this.ManageUsersPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1269,10 +1319,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl HomeTab;
-        private System.Windows.Forms.TabPage homePage;
+        private System.Windows.Forms.TabControl ApplicationTabs;
+        private System.Windows.Forms.TabPage HomePage;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TabPage manageAccountPage;
         private System.Windows.Forms.TextBox accountBox1;
         private System.Windows.Forms.TextBox routingBox1;
         private System.Windows.Forms.TextBox lastNameBox;
@@ -1282,7 +1331,7 @@
         private System.Windows.Forms.Label lastNameLabel;
         private System.Windows.Forms.Label firstNameLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabPage manageCheckPage;
+        private System.Windows.Forms.TabPage ManageChecksPage;
         private System.Windows.Forms.TextBox ammountBox;
         private System.Windows.Forms.TextBox accountBox2;
         private System.Windows.Forms.TextBox routingBox2;
@@ -1302,7 +1351,7 @@
         private System.Windows.Forms.Label stNameLabel;
         private System.Windows.Forms.TextBox checkNumBox;
         private System.Windows.Forms.Label checkNumLabel;
-        private System.Windows.Forms.TabPage manageUsersPage;
+        private System.Windows.Forms.TabPage ManageUsersPage;
         private System.Windows.Forms.Button deleteUserButton;
         private System.Windows.Forms.Button updateUserButton;
         private System.Windows.Forms.TextBox userFirstNameBox;
@@ -1377,6 +1426,12 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button unitTestsButton;
         private System.Windows.Forms.TextBox unitTestBox;
+        private System.Windows.Forms.TextBox UserPasswordBox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox UserClientComboBx;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TabPage ManageAccountsPage;
+        private System.Windows.Forms.ColumnHeader UsernameCH;
     }
 }
 

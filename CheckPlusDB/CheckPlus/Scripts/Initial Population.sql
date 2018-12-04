@@ -174,5 +174,5 @@ insert into cp_user
 (		first_name,		last_name,		username,		user_password,		user_role_cd	)
 select	'Universal',	'Admin',		'admin',		'administrator',	'A'				union
 select	'Main',			'Supervisor',	'sup',			'supervisor',		'S'				union
-select	'Joe',			'Shmo',			'jshmo',		'joeshmoiscool',	'U'	
+select	'Joe',			'Shmo',			'jshmo',		'jshmoiscool',		'U'	
 ;
