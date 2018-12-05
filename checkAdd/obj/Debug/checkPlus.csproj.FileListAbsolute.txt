@@ -157,3 +157,13 @@ C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\de\MigraDoc.Re
 C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\de\MigraDoc.RtfRendering-WPF.resources.dll
 C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\de\PdfSharp-WPF.resources.dll
 C:\Users\jondt\source\repos\jteel581\CheckPlus\checkAdd\bin\Debug\de\PdfSharp.Charting-WPF.resources.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\MigraDoc.DocumentObjectModel-WPF.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\MigraDoc.Rendering-WPF.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\MigraDoc.RtfRendering-WPF.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\PdfSharp-WPF.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\PdfSharp.Charting-WPF.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\de\MigraDoc.DocumentObjectModel-WPF.resources.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\de\MigraDoc.Rendering-WPF.resources.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\de\MigraDoc.RtfRendering-WPF.resources.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\de\PdfSharp-WPF.resources.dll
+C:\Users\imora\Documents\GitHub\CheckPlus\checkAdd\bin\Debug\de\PdfSharp.Charting-WPF.resources.dll
