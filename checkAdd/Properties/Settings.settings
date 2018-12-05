@@ -17,11 +17,5 @@
     <Setting Name="db_prod" Type="System.String" Scope="Application">
       <Value Profile="(Default)">CheckPlus</Value>
     </Setting>
-    <Setting Name="db_local" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">CheckPlus</Value>
-    </Setting>
-    <Setting Name="db_server_local" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">.</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

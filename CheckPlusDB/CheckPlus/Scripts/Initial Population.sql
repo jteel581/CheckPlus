@@ -169,10 +169,3 @@ select	100008,				'000001',			255.61,			'2018-07-24',	100007		union
 select	100009,				'000072',			335.67,			'2018-07-24',	100008		union
 select	100017,				'000110',			214.76,			'2018-07-24',	100001
 ;
-
-insert into cp_user
-(		first_name,		last_name,		username,		user_password,		user_role_cd	)
-select	'Universal',	'Admin',		'admin',		'administrator',	'A'				union
-select	'Main',			'Supervisor',	'sup',			'supervisor',		'S'				union
-select	'Joe',			'Shmo',			'jshmo',		'jshmoiscool',		'U'	
-;

@@ -74,6 +74,5 @@
   <ItemGroup>
     <None Include="CheckPlus.publish.xml" />
     <None Include="CheckPlusTest.publish.xml" />
-    <None Include="Local.CheckPlus.publish.xml" />
   </ItemGroup>
 </Project>
