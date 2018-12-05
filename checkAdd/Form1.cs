@@ -14,6 +14,11 @@ using System.Configuration;
 using System.Data.Common;
 using System.Text.RegularExpressions;
 using checkAdd;
+using System.IO;
+using MigraDoc.Rendering.Printing;
+using MigraDoc.DocumentObjectModel.IO;
+using System.Drawing.Printing;
+using System.Diagnostics;
 
 namespace checkPlus
 {
@@ -1189,5 +1194,88 @@ namespace checkPlus
             unitTest.RunCheckHandlerTests();
             unitTestBox.Text = unitTest.getTestStr();
         }
+
+        public void generateReport()
+        {
+            string fName;
+            string lName;
+            string actNum;
+            string checkNum;
+            foreach (Acct_check ac in AppHand.GetCheckHandler().SelectAllChecks())
+            {
+                
+                Account checkAccount = AppHand.GetAccountHandler().SelectAccount(ac.Account_id);
+                fName = checkAccount.First_name;
+                lName = checkAccount.Last_name;
+                actNum = checkAccount.Account_number;
+                checkNum = ac.Check_number;
+
+                reportsTextBox.Text += fName + " " + lName + " " + actNum + " " + checkNum + "\r\n";
+                
+            }
+        }
+
+        private void generateReportsButton_Click(object sender, EventArgs e)
+        {
+            generateReport();
+        }
+
+        private void generateLettersButton_Click(object sender, EventArgs e)
+        {
+            string letterTemplate = File.ReadAllText("letter1.txt");
+            string letter;
+            PDF letterPdf;
+            string fileName = "";
+            foreach (Acct_check ac in AppHand.GetCheckHandler().SelectAllChecks())
+            {
+                letterPdf = new PDF();
+                lettersStatusBox.Text += "Getting check information...\r\n";
+                this.Update();
+                Account checkAccount = AppHand.GetAccountHandler().SelectAccount(ac.Account_id);
+                lettersStatusBox.Text += "Creating new letter for " + checkAccount.First_name + " " + checkAccount.Last_name +
+                    "'s check number " + ac.Check_number.ToString() + "\r\n";
+                this.Update();
+
+                letter = letterTemplate.Replace("[dateOfReport]", DateTime.Today.ToShortDateString());
+                letter = letter.Replace("[checkWriterName]", checkAccount.First_name + " " + checkAccount.Last_name);
+                letter = letter.Replace("[checkWriterStreet]", checkAccount.Address);
+                letter = letter.Replace("[checkWriterCity]", checkAccount.City + ", " + checkAccount.State + " " + checkAccount.Zip_code);
+                letter = letter.Replace("[checkNum]", ac.Check_number);
+                letter = letter.Replace("[checkWrittenDate]", ac.Date_written.ToShortDateString());
+                letter = letter.Replace("[checkAmmount]", ac.Amount.ToString());
+                letter = letter.Replace("[clientName]", "Walmart");
+                letterPdf.writeAllText(letter);
+                fileName = checkAccount.First_name + checkAccount.Last_name + ac.Check_number + ".pdf";
+                lettersStatusBox.Text += "Saving letter as " + fileName + "\r\n";
+                this.Update();
+
+                letterPdf.save(fileName);
+                                             
+            }
+
+        }
+
+        private void viewLettersButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.InitialDirectory = Directory.GetCurrentDirectory();
+            dialog.Filter = "PDFs |*pdf";
+            dialog.ShowDialog();
+        }
+
+        private void printLettersButton_Click(object sender, EventArgs e)
+        {
+            
+            Process proc = new Process();
+            proc.StartInfo = new ProcessStartInfo()
+            {
+                CreateNoWindow = true,
+                Verb = "Print",
+                FileName = "GarretDarlin000001.pdf"
+            };
+            proc.Start();
+        }
+
+        
     }
 }
