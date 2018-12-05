@@ -9,6 +9,7 @@ create table dbo.cp_user
 	first_name		varchar(30)		not null,
 	last_name		varchar(30)		not null,
 	username		varchar(15)		not null,
+	user_password	varchar(50)		not null,
 	user_role_cd	char(1)			not null,
 primary key (cp_user_id asc)
 )

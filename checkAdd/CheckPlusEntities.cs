@@ -106,6 +106,7 @@ namespace checkPlus
         public string First_name { get; set; }
         public string Last_name { get; set; }
         public string Username { get; set; }
+        public string User_password { get; set; }
         public string User_role_cd { get; set; }
     }
 
