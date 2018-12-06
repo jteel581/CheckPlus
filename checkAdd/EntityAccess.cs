@@ -414,6 +414,34 @@ namespace checkPlus
             return SelectAcct_check(origCheck.Acct_check_id);
         }
 
+
+        public void UpdateAcct_checkPaidStatus(Acct_check check, bool isPaid)
+        {
+            if (isPaid) { check.Date_paid = DateTime.Today; }
+            else { check.Date_paid = null; }
+            cpdb.SaveChanges();
+        }
+        
+
+        public void UpdateAcct_checkLetterSendDate(Acct_check check, int letterStageNum, DateTime dateSent)
+        {
+            switch (letterStageNum)
+            {
+                case 1:
+                    check.Letter1_send_date = dateSent;
+                    break;
+                case 2:
+                    check.Letter2_send_date = dateSent;
+                    break;
+                case 3:
+                    check.Letter3_send_date = dateSent;
+                    break;
+                default:
+                    break;
+            }
+            cpdb.SaveChanges();
+        }
+
         /*  -----------------------------------------------------
          *  FUNCTION - InsertAcct_check
          *  -----------------------------------------------------
@@ -686,7 +714,10 @@ namespace checkPlus
             userToUpdate.Username = userNewInfo.Username;
             userToUpdate.User_password = userNewInfo.User_password;
             userToUpdate.User_role_cd = userNewInfo.User_role_cd;
-            return null;
+
+            cpdb.SaveChanges();
+
+            return userToUpdate;
         }
     }
 

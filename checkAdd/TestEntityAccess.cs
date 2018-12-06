@@ -344,7 +344,8 @@ namespace checkAdd
                 "239898788", "68786765343655", "00045",
                 "239898788", "68786765343655", "00045",
                 155.67M,
-                new DateTime(2018, 3, 5)
+                new DateTime(2018, 3, 5),
+                true
             );
             Debug.Assert(successUpdateCheck.Amount == 155.67M);
             TestString += "Success at updating a check." + nl;
@@ -354,7 +355,8 @@ namespace checkAdd
                 "239898788", "68786765343655", "00045",
                 "342323678", "585879874653132", "000024",
                 155.67M,
-                new DateTime(2018, 3, 5)
+                new DateTime(2018, 3, 5),
+                false
             );
             Debug.Assert(failUpdateCheck == null);
             TestString += "Caught an attempt to update one check to an existing check." + nl;
@@ -364,7 +366,8 @@ namespace checkAdd
                 "239898788", "68786765343655", "00045",
                 "342323678", "585879874653132", "00026",
                 1236.67M,
-                new DateTime(2018, 3, 5)
+                new DateTime(2018, 3, 5),
+                false
             );
             Debug.Assert(successUpdateOfAccountCheck != null && successUpdateOfAccountCheck.Amount == 1236.67M);
             TestString += "Success at updating a check to a different exising account." + nl;

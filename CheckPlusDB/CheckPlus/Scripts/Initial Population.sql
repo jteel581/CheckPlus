@@ -10,15 +10,15 @@ insert into dbo.bank
 --100000
 select	'First Together Bank',	'000123678',		'Grant Billings',	'gjbill@fun.com',	'6755558976',	'123 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100001
-select	'Name Me 1 Bank',		'239898788',		'John Doe1',		'jdoe1@nm1.com',	'6755558976',	'124 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'JCFCU',				'239898788',		'John Doe1',		'jdoe1@nm1.com',	'6755558976',	'124 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100002
-select	'Name Me 2 Bank',		'938747658',		'John Doe2',		'jdoe2@nm2.com',	'6755558976',	'125 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Wealth of Nations',	'938747658',		'John Doe2',		'jdoe2@nm2.com',	'6755558976',	'125 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100003
-select	'Name Me 3 Bank',		'342323678',		'John Doe3',		'jdoe3@nm3.com',	'6755558976',	'126 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Capital One Online',	'342323678',		'John Doe3',		'jdoe3@nm3.com',	'6755558976',	'126 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100004
-select	'Name Me 4 Bank',		'124453458',		'John Doe4',		'jdoe4@nm4.com',	'6755558976',	'127 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Cash Together',		'124453458',		'John Doe4',		'jdoe4@nm4.com',	'6755558976',	'127 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100005
-select	'Name Me 5 Bank',		'002343678',		'John Doe5',		'jdoe5@nm5.com',	'6755558976',	'128 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
+select	'Hoboken Floris',		'002343678',		'John Doe5',		'jdoe5@nm5.com',	'6755558976',	'128 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100006
 select	'Name Me 6 Bank',		'012334478',		'John Doe6',		'jdoe6@nm6.com',	'6755558976',	'129 Place Av.',	'Greensboro',	'Iowa',		'United States',	'54321'		union
 --100007
@@ -40,33 +40,33 @@ select	'Shawna',	'Tweep',	100000,		'100 Good Rd.',	'Smelton',	'Wisconsin', 	'Uni
 --100001
 select	'Garret',	'Darlin',	100001,		'101 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'68786765343655',	'8645558765'		union
 --100002
-select	'John',		'Doe2',		100002,		'102 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'655435468768',		'8645558765'		union
+select	'Heather',	'Jones',	100002,		'102 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'655435468768',		'8645558765'		union
 --100003
-select	'John',		'Doe3',		100003,		'103 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6843543524135',	'8645558765'		union
+select	'Bill',		'Martin',	100003,		'103 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6843543524135',	'8645558765'		union
 --100004
-select	'John',		'Doe4',		100001,		'104 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'35213875415435',	'8645558765'		union
+select	'Frank',	'Grish',	100001,		'104 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'35213875415435',	'8645558765'		union
 --100005
-select	'John',		'Doe5',		100002,		'105 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'13549865435243',	'8645558765'		union
+select	'Barr',		'Marrish',	100002,		'105 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'13549865435243',	'8645558765'		union
 --100006
-select	'John',		'Doe6',		100003,		'106 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'688546835746241',	'8645558765'		union
+select	'John',		'Heart',	100003,		'106 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'688546835746241',	'8645558765'		union
 --100007
-select	'John',		'Doe7',		100001,		'107 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6543543152413',	'8645558765'		union
+select	'Jake',		'Smith',	100001,		'107 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6543543152413',	'8645558765'		union
 --100008
-select	'John',		'Doe8',		100002,		'108 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'54654321321635',	'8645558765'		union
+select	'Leslie',	'Knope',	100002,		'108 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'54654321321635',	'8645558765'		union
 --100009
-select	'John',		'Doe9',		100003,		'109 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6543216456354',	'8645558765'		union
+select	'Aaron',	'Gates',	100003,		'109 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6543216456354',	'8645558765'		union
 --100010
-select	'John',		'Doe10',	100004,		'110 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'585879874653132',	'8645558765'		union
+select	'Bart',		'Faris',	100004,		'110 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'585879874653132',	'8645558765'		union
 --100011
-select	'John',		'Doe11',	100005,		'111 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'879843213213',		'8645558765'		union
+select	'Mark',		'Drudge',	100005,		'111 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'879843213213',		'8645558765'		union
 --100012
-select	'John',		'Doe12',	100006,		'112 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'879846321321',		'8645558765'		union
+select	'Mary',		'Mazel',	100006,		'112 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'879846321321',		'8645558765'		union
 --100013
-select	'John',		'Doe13',	100007,		'113 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6887651354654',	'8645558765'		union
+select	'Hath',		'Harris',	100007,		'113 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'6887651354654',	'8645558765'		union
 --100014
-select	'John',		'Doe14',	100004,		'114 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'45467897965311',	'864-555-8765'		union
+select	'Brie',		'Riche',	100004,		'114 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'45467897965311',	'864-555-8765'		union
 --100015
-select	'John',		'Doe15',	100005,		'115 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'2132168798645351',	'864-555-8765'		union
+select	'Marty',	'Doles',	100005,		'115 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'2132168798645351',	'864-555-8765'		union
 --100016
 select	'John',		'Doe16',	100006,		'116 Good Rd.',	'Smelton',	'Wisconsin', 	'United States',	'09876',	'689798465132168',	'864-555-8765'		union
 --100017
@@ -112,42 +112,42 @@ insert into dbo.client
 --100000
 select	'Chick-fil-A',			100.05,				15					union
 --100001
-select	'Chick-fil-B',			100.05,				15					union
+select	'Walmart',				100.05,				15					union
 --100002
-select	'Chick-fil-C',			100.05,				15					union
+select	'Target',				100.05,				15					union
 --100003
-select	'Chick-fil-D',			100.05,				15					union
+select	'Whole Foods Market',	100.05,				15					union
 --100004
-select	'Chick-fil-E',			100.05,				15					union
+select	'Lowes Foods',			100.05,				15					union
 --100005
-select	'Chick-fil-F',			100.05,				15					union
+select	'Fresh Market',			100.05,				15					union
 --100006
-select	'Chick-fil-G',			100.05,				15					union
+select	'State Park System',	100.05,				15					union
 --100007
-select	'Chick-fil-H',			100.05,				15					union
+select	'Costco Wholesale',		100.05,				15					union
 --100008
-select	'Chick-fil-I',			100.05,				15
+select	'Hobby Lobby',			100.05,				15
 ;
 
 insert into dbo.acct_check 
 (		account_id,			check_number,		amount,			date_written,	client_id	)
-select	100000,				'000001',			235.67,			'2018-07-24',	100000		union
-select	100001,				'000024',			1235.67,		'2018-07-24',	100001		union
-select	100002,				'000058',			200.56,			'2018-07-24',	100002		union
-select	100003,				'000101',			235.60,			'2018-07-24',	100003		union
-select	100004,				'000023',			265.47,			'2018-07-24',	100003		union
-select	100005,				'000005',			223.57,			'2018-07-24',	100004		union
-select	100006,				'000047',			231.66,			'2018-07-24',	100005		union
-select	100007,				'000059',			335.67,			'2018-07-24',	100006		union
-select	100008,				'000061',			255.61,			'2018-07-24',	100007		union
-select	100009,				'000070',			335.67,			'2018-07-24',	100008		union
-select	100010,				'000015',			255.67,			'2018-07-24',	100008		union
-select	100011,				'000028',			235.67,			'2018-07-24',	100008		union
-select	100012,				'000003',			237.67,			'2018-07-24',	100007		union
-select	100013,				'000005',			235.87,			'2018-07-24',	100006		union
-select	100014,				'000004',			235.67,			'2018-07-24',	100001		union
-select	100015,				'000078',			233.77,			'2018-07-24',	100002		union
-select	100016,				'000104',			231.68,			'2018-07-24',	100002		union
+select	100000,				'000001',			235.67,			'2018-11-25',	100000		union
+select	100001,				'000024',			1235.67,		'2018-11-25',	100001		union
+select	100002,				'000058',			200.56,			'2018-11-25',	100002		union
+select	100003,				'000101',			235.60,			'2018-11-25',	100003		union
+select	100004,				'000023',			265.47,			'2018-11-25',	100003		union
+select	100005,				'000005',			223.57,			'2018-11-25',	100004		union
+select	100006,				'000047',			231.66,			'2018-11-25',	100005		union
+select	100007,				'000059',			335.67,			'2018-11-26',	100006		union
+select	100008,				'000061',			255.61,			'2018-11-26',	100007		union
+select	100009,				'000070',			335.67,			'2018-11-26',	100008		union
+select	100010,				'000015',			255.67,			'2018-11-26',	100008		union
+select	100011,				'000028',			235.67,			'2018-11-26',	100008		union
+select	100012,				'000003',			237.67,			'2018-11-26',	100007		union
+select	100013,				'000005',			235.87,			'2018-11-27',	100006		union
+select	100014,				'000004',			235.67,			'2018-11-27',	100001		union
+select	100015,				'000078',			233.77,			'2018-11-27',	100002		union
+select	100016,				'000104',			231.68,			'2018-11-27',	100002		union
 select	100008,				'000064',			432.98,			'2018-07-24',	100007		union
 select	100009,				'000071',			1565.89,		'2018-07-24',	100008		union
 select	100010,				'000011',			100.00,			'2018-07-24',	100008		union
@@ -168,4 +168,12 @@ select	100007,				'000099',			335.67,			'2018-07-24',	100006		union
 select	100008,				'000001',			255.61,			'2018-07-24',	100007		union
 select	100009,				'000072',			335.67,			'2018-07-24',	100008		union
 select	100017,				'000110',			214.76,			'2018-07-24',	100001
+;
+
+insert into dbo.cp_user
+(		first_name,			last_name,			username,			user_password,		user_role_cd,	client_id)
+select	'Universal',		'Admin',			'admin',			'administrator',	'A',			null		union
+select	'Main',				'Supervisor',		'sup',				'supervisor',		'S',			null		union
+select	'Joe',				'Schmo',			'jshmo',			'jschmoiscool',		'U',			null		union
+select	'John',				'Doe',				'jdoe',				'unknown',			'U',			100003		
 ;

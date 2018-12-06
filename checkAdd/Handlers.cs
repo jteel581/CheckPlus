@@ -46,8 +46,7 @@ namespace checkPlus
             DBPW = Props["db_pw"].DefaultValue.ToString();
 
             CPDB = new CheckPlusDB();
-
-            /*
+            
             CPDBConn = "" +
                 "Data Source=" + DBServer + ";" +
                 "Initial Catalog=" + DBTest + ";" +
@@ -55,9 +54,8 @@ namespace checkPlus
                 "Password=" + DBPW + ";" +
                 "MultipleActiveResultSets=True"
             ;
-            */
 
-            CPDBConn = "Data Source=.; Initial Catalog=CheckPlus; Integrated Security=True; MultipleActiveResultSets=True";
+            //CPDBConn = "Data Source=.; Initial Catalog=CheckPlus; Integrated Security=True; MultipleActiveResultSets=True";
 
             CPDB.Database.Connection.ConnectionString = CPDBConn;
 
@@ -530,7 +528,8 @@ namespace checkPlus
         (
             string routNum, string acctNum,
             Decimal amount, DateTime dateWritten,
-            string checkNum, DateTime dateReceived
+            string checkNum, DateTime dateReceived,
+            bool isPaid
         )
         {   //first, check to see if there is an existing bank record with the <routNum>
             Bank tstBank = BankSQL.SelectBank(routNum);
@@ -665,7 +664,7 @@ namespace checkPlus
         {   //if no check already exists
             if (!VerifyExistingCheck(routNum, acctNum, checkNum))
             {   //attempt to build account; if the routing number does not have a bank to connect to, it will return null
-                Acct_check newCheck = BuildNewCheck(routNum, acctNum, amount, dateWritten, checkNum, DateTime.Today);
+                Acct_check newCheck = BuildNewCheck(routNum, acctNum, amount, dateWritten, checkNum, DateTime.Today, false);
 
                 //if a new Acct_check object could not be built, return null
                 if (newCheck == null) { return null; }
@@ -689,7 +688,7 @@ namespace checkPlus
          */
         public Acct_check UpdateCheck(
             string origRoutNum, string origAcctNum, string origCheckNum,
-            string newRoutNum, string newAcctNum, string newCheckNum, Decimal newAmount, DateTime newDateWritten)
+            string newRoutNum, string newAcctNum, string newCheckNum, Decimal newAmount, DateTime newDateWritten, bool newPaidStatus)
         {   //if there is an attempt to change the routing number or account number or check number
             if (origRoutNum != newRoutNum || origAcctNum != newAcctNum || origCheckNum != newCheckNum)
             {   //if there was already a check with that routing number and account number and check number
@@ -700,14 +699,30 @@ namespace checkPlus
             }
             //otherwise, pull the orignial check and build an Acct_check object that will have the new information
             Acct_check origCheck = CheckSQL.SelectAcct_check(origRoutNum, origAcctNum, origCheckNum);
-            Acct_check newInfoCheck = BuildNewCheck(newRoutNum, newAcctNum, newAmount, newDateWritten, newCheckNum, origCheck.Date_received);
+            Acct_check newInfoCheck = BuildNewCheck(newRoutNum, newAcctNum, newAmount, newDateWritten, 
+                newCheckNum, origCheck.Date_received, newPaidStatus);
 
             //if we cannot build that object due to bad bank or account info, return null
             if (newInfoCheck == null) { return null; }
             //otherwise, update the account with the new information and return an Account object with the new info
-            else { return CheckSQL.UpdateAcct_check(origCheck, newInfoCheck); };
+            else
+            {
+                CheckSQL.UpdateAcct_checkPaidStatus(newInfoCheck, newPaidStatus);
+                return CheckSQL.UpdateAcct_check(origCheck, newInfoCheck);
+            };
         }
 
+
+        public void UpdateCheckSendDate(Acct_check check, int letterStageNum, DateTime dateSend)
+        {
+            if (check != null) { CheckSQL.UpdateAcct_checkLetterSendDate(check, letterStageNum, dateSend); }
+        }
+
+
+        public void UpdateCheckPaidStatus(Acct_check check, bool isPaid)
+        {
+            UpdateCheckPaidStatus(check, isPaid);
+        }
 
         /*  ---------------------------------------------------------------
          *  FUNCTION - DeleteCheck
@@ -803,6 +818,24 @@ namespace checkPlus
             return appHand.VerifyExistingUser(username);
         }
 
+
+        /*  ---------------------------------------------------------------
+         *  FUNCTION - VerifyCheckInfoInputWithStringFeedback
+         *  ---------------------------------------------------------------
+         *  pass in all the text input from the gui when working with checks
+         *      and verify that all of the information is legal information
+         */
+        public string VerifyUserInfoInputWithStringFeedback(string firstName, string lastName, string username, string password)
+        {   //start the string then finish it off in one of these if/else if statements
+            string badResponse = "Please enter";
+
+            if (firstName == "") { badResponse += " a First Name."; }
+            else if (lastName == "") { badResponse += " a Last Name."; }
+            else if (username == "") { badResponse += " a Username."; }
+            else if (password == "") { badResponse += " a Password."; }
+            else { return ""; }
+            return badResponse;
+        }
 
         UserSQLer UserSQL = DatabaseHandler.Instance.GetUserSQLer();
         ClientSQLer ClientSQL = DatabaseHandler.Instance.GetClientSQLer();

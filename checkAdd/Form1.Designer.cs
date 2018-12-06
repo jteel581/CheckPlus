@@ -47,11 +47,6 @@
             this.phoneNumLabel = new System.Windows.Forms.Label();
             this.DeleteAccountButton = new System.Windows.Forms.Button();
             this.UpdateAccountButton = new System.Windows.Forms.Button();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.accountNameSearchBox = new System.Windows.Forms.TextBox();
-            this.accountNumSearchBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.searchByAccountNumLabel = new System.Windows.Forms.Label();
             this.zipLabel = new System.Windows.Forms.Label();
             this.zipBox = new System.Windows.Forms.TextBox();
             this.stateBox = new System.Windows.Forms.TextBox();
@@ -84,13 +79,6 @@
             this.UpdateCheckButton = new System.Windows.Forms.Button();
             this.dateWrittenlabel = new System.Windows.Forms.Label();
             this.dateWrittenSelector = new System.Windows.Forms.DateTimePicker();
-            this.viewCheckNumBox = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.viewChecksSearchButton = new System.Windows.Forms.Button();
-            this.viewCheckNameBox = new System.Windows.Forms.TextBox();
-            this.viewCheckActNumBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.CheckListView = new System.Windows.Forms.ListView();
             this.acctNumCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -133,11 +121,6 @@
             this.userNameLabel2 = new System.Windows.Forms.Label();
             this.lastNameLabel4 = new System.Windows.Forms.Label();
             this.fNameLabel4 = new System.Windows.Forms.Label();
-            this.searchUserButton = new System.Windows.Forms.Button();
-            this.userLNameBox = new System.Windows.Forms.TextBox();
-            this.userFNameBox = new System.Windows.Forms.TextBox();
-            this.manageLNameLabel = new System.Windows.Forms.Label();
-            this.manageFNameLabel = new System.Windows.Forms.Label();
             this.ReportsLettersPage = new System.Windows.Forms.TabPage();
             this.lettersStatusBox = new System.Windows.Forms.TextBox();
             this.printLettersButton = new System.Windows.Forms.Button();
@@ -228,6 +211,7 @@
             this.textBox1.Size = new System.Drawing.Size(280, 304);
             this.textBox1.TabIndex = 14;
             this.textBox1.Text = resources.GetString("textBox1.Text");
+            this.textBox1.Visible = false;
             // 
             // LogoutButton
             // 
@@ -316,11 +300,6 @@
             this.ManageAccountsPage.Controls.Add(this.phoneNumLabel);
             this.ManageAccountsPage.Controls.Add(this.DeleteAccountButton);
             this.ManageAccountsPage.Controls.Add(this.UpdateAccountButton);
-            this.ManageAccountsPage.Controls.Add(this.searchButton);
-            this.ManageAccountsPage.Controls.Add(this.accountNameSearchBox);
-            this.ManageAccountsPage.Controls.Add(this.accountNumSearchBox);
-            this.ManageAccountsPage.Controls.Add(this.label6);
-            this.ManageAccountsPage.Controls.Add(this.searchByAccountNumLabel);
             this.ManageAccountsPage.Controls.Add(this.zipLabel);
             this.ManageAccountsPage.Controls.Add(this.zipBox);
             this.ManageAccountsPage.Controls.Add(this.stateBox);
@@ -390,59 +369,6 @@
             this.UpdateAccountButton.Text = "Save Changes";
             this.UpdateAccountButton.UseVisualStyleBackColor = true;
             this.UpdateAccountButton.Click += new System.EventHandler(this.UpdateAccountButton_Click);
-            // 
-            // searchButton
-            // 
-            this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.Location = new System.Drawing.Point(355, 31);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(4);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(100, 28);
-            this.searchButton.TabIndex = 62;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Visible = false;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
-            // 
-            // accountNameSearchBox
-            // 
-            this.accountNameSearchBox.Location = new System.Drawing.Point(213, 33);
-            this.accountNameSearchBox.Margin = new System.Windows.Forms.Padding(4);
-            this.accountNameSearchBox.Name = "accountNameSearchBox";
-            this.accountNameSearchBox.Size = new System.Drawing.Size(132, 22);
-            this.accountNameSearchBox.TabIndex = 61;
-            this.accountNameSearchBox.Visible = false;
-            // 
-            // accountNumSearchBox
-            // 
-            this.accountNumSearchBox.Location = new System.Drawing.Point(213, 5);
-            this.accountNumSearchBox.Margin = new System.Windows.Forms.Padding(4);
-            this.accountNumSearchBox.Name = "accountNumSearchBox";
-            this.accountNumSearchBox.Size = new System.Drawing.Size(132, 22);
-            this.accountNumSearchBox.TabIndex = 60;
-            this.accountNumSearchBox.Visible = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 37);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(189, 17);
-            this.label6.TabIndex = 59;
-            this.label6.Text = "Search by name on account:";
-            this.label6.Visible = false;
-            // 
-            // searchByAccountNumLabel
-            // 
-            this.searchByAccountNumLabel.AutoSize = true;
-            this.searchByAccountNumLabel.Location = new System.Drawing.Point(21, 5);
-            this.searchByAccountNumLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.searchByAccountNumLabel.Name = "searchByAccountNumLabel";
-            this.searchByAccountNumLabel.Size = new System.Drawing.Size(182, 17);
-            this.searchByAccountNumLabel.TabIndex = 58;
-            this.searchByAccountNumLabel.Text = "Search by account number:";
-            this.searchByAccountNumLabel.Visible = false;
             // 
             // zipLabel
             // 
@@ -620,10 +546,10 @@
             this.numChecksCH,
             this.curBalanceCH,
             this.acctRoutNumCH});
-            this.AccountsListView.Location = new System.Drawing.Point(16, 65);
+            this.AccountsListView.Location = new System.Drawing.Point(16, 7);
             this.AccountsListView.Margin = new System.Windows.Forms.Padding(4);
             this.AccountsListView.Name = "AccountsListView";
-            this.AccountsListView.Size = new System.Drawing.Size(696, 288);
+            this.AccountsListView.Size = new System.Drawing.Size(696, 346);
             this.AccountsListView.TabIndex = 57;
             this.AccountsListView.UseCompatibleStateImageBehavior = false;
             this.AccountsListView.View = System.Windows.Forms.View.Details;
@@ -667,13 +593,6 @@
             this.ManageChecksPage.Controls.Add(this.UpdateCheckButton);
             this.ManageChecksPage.Controls.Add(this.dateWrittenlabel);
             this.ManageChecksPage.Controls.Add(this.dateWrittenSelector);
-            this.ManageChecksPage.Controls.Add(this.viewCheckNumBox);
-            this.ManageChecksPage.Controls.Add(this.label8);
-            this.ManageChecksPage.Controls.Add(this.viewChecksSearchButton);
-            this.ManageChecksPage.Controls.Add(this.viewCheckNameBox);
-            this.ManageChecksPage.Controls.Add(this.viewCheckActNumBox);
-            this.ManageChecksPage.Controls.Add(this.label5);
-            this.ManageChecksPage.Controls.Add(this.label7);
             this.ManageChecksPage.Controls.Add(this.CheckListView);
             this.ManageChecksPage.Controls.Add(this.checkNumBox);
             this.ManageChecksPage.Controls.Add(this.checkNumLabel);
@@ -756,79 +675,6 @@
             this.dateWrittenSelector.Size = new System.Drawing.Size(265, 22);
             this.dateWrittenSelector.TabIndex = 304;
             // 
-            // viewCheckNumBox
-            // 
-            this.viewCheckNumBox.Location = new System.Drawing.Point(204, 64);
-            this.viewCheckNumBox.Margin = new System.Windows.Forms.Padding(4);
-            this.viewCheckNumBox.Name = "viewCheckNumBox";
-            this.viewCheckNumBox.Size = new System.Drawing.Size(132, 22);
-            this.viewCheckNumBox.TabIndex = 70;
-            this.viewCheckNumBox.Visible = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(88, 68);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(105, 17);
-            this.label8.TabIndex = 69;
-            this.label8.Text = "Check Number:";
-            this.label8.Visible = false;
-            // 
-            // viewChecksSearchButton
-            // 
-            this.viewChecksSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.viewChecksSearchButton.Location = new System.Drawing.Point(345, 60);
-            this.viewChecksSearchButton.Margin = new System.Windows.Forms.Padding(4);
-            this.viewChecksSearchButton.Name = "viewChecksSearchButton";
-            this.viewChecksSearchButton.Size = new System.Drawing.Size(100, 28);
-            this.viewChecksSearchButton.TabIndex = 68;
-            this.viewChecksSearchButton.Text = "Search";
-            this.viewChecksSearchButton.UseVisualStyleBackColor = true;
-            this.viewChecksSearchButton.Visible = false;
-            this.viewChecksSearchButton.Click += new System.EventHandler(this.viewChecksSearchButton_Click);
-            // 
-            // viewCheckNameBox
-            // 
-            this.viewCheckNameBox.Location = new System.Drawing.Point(204, 33);
-            this.viewCheckNameBox.Margin = new System.Windows.Forms.Padding(4);
-            this.viewCheckNameBox.Name = "viewCheckNameBox";
-            this.viewCheckNameBox.Size = new System.Drawing.Size(132, 22);
-            this.viewCheckNameBox.TabIndex = 67;
-            this.viewCheckNameBox.Visible = false;
-            // 
-            // viewCheckActNumBox
-            // 
-            this.viewCheckActNumBox.Location = new System.Drawing.Point(204, 5);
-            this.viewCheckActNumBox.Margin = new System.Windows.Forms.Padding(4);
-            this.viewCheckActNumBox.Name = "viewCheckActNumBox";
-            this.viewCheckActNumBox.Size = new System.Drawing.Size(132, 22);
-            this.viewCheckActNumBox.TabIndex = 66;
-            this.viewCheckActNumBox.Visible = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 37);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(189, 17);
-            this.label5.TabIndex = 65;
-            this.label5.Text = "Search by name on account:";
-            this.label5.Visible = false;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 9);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(182, 17);
-            this.label7.TabIndex = 64;
-            this.label7.Text = "Search by account number:";
-            this.label7.Visible = false;
-            // 
             // CheckListView
             // 
             this.CheckListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -838,10 +684,10 @@
             this.numCH,
             this.ammountCH,
             this.routNumCH});
-            this.CheckListView.Location = new System.Drawing.Point(7, 100);
+            this.CheckListView.Location = new System.Drawing.Point(7, 5);
             this.CheckListView.Margin = new System.Windows.Forms.Padding(4);
             this.CheckListView.Name = "CheckListView";
-            this.CheckListView.Size = new System.Drawing.Size(731, 254);
+            this.CheckListView.Size = new System.Drawing.Size(731, 349);
             this.CheckListView.TabIndex = 63;
             this.CheckListView.UseCompatibleStateImageBehavior = false;
             this.CheckListView.View = System.Windows.Forms.View.Details;
@@ -993,11 +839,6 @@
             this.ManageUsersPage.Controls.Add(this.userNameLabel2);
             this.ManageUsersPage.Controls.Add(this.lastNameLabel4);
             this.ManageUsersPage.Controls.Add(this.fNameLabel4);
-            this.ManageUsersPage.Controls.Add(this.searchUserButton);
-            this.ManageUsersPage.Controls.Add(this.userLNameBox);
-            this.ManageUsersPage.Controls.Add(this.userFNameBox);
-            this.ManageUsersPage.Controls.Add(this.manageLNameLabel);
-            this.ManageUsersPage.Controls.Add(this.manageFNameLabel);
             this.ManageUsersPage.Location = new System.Drawing.Point(4, 25);
             this.ManageUsersPage.Margin = new System.Windows.Forms.Padding(4);
             this.ManageUsersPage.Name = "ManageUsersPage";
@@ -1073,10 +914,10 @@
             this.usernameCH,
             this.supervisorCH,
             this.adminCH});
-            this.userListView.Location = new System.Drawing.Point(17, 73);
+            this.userListView.Location = new System.Drawing.Point(17, 10);
             this.userListView.Margin = new System.Windows.Forms.Padding(4);
             this.userListView.Name = "userListView";
-            this.userListView.Size = new System.Drawing.Size(509, 281);
+            this.userListView.Size = new System.Drawing.Size(509, 344);
             this.userListView.TabIndex = 17;
             this.userListView.UseCompatibleStateImageBehavior = false;
             this.userListView.View = System.Windows.Forms.View.Details;
@@ -1117,6 +958,7 @@
             this.deleteUserButton.TabIndex = 16;
             this.deleteUserButton.Text = "Delete User";
             this.deleteUserButton.UseVisualStyleBackColor = true;
+            this.deleteUserButton.Visible = false;
             // 
             // updateUserButton
             // 
@@ -1128,6 +970,7 @@
             this.updateUserButton.TabIndex = 15;
             this.updateUserButton.Text = "Save Changes";
             this.updateUserButton.UseVisualStyleBackColor = true;
+            this.updateUserButton.Visible = false;
             // 
             // userFirstNameBox
             // 
@@ -1224,58 +1067,6 @@
             this.fNameLabel4.Size = new System.Drawing.Size(80, 17);
             this.fNameLabel4.TabIndex = 5;
             this.fNameLabel4.Text = "First Name:";
-            // 
-            // searchUserButton
-            // 
-            this.searchUserButton.Location = new System.Drawing.Point(260, 37);
-            this.searchUserButton.Margin = new System.Windows.Forms.Padding(4);
-            this.searchUserButton.Name = "searchUserButton";
-            this.searchUserButton.Size = new System.Drawing.Size(100, 28);
-            this.searchUserButton.TabIndex = 4;
-            this.searchUserButton.Text = "Search User";
-            this.searchUserButton.UseVisualStyleBackColor = true;
-            this.searchUserButton.Visible = false;
-            this.searchUserButton.Click += new System.EventHandler(this.searchUserButton_Click);
-            // 
-            // userLNameBox
-            // 
-            this.userLNameBox.Location = new System.Drawing.Point(101, 39);
-            this.userLNameBox.Margin = new System.Windows.Forms.Padding(4);
-            this.userLNameBox.Name = "userLNameBox";
-            this.userLNameBox.Size = new System.Drawing.Size(132, 22);
-            this.userLNameBox.TabIndex = 3;
-            this.userLNameBox.Visible = false;
-            // 
-            // userFNameBox
-            // 
-            this.userFNameBox.Location = new System.Drawing.Point(101, 6);
-            this.userFNameBox.Margin = new System.Windows.Forms.Padding(4);
-            this.userFNameBox.Name = "userFNameBox";
-            this.userFNameBox.Size = new System.Drawing.Size(132, 22);
-            this.userFNameBox.TabIndex = 2;
-            this.userFNameBox.Visible = false;
-            // 
-            // manageLNameLabel
-            // 
-            this.manageLNameLabel.AutoSize = true;
-            this.manageLNameLabel.Location = new System.Drawing.Point(11, 43);
-            this.manageLNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.manageLNameLabel.Name = "manageLNameLabel";
-            this.manageLNameLabel.Size = new System.Drawing.Size(80, 17);
-            this.manageLNameLabel.TabIndex = 1;
-            this.manageLNameLabel.Text = "Last Name:";
-            this.manageLNameLabel.Visible = false;
-            // 
-            // manageFNameLabel
-            // 
-            this.manageFNameLabel.AutoSize = true;
-            this.manageFNameLabel.Location = new System.Drawing.Point(12, 10);
-            this.manageFNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.manageFNameLabel.Name = "manageFNameLabel";
-            this.manageFNameLabel.Size = new System.Drawing.Size(80, 17);
-            this.manageFNameLabel.TabIndex = 0;
-            this.manageFNameLabel.Text = "First Name:";
-            this.manageFNameLabel.Visible = false;
             // 
             // ReportsLettersPage
             // 
@@ -1498,11 +1289,6 @@
         private System.Windows.Forms.Label userNameLabel2;
         private System.Windows.Forms.Label lastNameLabel4;
         private System.Windows.Forms.Label fNameLabel4;
-        private System.Windows.Forms.Button searchUserButton;
-        private System.Windows.Forms.TextBox userLNameBox;
-        private System.Windows.Forms.TextBox userFNameBox;
-        private System.Windows.Forms.Label manageLNameLabel;
-        private System.Windows.Forms.Label manageFNameLabel;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button LogoutButton;
         private System.Windows.Forms.Label logoutLabel;
@@ -1511,11 +1297,6 @@
         private System.Windows.Forms.TextBox usernameBox;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.Label usernameLabel;
-        private System.Windows.Forms.Button searchButton;
-        private System.Windows.Forms.TextBox accountNameSearchBox;
-        private System.Windows.Forms.TextBox accountNumSearchBox;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label searchByAccountNumLabel;
         private System.Windows.Forms.ListView AccountsListView;
         private System.Windows.Forms.ColumnHeader accNumCH;
         private System.Windows.Forms.ColumnHeader firstCH;
@@ -1528,13 +1309,6 @@
         private System.Windows.Forms.Button UpdateCheckButton;
         private System.Windows.Forms.Label dateWrittenlabel;
         private System.Windows.Forms.DateTimePicker dateWrittenSelector;
-        private System.Windows.Forms.TextBox viewCheckNumBox;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button viewChecksSearchButton;
-        private System.Windows.Forms.TextBox viewCheckNameBox;
-        private System.Windows.Forms.TextBox viewCheckActNumBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListView CheckListView;
         private System.Windows.Forms.ColumnHeader acctNumCH;
         private System.Windows.Forms.ColumnHeader fNameCH;

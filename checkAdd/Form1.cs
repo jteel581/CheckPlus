@@ -181,6 +181,17 @@ namespace checkPlus
         }
 
 
+        /*  --------------------------------------------------------
+         *  FUNCTION - ClearReportsTabTextBoxes
+         *  --------------------------------------------------------
+         */
+        public void ClearReportsTabTextBoxes()
+        {
+            reportsTextBox.Clear();
+            lettersStatusBox.Clear();
+        }
+
+
         public void ClearAllListViews()
         {
             AccountsListView.Items.Clear();
@@ -275,9 +286,16 @@ namespace checkPlus
             string firstName = userFirstNameBox.Text;
             string lastName = userLastNameBox.Text;
             string username = UserUserNameBox.Text;
+            string password = UserPasswordBox.Text;
 
-            if (username.Length > 50) { return false; }
-            return true;
+            string response = AppHand.GetUserHandler().VerifyUserInfoInputWithStringFeedback(firstName, lastName, username, password);
+            if (response != "")
+            {
+                if (username.Length > 50) { response = "Passwords must be less than 50 characters."; }
+                DisplayMessageNoResponse(error, response);
+                return false;
+            }
+            else { return true; }
         }
 
 
@@ -321,6 +339,10 @@ namespace checkPlus
                 {
                     adminStatusBox.Checked = true;
                 }
+                if (usr.Client_id != null)
+                {
+                    UserClientComboBx.Text = AppHand.GetUserHandler().GetClient(Convert.ToInt32(usr.Client_id)).Client_nm;
+                }
             }
             else
             {
@@ -337,6 +359,7 @@ namespace checkPlus
         private void LoginButton_Click(object sender, EventArgs e)
         {
             RemoveAllTabs();
+            ClearAllListViews();
 
             string uName = usernameBox.Text;
             string pWord = passwordBox.Text;
@@ -379,6 +402,7 @@ namespace checkPlus
                     CheckListView.FullRowSelect = true;
 
                     ClearHomeTabTextBoxes();
+                    ClearReportsTabTextBoxes();
 
                     return;
                 }
@@ -424,31 +448,32 @@ namespace checkPlus
                 ListViewItem lvi;
                 foreach (Cp_user usr in AppHand.GetUserHandler().SelectAllUsers())
                 {
-                    string admin = usr.User_role_cd == "A" ? "Granted" : "Not Granted";
-                    string sup = usr.User_role_cd == "S" ? "Granted" : "Not Granted";
-                    lvi = new ListViewItem(new string[] { usr.First_name, usr.Last_name, usr.Username, sup, admin });
-                    userListView.Items.Add(lvi);
+                    if (usr.Username != "admin")
+                    {
+                        string admin = usr.User_role_cd == "A" ? "Granted" : "Not Granted";
+                        string sup = usr.User_role_cd == "S" ? "Granted" : "Not Granted";
+                        lvi = new ListViewItem(new string[] { usr.First_name, usr.Last_name, usr.Username, sup, admin });
+                        userListView.Items.Add(lvi);
+                    }
                 }
             }
             else
             {
                 foreach (ListViewItem lvi in userListView.Items)
                 {
-                    string fName = lvi.SubItems[0].ToString();
-                    string lName = lvi.SubItems[1].ToString();
-                    string uname = lvi.SubItems[2].ToString();
+                    string username = lvi.SubItems[2].Text;
 
-                    Cp_user usr = AppHand.GetUserHandler().SelectUser(uname);
+                    Cp_user tstUser = AppHand.GetUserHandler().SelectUser(username);
 
-                    if (usr != null)
-                    {
-                        lvi.SubItems[3].Text = usr.User_role_cd == "S" ? "Granted" : "Not Granted";
-                        lvi.SubItems[4].Text = usr.User_role_cd == "A" ? "Granted" : "Not Granted";
+                    if (tstUser != null)
+                    {   //update all the information to reflect whatever changes were made
+                        lvi.SubItems[0].Text = tstUser.First_name;
+                        lvi.SubItems[1].Text = tstUser.Last_name;
+                        lvi.SubItems[2].Text = tstUser.Username;
+                        lvi.SubItems[3].Text = tstUser.User_role_cd == "S" ? "Granted" : "Not Granted";
+                        lvi.SubItems[4].Text = tstUser.User_role_cd == "A" ? "Granted" : "Not Granted";
                     }
-                    else
-                    {
-                        lvi.Remove();
-                    }
+                    else { userListView.Items.Remove(lvi); }
                 }
             }
             ControlClientComboBox();
@@ -523,15 +548,67 @@ namespace checkPlus
 
 
         private void UpdateUserButton_Click(object sender, EventArgs e)
-        {
+        {   //did the user select only one user from the listing?
+            if (userListView.SelectedItems.Count == 1)
+            {
+                if (VerifyUserBoxes())
+                {   //get the index of the item being highlighted
+                    //this highlighting disappears once the user clicks "Save Changes"
+                    //  so we need to preserve the index
+                    int userListItemInd = userListView.FocusedItem.Index;
 
+                    //get the original data
+                    string origUsername = userListView.Items[userListItemInd].SubItems[0].Text;
+
+                    //get all the new information (not all of it has to have been changed,
+                    //  but it may have been, so we want to grab ALL the things
+                    string newFirstName = userFirstNameBox.Text;
+                    string newLastName = userLastNameBox.Text;
+                    string newUsername = UserUserNameBox.Text;
+                    string newPassword = UserPasswordBox.Text;
+                    bool newAdminStatus = adminStatusBox.Checked;
+                    bool newSupStatus = supStatusBox.Checked;
+                    string newStatus = newAdminStatus ? "A" : (newSupStatus ? "S" : "U");
+                    string newClientName = UserClientComboBx.Text;
+                    
+                    Cp_user updatedUser = AppHand.GetUserHandler()
+                        .UpdateUser(origUsername, newClientName, newFirstName, newLastName, newUsername, newPassword, newStatus);
+
+                    if (updatedUser == null)
+                    {   //if it does, display an error message and do nothing with the changes
+                        DisplayMessageNoResponse(error, "User with that information already exists.");
+                    }
+                    else
+                    {   //otherwise, update database account record and update display listing
+                        UpdateUserListView();
+                    }
+                }
+            }
+            else { DisplayMessageNoResponse(error, "Please select 1 user."); }
         }
 
 
         private void DeleteUserButton_Click(object sender, EventArgs e)
         {
+            if (userListView.SelectedItems.Count > 0)
+            {   //loop through each item selected and do work
+                foreach (ListViewItem lvi in userListView.SelectedItems)
+                {   
+                    string usernameSelected = lvi.SubItems[2].Text;
 
-        }
+                    Cp_user tstUser = AppHand.GetUserHandler().SelectUser(usernameSelected);
+
+                    //now delete the actual account
+                    Cp_user delUser =
+                        AppHand.GetUserHandler().DeleteUser(tstUser.Username);
+                }
+                //update the views
+                UpdateUserListView();
+            }
+            else { DisplayMessageNoResponse(error, "Please select user(s)."); }
+
+            ClearUserTabTextBoxes();
+        }    
 
 
         /*  --------------------------------------------------------
@@ -592,7 +669,8 @@ namespace checkPlus
                 {
                     newUser.First_name,
                     newUser.Last_name,
-                    newUser.User_role_cd == "A" || newUser.User_role_cd == "S" ? "Granted" : "Not Granted",
+                    newUser.Username,
+                    newUser.User_role_cd == "S" ? "Granted" : "Not Granted",
                     newUser.User_role_cd == "A" ? "Granted" : "Not Granted"
                 }
             );
@@ -691,6 +769,7 @@ namespace checkPlus
                 ammountBox.Text = check.Amount.ToString();
                 checkNumBox.Text = check.Check_number;
                 dateWrittenSelector.Text = check.Date_written.ToString();
+                paidChkBox.Checked = check.Date_paid == null ? false : true;
             }
             else { ClearCheckTabTextBoxes(); }
         }
@@ -944,6 +1023,7 @@ namespace checkPlus
                     string newAcctNum = accountBox2.Text;
                     Decimal newCheckAmt = Convert.ToDecimal(ammountBox.Text);
                     string newCheckNum = checkNumBox.Text;
+                    bool newPaidStatus = paidChkBox.Checked;
                     DateTime newDateWrit = Convert.ToDateTime(dateWrittenSelector.Text);
 
                     //attempt to update the check
@@ -951,7 +1031,7 @@ namespace checkPlus
                     Acct_check updatedCheck = AppHand.GetCheckHandler().UpdateCheck
                     (
                         origRoutNum, origAccountNum, origCheckNum,
-                        newRoutNum, newAcctNum, newCheckNum, newCheckAmt, newDateWrit
+                        newRoutNum, newAcctNum, newCheckNum, newCheckAmt, newDateWrit, newPaidStatus
                     );
 
                     if (updatedCheck == null)
@@ -1060,142 +1140,6 @@ namespace checkPlus
         }
 
 
-        private void searchButton_Click(object sender, EventArgs e)
-        {
-            AccountsListView.SelectedItems.Clear();
-            AccountsListView.SelectedIndices.Clear();
-            if (accountNumSearchBox.Text != null && accountNameSearchBox.Text != null)
-            {
-                // message box choose one
-                // then change rest to else if
-            }
-            if (accountNumSearchBox != null)
-            {
-                string sNum = accountNumSearchBox.Text;
-                int i = 0;
-                foreach (ListViewItem lvi in AccountsListView.Items)
-                {
-                    string actNum = lvi.SubItems[0].Text;
-                    if (actNum == sNum)
-                    {
-                        AccountsListView.Items[i].Selected = true;
-                        AccountsListView.TopItem = AccountsListView.Items[i];
-                        AccountsListView.Select();
-                        return;
-                    }
-                    i++;
-                }
-            }
-            else if (accountNameSearchBox.Text != null)
-            {
-                string sName = accountNameSearchBox.Text;
-                int i = 0;
-                foreach (ListViewItem lvi in AccountsListView.Items)
-                {
-                    string fName = lvi.SubItems[1].ToString();
-                    string lName = lvi.SubItems[2].ToString();
-                    if (fName == sName || lName == sName)
-                    {
-                        AccountsListView.Items[i].Selected = true;
-                        AccountsListView.TopItem = AccountsListView.Items[i];
-                        AccountsListView.Select();
-
-                        return;
-                    }
-                    i++;
-                }
-            }
-        }
-
-        
-
-
-        
-
-        private void viewChecksSearchButton_Click(object sender, EventArgs e)
-        {
-            CheckListView.SelectedIndices.Clear();
-            CheckListView.SelectedItems.Clear();
-            if (viewCheckActNumBox.Text != null && viewCheckNameBox.Text != null)
-            {
-                // message box choose one
-                // then change rest to else if
-            }
-            if (viewCheckActNumBox != null)
-            {
-                string sNum = viewCheckActNumBox.Text;
-                string sCNum = viewCheckNumBox.Text;
-                int i = 0;
-                foreach (ListViewItem lvi in CheckListView.Items)
-                {
-                    string actNum = lvi.SubItems[0].Text;
-                    string cNum = lvi.SubItems[3].Text;
-                    if (actNum == sNum && cNum == sCNum)
-                    {
-                        CheckListView.Items[i].Selected = true;
-                        CheckListView.TopItem = AccountsListView.Items[i];
-                        CheckListView.Select();
-                        return;
-                    }
-                    i++;
-                }
-            }
-            else if (viewCheckNameBox.Text != null)
-            {
-                string sName = viewCheckActNumBox.Text;
-                string sCNum = viewCheckNumBox.Text;
-
-                int i = 0;
-                foreach (ListViewItem lvi in AccountsListView.Items)
-                {
-                    string fName = lvi.SubItems[1].ToString();
-                    string lName = lvi.SubItems[2].ToString();
-                    string cNum = lvi.SubItems[3].Text;
-
-                    if ((fName == sName || lName == sName) && cNum == sCNum)
-                    {
-                        CheckListView.Items[i].Selected = true;
-                        CheckListView.TopItem = CheckListView.Items[i];
-                        CheckListView.Select();
-
-                        return;
-                    }
-                    i++;
-                }
-            }
-        }
-        
-
-        private void searchUserButton_Click(object sender, EventArgs e)
-        {
-            userListView.SelectedIndices.Clear();
-            userListView.SelectedItems.Clear();
-            if (userFNameBox.Text == "" || userLNameBox.Text == "")
-            {
-                // complain that it needs more info
-            }
-            else
-            {
-                string fName = userFNameBox.Text;
-                string lName = userLNameBox.Text;
-                int i = 0;
-                foreach (ListViewItem lvi in userListView.Items)
-                {
-                    string userFname = lvi.SubItems[0].Text;
-                    string userLname = lvi.SubItems[1].Text;
-                    if (userFname == fName && userLname == lName)
-                    {
-                        userListView.Items[i].Selected = true;
-                        userListView.TopItem = userListView.Items[i];
-                        userListView.Select();
-                        return;
-                    }
-                    i++;
-                }
-            }
-        }
-
-
         private void unitTestsButton_Click(object sender, EventArgs e)
         {
             TestEntityAccess unitTest = new TestEntityAccess();
@@ -1207,21 +1151,39 @@ namespace checkPlus
 
         public void generateReport()
         {
+            ClearReportsTabTextBoxes();
             string fName;
             string lName;
             string actNum;
             string checkNum;
             foreach (Acct_check ac in AppHand.GetCheckHandler().SelectAllChecks())
             {
-                
-                Account checkAccount = AppHand.GetAccountHandler().SelectAccount(ac.Account_id);
-                fName = checkAccount.First_name;
-                lName = checkAccount.Last_name;
-                actNum = checkAccount.Account_number;
-                checkNum = ac.Check_number;
+                if (ActiveUser.Client_id != null)
+                {
+                    if (ac.Date_paid == null && ac.Client_id == ActiveUser.Client_id)
+                    {
+                        Account checkAccount = AppHand.GetAccountHandler().SelectAccount(ac.Account_id);
+                        fName = checkAccount.First_name;
+                        lName = checkAccount.Last_name;
+                        actNum = checkAccount.Account_number;
+                        checkNum = ac.Check_number;
 
-                reportsTextBox.Text += fName + " " + lName + " " + actNum + " " + checkNum + "\r\n";
-                
+                        reportsTextBox.Text += fName + " " + lName + " " + actNum + " " + checkNum + "\r\n";
+                    }
+                }
+                else
+                {
+                    if (ac.Date_paid == null)
+                    {
+                        Account checkAccount = AppHand.GetAccountHandler().SelectAccount(ac.Account_id);
+                        fName = checkAccount.First_name;
+                        lName = checkAccount.Last_name;
+                        actNum = checkAccount.Account_number;
+                        checkNum = ac.Check_number;
+
+                        reportsTextBox.Text += fName + " " + lName + " " + actNum + " " + checkNum + "\r\n";
+                    }
+                }
             }
         }
 
@@ -1230,39 +1192,95 @@ namespace checkPlus
             generateReport();
         }
 
-        private void generateLettersButton_Click(object sender, EventArgs e)
+        private void GenerateReportForLetter(Acct_check ac)
         {
-            string letterTemplate = File.ReadAllText("letter1.txt");
+            string letterTemplate;
             string letter;
             PDF letterPdf;
             string fileName = "";
-            foreach (Acct_check ac in AppHand.GetCheckHandler().SelectAllChecks())
+            DateTime dateToUse;
+
+            if (ac.Letter1_send_date != null && ac.Letter2_send_date != null && ac.Letter3_send_date != null) { }
+            else
             {
-                letterPdf = new PDF();
-                lettersStatusBox.Text += "Getting check information...\r\n";
-                this.Update();
-                Account checkAccount = AppHand.GetAccountHandler().SelectAccount(ac.Account_id);
-                lettersStatusBox.Text += "Creating new letter for " + checkAccount.First_name + " " + checkAccount.Last_name +
-                    "'s check number " + ac.Check_number.ToString() + "\r\n";
-                this.Update();
+                if (ac.Letter1_send_date != null && ac.Letter2_send_date != null && ac.Letter3_send_date == null)
+                {
+                    dateToUse = Convert.ToDateTime(ac.Letter2_send_date).AddDays(10);
+                    letterTemplate = File.ReadAllText("letter3.txt");
+                }
+                else if (ac.Letter1_send_date != null && ac.Letter2_send_date == null)
+                {
+                    dateToUse = Convert.ToDateTime(ac.Letter1_send_date).AddDays(10);
+                    letterTemplate = File.ReadAllText("letter2.txt");
+                }
+                else
+                {
+                    dateToUse = ac.Date_written.AddDays(10);
+                    letterTemplate = File.ReadAllText("letter1.txt");
+                }
 
-                letter = letterTemplate.Replace("[dateOfReport]", DateTime.Today.ToShortDateString());
-                letter = letter.Replace("[checkWriterName]", checkAccount.First_name + " " + checkAccount.Last_name);
-                letter = letter.Replace("[checkWriterStreet]", checkAccount.Address);
-                letter = letter.Replace("[checkWriterCity]", checkAccount.City + ", " + checkAccount.State + " " + checkAccount.Zip_code);
-                letter = letter.Replace("[checkNum]", ac.Check_number);
-                letter = letter.Replace("[checkWrittenDate]", ac.Date_written.ToShortDateString());
-                letter = letter.Replace("[checkAmmount]", ac.Amount.ToString());
-                letter = letter.Replace("[clientName]", "Walmart");
-                letterPdf.writeAllText(letter);
-                fileName = checkAccount.First_name + checkAccount.Last_name + ac.Check_number + ".pdf";
-                lettersStatusBox.Text += "Saving letter as " + fileName + "\r\n";
-                this.Update();
+                if (ac.Date_paid == null && dateToUse == DateTime.Today)
+                {
+                    letterPdf = new PDF();
+                    lettersStatusBox.Text += "Getting check information...\r\n";
+                    this.Update();
 
-                letterPdf.save(fileName);
-                                             
+                    Account checkAccount = AppHand.GetAccountHandler().SelectAccount(ac.Account_id);
+                    Client checkClient = AppHand.GetClientHandler().GetClient(ac.Client_id);
+                    lettersStatusBox.Text += "Creating new letter for "
+                        + checkAccount.First_name + " "
+                        + checkAccount.Last_name +
+                        "'s check number " + ac.Check_number.ToString() + "\r\n";
+                    this.Update();
+
+                    letter = letterTemplate.Replace("[dateOfReport]", DateTime.Today.ToShortDateString());
+                    letter = letter.Replace("[checkWriterName]", checkAccount.First_name + " " + checkAccount.Last_name);
+                    letter = letter.Replace("[checkWriterStreet]", checkAccount.Address);
+                    letter = letter.Replace("[checkWriterCity]", checkAccount.City + ", " + checkAccount.State + " " + checkAccount.Zip_code);
+                    letter = letter.Replace("[checkNum]", ac.Check_number);
+                    letter = letter.Replace("[checkWrittenDate]", ac.Date_written.ToShortDateString());
+                    letter = letter.Replace("[checkAmmount]", ac.Amount.ToString());
+                    letter = letter.Replace("[clientName]", checkClient.Client_nm);
+                    letterPdf.writeAllText(letter);
+                    fileName = checkAccount.First_name + checkAccount.Last_name + ac.Check_number + ".pdf";
+                    lettersStatusBox.Text += "Saving letter as " + fileName + "\r\n";
+                    this.Update();
+
+                    letterPdf.save(fileName);
+
+                    if (ac.Letter1_send_date != null && ac.Letter2_send_date != null && ac.Letter3_send_date == null)
+                    {
+                        AppHand.GetCheckHandler().UpdateCheckSendDate(ac, 3, DateTime.Today);
+                    }
+                    else if (ac.Letter1_send_date != null && ac.Letter2_send_date == null)
+                    {
+                        AppHand.GetCheckHandler().UpdateCheckSendDate(ac, 2, DateTime.Today);
+                    }
+                    else
+                    {
+                        AppHand.GetCheckHandler().UpdateCheckSendDate(ac, 1, DateTime.Today);
+                    }
+                }
             }
 
+        }
+
+        private void generateLettersButton_Click(object sender, EventArgs e)
+        {
+            foreach (Acct_check ac in AppHand.GetCheckHandler().SelectAllChecks())
+            {
+                if (ActiveUser.Client_id != null)
+                {
+                    if (ActiveUser.Client_id == ac.Client_id)
+                    {
+                        GenerateReportForLetter(ac);
+                    }
+                }
+                else
+                {
+                    GenerateReportForLetter(ac);
+                }
+            }
         }
 
         private void viewLettersButton_Click(object sender, EventArgs e)
