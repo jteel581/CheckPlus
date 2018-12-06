@@ -54,6 +54,25 @@ namespace checkPlus
             ApplicationTabs.TabPages.Remove(ReportsLettersPage);
         }
 
+
+        public void MakeEverythingVisible()
+        {
+            InsertAccountButton.Visible = true;
+            UpdateAccountButton.Visible = true;
+            DeleteAccountButton.Visible = true;
+            InsertCheckButton.Visible = true;
+            UpdateCheckButton.Visible = true;
+            DeleteCheckButton.Visible = true;
+            addUserButton.Visible = true;
+            //updateUserButton.Visible = true;
+            //deleteUserButton.Visible = true;
+            lettersLabel.Visible = true;
+            generateLettersButton.Visible = true;
+            viewLettersButton.Visible = true;
+            printLettersButton.Visible = true;
+            lettersStatusBox.Visible = true;
+        }
+
         public ammountLabel()
         {
             InitializeComponent();
@@ -116,6 +135,11 @@ namespace checkPlus
                     else
                     {
                         ApplicationTabs.TabPages.Add(LettersPage);
+                        generateLettersButton.Visible = false;
+                        viewLettersButton.Visible = false;
+                        printLettersButton.Visible = false;
+                        lettersLabel.Visible = false;
+                        lettersStatusBox.Visible = false;
                     }
                     break;
                 default:
@@ -359,6 +383,7 @@ namespace checkPlus
         private void LoginButton_Click(object sender, EventArgs e)
         {
             RemoveAllTabs();
+            MakeEverythingVisible();
             ClearAllListViews();
 
             string uName = usernameBox.Text;
@@ -432,6 +457,7 @@ namespace checkPlus
             DeleteCheckButton.Enabled = false;
 
             ClearAllListViews();
+            MakeEverythingVisible();
             RemoveAllTabs();
         }
 

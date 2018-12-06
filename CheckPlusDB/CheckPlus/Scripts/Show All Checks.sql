@@ -12,7 +12,11 @@ select
 	b.routing_number,
 	a.account_number,
 	ac.check_number,
-	ac.amount
+	ac.amount,
+	ac.date_written,
+	ac.letter1_send_date,
+	ac.letter2_send_date,
+	ac.letter2_send_date
 from dbo.account a
 	join dbo.acct_check ac on ac.account_id = a.account_id
 	join dbo.bank b on b.bank_id = a.bank_id
